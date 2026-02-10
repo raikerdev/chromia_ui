@@ -1,5 +1,3 @@
-// lib/src/foundation/platform_detector.dart
-
 import 'dart:io' show Platform;
 
 import 'package:flutter/foundation.dart' show kIsWeb;
