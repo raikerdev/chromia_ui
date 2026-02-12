@@ -18,8 +18,8 @@ class ColorTokens {
   static const Color neutral600 = Color(0xFF757575);
   static const Color neutral700 = Color(0xFF616161);
   static const Color neutral800 = Color(0xFF424242);
-  static const Color neutral900 = Color(0xFF212121);
-  static const Color neutral1000 = Color(0xFF000000); // Black
+  static const Color neutral900 = Color(0xFF2A2A2A);
+  static const Color neutral1000 = Color(0xFF212121); // Black
 
   // Primary colors (Blue)
   static const Color primary50 = Color(0xFFE3F2FD);

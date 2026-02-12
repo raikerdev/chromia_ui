@@ -122,7 +122,7 @@ Check out the `/example` folder for comprehensive examples of all components and
 
 ## Contributing
 
-Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md) before submitting a Pull Request.
+Contributions are welcome! Please read our [Contributing Guide](https://CONTRIBUTING.md) before submitting a Pull Request.
 
 ## License
 
