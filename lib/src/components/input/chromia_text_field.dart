@@ -1,4 +1,5 @@
 import 'package:chromia_ui/src/components/input/chromia_text_field_style.dart';
+import 'package:chromia_ui/src/components/input/util/chromia_text_field_validator.dart';
 import 'package:chromia_ui/src/theme/chromia_theme.dart';
 import 'package:chromia_ui/src/theme/chromia_theme_data.dart';
 import 'package:chromia_ui/src/tokens/animation_tokens.dart';
@@ -43,7 +44,7 @@ class ChromiaTextField extends StatefulWidget {
     this.autocorrect = true,
     this.enableSuggestions = true,
     this.autofocus = false,
-    this.validator,
+    this.validators = const [],
     this.inputFormatters,
     this.onChanged,
     this.onSubmitted,
@@ -124,8 +125,8 @@ class ChromiaTextField extends StatefulWidget {
   /// Whether to autofocus on this field
   final bool autofocus;
 
-  /// Validation function
-  final String? Function(String?)? validator;
+  /// Validators
+  final List<ChromiaTextFieldValidator> validators;
 
   /// Input formatters
   final List<TextInputFormatter>? inputFormatters;
@@ -159,12 +160,14 @@ class _ChromiaTextFieldState extends State<ChromiaTextField> {
   late FocusNode _focusNode;
   bool _isFocused = false;
   String? _internalError;
+  TextEditingController? _controller;
 
   @override
   void initState() {
     super.initState();
     _focusNode = widget.focusNode ?? FocusNode();
     _focusNode.addListener(_onFocusChange);
+    _controller = widget.controller ?? TextEditingController(text: widget.initialValue);
   }
 
   @override
@@ -184,19 +187,30 @@ class _ChromiaTextFieldState extends State<ChromiaTextField> {
 
   void _handleChanged(String value) {
     // Run validation if provided
-    if (widget.validator != null) {
+    if (widget.validators.isNotEmpty) {
       setState(() {
-        _internalError = widget.validator!(value);
+        _internalError = _validate(value);
       });
     }
     widget.onChanged?.call(value);
   }
 
+  String? _validate(String value) {
+    for (final validator in widget.validators) {
+      final error = validator.validate(value);
+      if (error != null) {
+        return error;
+      }
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
-    final ChromiaThemeData theme = context.chromiaTheme;
-    final bool hasError = widget.errorText != null || _internalError != null;
-    final String? displayError = widget.errorText ?? _internalError;
+    final theme = context.chromiaTheme;
+    final hasError = widget.errorText != null || _internalError != null;
+    final displayError = widget.errorText ?? _internalError;
+    final currentLength = _getLength();
 
     // Get base style for the variant
     final ChromiaTextFieldStyle baseStyle = _getBaseStyle(theme);
@@ -235,7 +249,7 @@ class _ChromiaTextFieldState extends State<ChromiaTextField> {
             ),
           ),
           child: TextField(
-            controller: widget.controller,
+            controller: _controller,
             focusNode: _focusNode,
             enabled: widget.enabled,
             readOnly: widget.readOnly,
@@ -293,17 +307,32 @@ class _ChromiaTextFieldState extends State<ChromiaTextField> {
         ),
 
         // Helper or error text
-        if (widget.helperText != null || displayError != null) ...[
+        if (widget.helperText != null || displayError != null || currentLength != null) ...[
           SizedBox(height: theme.spacing.xs),
-          Text(
-            displayError ?? widget.helperText!,
-            style: (hasError ? finalStyle.errorStyle : finalStyle.helperStyle)?.copyWith(
-              color: hasError ? finalStyle.errorColor : finalStyle.labelColor,
-            ),
+          Row(
+            children: [
+              Text(
+                displayError ?? widget.helperText ?? '',
+                style: (hasError ? finalStyle.errorStyle : finalStyle.helperStyle),
+              ),
+              const Spacer(),
+              Text(
+                currentLength ?? '',
+                style: (hasError ? finalStyle.errorStyle : finalStyle.helperStyle),
+              ),
+            ],
           ),
         ],
       ],
     );
+  }
+
+  String? _getLength() {
+    if (widget.maxLength == null) {
+      return null;
+    }
+    final currentLength = widget.controller?.text.length ?? 0;
+    return '$currentLength/${widget.maxLength}';
   }
 
   /// Gets the base style for the text field variant

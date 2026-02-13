@@ -134,8 +134,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [x] Color tokens
 - [x] Typography system
 - [x] Button component
-- [ ] Input components
-- [ ] Card components
+- [x] Input components
+- [x] Card components
 - [ ] Navigation components
 - [ ] Layout components
 - [ ] Feedback components

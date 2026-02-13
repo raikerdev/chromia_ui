@@ -43,6 +43,7 @@ export 'src/components/card/chromia_card.dart';
 export 'src/components/checkbox/chromia_checkbox.dart';
 export 'src/components/input/chromia_text_field.dart';
 export 'src/components/input/chromia_text_field_style.dart';
+export 'src/components/input/util/chromia_text_field_validator.dart';
 // Foundation
 export 'src/foundation/constants.dart';
 export 'src/foundation/platform_detector.dart';
