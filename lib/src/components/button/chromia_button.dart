@@ -267,6 +267,7 @@ class _ChromiaButtonState extends State<ChromiaButton> {
   ) {
     return switch (widget.size) {
       ChromiaButtonSize.small => style.copyWith(
+        borderRadius: theme.radius.radiusM,
         padding: EdgeInsets.symmetric(
           horizontal: theme.spacing.m,
           vertical: theme.spacing.s,
@@ -276,6 +277,7 @@ class _ChromiaButtonState extends State<ChromiaButton> {
       ),
       ChromiaButtonSize.medium => style,
       ChromiaButtonSize.large => style.copyWith(
+        borderRadius: theme.radius.radiusXL,
         padding: EdgeInsets.symmetric(
           horizontal: theme.spacing.xl,
           vertical: theme.spacing.l,

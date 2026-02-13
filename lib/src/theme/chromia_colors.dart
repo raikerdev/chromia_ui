@@ -130,8 +130,8 @@ class ChromiaColors {
     return const ChromiaColors(
       // Brand colors
       primary: ColorTokens.primary600,
-      primaryHover: ColorTokens.primary700,
-      primaryPressed: ColorTokens.primary800,
+      primaryHover: ColorTokens.primary800,
+      primaryPressed: ColorTokens.primary900,
       primaryDisabled: ColorTokens.primary200,
       onPrimary: ColorTokens.neutral0,
       secondary: ColorTokens.secondary600,
@@ -141,12 +141,12 @@ class ChromiaColors {
       onSecondary: ColorTokens.neutral0,
       // Surface colors
       surface: ColorTokens.neutral0,
-      surfaceHover: ColorTokens.neutral50,
-      surfacePressed: ColorTokens.neutral100,
+      surfaceHover: ColorTokens.neutral200,
+      surfacePressed: ColorTokens.neutral300,
       surfaceVariant: ColorTokens.neutral100,
-      surfaceContainer: ColorTokens.neutral50,
-      surfaceContainerHigh: ColorTokens.neutral100,
-      surfaceContainerHighest: ColorTokens.neutral200,
+      surfaceContainer: ColorTokens.neutral200,
+      surfaceContainerHigh: ColorTokens.neutral200,
+      surfaceContainerHighest: ColorTokens.neutral300,
       onSurface: ColorTokens.neutral900,
       onSurfaceVariant: ColorTokens.neutral700,
       // Background colors
@@ -174,12 +174,12 @@ class ChromiaColors {
       textPrimary: ColorTokens.neutral900,
       textSecondary: ColorTokens.neutral700,
       textTertiary: ColorTokens.neutral500,
-      textDisabled: ColorTokens.neutral400,
+      textDisabled: ColorTokens.neutral500,
       // Other
       shadow: ColorTokens.neutral900,
       overlay: Color(0x52000000),
       scrim: Color(0x52000000),
-      transparent: ColorTokens.transparent,
+      transparent: Color(0x00FFFFFF),
     );
   }
 

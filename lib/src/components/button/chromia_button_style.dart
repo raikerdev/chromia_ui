@@ -82,7 +82,7 @@ class ChromiaButtonStyle {
       disabledForegroundColor: theme.colors.textDisabled,
       hoverBackgroundColor: theme.colors.primaryHover,
       pressedBackgroundColor: theme.colors.primaryPressed,
-      borderRadius: theme.radius.radiusM,
+      borderRadius: theme.radius.radiusL,
       padding: EdgeInsets.symmetric(
         horizontal: theme.spacing.l,
         vertical: theme.spacing.m,
@@ -106,7 +106,7 @@ class ChromiaButtonStyle {
       disabledBorderColor: theme.colors.border,
       hoverBorderColor: theme.colors.primaryHover,
       borderWidth: 1.5,
-      borderRadius: theme.radius.radiusM,
+      borderRadius: theme.radius.radiusL,
       padding: EdgeInsets.symmetric(
         horizontal: theme.spacing.l,
         vertical: theme.spacing.m,
@@ -126,7 +126,7 @@ class ChromiaButtonStyle {
       disabledForegroundColor: theme.colors.textDisabled,
       hoverBackgroundColor: theme.colors.surfaceHover,
       pressedBackgroundColor: theme.colors.surfacePressed,
-      borderRadius: theme.radius.radiusM,
+      borderRadius: theme.radius.radiusL,
       padding: EdgeInsets.symmetric(
         horizontal: theme.spacing.l,
         vertical: theme.spacing.m,
@@ -146,7 +146,7 @@ class ChromiaButtonStyle {
       disabledForegroundColor: theme.colors.textDisabled,
       hoverBackgroundColor: theme.colors.surfaceContainerHighest,
       pressedBackgroundColor: theme.colors.surfaceContainer,
-      borderRadius: theme.radius.radiusM,
+      borderRadius: theme.radius.radiusL,
       padding: EdgeInsets.symmetric(
         horizontal: theme.spacing.l,
         vertical: theme.spacing.m,
@@ -166,7 +166,7 @@ class ChromiaButtonStyle {
       disabledForegroundColor: theme.colors.textDisabled,
       hoverBackgroundColor: theme.colors.surfaceHover,
       pressedBackgroundColor: theme.colors.surfacePressed,
-      borderRadius: theme.radius.radiusM,
+      borderRadius: theme.radius.radiusL,
       padding: EdgeInsets.symmetric(
         horizontal: theme.spacing.l,
         vertical: theme.spacing.m,
