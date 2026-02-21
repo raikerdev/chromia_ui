@@ -10,7 +10,7 @@ class CheckboxesScreen extends StatelessWidget {
     final theme = context.chromiaTheme;
     final spacing = theme.spacing;
     return ExampleScaffold(
-      title: 'Inputs',
+      title: 'Checkboxes',
       children: [
         // Checkboxes section
         _buildCheckboxesSection(context),
@@ -27,14 +27,6 @@ class CheckboxesScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Checkboxes',
-          style: theme.typography.headlineSmall.copyWith(
-            color: colors.textPrimary,
-          ),
-        ),
-        spacing.gapVM,
-
         // Basic checkboxes
         Text(
           'Basic',
@@ -46,23 +38,23 @@ class CheckboxesScreen extends StatelessWidget {
         Row(
           children: [
             ChromiaCheckbox(
-              value: true,
+              initialValue: true,
               onChanged: (value) {},
             ),
             spacing.gapHM,
             ChromiaCheckbox(
-              value: false,
+              initialValue: false,
               onChanged: (value) {},
             ),
             spacing.gapHM,
             ChromiaCheckbox(
-              value: null,
+              initialValue: null,
               onChanged: (value) {},
               tristate: true,
             ),
             spacing.gapHM,
             const ChromiaCheckbox(
-              value: true,
+              initialValue: true,
               onChanged: null, // Disabled
             ),
           ],
@@ -78,13 +70,13 @@ class CheckboxesScreen extends StatelessWidget {
         ),
         spacing.gapVS,
         ChromiaCheckbox(
-          value: true,
+          initialValue: true,
           onChanged: (value) {},
           label: 'Accept terms and conditions',
         ),
         spacing.gapVS,
         ChromiaCheckbox(
-          value: false,
+          initialValue: false,
           onChanged: (value) {},
           label: 'Subscribe to newsletter',
         ),

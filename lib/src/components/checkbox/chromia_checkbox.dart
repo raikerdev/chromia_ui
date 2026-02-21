@@ -24,7 +24,7 @@ import 'package:flutter/material.dart';
 /// ```
 class ChromiaCheckbox extends StatelessWidget {
   const ChromiaCheckbox({
-    required this.value,
+    required this.initialValue,
     required this.onChanged,
     this.label,
     this.tristate = false,
@@ -35,7 +35,7 @@ class ChromiaCheckbox extends StatelessWidget {
   });
 
   /// Whether the checkbox is checked
-  final bool? value;
+  final bool? initialValue;
 
   /// Called when the value changes
   final ValueChanged<bool?>? onChanged;
@@ -72,15 +72,15 @@ class ChromiaCheckbox extends StatelessWidget {
             ? () {
                 if (tristate) {
                   // Cycle through: false -> true -> null -> false
-                  if (value == false) {
+                  if (initialValue == false) {
                     onChanged!(true);
-                  } else if (value == true) {
+                  } else if (initialValue == true) {
                     onChanged!(null);
                   } else {
                     onChanged!(false);
                   }
                 } else {
-                  onChanged!(!(value ?? false));
+                  onChanged!(!(initialValue ?? false));
                 }
               }
             : null,
@@ -133,15 +133,15 @@ class ChromiaCheckbox extends StatelessWidget {
       onTap: isEnabled && label == null
           ? () {
               if (tristate) {
-                if (value == false) {
+                if (initialValue == false) {
                   onChanged!(true);
-                } else if (value == true) {
+                } else if (initialValue == true) {
                   onChanged!(null);
                 } else {
                   onChanged!(false);
                 }
               } else {
-                onChanged!(!(value ?? false));
+                onChanged!(!(initialValue ?? false));
               }
             }
           : null,
@@ -151,139 +151,26 @@ class ChromiaCheckbox extends StatelessWidget {
         width: size,
         height: size,
         decoration: BoxDecoration(
-          color: value == true ? (isEnabled ? activeColor : colors.border) : colors.transparent,
+          color: initialValue == true ? (isEnabled ? activeColor : colors.border) : colors.transparent,
           border: Border.all(
-            color: value == true ? (isEnabled ? activeColor : colors.border) : (isEnabled ? colors.border : colors.border),
+            color: initialValue == true ? (isEnabled ? activeColor : colors.border) : (isEnabled ? colors.border : colors.border),
             width: 2,
           ),
           borderRadius: radius.circular(4),
         ),
-        child: value == true
+        child: initialValue == true
             ? Icon(
                 Icons.check,
                 size: size * 0.7,
                 color: checkColor,
               )
-            : value == null
+            : initialValue == null
             ? Icon(
                 Icons.remove,
                 size: size * 0.7,
                 color: isEnabled ? activeColor : colors.border,
               )
             : null,
-      ),
-    );
-  }
-}
-
-/// A checkbox with a tile layout similar to CheckboxListTile.
-class ChromiaCheckboxTile extends StatelessWidget {
-  const ChromiaCheckboxTile({
-    required this.value,
-    required this.onChanged,
-    this.title,
-    this.subtitle,
-    this.secondary,
-    this.tristate = false,
-    this.activeColor,
-    this.checkColor,
-    this.contentPadding,
-    super.key,
-  });
-
-  /// Whether the checkbox is checked
-  final bool? value;
-
-  /// Called when the value changes
-  final ValueChanged<bool?>? onChanged;
-
-  /// The primary content
-  final Widget? title;
-
-  /// Additional content displayed below the title
-  final Widget? subtitle;
-
-  /// A widget to display before the checkbox
-  final Widget? secondary;
-
-  /// Whether the checkbox can be in an indeterminate state
-  final bool tristate;
-
-  /// The color when checked
-  final Color? activeColor;
-
-  /// The color of the check mark
-  final Color? checkColor;
-
-  /// Padding around the tile
-  final EdgeInsetsGeometry? contentPadding;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final spacing = theme.spacing;
-    final radius = theme.radius;
-
-    return InkWell(
-      onTap: onChanged != null
-          ? () {
-              if (tristate) {
-                if (value == false) {
-                  onChanged!(true);
-                } else if (value == true) {
-                  onChanged!(null);
-                } else {
-                  onChanged!(false);
-                }
-              } else {
-                onChanged!(!(value ?? false));
-              }
-            }
-          : null,
-      borderRadius: radius.radiusS,
-      child: Padding(
-        padding: contentPadding ?? spacing.paddingM,
-        child: Row(
-          children: [
-            if (secondary != null) ...[
-              secondary!,
-              spacing.gapHM,
-            ],
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if (title != null)
-                    DefaultTextStyle(
-                      style: theme.typography.bodyMedium.copyWith(
-                        color: theme.colors.textPrimary,
-                      ),
-                      child: title!,
-                    ),
-                  if (subtitle != null) ...[
-                    spacing.gapVXS,
-                    DefaultTextStyle(
-                      style: theme.typography.bodySmall.copyWith(
-                        color: theme.colors.textSecondary,
-                      ),
-                      child: subtitle!,
-                    ),
-                  ],
-                ],
-              ),
-            ),
-            spacing.gapHM,
-            ChromiaCheckbox(
-              value: value,
-              onChanged: null,
-              // Handled by tile tap
-              tristate: tristate,
-              activeColor: activeColor,
-              checkColor: checkColor,
-            ),
-          ],
-        ),
       ),
     );
   }

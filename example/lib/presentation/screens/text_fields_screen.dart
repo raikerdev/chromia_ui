@@ -164,9 +164,9 @@ class _TextFieldsScreenState extends State<TextFieldsScreen> {
           label: 'Username',
           hintText: 'Enter username',
           initialValue: 'john_doe',
-          errorText: 'Username is already taken',
           variant: selectedVariant,
           prefixIcon: const Icon(Icons.account_circle),
+          validators: [DifferentValidator('Username is already taken', compareValue: 'john_doe')],
         ),
         spacing.gapVL,
 

@@ -33,12 +33,27 @@ class EqualsValidator extends ChromiaTextFieldValidator {
   }
 }
 
+class DifferentValidator extends ChromiaTextFieldValidator {
+  final String compareValue;
+
+  DifferentValidator(super.error, {required this.compareValue});
+
+  @override
+  String? validate(String? value) {
+    if (value == compareValue) {
+      return error;
+    }
+
+    return null;
+  }
+}
+
 class EmailValidator extends ChromiaTextFieldValidator {
   EmailValidator(super.error);
 
   @override
   String? validate(String? value) {
-    final RegExp emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    final RegExp emailRegex = RegExp(r'^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$');
     if (value == null || !emailRegex.hasMatch(value)) {
       return error;
     }
