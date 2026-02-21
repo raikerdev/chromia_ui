@@ -2,8 +2,26 @@ import 'package:chromia_ui/chromia_ui.dart';
 import 'package:flutter/material.dart';
 
 /// A checkbox with a tile layout similar to CheckboxListTile.
-class ChromiaCheckboxTile extends StatelessWidget {
-  const ChromiaCheckboxTile({
+///
+/// The [ChromiaListTileCheckbox] is a widget that displays a
+/// checkbox with a tile layout.
+///
+/// Example usage:
+/// ```dart
+/// ChromiaCheckboxListTile(
+///   value: isChecked,
+///   title: Text('Checkbox ListTile'),
+///   subtitle: Text('This is a subtitle'),
+///   secondary: Icon(Icons.check),
+///   onChanged: (value) {
+///     setState(() {
+///       isChecked = value;
+///     });
+///   },
+/// )
+/// ```
+class ChromiaListTileCheckbox extends StatelessWidget {
+  const ChromiaListTileCheckbox({
     required this.value,
     required this.onChanged,
     this.title,

@@ -154,7 +154,7 @@ class _CheckboxesScreenState extends State<CheckboxesScreen> {
           ),
           child: Column(
             children: [
-              ChromiaCheckboxTile(
+              ChromiaListTileCheckbox(
                 value: true,
                 onChanged: null,
                 title: const Text('Enable notifications'),
@@ -162,7 +162,7 @@ class _CheckboxesScreenState extends State<CheckboxesScreen> {
                 secondary: Icon(Icons.notifications, color: colors.primary),
               ),
               Divider(height: 1, color: colors.divider),
-              ChromiaCheckboxTile(
+              ChromiaListTileCheckbox(
                 value: _tileValue,
                 onChanged: (value) => setState(() => _tileValue = value ?? false),
                 title: const Text('Auto-save'),
@@ -170,7 +170,7 @@ class _CheckboxesScreenState extends State<CheckboxesScreen> {
                 secondary: Icon(Icons.save, color: colors.primary),
               ),
               Divider(height: 1, color: colors.divider),
-              ChromiaCheckboxTile(
+              ChromiaListTileCheckbox(
                 value: _customTileValue,
                 onChanged: (value) => setState(() => _customTileValue = value ?? false),
                 checkIcon: Icons.thumb_up,

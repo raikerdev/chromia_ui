@@ -10,7 +10,7 @@ class CardsScreen extends StatelessWidget {
     final theme = context.chromiaTheme;
     final spacing = theme.spacing;
     return ExampleScaffold(
-      title: 'Inputs',
+      title: 'Cards',
       children: [
         // Cards section
         _buildCardsSection(context),
@@ -27,14 +27,6 @@ class CardsScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Cards',
-          style: theme.typography.headlineSmall.copyWith(
-            color: colors.textPrimary,
-          ),
-        ),
-        spacing.gapVM,
-
         // Basic card
         Text(
           'Basic Card',
@@ -256,7 +248,7 @@ class CardsScreen extends StatelessWidget {
           ),
         ),
         spacing.gapVS,
-        ChromiaListCard(
+        ChromiaListTileCard(
           leading: CircleAvatar(
             backgroundColor: colors.primary,
             child: const Icon(Icons.person, color: Colors.white),
@@ -267,7 +259,7 @@ class CardsScreen extends StatelessWidget {
           onTap: () {},
         ),
         spacing.gapVM,
-        ChromiaListCard(
+        ChromiaListTileCard(
           leading: CircleAvatar(
             backgroundColor: colors.success,
             child: const Icon(Icons.check, color: Colors.white),
@@ -283,7 +275,7 @@ class CardsScreen extends StatelessWidget {
           onTap: () {},
         ),
         spacing.gapVM,
-        ChromiaListCard(
+        ChromiaListTileCard(
           leading: CircleAvatar(
             backgroundColor: colors.warning,
             child: const Icon(Icons.warning, color: Colors.white),
@@ -313,97 +305,40 @@ class CardsScreen extends StatelessWidget {
               crossAxisCount: crossAxisCount,
               mainAxisSpacing: spacing.m,
               crossAxisSpacing: spacing.m,
-              childAspectRatio: 1.2,
+              childAspectRatio: 100/20,
               children: [
-                ChromiaCard(
-                  onTap: () {},
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.home, size: 40, color: colors.primary),
-                      spacing.gapVS,
-                      Text(
-                        'Home',
-                        style: theme.typography.labelMedium,
-                      ),
-                    ],
-                  ),
-                ),
-                ChromiaCard(
-                  onTap: () {},
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.settings, size: 40, color: colors.primary),
-                      spacing.gapVS,
-                      Text(
-                        'Settings',
-                        style: theme.typography.labelMedium,
-                      ),
-                    ],
-                  ),
-                ),
-                ChromiaCard(
-                  onTap: () {},
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.person, size: 40, color: colors.primary),
-                      spacing.gapVS,
-                      Text(
-                        'Profile',
-                        style: theme.typography.labelMedium,
-                      ),
-                    ],
-                  ),
-                ),
-                ChromiaCard(
-                  onTap: () {},
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.notifications, size: 40, color: colors.primary),
-                      spacing.gapVS,
-                      Text(
-                        'Alerts',
-                        style: theme.typography.labelMedium,
-                      ),
-                    ],
-                  ),
-                ),
-                ChromiaCard(
-                  onTap: () {},
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.analytics, size: 40, color: colors.primary),
-                      spacing.gapVS,
-                      Text(
-                        'Analytics',
-                        style: theme.typography.labelMedium,
-                      ),
-                    ],
-                  ),
-                ),
-                ChromiaCard(
-                  onTap: () {},
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.help, size: 40, color: colors.primary),
-                      spacing.gapVS,
-                      Text(
-                        'Help',
-                        style: theme.typography.labelMedium,
-                      ),
-                    ],
-                  ),
-                ),
+                _buildGridItem(context, Icons.home, 'Home'),
+                _buildGridItem(context, Icons.settings, 'Settings'),
+                _buildGridItem(context, Icons.person, 'Profile'),
+                _buildGridItem(context, Icons.notifications, 'Alerts'),
+                _buildGridItem(context, Icons.analytics, 'Analytics'),
+                _buildGridItem(context, Icons.help, 'Help'),
               ],
             );
           },
         ),
       ],
+    );
+  }
+
+  Widget _buildGridItem(BuildContext context, IconData icon, String title) {
+    final theme = context.chromiaTheme;
+    final colors = theme.colors;
+    final spacing = theme.spacing;
+    return ChromiaCard(
+      onTap: () {},
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(icon, size: 40, color: colors.primary),
+          spacing.gapVS,
+          Text(
+            title,
+            style: theme.typography.labelMedium,
+          ),
+        ],
+      ),
     );
   }
 }

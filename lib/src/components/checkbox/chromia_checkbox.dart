@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 
 /// A customizable checkbox component that follows the Chromia design system.
 ///
+/// The [ChromiaCheckbox] widget is a customizable checkbox component that
+/// follows the Chromia design system.
+///
 /// Example usage:
 /// ```dart
 /// ChromiaCheckbox(
