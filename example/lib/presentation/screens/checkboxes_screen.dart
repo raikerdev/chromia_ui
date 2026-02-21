@@ -2,8 +2,21 @@ import 'package:chromia_ui/chromia_ui.dart';
 import 'package:chromia_ui_example/presentation/widgets/layout/scaffold/example_scaffold.dart';
 import 'package:flutter/material.dart';
 
-class CheckboxesScreen extends StatelessWidget {
+class CheckboxesScreen extends StatefulWidget {
   const CheckboxesScreen({super.key});
+
+  @override
+  State<CheckboxesScreen> createState() => _CheckboxesScreenState();
+}
+
+class _CheckboxesScreenState extends State<CheckboxesScreen> {
+  bool _basicValue = true;
+  bool? _tristateValue;
+  bool _customizableValue = true;
+  bool? _customizableTristateValue;
+  bool _withLabelValue = false;
+  bool _tileValue = false;
+  bool _customTileValue = false;
 
   @override
   Widget build(BuildContext context) {
@@ -37,25 +50,69 @@ class CheckboxesScreen extends StatelessWidget {
         spacing.gapVS,
         Row(
           children: [
-            ChromiaCheckbox(
-              initialValue: true,
-              onChanged: (value) {},
-            ),
-            spacing.gapHM,
-            ChromiaCheckbox(
-              initialValue: false,
-              onChanged: (value) {},
-            ),
-            spacing.gapHM,
-            ChromiaCheckbox(
-              initialValue: null,
-              onChanged: (value) {},
-              tristate: true,
-            ),
-            spacing.gapHM,
             const ChromiaCheckbox(
-              initialValue: true,
+              value: true,
               onChanged: null, // Disabled
+            ),
+            spacing.gapHM,
+            ChromiaCheckbox(
+              value: _basicValue,
+              onChanged: (value) => setState(() => _basicValue = value ?? false),
+            ),
+          ],
+        ),
+        spacing.gapVL,
+
+        Text(
+          'Tristate',
+          style: theme.typography.titleSmall.copyWith(
+            color: colors.textSecondary,
+          ),
+        ),
+        spacing.gapVS,
+        Row(
+          children: [
+            const ChromiaCheckbox(
+              value: null,
+              tristate: true,
+              onChanged: null, // Disabled
+            ),
+            spacing.gapHM,
+            ChromiaCheckbox(
+              value: _tristateValue,
+              tristate: true,
+              onChanged: (value) => setState(() => _tristateValue = value),
+            ),
+          ],
+        ),
+        spacing.gapVL,
+
+        Text(
+          'Customizable',
+          style: theme.typography.titleSmall.copyWith(
+            color: colors.textSecondary,
+          ),
+        ),
+        spacing.gapVS,
+        Row(
+          children: [
+            ChromiaCheckbox(
+              value: _customizableValue,
+              size: 40,
+              checkIcon: Icons.star,
+              checkColor: Colors.amber,
+              activeColor: Colors.cyan,
+              onChanged: (value) => setState(() => _customizableValue = value ?? false),
+            ),
+            spacing.gapHM,
+            ChromiaCheckbox(
+              value: _customizableTristateValue,
+              tristate: true,
+              size: 30,
+              checkIcon: Icons.favorite,
+              tristateIcon: Icons.heart_broken,
+              activeColor: Colors.red,
+              onChanged: (value) => setState(() => _customizableTristateValue = value),
             ),
           ],
         ),
@@ -69,16 +126,16 @@ class CheckboxesScreen extends StatelessWidget {
           ),
         ),
         spacing.gapVS,
-        ChromiaCheckbox(
-          initialValue: true,
-          onChanged: (value) {},
-          label: 'Accept terms and conditions',
+        const ChromiaCheckbox(
+          value: true,
+          onChanged: null,
+          label: 'Subscribe to newsletter',
         ),
         spacing.gapVS,
         ChromiaCheckbox(
-          initialValue: false,
-          onChanged: (value) {},
-          label: 'Subscribe to newsletter',
+          value: _withLabelValue,
+          onChanged: (value) => setState(() => _withLabelValue = value ?? false),
+          label: 'Accept terms and conditions',
         ),
         spacing.gapVL,
 
@@ -99,18 +156,27 @@ class CheckboxesScreen extends StatelessWidget {
             children: [
               ChromiaCheckboxTile(
                 value: true,
-                onChanged: (value) {},
+                onChanged: null,
                 title: const Text('Enable notifications'),
                 subtitle: const Text('Receive alerts about new messages'),
                 secondary: Icon(Icons.notifications, color: colors.primary),
               ),
               Divider(height: 1, color: colors.divider),
               ChromiaCheckboxTile(
-                value: false,
-                onChanged: (value) {},
+                value: _tileValue,
+                onChanged: (value) => setState(() => _tileValue = value ?? false),
                 title: const Text('Auto-save'),
                 subtitle: const Text('Automatically save your progress'),
                 secondary: Icon(Icons.save, color: colors.primary),
+              ),
+              Divider(height: 1, color: colors.divider),
+              ChromiaCheckboxTile(
+                value: _customTileValue,
+                onChanged: (value) => setState(() => _customTileValue = value ?? false),
+                checkIcon: Icons.thumb_up,
+                title: const Text('Show likes'),
+                subtitle: const Text('Show likes on posts'),
+                secondary: Icon(Icons.thumb_up, color: colors.primary),
               ),
             ],
           ),

@@ -24,18 +24,20 @@ import 'package:flutter/material.dart';
 /// ```
 class ChromiaCheckbox extends StatelessWidget {
   const ChromiaCheckbox({
-    required this.initialValue,
+    required this.value,
     required this.onChanged,
     this.label,
     this.tristate = false,
     this.activeColor,
     this.checkColor,
     this.size = 20.0,
+    this.checkIcon = Icons.check,
+    this.tristateIcon = Icons.remove,
     super.key,
   });
 
   /// Whether the checkbox is checked
-  final bool? initialValue;
+  final bool? value;
 
   /// Called when the value changes
   final ValueChanged<bool?>? onChanged;
@@ -55,6 +57,12 @@ class ChromiaCheckbox extends StatelessWidget {
   /// The size of the checkbox
   final double size;
 
+  /// The icon to display when the checkbox is checked
+  final IconData checkIcon;
+
+  /// The icon to display when the checkbox is null
+  final IconData tristateIcon;
+
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
@@ -72,15 +80,15 @@ class ChromiaCheckbox extends StatelessWidget {
             ? () {
                 if (tristate) {
                   // Cycle through: false -> true -> null -> false
-                  if (initialValue == false) {
+                  if (value == false) {
                     onChanged!(true);
-                  } else if (initialValue == true) {
+                  } else if (value == true) {
                     onChanged!(null);
                   } else {
                     onChanged!(false);
                   }
                 } else {
-                  onChanged!(!(initialValue ?? false));
+                  onChanged!(!(value ?? false));
                 }
               }
             : null,
@@ -133,15 +141,15 @@ class ChromiaCheckbox extends StatelessWidget {
       onTap: isEnabled && label == null
           ? () {
               if (tristate) {
-                if (initialValue == false) {
+                if (value == false) {
                   onChanged!(true);
-                } else if (initialValue == true) {
+                } else if (value == true) {
                   onChanged!(null);
                 } else {
                   onChanged!(false);
                 }
               } else {
-                onChanged!(!(initialValue ?? false));
+                onChanged!(!(value ?? false));
               }
             }
           : null,
@@ -151,22 +159,22 @@ class ChromiaCheckbox extends StatelessWidget {
         width: size,
         height: size,
         decoration: BoxDecoration(
-          color: initialValue == true ? (isEnabled ? activeColor : colors.border) : colors.transparent,
+          color: value == true ? (isEnabled ? activeColor : colors.border) : colors.transparent,
           border: Border.all(
-            color: initialValue == true ? (isEnabled ? activeColor : colors.border) : (isEnabled ? colors.border : colors.border),
+            color: value == true ? (isEnabled ? activeColor : colors.border) : (isEnabled ? colors.border : colors.border),
             width: 2,
           ),
           borderRadius: radius.circular(4),
         ),
-        child: initialValue == true
+        child: value == true
             ? Icon(
-                Icons.check,
+                checkIcon,
                 size: size * 0.7,
                 color: checkColor,
               )
-            : initialValue == null
+            : value == null
             ? Icon(
-                Icons.remove,
+                tristateIcon,
                 size: size * 0.7,
                 color: isEnabled ? activeColor : colors.border,
               )

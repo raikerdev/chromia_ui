@@ -13,6 +13,8 @@ class ChromiaCheckboxTile extends StatelessWidget {
     this.activeColor,
     this.checkColor,
     this.contentPadding,
+    this.checkIcon = Icons.check,
+    this.tristateIcon = Icons.remove,
     super.key,
   });
 
@@ -42,6 +44,12 @@ class ChromiaCheckboxTile extends StatelessWidget {
 
   /// Padding around the tile
   final EdgeInsetsGeometry? contentPadding;
+
+  /// The icon to display when the checkbox is checked
+  final IconData checkIcon;
+
+  /// The icon to display when the checkbox is null
+  final IconData tristateIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -100,12 +108,13 @@ class ChromiaCheckboxTile extends StatelessWidget {
             ),
             spacing.gapHM,
             ChromiaCheckbox(
-              initialValue: value,
-              onChanged: null,
-              // Handled by tile tap
+              value: value,
+              onChanged: onChanged,
               tristate: tristate,
               activeColor: activeColor,
               checkColor: checkColor,
+              checkIcon: checkIcon,
+              tristateIcon: tristateIcon,
             ),
           ],
         ),
