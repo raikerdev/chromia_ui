@@ -43,11 +43,16 @@ class BrandsScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Brand Themes', style: theme.typography.headlineSmall.copyWith(color: colors.textPrimary)),
+        ChromiaText(
+          'Brand Themes',
+          type: ChromiaTypographyType.headlineSmall,
+          color: colors.textPrimary,
+        ),
         spacing.gapVM,
-        Text(
+        ChromiaText(
           'Select a brand to see the theme change dynamically:',
-          style: theme.typography.bodyMedium.copyWith(color: colors.textSecondary),
+          type: ChromiaTypographyType.bodyMedium,
+          color: colors.textSecondary,
         ),
         spacing.gapVM,
         Wrap(
@@ -82,16 +87,26 @@ class BrandsScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Current Theme', style: theme.typography.titleMedium.copyWith(color: colors.textPrimary)),
-          spacing.gapVS,
-          Text('Brand: ${selectedBrand.name}', style: theme.typography.bodyMedium.copyWith(color: colors.textSecondary)),
-          Text(
-            'Mode: ${themeMode == ThemeMode.light ? "Light" : "Dark"}',
-            style: theme.typography.bodyMedium.copyWith(color: colors.textSecondary),
+          ChromiaText(
+            'Current Theme',
+            type: ChromiaTypographyType.titleMedium,
+            color: colors.textPrimary,
           ),
-          Text(
+          spacing.gapVS,
+          ChromiaText(
+            'Brand: ${selectedBrand.name}',
+            type: ChromiaTypographyType.bodyMedium,
+            color: colors.textSecondary,
+          ),
+          ChromiaText(
+            'Mode: ${themeMode == ThemeMode.light ? "Light" : "Dark"}',
+            type: ChromiaTypographyType.bodyMedium,
+            color: colors.textSecondary,
+          ),
+          ChromiaText(
             'Platform: ${PlatformDetector.platformName}',
-            style: theme.typography.bodyMedium.copyWith(color: colors.textSecondary),
+            type: ChromiaTypographyType.bodyMedium,
+            color: colors.textSecondary,
           ),
         ],
       ),
@@ -106,7 +121,11 @@ class BrandsScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Colors', style: theme.typography.headlineSmall.copyWith(color: colors.textPrimary)),
+        ChromiaText(
+          'Colors',
+          type: ChromiaTypographyType.headlineSmall,
+          color: colors.textPrimary,
+        ),
         spacing.gapVM,
         Wrap(
           spacing: spacing.m,
@@ -132,7 +151,11 @@ class BrandsScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Spacing Scale', style: theme.typography.headlineSmall.copyWith(color: colors.textPrimary)),
+        ChromiaText(
+          'Spacing Scale',
+          type: ChromiaTypographyType.headlineSmall,
+          color: colors.textPrimary,
+        ),
         spacing.gapVM,
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -174,7 +197,11 @@ class _ColorSwatch extends StatelessWidget {
           ),
         ),
         spacing.gapVXS,
-        Text(name, style: theme.typography.caption.copyWith(color: colors.textSecondary)),
+        ChromiaText(
+          name,
+          type: ChromiaTypographyType.caption,
+          color: colors.textSecondary,
+        ),
       ],
     );
   }
@@ -198,7 +225,11 @@ class _SpacingExample extends StatelessWidget {
         children: [
           SizedBox(
             width: 40,
-            child: Text(label, style: theme.typography.bodySmall.copyWith(color: colors.textSecondary)),
+            child: ChromiaText(
+              label,
+              type: ChromiaTypographyType.bodySmall,
+              color: colors.textSecondary,
+            ),
           ),
           spacing.gapHM,
           Container(
@@ -207,7 +238,11 @@ class _SpacingExample extends StatelessWidget {
             decoration: BoxDecoration(color: colors.primary, borderRadius: theme.radius.radiusS),
           ),
           spacing.gapHM,
-          Text('${value.toInt()}px', style: theme.typography.bodySmall.copyWith(color: colors.textTertiary)),
+          ChromiaText(
+            '${value.toInt()}px',
+            type: ChromiaTypographyType.bodySmall,
+            color: colors.textTertiary,
+          ),
         ],
       ),
     );

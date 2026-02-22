@@ -33,8 +33,8 @@ class HomeScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 final route = screenRoutes.elementAt(index);
                 return ListTile(
-                  title: Text(route.title, style: theme.typography.headlineSmall),
-                  subtitle: Text(route.path, style: theme.typography.bodyMedium),
+                  title: ChromiaText(route.title, type: ChromiaTypographyType.headlineSmall),
+                  subtitle: ChromiaText(route.path, type: ChromiaTypographyType.bodyMedium),
                   leading: Icon(route.icon, color: colors.primary),
                   trailing: Icon(Icons.chevron_right, color: colors.textSecondary),
                   shape: Border(bottom: BorderSide(color: colors.border)),
@@ -56,11 +56,16 @@ class HomeScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Welcome to Chromia UI', style: theme.typography.displaySmall.copyWith(color: colors.textPrimary)),
+        ChromiaText(
+          'Welcome to Chromia UI',
+          type: ChromiaTypographyType.displaySmall,
+          color: colors.textPrimary,
+        ),
         spacing.gapVS,
-        Text(
+        ChromiaText(
           'A comprehensive Flutter UI component library for mobile, desktop, and web.',
-          style: theme.typography.bodyLarge.copyWith(color: colors.textSecondary),
+          type: ChromiaTypographyType.bodyLarge,
+          color: colors.textSecondary,
         ),
       ],
     );

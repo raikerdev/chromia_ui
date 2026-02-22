@@ -23,7 +23,11 @@ class ExampleAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: colors.surface,
       elevation: 0,
-      title: Text(title, style: theme.typography.titleLarge.copyWith(color: colors.textPrimary)),
+      title: ChromiaText(
+        title,
+        type: ChromiaTypographyType.titleLarge,
+        color: colors.textPrimary,
+      ),
       actions: [
         // Theme toggle button
         IconButton(

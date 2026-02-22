@@ -41,11 +41,10 @@ class _CheckboxesScreenState extends State<CheckboxesScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Basic checkboxes
-        Text(
+        ChromiaText(
           'Basic',
-          style: theme.typography.titleSmall.copyWith(
-            color: colors.textSecondary,
-          ),
+          type: ChromiaTypographyType.headlineSmall,
+          color: colors.textPrimary,
         ),
         spacing.gapVS,
         Row(
@@ -63,11 +62,10 @@ class _CheckboxesScreenState extends State<CheckboxesScreen> {
         ),
         spacing.gapVL,
 
-        Text(
+        ChromiaText(
           'Tristate',
-          style: theme.typography.titleSmall.copyWith(
-            color: colors.textSecondary,
-          ),
+          type: ChromiaTypographyType.headlineSmall,
+          color: colors.textPrimary,
         ),
         spacing.gapVS,
         Row(
@@ -87,11 +85,10 @@ class _CheckboxesScreenState extends State<CheckboxesScreen> {
         ),
         spacing.gapVL,
 
-        Text(
+        ChromiaText(
           'Customizable',
-          style: theme.typography.titleSmall.copyWith(
-            color: colors.textSecondary,
-          ),
+          type: ChromiaTypographyType.headlineSmall,
+          color: colors.textPrimary,
         ),
         spacing.gapVS,
         Row(
@@ -119,11 +116,10 @@ class _CheckboxesScreenState extends State<CheckboxesScreen> {
         spacing.gapVL,
 
         // With labels
-        Text(
+        ChromiaText(
           'With Labels',
-          style: theme.typography.titleSmall.copyWith(
-            color: colors.textSecondary,
-          ),
+          type: ChromiaTypographyType.headlineSmall,
+          color: colors.textPrimary,
         ),
         spacing.gapVS,
         const ChromiaCheckbox(
@@ -140,11 +136,10 @@ class _CheckboxesScreenState extends State<CheckboxesScreen> {
         spacing.gapVL,
 
         // Checkbox tiles
-        Text(
+        ChromiaText(
           'Checkbox Tiles',
-          style: theme.typography.titleSmall.copyWith(
-            color: colors.textSecondary,
-          ),
+          type: ChromiaTypographyType.headlineSmall,
+          color: colors.textPrimary,
         ),
         spacing.gapVS,
         Container(
@@ -157,16 +152,16 @@ class _CheckboxesScreenState extends State<CheckboxesScreen> {
               ChromiaListTileCheckbox(
                 value: true,
                 onChanged: null,
-                title: const Text('Enable notifications'),
-                subtitle: const Text('Receive alerts about new messages'),
+                title: const ChromiaText('Enable notifications'),
+                subtitle: const ChromiaText('Receive alerts about new messages'),
                 secondary: Icon(Icons.notifications, color: colors.primary),
               ),
               Divider(height: 1, color: colors.divider),
               ChromiaListTileCheckbox(
                 value: _tileValue,
                 onChanged: (value) => setState(() => _tileValue = value ?? false),
-                title: const Text('Auto-save'),
-                subtitle: const Text('Automatically save your progress'),
+                title: const ChromiaText('Auto-save'),
+                subtitle: const ChromiaText('Automatically save your progress'),
                 secondary: Icon(Icons.save, color: colors.primary),
               ),
               Divider(height: 1, color: colors.divider),
@@ -174,8 +169,8 @@ class _CheckboxesScreenState extends State<CheckboxesScreen> {
                 value: _customTileValue,
                 onChanged: (value) => setState(() => _customTileValue = value ?? false),
                 checkIcon: Icons.thumb_up,
-                title: const Text('Show likes'),
-                subtitle: const Text('Show likes on posts'),
+                title: const ChromiaText('Show likes'),
+                subtitle: const ChromiaText('Show likes on posts'),
                 secondary: Icon(Icons.thumb_up, color: colors.primary),
               ),
             ],

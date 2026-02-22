@@ -1,3 +1,4 @@
+import 'package:chromia_ui/src/theme/chromia_theme.dart';
 import 'package:chromia_ui/src/tokens/typography_tokens.dart';
 import 'package:flutter/material.dart';
 
@@ -276,5 +277,75 @@ class ChromiaTypography {
       overline: overline.copyWith(color: color),
       code: code.copyWith(color: color),
     );
+  }
+}
+
+enum ChromiaTypographyType {
+  // Display styles
+  displayLarge,
+  displayMedium,
+  displaySmall,
+  // Headline styles
+  headlineLarge,
+  headlineMedium,
+  headlineSmall,
+  // Title styles
+  titleLarge,
+  titleMedium,
+  titleSmall,
+  // Body styles
+  bodyLarge,
+  bodyMedium,
+  bodySmall,
+  // Label styles
+  labelLarge,
+  labelMedium,
+  labelSmall,
+  // Caption styles
+  caption,
+  overline,
+  // Code style
+  code;
+
+  TextStyle getTextStyle(BuildContext context) {
+    final typography = context.chromiaTheme.typography;
+    switch (this) {
+      case ChromiaTypographyType.displayLarge:
+        return typography.displayLarge;
+      case ChromiaTypographyType.displayMedium:
+        return typography.displayMedium;
+      case ChromiaTypographyType.displaySmall:
+        return typography.displaySmall;
+      case ChromiaTypographyType.headlineLarge:
+        return typography.headlineLarge;
+      case ChromiaTypographyType.headlineMedium:
+        return typography.headlineMedium;
+      case ChromiaTypographyType.headlineSmall:
+        return typography.headlineSmall;
+      case ChromiaTypographyType.titleLarge:
+        return typography.titleLarge;
+      case ChromiaTypographyType.titleMedium:
+        return typography.titleMedium;
+      case ChromiaTypographyType.titleSmall:
+        return typography.titleSmall;
+      case ChromiaTypographyType.bodyLarge:
+        return typography.bodyLarge;
+      case ChromiaTypographyType.bodyMedium:
+        return typography.bodyMedium;
+      case ChromiaTypographyType.bodySmall:
+        return typography.bodySmall;
+      case ChromiaTypographyType.labelLarge:
+        return typography.labelLarge;
+      case ChromiaTypographyType.labelMedium:
+        return typography.labelMedium;
+      case ChromiaTypographyType.labelSmall:
+        return typography.labelSmall;
+      case ChromiaTypographyType.caption:
+        return typography.caption;
+      case ChromiaTypographyType.overline:
+        return typography.overline;
+      case ChromiaTypographyType.code:
+        return typography.code;
+    }
   }
 }

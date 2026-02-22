@@ -42,7 +42,11 @@ class _ButtonsScreenState extends State<ButtonsScreen> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         // Button variants
-        Text('Variants', style: theme.typography.titleSmall.copyWith(color: colors.textSecondary)),
+        ChromiaText(
+          'Variants',
+          type: ChromiaTypographyType.headlineSmall,
+          color: colors.textPrimary,
+        ),
         spacing.gapVS,
         Wrap(
           spacing: spacing.m,
@@ -78,7 +82,11 @@ class _ButtonsScreenState extends State<ButtonsScreen> {
         spacing.gapVL,
 
         // Button sizes
-        Text('Sizes', style: theme.typography.titleSmall.copyWith(color: colors.textSecondary)),
+        ChromiaText(
+          'Sizes',
+          type: ChromiaTypographyType.headlineSmall,
+          color: colors.textPrimary,
+        ),
         spacing.gapVS,
         Wrap(
           spacing: spacing.m,
@@ -93,7 +101,11 @@ class _ButtonsScreenState extends State<ButtonsScreen> {
         spacing.gapVL,
 
         // Button states
-        Text('States', style: theme.typography.titleSmall.copyWith(color: colors.textSecondary)),
+        ChromiaText(
+          'States',
+          type: ChromiaTypographyType.headlineSmall,
+          color: colors.textPrimary,
+        ),
         spacing.gapVS,
         Wrap(
           spacing: spacing.m,
@@ -107,7 +119,11 @@ class _ButtonsScreenState extends State<ButtonsScreen> {
         spacing.gapVL,
 
         // Button with icons
-        Text('With Icons', style: theme.typography.titleSmall.copyWith(color: colors.textSecondary)),
+        ChromiaText(
+          'With Icons',
+          type: ChromiaTypographyType.headlineSmall,
+          color: colors.textPrimary,
+        ),
         spacing.gapVS,
         Wrap(
           spacing: spacing.m,
@@ -131,7 +147,11 @@ class _ButtonsScreenState extends State<ButtonsScreen> {
         spacing.gapVL,
 
         // Full width button
-        Text('Full Width', style: theme.typography.titleSmall.copyWith(color: colors.textSecondary)),
+        ChromiaText(
+          'Full Width',
+          type: ChromiaTypographyType.headlineSmall,
+          color: colors.textPrimary,
+        ),
         spacing.gapVS,
         ChromiaButton(variant: _variant, onPressed: () {}, isFullWidth: true, child: const Text('Full Width Button')),
       ],

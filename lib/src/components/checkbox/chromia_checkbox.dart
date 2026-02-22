@@ -1,3 +1,5 @@
+import 'package:chromia_ui/chromia_ui.dart';
+import 'package:chromia_ui/src/components/text/chromia_text.dart';
 import 'package:chromia_ui/src/theme/chromia_theme.dart';
 import 'package:chromia_ui/src/tokens/animation_tokens.dart';
 import 'package:flutter/material.dart';
@@ -109,11 +111,10 @@ class ChromiaCheckbox extends StatelessWidget {
               ),
               spacing.gapHM,
               Flexible(
-                child: Text(
+                child: ChromiaText(
                   label!,
-                  style: theme.typography.bodyMedium.copyWith(
-                    color: isEnabled ? colors.textPrimary : colors.textDisabled,
-                  ),
+                  type: ChromiaTypographyType.bodyMedium,
+                  color: isEnabled ? colors.textPrimary : colors.textDisabled,
                 ),
               ),
             ],
@@ -140,48 +141,53 @@ class ChromiaCheckbox extends StatelessWidget {
     final colors = theme.colors;
     final radius = theme.radius;
 
-    return GestureDetector(
-      onTap: isEnabled && label == null
-          ? () {
-              if (tristate) {
-                if (value == false) {
-                  onChanged!(true);
-                } else if (value == true) {
-                  onChanged!(null);
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: isEnabled && label == null
+            ? () {
+                if (tristate) {
+                  if (value == false) {
+                    onChanged!(true);
+                  } else if (value == true) {
+                    onChanged!(null);
+                  } else {
+                    onChanged!(false);
+                  }
                 } else {
-                  onChanged!(false);
+                  onChanged!(!(value ?? false));
                 }
-              } else {
-                onChanged!(!(value ?? false));
               }
-            }
-          : null,
-      child: AnimatedContainer(
-        duration: AnimationTokens.fast,
-        curve: AnimationTokens.easeOut,
-        width: size,
-        height: size,
-        decoration: BoxDecoration(
-          color: value == true ? (isEnabled ? activeColor : colors.border) : colors.transparent,
-          border: Border.all(
-            color: value == true ? (isEnabled ? activeColor : colors.border) : (isEnabled ? colors.border : colors.border),
-            width: 2,
-          ),
-          borderRadius: radius.circular(4),
-        ),
-        child: value == true
-            ? Icon(
-                checkIcon,
-                size: size * 0.7,
-                color: checkColor,
-              )
-            : value == null
-            ? Icon(
-                tristateIcon,
-                size: size * 0.7,
-                color: isEnabled ? activeColor : colors.border,
-              )
             : null,
+        child: AnimatedContainer(
+          duration: AnimationTokens.fast,
+          curve: AnimationTokens.easeOut,
+          width: size,
+          height: size,
+          decoration: BoxDecoration(
+            color: value == true ? (isEnabled ? activeColor : colors.surfaceContainer) : colors.transparent,
+            border: Border.all(
+              color: value == true
+                  ? (isEnabled ? activeColor : colors.surfaceContainer)
+                  : (isEnabled ? colors.border : colors.surfaceContainer),
+              width: 2,
+            ),
+            borderRadius: radius.circular(4),
+          ),
+          child: value == true
+              ? Icon(
+                  checkIcon,
+                  size: size * 0.7,
+                  color: checkColor,
+                )
+              : value == null
+              ? Icon(
+                  tristateIcon,
+                  size: size * 0.7,
+                  color: isEnabled ? activeColor : colors.border,
+                )
+              : null,
+        ),
       ),
     );
   }

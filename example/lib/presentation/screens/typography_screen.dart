@@ -21,43 +21,32 @@ class TypographyScreen extends StatelessWidget {
   }
 
   Widget _buildTypographySection(BuildContext context) {
-    final theme = context.chromiaTheme;
-
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _TypographyExample(label: 'Display Large', style: theme.typography.displayLarge),
-        _TypographyExample(label: 'Display Medium', style: theme.typography.displayMedium),
-        _TypographyExample(label: 'Display Small', style: theme.typography.displaySmall),
-        _TypographyExample(label: 'Headline Large', style: theme.typography.headlineLarge),
-        _TypographyExample(label: 'Headline Medium', style: theme.typography.headlineMedium),
-        _TypographyExample(label: 'Headline Small', style: theme.typography.headlineSmall),
-        _TypographyExample(label: 'Body Large', style: theme.typography.bodyLarge),
-        _TypographyExample(label: 'Body Medium', style: theme.typography.bodyMedium),
-        _TypographyExample(label: 'Body Small', style: theme.typography.bodySmall),
-      ],
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: ChromiaTypographyType.values.map((type) => _buildTypographyExample(context, type.name, type)).toList(),
     );
   }
-}
 
-class _TypographyExample extends StatelessWidget {
-  const _TypographyExample({required this.label, required this.style});
-
-  final String label;
-  final TextStyle style;
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildTypographyExample(BuildContext context, String label, ChromiaTypographyType type) {
     final colors = context.chromiaColors;
     final spacing = context.chromiaSpacing;
-
+    final fontSize = type.getTextStyle(context).fontSize;
     return Padding(
       padding: spacing.verticalS,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('$label (font-size: ${style.fontSize})', style: TextStyle(fontSize: 12, color: colors.textTertiary)),
-          Text('The quick brown fox jumps over the lazy dog', style: style.copyWith(color: colors.textPrimary)),
+          ChromiaText(
+            '$label (font-size: $fontSize)',
+            type: ChromiaTypographyType.labelMedium,
+            color: colors.primary,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          ChromiaText(
+            'The quick brown fox jumps over the lazy dog',
+            type: type,
+            color: colors.textPrimary,
+          ),
         ],
       ),
     );

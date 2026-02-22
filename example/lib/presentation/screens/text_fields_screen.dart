@@ -51,9 +51,10 @@ class _TextFieldsScreenState extends State<TextFieldsScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        ChromiaText(
           'Select a variant to see the theme change dynamically:',
-          style: theme.typography.bodyMedium.copyWith(color: colors.textSecondary),
+          type: ChromiaTypographyType.bodyMedium,
+          color: colors.textSecondary,
         ),
         spacing.gapVM,
         Wrap(
@@ -82,11 +83,10 @@ class _TextFieldsScreenState extends State<TextFieldsScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Single line'
-        Text(
+        ChromiaText(
           'Single line',
-          style: theme.typography.titleSmall.copyWith(
-            color: colors.textSecondary,
-          ),
+          type: ChromiaTypographyType.headlineSmall,
+          color: colors.textPrimary,
         ),
         spacing.gapVS,
 
@@ -124,11 +124,10 @@ class _TextFieldsScreenState extends State<TextFieldsScreen> {
         spacing.gapVL,
 
         // With Helper text
-        Text(
+        ChromiaText(
           'With Helper',
-          style: theme.typography.titleSmall.copyWith(
-            color: colors.textSecondary,
-          ),
+          type: ChromiaTypographyType.headlineSmall,
+          color: colors.textPrimary,
         ),
         spacing.gapVS,
 
@@ -152,11 +151,10 @@ class _TextFieldsScreenState extends State<TextFieldsScreen> {
         spacing.gapVM,
 
         // With validation text
-        Text(
+        ChromiaText(
           'With Validation',
-          style: theme.typography.titleSmall.copyWith(
-            color: colors.textSecondary,
-          ),
+          type: ChromiaTypographyType.headlineSmall,
+          color: colors.textPrimary,
         ),
         spacing.gapVS,
 
@@ -181,11 +179,10 @@ class _TextFieldsScreenState extends State<TextFieldsScreen> {
         spacing.gapVL,
 
         // Multiline
-        Text(
+        ChromiaText(
           'Multiline',
-          style: theme.typography.titleSmall.copyWith(
-            color: colors.textSecondary,
-          ),
+          type: ChromiaTypographyType.headlineSmall,
+          color: colors.textPrimary,
         ),
         spacing.gapVS,
 

@@ -28,15 +28,14 @@ class CardsScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Basic card
-        Text(
+        ChromiaText(
           'Basic Card',
-          style: theme.typography.titleSmall.copyWith(
-            color: colors.textSecondary,
-          ),
+          type: ChromiaTypographyType.headlineSmall,
+          color: colors.textPrimary,
         ),
         spacing.gapVS,
         const ChromiaCard(
-          child: Text(
+          child: ChromiaText(
             'This is a basic card with some content inside. '
             'Cards are great for grouping related information.',
           ),
@@ -44,31 +43,29 @@ class CardsScreen extends StatelessWidget {
         spacing.gapVL,
 
         // Card with header
-        Text(
+        ChromiaText(
           'Card with Header',
-          style: theme.typography.titleSmall.copyWith(
-            color: colors.textSecondary,
-          ),
+          type: ChromiaTypographyType.headlineSmall,
+          color: colors.textPrimary,
         ),
         spacing.gapVS,
         const ChromiaCard(
-          header: Text('Card Title'),
-          child: Text(
+          header: ChromiaText('Card Title'),
+          child: ChromiaText(
             'This card has a header section that can contain a title or any widget.',
           ),
         ),
         spacing.gapVL,
 
         // Card with header and footer
-        Text(
+        ChromiaText(
           'Card with Header and Footer',
-          style: theme.typography.titleSmall.copyWith(
-            color: colors.textSecondary,
-          ),
+          type: ChromiaTypographyType.headlineSmall,
+          color: colors.textPrimary,
         ),
         spacing.gapVS,
         ChromiaCard(
-          header: const Text('Project Card'),
+          header: const ChromiaText('Project Card'),
           footer: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -76,35 +73,34 @@ class CardsScreen extends StatelessWidget {
                 variant: ChromiaButtonVariant.text,
                 size: ChromiaButtonSize.small,
                 onPressed: () {},
-                child: const Text('Cancel'),
+                child: const ChromiaText('Cancel'),
               ),
               spacing.gapHM,
               ChromiaButton(
                 size: ChromiaButtonSize.small,
                 onPressed: () {},
-                child: const Text('Save'),
+                child: const ChromiaText('Save'),
               ),
             ],
           ),
-          child: const Text(
+          child: const ChromiaText(
             'This card demonstrates how to add action buttons in the footer section.',
           ),
         ),
         spacing.gapVL,
 
         // Interactive card
-        Text(
+        ChromiaText(
           'Interactive Card',
-          style: theme.typography.titleSmall.copyWith(
-            color: colors.textSecondary,
-          ),
+          type: ChromiaTypographyType.headlineSmall,
+          color: colors.textPrimary,
         ),
         spacing.gapVS,
         ChromiaCard(
           elevation: 2,
           onTap: () {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Card tapped!')),
+              const SnackBar(content: ChromiaText('Card tapped!')),
             );
           },
           child: Row(
@@ -112,7 +108,7 @@ class CardsScreen extends StatelessWidget {
               Icon(Icons.touch_app, color: colors.primary, size: 40),
               spacing.gapHM,
               const Expanded(
-                child: Text(
+                child: ChromiaText(
                   'Tap this card to see the interaction. '
                   'It has hover and press states.',
                 ),
@@ -123,11 +119,10 @@ class CardsScreen extends StatelessWidget {
         spacing.gapVL,
 
         // Card with image
-        Text(
+        ChromiaText(
           'Card with Image',
-          style: theme.typography.titleSmall.copyWith(
-            color: colors.textSecondary,
-          ),
+          type: ChromiaTypographyType.headlineSmall,
+          color: colors.textPrimary,
         ),
         spacing.gapVS,
         ChromiaCard(
@@ -149,19 +144,18 @@ class CardsScreen extends StatelessWidget {
             ),
           ),
           imagePosition: CardImagePosition.top,
-          header: const Text('Photo Card'),
-          child: const Text(
+          header: const ChromiaText('Photo Card'),
+          child: const ChromiaText(
             'This card includes an image at the top. Perfect for gallery views or product cards.',
           ),
         ),
         spacing.gapVL,
 
         // Different elevations
-        Text(
+        ChromiaText(
           'Different Elevations',
-          style: theme.typography.titleSmall.copyWith(
-            color: colors.textSecondary,
-          ),
+          type: ChromiaTypographyType.headlineSmall,
+          color: colors.textPrimary,
         ),
         spacing.gapVS,
         Row(
@@ -173,18 +167,16 @@ class CardsScreen extends StatelessWidget {
                 borderWidth: 1,
                 child: Column(
                   children: [
-                    Text(
+                    ChromiaText(
                       'Elevation 0',
-                      style: theme.typography.labelMedium.copyWith(
-                        color: colors.textPrimary,
-                      ),
+                      type: ChromiaTypographyType.labelMedium,
+                      color: colors.textPrimary,
                     ),
                     spacing.gapVXS,
-                    Text(
+                    ChromiaText(
                       'Flat',
-                      style: theme.typography.bodySmall.copyWith(
-                        color: colors.textSecondary,
-                      ),
+                      type: ChromiaTypographyType.bodySmall,
+                      color: colors.textSecondary,
                     ),
                   ],
                 ),
@@ -196,18 +188,16 @@ class CardsScreen extends StatelessWidget {
                 elevation: 2,
                 child: Column(
                   children: [
-                    Text(
+                    ChromiaText(
                       'Elevation 2',
-                      style: theme.typography.labelMedium.copyWith(
-                        color: colors.textPrimary,
-                      ),
+                      type: ChromiaTypographyType.labelMedium,
+                      color: colors.textPrimary,
                     ),
                     spacing.gapVXS,
-                    Text(
+                    ChromiaText(
                       'Default',
-                      style: theme.typography.bodySmall.copyWith(
-                        color: colors.textSecondary,
-                      ),
+                      type: ChromiaTypographyType.bodySmall,
+                      color: colors.textSecondary,
                     ),
                   ],
                 ),
@@ -219,18 +209,16 @@ class CardsScreen extends StatelessWidget {
                 elevation: 4,
                 child: Column(
                   children: [
-                    Text(
+                    ChromiaText(
                       'Elevation 4',
-                      style: theme.typography.labelMedium.copyWith(
-                        color: colors.textPrimary,
-                      ),
+                      type: ChromiaTypographyType.labelMedium,
+                      color: colors.textPrimary,
                     ),
                     spacing.gapVXS,
-                    Text(
+                    ChromiaText(
                       'Raised',
-                      style: theme.typography.bodySmall.copyWith(
-                        color: colors.textSecondary,
-                      ),
+                      type: ChromiaTypographyType.bodySmall,
+                      color: colors.textSecondary,
                     ),
                   ],
                 ),
@@ -241,11 +229,10 @@ class CardsScreen extends StatelessWidget {
         spacing.gapVL,
 
         // List cards
-        Text(
+        ChromiaText(
           'List Cards',
-          style: theme.typography.titleSmall.copyWith(
-            color: colors.textSecondary,
-          ),
+          type: ChromiaTypographyType.headlineSmall,
+          color: colors.textPrimary,
         ),
         spacing.gapVS,
         ChromiaListTileCard(
@@ -253,8 +240,8 @@ class CardsScreen extends StatelessWidget {
             backgroundColor: colors.primary,
             child: const Icon(Icons.person, color: Colors.white),
           ),
-          title: const Text('John Doe'),
-          subtitle: const Text('Software Engineer'),
+          title: const ChromiaText('John Doe'),
+          subtitle: const ChromiaText('Software Engineer'),
           trailing: Icon(Icons.chevron_right, color: colors.textSecondary),
           onTap: () {},
         ),
@@ -264,13 +251,12 @@ class CardsScreen extends StatelessWidget {
             backgroundColor: colors.success,
             child: const Icon(Icons.check, color: Colors.white),
           ),
-          title: const Text('Task Completed'),
-          subtitle: const Text('Successfully deployed to production'),
-          trailing: Text(
+          title: const ChromiaText('Task Completed'),
+          subtitle: const ChromiaText('Successfully deployed to production'),
+          trailing: ChromiaText(
             '2 hours ago',
-            style: theme.typography.bodySmall.copyWith(
-              color: colors.textTertiary,
-            ),
+            type: ChromiaTypographyType.bodySmall,
+            color: colors.textTertiary,
           ),
           onTap: () {},
         ),
@@ -280,8 +266,8 @@ class CardsScreen extends StatelessWidget {
             backgroundColor: colors.warning,
             child: const Icon(Icons.warning, color: Colors.white),
           ),
-          title: const Text('Warning Alert'),
-          subtitle: const Text('Server resources running low'),
+          title: const ChromiaText('Warning Alert'),
+          subtitle: const ChromiaText('Server resources running low'),
           trailing: Icon(Icons.arrow_forward, color: colors.primary),
           onTap: () {},
           elevation: 2,
@@ -289,11 +275,10 @@ class CardsScreen extends StatelessWidget {
         spacing.gapVL,
 
         // Grid of cards
-        Text(
+        ChromiaText(
           'Card Grid Layout',
-          style: theme.typography.titleSmall.copyWith(
-            color: colors.textSecondary,
-          ),
+          type: ChromiaTypographyType.headlineSmall,
+          color: colors.textPrimary,
         ),
         spacing.gapVS,
         LayoutBuilder(
@@ -305,7 +290,7 @@ class CardsScreen extends StatelessWidget {
               crossAxisCount: crossAxisCount,
               mainAxisSpacing: spacing.m,
               crossAxisSpacing: spacing.m,
-              childAspectRatio: 100/20,
+              childAspectRatio: 100 / 20,
               children: [
                 _buildGridItem(context, Icons.home, 'Home'),
                 _buildGridItem(context, Icons.settings, 'Settings'),
@@ -333,9 +318,9 @@ class CardsScreen extends StatelessWidget {
         children: [
           Icon(icon, size: 40, color: colors.primary),
           spacing.gapVS,
-          Text(
+          ChromiaText(
             title,
-            style: theme.typography.labelMedium,
+            type: ChromiaTypographyType.labelMedium,
           ),
         ],
       ),
