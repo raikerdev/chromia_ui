@@ -15,26 +15,6 @@ import 'package:flutter/material.dart';
 /// ```
 
 class ChromiaText extends StatelessWidget {
-  final String data;
-  final ChromiaTypographyType type;
-  final Color? color;
-  final TextStyle? style;
-
-  final StrutStyle? strutStyle;
-  final TextAlign? textAlign;
-  final TextDirection? textDirection;
-  final Locale? locale;
-  final bool? softWrap;
-  final TextOverflow? overflow;
-  final double? textScaleFactor;
-  final TextScaler? textScaler;
-  final int? maxLines;
-  final String? semanticsLabel;
-  final String? semanticsIdentifier;
-  final TextWidthBasis? textWidthBasis;
-  final TextHeightBehavior? textHeightBehavior;
-  final Color? selectionColor;
-
   const ChromiaText(
     this.data, {
     this.color,
@@ -55,26 +35,50 @@ class ChromiaText extends StatelessWidget {
     this.type = ChromiaTypographyType.bodyMedium,
     this.style,
     this.strutStyle,
+    this.margin = EdgeInsets.zero,
   });
+
+  final String data;
+  final ChromiaTypographyType type;
+  final Color? color;
+  final TextStyle? style;
+  final StrutStyle? strutStyle;
+  final TextAlign? textAlign;
+  final TextDirection? textDirection;
+  final Locale? locale;
+  final bool? softWrap;
+  final TextOverflow? overflow;
+  final double? textScaleFactor;
+  final TextScaler? textScaler;
+  final int? maxLines;
+  final String? semanticsLabel;
+  final String? semanticsIdentifier;
+  final TextWidthBasis? textWidthBasis;
+  final TextHeightBehavior? textHeightBehavior;
+  final Color? selectionColor;
+  final EdgeInsetsGeometry margin;
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      data,
-      style: type.getTextStyle(context).copyWith(color: color).merge(style),
-      strutStyle: strutStyle,
-      textAlign: textAlign,
-      textDirection: textDirection,
-      locale: locale,
-      softWrap: softWrap,
-      overflow: overflow,
-      textScaler: textScaler,
-      maxLines: maxLines,
-      semanticsLabel: semanticsLabel,
-      semanticsIdentifier: semanticsIdentifier,
-      textWidthBasis: textWidthBasis,
-      textHeightBehavior: textHeightBehavior,
-      selectionColor: selectionColor,
+    return Padding(
+      padding: margin,
+      child: Text(
+        data,
+        style: type.getTextStyle(context).copyWith(color: color).merge(style),
+        strutStyle: strutStyle,
+        textAlign: textAlign,
+        textDirection: textDirection,
+        locale: locale,
+        softWrap: softWrap,
+        overflow: overflow,
+        textScaler: textScaler,
+        maxLines: maxLines,
+        semanticsLabel: semanticsLabel,
+        semanticsIdentifier: semanticsIdentifier,
+        textWidthBasis: textWidthBasis,
+        textHeightBehavior: textHeightBehavior,
+        selectionColor: selectionColor,
+      ),
     );
   }
 }

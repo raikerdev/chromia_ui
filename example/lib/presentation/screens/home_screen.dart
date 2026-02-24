@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: colors.background,
       appBar: const ExampleAppBar(),
-      body: SingleChildScrollView(
+      body: Padding(
         padding: spacing.paddingL,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,21 +26,23 @@ class HomeScreen extends StatelessWidget {
             // Welcome section
             _buildWelcomeSection(context),
             spacing.gapVXXL,
+            Expanded(
+              child: ListView.builder(
+                shrinkWrap: true,
+                padding: const EdgeInsets.only(bottom: 100),
+                itemCount: screenRoutes.length,
+                itemBuilder: (context, index) {
+                  final route = screenRoutes.elementAt(index);
+                  return ListTile(
+                    title: ChromiaText(route.title, type: ChromiaTypographyType.headlineSmall),
+                    subtitle: ChromiaText(route.path, type: ChromiaTypographyType.bodyMedium),
+                    leading: Icon(route.icon, color: colors.primary),
+                    trailing: Icon(Icons.chevron_right, color: colors.textSecondary),
 
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: screenRoutes.length,
-              itemBuilder: (context, index) {
-                final route = screenRoutes.elementAt(index);
-                return ListTile(
-                  title: ChromiaText(route.title, type: ChromiaTypographyType.headlineSmall),
-                  subtitle: ChromiaText(route.path, type: ChromiaTypographyType.bodyMedium),
-                  leading: Icon(route.icon, color: colors.primary),
-                  trailing: Icon(Icons.chevron_right, color: colors.textSecondary),
-                  shape: Border(bottom: BorderSide(color: colors.border)),
-                  onTap: () => context.push(route.path),
-                );
-              },
+                    onTap: () => context.push(route.path),
+                  );
+                },
+              ),
             ),
           ],
         ),

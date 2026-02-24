@@ -1,4 +1,4 @@
-# Chromia UI
+# Chromia UI (Under Construction)
 
 A comprehensive Flutter UI component library for mobile, desktop, and web applications with dynamic theming, brand management, and dark mode support.
 
@@ -61,16 +61,16 @@ class MyApp extends StatelessWidget {
 
 ### Basic Theme Setup
 
-```dart
+```md
 ChromiaTheme(
   data: ChromiaThemeData.light(),
   child: YourApp(),
-)
+);
 ```
 
 ### Custom Theme
 
-```dart
+```md
 ChromiaTheme(
   data: ChromiaThemeData(
     colors: ChromiaColors.fromPrimary(Colors.purple),
@@ -83,7 +83,7 @@ ChromiaTheme(
 
 ### Dark Mode
 
-```dart
+```md
 ChromiaTheme(
   data: ChromiaThemeData.dark(),
   child: YourApp(),
@@ -92,7 +92,7 @@ ChromiaTheme(
 
 ### Brand-Specific Theme
 
-```dart
+```md
 ChromiaTheme(
   data: ChromiaThemeData.fromBrand(
     BrandConfig(
@@ -114,7 +114,7 @@ ChromiaTheme(
 
 ## Documentation
 
-For detailed documentation, visit [documentation link].
+For detailed documentation, visit [documentation link](https://documentation.link).
 
 ## Examples
 
@@ -128,22 +128,10 @@ Contributions are welcome! Please read our [Contributing Guide](https://CONTRIBU
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Roadmap
-
-- [x] Theme system
-- [x] Color tokens
-- [x] Typography system
-- [x] Button component
-- [x] Input components
-- [x] Card components
-- [ ] Navigation components
-- [ ] Layout components
-- [ ] Feedback components
-
 ## Support
 
-If you encounter any issues or have questions, please [open an issue](https://github.com/yourusername/chromia_ui/issues).
+If you encounter any issues or have questions, please [open an issue](https://github.com/raikerdev/chromia_ui/issues).
 
 ---
 
-Made with ❤️ by the Chromia UI team
+Made with ❤️ by RaikerDev
