@@ -5,6 +5,7 @@ import 'package:chromia_ui_example/presentation/screens/cards_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/checkboxes_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/dialogs_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/home_screen.dart';
+import 'package:chromia_ui_example/presentation/screens/layout_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/progress_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/radio_buttons_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/sliders_screen.dart';
@@ -19,8 +20,15 @@ class ExampleRoute {
   final IconData icon;
   final String path;
   final Widget child;
+  final bool navigateWithGo;
 
-  ExampleRoute({required this.icon, required this.title, required this.path, required this.child});
+  ExampleRoute({
+    required this.icon,
+    required this.title,
+    required this.path,
+    required this.child,
+    this.navigateWithGo = false,
+  });
 }
 
 final routes = <ExampleRoute>[
@@ -101,5 +109,12 @@ final routes = <ExampleRoute>[
     icon: Symbols.dialogs_rounded,
     path: '/dialogs',
     child: const DialogsScreen(),
+  ),
+  ExampleRoute(
+    title: 'Layout',
+    icon: Symbols.view_quilt_rounded,
+    path: '/layout',
+    navigateWithGo: true,
+    child: const LayoutScreen(),
   ),
 ];

@@ -37,6 +37,7 @@
 library;
 
 // Components
+export 'src/components/app_bar/chromia_app_bar.dart';
 export 'src/components/badge/chromia_badge.dart';
 export 'src/components/badge/chromia_label.dart';
 export 'src/components/badge/chromia_status_badge.dart';
@@ -47,6 +48,8 @@ export 'src/components/card/chromia_list_tile_card.dart';
 export 'src/components/checkbox/chromia_checkbox.dart';
 export 'src/components/checkbox/chromia_list_tile_checkbox.dart';
 export 'src/components/dialog/chromia_dialog.dart';
+export 'src/components/drawer/chromia_drawer.dart';
+export 'src/components/drawer/chromia_mini_drawer.dart';
 export 'src/components/input/chromia_text_field.dart';
 export 'src/components/input/chromia_text_field_style.dart';
 export 'src/components/input/util/chromia_text_field_validator.dart';

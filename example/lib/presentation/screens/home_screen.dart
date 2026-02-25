@@ -38,8 +38,13 @@ class HomeScreen extends StatelessWidget {
                     subtitle: ChromiaText(route.path, type: ChromiaTypographyType.bodyMedium),
                     leading: Icon(route.icon, color: colors.primary),
                     trailing: Icon(Icons.chevron_right, color: colors.textSecondary),
-
-                    onTap: () => context.push(route.path),
+                    onTap: () {
+                      if (route.navigateWithGo) {
+                        context.go(route.path);
+                      } else {
+                        context.push(route.path);
+                      }
+                    },
                   );
                 },
               ),
