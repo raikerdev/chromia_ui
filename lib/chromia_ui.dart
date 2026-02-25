@@ -37,12 +37,16 @@
 library;
 
 // Components
+export 'src/components/badge/chromia_badge.dart';
+export 'src/components/badge/chromia_label.dart';
+export 'src/components/badge/chromia_status_badge.dart';
 export 'src/components/button/chromia_button.dart';
 export 'src/components/button/chromia_button_style.dart';
 export 'src/components/card/chromia_card.dart';
 export 'src/components/card/chromia_list_tile_card.dart';
 export 'src/components/checkbox/chromia_checkbox.dart';
 export 'src/components/checkbox/chromia_list_tile_checkbox.dart';
+export 'src/components/dialog/chromia_dialog.dart';
 export 'src/components/input/chromia_text_field.dart';
 export 'src/components/input/chromia_text_field_style.dart';
 export 'src/components/input/util/chromia_text_field_validator.dart';

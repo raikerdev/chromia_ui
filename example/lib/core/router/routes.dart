@@ -1,15 +1,18 @@
+import 'package:chromia_ui_example/presentation/screens/badges_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/brands_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/buttons_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/cards_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/checkboxes_screen.dart';
+import 'package:chromia_ui_example/presentation/screens/dialogs_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/home_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/progress_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/radio_buttons_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/sliders_screen.dart';
-import 'package:chromia_ui_example/presentation/screens/toggle_buttons_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/text_fields_screen.dart';
+import 'package:chromia_ui_example/presentation/screens/toggle_buttons_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/typography_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class ExampleRoute {
   final String title;
@@ -21,15 +24,82 @@ class ExampleRoute {
 }
 
 final routes = <ExampleRoute>[
-  ExampleRoute(title: 'Home', icon: Icons.home_rounded, path: '/', child: const HomeScreen()),
-  ExampleRoute(title: 'Brands', icon: Icons.color_lens_rounded, path: '/brands', child: const BrandsScreen()),
-  ExampleRoute(title: 'Typography', icon: Icons.font_download_rounded, path: '/typography', child: const TypographyScreen()),
-  ExampleRoute(title: 'Cards', icon: Icons.view_carousel, path: '/cards', child: const CardsScreen()),
-  ExampleRoute(title: 'Text Fields', icon: Icons.text_fields, path: '/text-fields', child: const TextFieldsScreen()),
-  ExampleRoute(title: 'Buttons', icon: Icons.touch_app_rounded, path: '/buttons', child: const ButtonsScreen()),
-  ExampleRoute(title: 'Checkboxes', icon: Icons.check_box_rounded, path: '/checkboxes', child: const CheckboxesScreen()),
-  ExampleRoute(title: 'Toggle Buttons', icon: Icons.toggle_on, path: '/toggle-buttons', child: const ToggleButtonsScreen()),
-  ExampleRoute(title: 'Radio Buttons', icon: Icons.radio_button_checked, path: '/radio-buttons', child: const RadioButtonsScreen()),
-  ExampleRoute(title: 'Sliders', icon: Icons.tune, path: '/sliders', child: const SlidersScreen()),
-  ExampleRoute(title: 'Progress', icon: Icons.rotate_right, path: '/progress', child: const ProgressScreen()),
+  ExampleRoute(
+    title: 'Home',
+    icon: Symbols.home_rounded,
+    path: '/',
+    child: const HomeScreen(),
+  ),
+  ExampleRoute(
+    title: 'Brands',
+    icon: Symbols.colors_rounded,
+    path: '/brands',
+    child: const BrandsScreen(),
+  ),
+  ExampleRoute(
+    title: 'Typography',
+    icon: Symbols.custom_typography_rounded,
+    path: '/typography',
+    child: const TypographyScreen(),
+  ),
+  ExampleRoute(
+    title: 'Cards',
+    icon: Symbols.cards_rounded,
+    path: '/cards',
+    child: const CardsScreen(),
+  ),
+  ExampleRoute(
+    title: 'Text Fields',
+    icon: Symbols.text_fields_alt_rounded,
+    path: '/text-fields',
+    child: const TextFieldsScreen(),
+  ),
+  ExampleRoute(
+    title: 'Buttons',
+    icon: Symbols.buttons_alt_rounded,
+    path: '/buttons',
+    child: const ButtonsScreen(),
+  ),
+  ExampleRoute(
+    title: 'Checkboxes',
+    icon: Symbols.check_box_rounded,
+    path: '/checkboxes',
+    child: const CheckboxesScreen(),
+  ),
+  ExampleRoute(
+    title: 'Toggle Buttons',
+    icon: Symbols.switches_rounded,
+    path: '/toggle-buttons',
+    child: const ToggleButtonsScreen(),
+  ),
+  ExampleRoute(
+    title: 'Radio Buttons',
+    icon: Symbols.radio_button_checked_rounded,
+    path: '/radio-buttons',
+    child: const RadioButtonsScreen(),
+  ),
+  ExampleRoute(
+    title: 'Sliders',
+    icon: Symbols.sliders_rounded,
+    path: '/sliders',
+    child: const SlidersScreen(),
+  ),
+  ExampleRoute(
+    title: 'Progress',
+    icon: Symbols.progress_activity_rounded,
+    path: '/progress',
+    child: const ProgressScreen(),
+  ),
+  ExampleRoute(
+    title: 'Badges',
+    icon: Symbols.notifications_unread_rounded,
+    path: '/badges',
+    child: const BadgesScreen(),
+  ),
+  ExampleRoute(
+    title: 'Dialogs',
+    icon: Symbols.dialogs_rounded,
+    path: '/dialogs',
+    child: const DialogsScreen(),
+  ),
 ];
