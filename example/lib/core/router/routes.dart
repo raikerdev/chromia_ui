@@ -1,8 +1,10 @@
+import 'package:chromia_ui_example/presentation/screens/avatars_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/badges_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/brands_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/buttons_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/cards_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/checkboxes_screen.dart';
+import 'package:chromia_ui_example/presentation/screens/chips_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/dialogs_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/home_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/layout_screen.dart';
@@ -11,6 +13,7 @@ import 'package:chromia_ui_example/presentation/screens/radio_buttons_screen.dar
 import 'package:chromia_ui_example/presentation/screens/sliders_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/text_fields_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/toggle_buttons_screen.dart';
+import 'package:chromia_ui_example/presentation/screens/tooltips_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/typography_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
@@ -116,5 +119,23 @@ final routes = <ExampleRoute>[
     path: '/layout',
     navigateWithGo: true,
     child: const LayoutScreen(),
+  ),
+  ExampleRoute(
+    title: 'Avatars',
+    icon: Symbols.account_circle_rounded,
+    path: '/avatars',
+    child: const AvatarsScreen(),
+  ),
+  ExampleRoute(
+    title: 'Chips',
+    icon: Symbols.voting_chip_rounded,
+    path: '/chips',
+    child: const ChipsScreen(),
+  ),
+  ExampleRoute(
+    title: 'Tooltips',
+    icon: Symbols.tooltip_rounded,
+    path: '/tooltips',
+    child: const TooltipsScreen(),
   ),
 ];
