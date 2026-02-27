@@ -1,7 +1,4 @@
-import 'package:chromia_ui/src/components/text/chromia_text.dart';
-import 'package:chromia_ui/src/theme/chromia_theme.dart';
-import 'package:chromia_ui/src/theme/chromia_typography.dart';
-import 'package:chromia_ui/src/tokens/animation_tokens.dart';
+import 'package:chromia_ui/chromia_ui.dart';
 import 'package:flutter/material.dart';
 
 /// A customizable radio button component that follows the Chromia design system.
@@ -29,7 +26,7 @@ class ChromiaRadioButton<T> extends StatelessWidget {
     this.size = 20.0,
     this.thumbScale = 0.4,
     super.key,
-  }): assert(thumbScale <= 1.0 && thumbScale >= 0.0, 'thumbScale must be between 0.0 and 1.0');
+  }) : assert(thumbScale <= 1.0 && thumbScale >= 0.0, 'thumbScale must be between 0.0 and 1.0');
 
   /// The value represented by this radio button
   final T value;

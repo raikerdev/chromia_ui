@@ -110,4 +110,3 @@ class ChromiaRadioButtonItem<T> {
   /// The label to display
   final String label;
 }
-

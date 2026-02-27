@@ -1,4 +1,4 @@
-import 'package:chromia_ui/src/components/button/chromia_button_style.dart';
+import 'package:chromia_ui/src/components/input/button/chromia_button_style.dart';
 import 'package:chromia_ui/src/theme/chromia_theme.dart';
 import 'package:chromia_ui/src/theme/chromia_theme_data.dart';
 import 'package:chromia_ui/src/tokens/animation_tokens.dart';

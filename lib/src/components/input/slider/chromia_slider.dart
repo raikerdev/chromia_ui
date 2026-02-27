@@ -1,34 +1,51 @@
 import 'package:chromia_ui/chromia_ui.dart';
-import 'package:chromia_ui/src/components/slider/chromia_range_slider_icon_shape.dart';
+import 'package:chromia_ui/src/components/input/slider/chromia_slider_icon_shape.dart';
 import 'package:flutter/material.dart';
 
-/// A range slider for selecting a range of values.
-class ChromiaRangeSlider extends StatelessWidget {
-  const ChromiaRangeSlider({
-    required this.values,
+/// A customizable slider component for selecting a value from a range.
+///
+/// Example usage:
+/// ```dart
+/// ChromiaSlider(
+///   value: _currentValue,
+///   min: 0,
+///   max: 100,
+///   onChanged: (value) => setState(() => _currentValue = value),
+/// )
+/// ```
+class ChromiaSlider extends StatelessWidget {
+  const ChromiaSlider({
+    required this.value,
     required this.onChanged,
+    this.minLabel,
+    this.maxLabel,
     this.min = 0.0,
     this.max = 1.0,
     this.divisions,
-    this.labels,
+    this.label,
     this.activeColor,
     this.inactiveColor,
-    this.showValues = false,
+    this.thumbColor,
     this.valueBuilder,
     this.enabled = true,
     this.trackHeight = 8,
     this.thumbRadius,
-    this.startThumbIcon,
-    this.endThumbIcon,
-    this.rangeThumbShape,
+    this.thumbIcon,
+    this.thumbShape,
     super.key,
-  });
+  }) : assert(!(thumbIcon != null && thumbShape != null), 'Either thumbIcon or thumbShape must be provided, not both.');
 
-  /// The current range values
-  final RangeValues values;
+  /// The current value of the slider
+  final double value;
 
-  /// Called when the values change
-  final ValueChanged<RangeValues>? onChanged;
+  /// Called when the value changes
+  final ValueChanged<double>? onChanged;
+
+  /// Label for minimum value
+  final String? minLabel;
+
+  /// Label for maximum value
+  final String? maxLabel;
 
   /// Minimum value
   final double min;
@@ -39,17 +56,17 @@ class ChromiaRangeSlider extends StatelessWidget {
   /// Number of discrete divisions
   final int? divisions;
 
-  /// Labels to show above the thumbs
-  final RangeLabels? labels;
+  /// Label to show above the slider thumb
+  final String? label;
 
-  /// Color of the active portion
+  /// Color of the active portion of the slider
   final Color? activeColor;
 
-  /// Color of the inactive portion
+  /// Color of the inactive portion of the slider
   final Color? inactiveColor;
 
-  /// Whether to show the values below the slider
-  final bool showValues;
+  /// Color of the slider thumb
+  final Color? thumbColor;
 
   /// Custom value formatter
   final String Function(double)? valueBuilder;
@@ -63,14 +80,13 @@ class ChromiaRangeSlider extends StatelessWidget {
   /// Radius of the slider thumb
   final double? thumbRadius;
 
-  /// Icon to display on the slider start thumb
-  final IconData? startThumbIcon;
+  /// Icon to display on the slider thumb
+  final IconData? thumbIcon;
 
-  /// Icon to display on the slider end thumb
-  final IconData? endThumbIcon;
+  /// Shape of the slider thumb
+  final SliderComponentShape? thumbShape;
 
-  /// Shape of the slider start thumb
-  final RangeSliderThumbShape? rangeThumbShape;
+  bool get _showInfo => valueBuilder != null || minLabel != null || maxLabel != null;
 
   @override
   Widget build(BuildContext context) {
@@ -83,45 +99,35 @@ class ChromiaRangeSlider extends StatelessWidget {
 
     final enabledThumbRadius = thumbRadius ?? trackHeight + 4;
 
-    final iconThumbShape = (startThumbIcon != null)
-        ? ChromiaRangeSliderIconShape(
-            startIcon: startThumbIcon!,
-            endIcon: endThumbIcon ?? startThumbIcon!,
-            thumbRadius: enabledThumbRadius,
-          )
-        : null;
-    final enabledRangeThumbShape =
-        iconThumbShape ?? rangeThumbShape ?? RoundRangeSliderThumbShape(enabledThumbRadius: enabledThumbRadius);
+    final iconThumbShape = (thumbIcon != null) ? ChromiaSliderIconShape(icon: thumbIcon!, thumbRadius: enabledThumbRadius) : null;
+    final enabledThumbShape = iconThumbShape ?? thumbShape ?? RoundSliderThumbShape(enabledThumbRadius: enabledThumbRadius);
 
     final SliderThemeData sliderTheme = SliderTheme.of(context).copyWith(
       activeTrackColor: effectiveActiveColor,
       inactiveTrackColor: effectiveInactiveColor,
-      thumbColor: effectiveActiveColor,
+      thumbColor: thumbColor ?? effectiveActiveColor,
       overlayColor: effectiveActiveColor.withAlpha(31),
       overlayShape: RoundSliderOverlayShape(overlayRadius: enabledThumbRadius + 10),
       valueIndicatorColor: effectiveActiveColor,
       trackHeight: trackHeight,
-      rangeThumbShape: enabledRangeThumbShape,
+      thumbShape: enabledThumbShape,
       activeTickMarkColor: effectiveInactiveColor.withAlpha(50),
       inactiveTickMarkColor: effectiveActiveColor.withAlpha(100),
     );
 
     final Widget slider = SliderTheme(
       data: sliderTheme,
-      child: RangeSlider(
-        values: values,
+      child: Slider(
+        value: value,
         min: min,
         max: max,
         divisions: divisions,
-        labels: labels,
+        label: label,
         onChanged: enabled ? onChanged : null,
       ),
     );
 
-    if (showValues) {
-      final String startValue = valueBuilder?.call(values.start) ?? values.start.toStringAsFixed(divisions != null ? 0 : 1);
-      final String endValue = valueBuilder?.call(values.end) ?? values.end.toStringAsFixed(divisions != null ? 0 : 1);
-
+    if (_showInfo) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
@@ -132,12 +138,19 @@ class ChromiaRangeSlider extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ChromiaText(
-                startValue,
+                minLabel ?? '',
+                margin: const EdgeInsetsGeometry.only(left: 8),
                 type: ChromiaTypographyType.labelSmall,
                 color: enabled ? colors.textSecondary : colors.textDisabled,
               ),
               ChromiaText(
-                endValue,
+                valueBuilder?.call(value) ?? '',
+                type: ChromiaTypographyType.labelSmall,
+                color: enabled ? colors.textSecondary : colors.textDisabled,
+              ),
+              ChromiaText(
+                maxLabel ?? '',
+                margin: const EdgeInsetsGeometry.only(right: 8),
                 type: ChromiaTypographyType.labelSmall,
                 color: enabled ? colors.textSecondary : colors.textDisabled,
               ),

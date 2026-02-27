@@ -1,8 +1,4 @@
-import 'package:chromia_ui/src/components/text/chromia_text.dart';
-import 'package:chromia_ui/src/theme/chromia_colors.dart';
-import 'package:chromia_ui/src/theme/chromia_theme.dart';
-import 'package:chromia_ui/src/theme/chromia_typography.dart';
-import 'package:chromia_ui/src/tokens/animation_tokens.dart';
+import 'package:chromia_ui/chromia_ui.dart';
 import 'package:flutter/material.dart';
 
 /// A customizable toggle button component that follows the Chromia design system.
@@ -247,4 +243,3 @@ enum ChromiaToggleButtonSize {
   /// Large toggle button
   large,
 }
-

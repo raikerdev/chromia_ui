@@ -1,7 +1,4 @@
 import 'package:chromia_ui/chromia_ui.dart';
-import 'package:chromia_ui/src/components/text/chromia_text.dart';
-import 'package:chromia_ui/src/theme/chromia_theme.dart';
-import 'package:chromia_ui/src/tokens/animation_tokens.dart';
 import 'package:flutter/material.dart';
 
 /// A customizable checkbox component that follows the Chromia design system.

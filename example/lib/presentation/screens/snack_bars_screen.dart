@@ -104,7 +104,7 @@ class SnackBarsScreen extends StatelessWidget {
             ChromiaButton(
               onPressed: () {
                 context.showWarningSnackBar(
-                  message: 'Please review your input',
+                  message: 'Please review your text_field',
                 );
               },
               child: const Text('Warning'),

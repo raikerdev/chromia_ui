@@ -1,14 +1,10 @@
-import 'package:chromia_ui/src/components/input/chromia_text_field_style.dart';
-import 'package:chromia_ui/src/components/input/util/chromia_text_field_validator.dart';
-import 'package:chromia_ui/src/theme/chromia_theme.dart';
-import 'package:chromia_ui/src/theme/chromia_theme_data.dart';
-import 'package:chromia_ui/src/tokens/animation_tokens.dart';
+import 'package:chromia_ui/chromia_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 /// A customizable text field component that follows the Chromia design system.
 ///
-/// The [ChromiaTextField] provides a consistent text input experience across
+/// The [ChromiaTextField] provides a consistent text text_field experience across
 /// your application with support for validation, icons, labels, and more.
 ///
 /// Example usage:
@@ -83,10 +79,10 @@ class ChromiaTextField extends StatefulWidget {
   /// Icon displayed at the end of the field
   final Widget? suffixIcon;
 
-  /// Text displayed before the input
+  /// Text displayed before the text_field
   final String? prefixText;
 
-  /// Text displayed after the input
+  /// Text displayed after the text_field
   final String? suffixText;
 
   /// Whether to obscure the text (for passwords)
@@ -104,7 +100,7 @@ class ChromiaTextField extends StatefulWidget {
   /// Minimum number of lines
   final int? minLines;
 
-  /// Maximum length of input
+  /// Maximum length of text_field
   final int? maxLength;
 
   /// The type of keyboard to show

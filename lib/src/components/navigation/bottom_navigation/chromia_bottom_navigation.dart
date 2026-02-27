@@ -1,5 +1,4 @@
-import 'package:chromia_ui/src/components/badge/chromia_badge.dart';
-import 'package:chromia_ui/src/theme/chromia_theme.dart';
+import 'package:chromia_ui/chromia_ui.dart';
 import 'package:flutter/material.dart';
 
 /// A customizable bottom navigation bar component.
