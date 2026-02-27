@@ -1,5 +1,3 @@
-// lib/chromia_ui.dart
-
 /// Chromia UI - A comprehensive Flutter UI component library.
 ///
 /// Chromia UI provides a complete design system with components for
@@ -13,7 +11,7 @@
 ///
 /// ## Getting Started
 ///
-/// Wrap your app with [ChromiaTheme] to provide the theme:
+/// Wrap your app with ChromiaTheme to provide the theme:
 ///
 /// ```dart
 /// ChromiaTheme(
