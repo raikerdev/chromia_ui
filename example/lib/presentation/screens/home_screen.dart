@@ -1,8 +1,8 @@
 import 'package:chromia_ui/chromia_ui.dart';
 import 'package:chromia_ui_example/core/router/routes.dart';
-import 'package:chromia_ui_example/presentation/widgets/layout/app_bar/example_app_bar.dart';
+import 'package:chromia_ui_example/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -13,68 +13,39 @@ class HomeScreen extends StatelessWidget {
     final spacing = theme.spacing;
     final colors = theme.colors;
 
-    final screenRoutes = routes.where((route) => route.path != '/');
-
     return Scaffold(
       backgroundColor: colors.background,
-      appBar: const ExampleAppBar(),
+      appBar: const ChromiaAppBar(title: 'Chromia UI'),
       body: Padding(
         padding: spacing.paddingL,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Welcome section
-            _buildWelcomeSection(context),
+            ChromiaText(
+              'Welcome to Chromia UI',
+              type: ChromiaTypographyType.displaySmall,
+              color: colors.textPrimary,
+            ),
+            spacing.gapVS,
+            ChromiaText(
+              'A comprehensive Flutter UI component library for mobile, desktop, and web.',
+              type: ChromiaTypographyType.bodyLarge,
+              color: colors.textSecondary,
+            ),
             spacing.gapVXXL,
-            Expanded(
-              child: ListView.builder(
-                shrinkWrap: true,
-                padding: const EdgeInsets.only(bottom: 100),
-                itemCount: screenRoutes.length,
-                itemBuilder: (context, index) {
-                  final route = screenRoutes.elementAt(index);
-                  return ListTile(
-                    title: ChromiaText(route.title, type: ChromiaTypographyType.headlineSmall),
-                    subtitle: ChromiaText(route.path, type: ChromiaTypographyType.bodyMedium),
-                    leading: Icon(route.icon, color: colors.primary),
-                    trailing: Icon(Icons.chevron_right, color: colors.textSecondary),
-                    onTap: () {
-                      if (route.navigateWithGo) {
-                        context.go(route.path);
-                      } else {
-                        context.push(route.path);
-                      }
-                    },
-                  );
-                },
-              ),
+            ScreenNavigatorList(
+              routes: [
+                homeRoutes[1],
+                ScreenRoute(icon: Symbols.account_circle_rounded, title: 'Display', path: '/display'),
+                ScreenRoute(icon: Symbols.dialogs_rounded, title: 'Feedback', path: '/feedback'),
+                ScreenRoute(icon: Symbols.buttons_alt_rounded, title: 'Input', path: '/input'),
+                ScreenRoute(icon: Symbols.cards_rounded, title: 'Layout', path: '/layout'),
+                ScreenRoute(icon: Symbols.bottom_navigation_rounded, title: 'Navigation', path: '/navigation'),
+              ],
             ),
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildWelcomeSection(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final colors = theme.colors;
-    final spacing = theme.spacing;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        ChromiaText(
-          'Welcome to Chromia UI',
-          type: ChromiaTypographyType.displaySmall,
-          color: colors.textPrimary,
-        ),
-        spacing.gapVS,
-        ChromiaText(
-          'A comprehensive Flutter UI component library for mobile, desktop, and web.',
-          type: ChromiaTypographyType.bodyLarge,
-          color: colors.textSecondary,
-        ),
-      ],
     );
   }
 }
