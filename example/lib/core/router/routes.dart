@@ -6,14 +6,17 @@ import 'package:chromia_ui_example/presentation/screens/buttons_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/cards_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/checkboxes_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/chips_screen.dart';
+import 'package:chromia_ui_example/presentation/screens/date_pickers_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/dialogs_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/dividers_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/dropdowns_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/home_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/layout_screen.dart';
+import 'package:chromia_ui_example/presentation/screens/menus_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/progress_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/radio_buttons_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/sliders_screen.dart';
+import 'package:chromia_ui_example/presentation/screens/snack_bars_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/text_fields_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/toggle_buttons_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/tooltips_screen.dart';
@@ -158,5 +161,24 @@ final routes = <ExampleRoute>[
     icon: Symbols.bottom_navigation_rounded,
     path: '/bottom-navigation',
     child: const BottomNavigationScreen(),
+  ),
+
+  ExampleRoute(
+    title: 'SnackBars',
+    icon: Symbols.toast_rounded,
+    path: '/snackBars',
+    child: const SnackBarsScreen(),
+  ),
+  ExampleRoute(
+    title: 'Menus',
+    icon: Symbols.menu_rounded,
+    path: '/menus',
+    child: const MenusScreen(),
+  ),
+  ExampleRoute(
+    title: 'Date Pickers',
+    icon: Symbols.event_rounded,
+    path: '/date-pickers',
+    child: const DatePickersScreen(),
   ),
 ];
