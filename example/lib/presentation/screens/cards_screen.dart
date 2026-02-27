@@ -290,7 +290,7 @@ class CardsScreen extends StatelessWidget {
               crossAxisCount: crossAxisCount,
               mainAxisSpacing: spacing.m,
               crossAxisSpacing: spacing.m,
-              childAspectRatio: 100 / 20,
+              childAspectRatio: 100 / 60,
               children: [
                 _buildGridItem(context, Icons.home, 'Home'),
                 _buildGridItem(context, Icons.settings, 'Settings'),

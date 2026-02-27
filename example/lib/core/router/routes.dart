@@ -1,11 +1,14 @@
 import 'package:chromia_ui_example/presentation/screens/avatars_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/badges_screen.dart';
+import 'package:chromia_ui_example/presentation/screens/bottom_navigation_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/brands_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/buttons_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/cards_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/checkboxes_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/chips_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/dialogs_screen.dart';
+import 'package:chromia_ui_example/presentation/screens/dividers_screen.dart';
+import 'package:chromia_ui_example/presentation/screens/dropdowns_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/home_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/layout_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/progress_screen.dart';
@@ -137,5 +140,23 @@ final routes = <ExampleRoute>[
     icon: Symbols.tooltip_rounded,
     path: '/tooltips',
     child: const TooltipsScreen(),
+  ),
+  ExampleRoute(
+    title: 'Dividers',
+    icon: Symbols.horizontal_rule_rounded,
+    path: '/dividers',
+    child: const DividersScreen(),
+  ),
+  ExampleRoute(
+    title: 'Dropdowns',
+    icon: Symbols.dropdown_rounded,
+    path: '/dropdowns',
+    child: const DropdownsScreen(),
+  ),
+  ExampleRoute(
+    title: 'Bottom Navigation',
+    icon: Symbols.bottom_navigation_rounded,
+    path: '/bottom-navigation',
+    child: const BottomNavigationScreen(),
   ),
 ];
