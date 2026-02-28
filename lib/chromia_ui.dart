@@ -44,6 +44,7 @@ export 'src/components/display/badge/chromia_label.dart';
 export 'src/components/display/badge/chromia_status_badge.dart';
 export 'src/components/display/chip/chromia_chip.dart';
 export 'src/components/display/code_preview/chromia_code_preview.dart';
+export 'src/components/display/text/chromia_rich_text.dart';
 export 'src/components/display/text/chromia_text.dart';
 //
 // ============================================================================

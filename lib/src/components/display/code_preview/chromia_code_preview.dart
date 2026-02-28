@@ -1,6 +1,8 @@
 import 'package:chromia_ui/chromia_ui.dart';
+import 'package:chromia_ui/src/components/display/code_preview/chromia_syntax_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_syntax_view/flutter_syntax_view.dart';
 
 /// A component that displays code alongside its rendered preview.
 ///
@@ -27,7 +29,7 @@ class ChromiaCodePreview extends StatefulWidget {
     required this.preview,
     this.title,
     this.description,
-    this.language = 'dart',
+    this.language = CodePreviewLanguage.dart,
     this.showCopyButton = true,
     this.codeHeight,
     this.previewPadding,
@@ -48,8 +50,8 @@ class ChromiaCodePreview extends StatefulWidget {
   /// Optional description
   final String? description;
 
-  /// Programming language for syntax (currently just for display)
-  final String language;
+  /// Programming language for syntax highlighting
+  final CodePreviewLanguage language;
 
   /// Whether to show the copy button
   final bool showCopyButton;
@@ -82,6 +84,20 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
     }
   }
 
+  Syntax get _syntax => switch (widget.language) {
+    CodePreviewLanguage.dart => Syntax.DART,
+    CodePreviewLanguage.c => Syntax.C,
+    CodePreviewLanguage.cpp => Syntax.CPP,
+    CodePreviewLanguage.javascript => Syntax.JAVASCRIPT,
+    CodePreviewLanguage.kotlin => Syntax.KOTLIN,
+    CodePreviewLanguage.java => Syntax.JAVA,
+    CodePreviewLanguage.swift => Syntax.SWIFT,
+    CodePreviewLanguage.yaml => Syntax.YAML,
+    CodePreviewLanguage.rust => Syntax.RUST,
+    CodePreviewLanguage.lua => Syntax.LUA,
+    CodePreviewLanguage.python => Syntax.PYTHON,
+  };
+
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
@@ -93,17 +109,16 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
       children: [
         if (widget.title != null || widget.description != null) ...[
           if (widget.title != null)
-            Text(
+            ChromiaText(
               widget.title!,
-              style: theme.typography.titleMedium,
+              type: ChromiaTypographyType.titleMedium,
             ),
           if (widget.description != null) ...[
             spacing.gapVXS,
-            Text(
+            ChromiaText(
               widget.description!,
-              style: theme.typography.bodySmall.copyWith(
-                color: theme.colors.textSecondary,
-              ),
+              type: ChromiaTypographyType.bodySmall,
+              color: theme.colors.textSecondary,
             ),
           ],
           spacing.gapVM,
@@ -115,14 +130,7 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
 
   Widget _buildContent(ChromiaThemeData theme) {
     if (widget.layout == CodePreviewLayout.vertical) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _buildPreviewSection(theme),
-          theme.spacing.gapVM,
-          _buildCodeSection(theme),
-        ],
-      );
+      _buildVerticalContent(theme);
     }
 
     // Horizontal layout
@@ -131,6 +139,7 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
         // If screen is too small, switch to vertical
         if (constraints.maxWidth < 800) {
           return Column(
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               _buildPreviewSection(theme),
@@ -161,14 +170,46 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
     );
   }
 
+  Widget _buildVerticalContent(ChromiaThemeData theme) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        _buildPreviewSection(theme),
+        theme.spacing.gapVM,
+        _buildCodeSection(theme),
+      ],
+    );
+  }
+
   Widget _buildCodeSection(ChromiaThemeData theme) {
     final colors = theme.colors;
     final spacing = theme.spacing;
+    final isDark = theme.brightness == Brightness.dark;
+
+    // Background color for code section
+    final codeBackgroundColor = isDark
+        ? const Color(0xFF282C34) // Dark background
+        : const Color(0xFFFAFAFA); // Light background
+
+    final syntaxTheme = SyntaxTheme(
+      baseStyle: TextStyle(color: colors.onSurfaceVariant),
+      numberStyle: TextStyle(color: isDark ? const Color(0xFF2AACB8) : const Color(0xFF1750EB)),
+      commentStyle: TextStyle(color: isDark ? const Color(0xFF7A7E85) : const Color(0xFF8C8C8C)),
+      keywordStyle: TextStyle(color: isDark ? const Color(0xFFCF8E6D) : const Color(0xFFEd864A)),
+      stringStyle: TextStyle(color: isDark ? const Color(0xFF6AAB73) : const Color(0xFF067D17)),
+      classStyle: TextStyle(color: isDark ? const Color(0xFF57AAF7) : const Color(0xFF0033B3)),
+      constantStyle: TextStyle(color: isDark ? const Color(0xFFC77DBB) : const Color(0xFF871094)),
+      linesCountColor: isDark ? const Color(0xFF5C6370) : const Color(0xFF9E9E9E),
+      backgroundColor: codeBackgroundColor,
+      zoomIconColor: isDark ? const Color(0xFF5C6370) : const Color(0xFF9E9E9E),
+    );
 
     return Container(
       height: widget.codeHeight,
+      clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
-        color: colors.surfaceVariant,
+        color: codeBackgroundColor,
         borderRadius: theme.radius.radiusM,
         border: Border.all(color: colors.border),
       ),
@@ -182,18 +223,23 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
               vertical: spacing.s,
             ),
             decoration: BoxDecoration(
+              color: isDark ? const Color(0xFF21252B) : const Color(0xFFEEEEEE),
+              borderRadius: BorderRadius.only(
+                topLeft: theme.radius.radiusM.topLeft,
+                topRight: theme.radius.radiusM.topRight,
+              ),
               border: Border(
-                bottom: BorderSide(color: colors.border),
+                bottom: BorderSide(
+                  color: isDark ? const Color(0xFF181A1F) : const Color(0xFFDDDDDD),
+                ),
               ),
             ),
             child: Row(
               children: [
-                Text(
-                  widget.language,
-                  style: theme.typography.labelSmall.copyWith(
-                    color: colors.textSecondary,
-                    fontFamily: 'monospace',
-                  ),
+                ChromiaText(
+                  widget.language.name,
+                  type: ChromiaTypographyType.code,
+                  color: isDark ? const Color(0xFF5C6370) : const Color(0xFF9E9E9E),
                 ),
                 const Spacer(),
                 if (widget.showCopyButton)
@@ -208,14 +254,13 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
                           Icon(
                             _copied ? Icons.check : Icons.copy,
                             size: 16,
-                            color: _copied ? colors.success : colors.textSecondary,
+                            color: _copied ? colors.success : (isDark ? const Color(0xFF5C6370) : const Color(0xFF9E9E9E)),
                           ),
                           spacing.gapHXS,
-                          Text(
+                          ChromiaText(
                             _copied ? 'Copied!' : 'Copy',
-                            style: theme.typography.labelSmall.copyWith(
-                              color: _copied ? colors.success : colors.textSecondary,
-                            ),
+                            type: ChromiaTypographyType.labelSmall,
+                            color: _copied ? colors.success : (isDark ? const Color(0xFF5C6370) : const Color(0xFF9E9E9E)),
                           ),
                         ],
                       ),
@@ -224,21 +269,19 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
               ],
             ),
           ),
-          // Code content
-          Expanded(
-            child: SingleChildScrollView(
-              padding: spacing.paddingM,
-              child: SelectableText(
-                widget.code.trim(),
-                style: theme.typography.bodySmall.copyWith(
-                  fontFamily: 'monospace',
-                  color: colors.textPrimary,
-                  height: 1.5,
-                ),
-              ),
-            ),
-          ),
+          // Code content with syntax highlighting
+          widget.codeHeight != null ? Expanded(child: _buildCodeContent(syntaxTheme)) : _buildCodeContent(syntaxTheme),
         ],
+      ),
+    );
+  }
+
+  Widget _buildCodeContent(SyntaxTheme syntaxTheme) {
+    return SingleChildScrollView(
+      child: ChromiaSyntaxView(
+        code: widget.code.trim(),
+        syntax: _syntax,
+        syntaxTheme: syntaxTheme,
       ),
     );
   }
@@ -308,17 +351,16 @@ class _ChromiaCodePreviewGroupState extends State<ChromiaCodePreviewGroup> {
       children: [
         if (widget.title != null || widget.description != null) ...[
           if (widget.title != null)
-            Text(
+            ChromiaText(
               widget.title!,
-              style: theme.typography.titleLarge,
+              type: ChromiaTypographyType.titleLarge,
             ),
           if (widget.description != null) ...[
             spacing.gapVXS,
-            Text(
+            ChromiaText(
               widget.description!,
-              style: theme.typography.bodyMedium.copyWith(
-                color: colors.textSecondary,
-              ),
+              type: ChromiaTypographyType.bodyMedium,
+              color: colors.textSecondary,
             ),
           ],
           spacing.gapVL,
@@ -337,26 +379,30 @@ class _ChromiaCodePreviewGroupState extends State<ChromiaCodePreviewGroup> {
                 final item = widget.items[index];
                 final isSelected = index == _selectedIndex;
 
-                return GestureDetector(
-                  onTap: () => setState(() => _selectedIndex = index),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: spacing.l,
-                      vertical: spacing.m,
-                    ),
-                    decoration: BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(
-                          color: isSelected ? colors.primary : Colors.transparent,
-                          width: 2,
+                return MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: GestureDetector(
+                    onTap: () => setState(() => _selectedIndex = index),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: spacing.l,
+                        vertical: spacing.m,
+                      ),
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(
+                            color: isSelected ? colors.primary : Colors.transparent,
+                            width: 2,
+                          ),
                         ),
                       ),
-                    ),
-                    child: Text(
-                      item.label,
-                      style: theme.typography.labelMedium.copyWith(
-                        color: isSelected ? colors.primary : colors.textSecondary,
-                        fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+                      child: ChromiaText(
+                        item.label,
+                        type: ChromiaTypographyType.labelMedium,
+                        style: TextStyle(
+                          color: isSelected ? colors.primary : colors.textSecondary,
+                          fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+                        ),
                       ),
                     ),
                   ),
@@ -397,4 +443,18 @@ class CodePreviewItem {
 
   /// Optional description
   final String? description;
+}
+
+enum CodePreviewLanguage {
+  dart,
+  c,
+  cpp,
+  javascript,
+  kotlin,
+  java,
+  swift,
+  yaml,
+  rust,
+  lua,
+  python,
 }

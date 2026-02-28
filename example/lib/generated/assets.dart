@@ -4,14 +4,12 @@ import 'package:flutter/widgets.dart';
 
 class Assets {
   Assets._();
-
 }
 
 class AssetGenImage {
   const AssetGenImage(this._assetName, {this.size, this.flavors = const {}});
 
   final String _assetName;
-
 
   final Size? size;
   final Set<String> flavors;
@@ -99,7 +97,6 @@ class SvgGenImage {
   const SvgGenImage(this._assetName);
 
   final String _assetName;
-
 
   Widget custom({
     Key? key,

@@ -95,6 +95,7 @@ class ChromiaThemeData {
       brandTypography = _applyFontFamily(
         brandTypography,
         brandConfig.fontFamily!,
+        brandConfig.monospaceFontFamily,
       );
     }
 
@@ -113,6 +114,7 @@ class ChromiaThemeData {
   static ChromiaTypography _applyFontFamily(
     ChromiaTypography typography,
     String fontFamily,
+    String? monospaceFontFamily,
   ) {
     return ChromiaTypography(
       displayLarge: typography.displayLarge.copyWith(fontFamily: fontFamily),
@@ -132,7 +134,7 @@ class ChromiaThemeData {
       labelSmall: typography.labelSmall.copyWith(fontFamily: fontFamily),
       caption: typography.caption.copyWith(fontFamily: fontFamily),
       overline: typography.overline.copyWith(fontFamily: fontFamily),
-      code: typography.code.copyWith(fontFamily: fontFamily),
+      code: typography.code.copyWith(fontFamily: monospaceFontFamily ?? fontFamily),
     );
   }
 

@@ -2,6 +2,7 @@ import 'package:chromia_ui_example/presentation/screens/brands_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/display/screen/avatars_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/display/screen/badges_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/display/screen/chips_screen.dart';
+import 'package:chromia_ui_example/presentation/screens/display/screen/documentation_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/display/screen/typography_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/feedback/screen/dialogs_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/feedback/screen/progress_screen.dart';
@@ -74,6 +75,13 @@ final displayRoutes = [
     path: '/chips',
     child: const ChipsScreen(),
   ),
+  ScreenRoute(
+    title: 'Documentation',
+    icon: Symbols.article_rounded,
+    path: '/documentation',
+    child: const DocumentationScreen(),
+  ),
+
   ScreenRoute(
     title: 'Typography',
     icon: Symbols.custom_typography_rounded,

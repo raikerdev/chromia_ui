@@ -13,6 +13,7 @@ class BrandConfig {
     this.logoPath,
     this.fontFamily,
     this.customColors,
+    this.monospaceFontFamily,
   });
 
   /// The name of the brand
@@ -30,6 +31,9 @@ class BrandConfig {
   /// Custom font family for the brand (optional)
   final String? fontFamily;
 
+  /// Custom monospace font family for the brand (optional)
+  final String? monospaceFontFamily;
+
   /// Additional custom colors for the brand (optional)
   final Map<String, Color>? customColors;
 
@@ -40,6 +44,7 @@ class BrandConfig {
     Color? secondaryColor,
     String? logoPath,
     String? fontFamily,
+    String? monospaceFontFamily,
     Map<String, Color>? customColors,
   }) {
     return BrandConfig(
@@ -48,6 +53,7 @@ class BrandConfig {
       secondaryColor: secondaryColor ?? this.secondaryColor,
       logoPath: logoPath ?? this.logoPath,
       fontFamily: fontFamily ?? this.fontFamily,
+      monospaceFontFamily: monospaceFontFamily ?? this.monospaceFontFamily,
       customColors: customColors ?? this.customColors,
     );
   }
