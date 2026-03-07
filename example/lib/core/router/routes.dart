@@ -3,6 +3,7 @@ import 'package:chromia_ui_example/presentation/screens/display/screen/avatars_s
 import 'package:chromia_ui_example/presentation/screens/display/screen/badges_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/display/screen/chips_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/display/screen/documentation_screen.dart';
+import 'package:chromia_ui_example/presentation/screens/display/screen/list_tile_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/display/screen/typography_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/feedback/screen/dialogs_screen.dart';
 import 'package:chromia_ui_example/presentation/screens/feedback/screen/progress_screen.dart';
@@ -81,7 +82,12 @@ final displayRoutes = [
     path: '/documentation',
     child: const DocumentationScreen(),
   ),
-
+  ScreenRoute(
+    title: 'ListTile',
+    icon: Symbols.tile_medium_rounded,
+    path: '/lis-tile',
+    child: const ListTileScreen(),
+  ),
   ScreenRoute(
     title: 'Typography',
     icon: Symbols.custom_typography_rounded,

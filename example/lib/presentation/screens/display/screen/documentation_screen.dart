@@ -333,47 +333,6 @@ Column(
                 ],
               ),
             ),
-            /*CodePreviewItem(
-              label: 'Rich Text',
-              description: 'Text with multiple styles',
-              code: '''
-ChromiaRichText(
-  children: [
-    ChromiaTextSpan(
-      context: context,
-      text: 'Hello ',
-      type: ChromiaTypographyType.bodyLarge,
-    ),
-    ChromiaTextSpan(
-      context: context,
-      text: 'World',
-      type: ChromiaTypographyType.bodyLarge,
-      color: colors.primary,
-      style: TextStyle(
-        fontWeight: FontWeight.bold,
-      ),
-    ),
-  ],
-)''',
-              preview: ChromiaRichText(
-                children: [
-                  ChromiaTextSpan(
-                    context: context,
-                    text: 'Hello ',
-                    type: ChromiaTypographyType.bodyLarge,
-                  ),
-                  ChromiaTextSpan(
-                    context: context,
-                    text: 'World',
-                    type: ChromiaTypographyType.bodyLarge,
-                    color: theme.colors.primary,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),*/
           ],
         ),
         spacing.gapVXXL,
