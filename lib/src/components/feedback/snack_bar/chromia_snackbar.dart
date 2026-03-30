@@ -84,7 +84,7 @@ extension ChromiaSnackBarExtension on BuildContext {
       onActionPressed: onActionPressed,
       duration: duration,
       backgroundColor: colors.success,
-      textColor: colors.onPrimary,
+      textColor: colors.onSuccess,
       icon: Icons.check_circle,
     );
   }
@@ -106,7 +106,7 @@ extension ChromiaSnackBarExtension on BuildContext {
       onActionPressed: onActionPressed,
       duration: duration,
       backgroundColor: colors.error,
-      textColor: colors.onPrimary,
+      textColor: colors.onError,
       icon: Icons.error,
     );
   }
@@ -128,7 +128,7 @@ extension ChromiaSnackBarExtension on BuildContext {
       onActionPressed: onActionPressed,
       duration: duration,
       backgroundColor: colors.warning,
-      textColor: colors.onPrimary,
+      textColor: colors.onWarning,
       icon: Icons.warning,
     );
   }
@@ -150,7 +150,7 @@ extension ChromiaSnackBarExtension on BuildContext {
       onActionPressed: onActionPressed,
       duration: duration,
       backgroundColor: colors.info,
-      textColor: colors.onPrimary,
+      textColor: colors.onInfo,
       icon: Icons.info,
     );
   }

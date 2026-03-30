@@ -163,7 +163,7 @@ class CardsScreen extends StatelessWidget {
             Expanded(
               child: ChromiaCard(
                 elevation: 0,
-                borderColor: colors.border,
+                borderColor: colors.outline,
                 borderWidth: 1,
                 child: Column(
                   children: [

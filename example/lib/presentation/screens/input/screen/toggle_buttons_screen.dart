@@ -168,7 +168,7 @@ class _ToggleButtonsScreenState extends State<ToggleButtonsScreen> {
         spacing.gapVS,
         Container(
           decoration: BoxDecoration(
-            border: Border.all(color: colors.border),
+            border: Border.all(color: colors.outline),
             borderRadius: theme.radius.radiusM,
           ),
           child: Column(

@@ -118,7 +118,7 @@ class ChromiaRadioButton<T> extends StatelessWidget {
             border: Border.all(
               color: _isSelected
                   ? (isEnabled ? activeColor : colors.surfaceContainer)
-                  : (isEnabled ? colors.border : colors.surfaceContainer),
+                  : (isEnabled ? colors.outline : colors.surfaceContainer),
               width: 2,
             ),
           ),

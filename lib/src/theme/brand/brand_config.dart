@@ -107,8 +107,8 @@ class BrandConfigs {
   /// Default Chromia brand
   static const BrandConfig chromia = BrandConfig(
     name: 'Chromia',
-    primaryColor: Color(0xFF2196F3),
-    secondaryColor: Color(0xFF9C27B0),
+    primaryColor: Color(0xFF181F32),
+    secondaryColor: Color(0xFF2196F3),
   );
 
   /// Example brand with blue theme

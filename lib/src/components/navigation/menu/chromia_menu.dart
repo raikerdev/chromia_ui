@@ -334,7 +334,7 @@ class ChromiaMenuButton<T> extends StatelessWidget {
           vertical: spacing.s,
         ),
         decoration: BoxDecoration(
-          border: Border.all(color: colors.border),
+          border: Border.all(color: colors.outline),
           borderRadius: theme.radius.radiusM,
         ),
         child: Row(

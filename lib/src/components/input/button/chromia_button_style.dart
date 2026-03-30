@@ -103,7 +103,7 @@ class ChromiaButtonStyle {
       hoverBackgroundColor: theme.colors.surfaceHover,
       pressedBackgroundColor: theme.colors.surfacePressed,
       borderColor: theme.colors.primary,
-      disabledBorderColor: theme.colors.border,
+      disabledBorderColor: theme.colors.outline,
       hoverBorderColor: theme.colors.primaryHover,
       borderWidth: 1.5,
       borderRadius: theme.radius.radiusL,
@@ -137,15 +137,15 @@ class ChromiaButtonStyle {
     );
   }
 
-  /// Creates a tonal button style (filled with lower emphasis)
+  /// Creates a tonal button style (filled with lower emphasis, uses primaryContainer)
   factory ChromiaButtonStyle.tonal(ChromiaThemeData theme) {
     return ChromiaButtonStyle(
-      backgroundColor: theme.colors.surfaceContainerHigh,
-      foregroundColor: theme.colors.primary,
+      backgroundColor: theme.colors.primaryContainer,
+      foregroundColor: theme.colors.onPrimaryContainer,
       disabledBackgroundColor: theme.colors.surfaceVariant,
       disabledForegroundColor: theme.colors.textDisabled,
-      hoverBackgroundColor: theme.colors.surfaceContainerHighest,
-      pressedBackgroundColor: theme.colors.surfaceContainer,
+      hoverBackgroundColor: theme.colors.primaryHover,
+      pressedBackgroundColor: theme.colors.primaryPressed,
       borderRadius: theme.radius.radiusL,
       padding: EdgeInsets.symmetric(
         horizontal: theme.spacing.l,

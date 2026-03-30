@@ -211,7 +211,7 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
       decoration: BoxDecoration(
         color: codeBackgroundColor,
         borderRadius: theme.radius.radiusM,
-        border: Border.all(color: colors.border),
+        border: Border.all(color: colors.outline),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -295,7 +295,7 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
       decoration: BoxDecoration(
         color: colors.surface,
         borderRadius: theme.radius.radiusM,
-        border: Border.all(color: colors.border),
+        border: Border.all(color: colors.outline),
       ),
       child: Align(
         alignment: widget.previewAlignment,
@@ -369,7 +369,7 @@ class _ChromiaCodePreviewGroupState extends State<ChromiaCodePreviewGroup> {
         Container(
           decoration: BoxDecoration(
             border: Border(
-              bottom: BorderSide(color: colors.border),
+              bottom: BorderSide(color: colors.outline),
             ),
           ),
           child: SingleChildScrollView(

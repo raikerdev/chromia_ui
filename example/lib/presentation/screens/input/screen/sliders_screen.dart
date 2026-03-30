@@ -162,7 +162,7 @@ class _SlidersScreenState extends State<SlidersScreen> {
         spacing.gapVS,
         Container(
           decoration: BoxDecoration(
-            border: Border.all(color: colors.border),
+            border: Border.all(color: colors.outline),
             borderRadius: theme.radius.radiusM,
           ),
           child: Column(

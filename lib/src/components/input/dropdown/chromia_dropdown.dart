@@ -97,8 +97,8 @@ class ChromiaDropdown<T> extends StatelessWidget {
               color: hasError
                   ? colors.error
                   : enabled
-                  ? colors.border
-                  : colors.border.withAlpha(128),
+                  ? colors.outline
+                  : colors.outline.withAlpha(128),
               width: hasError ? 2 : 1,
             ),
           ),
@@ -249,8 +249,8 @@ class ChromiaRichDropdown<T> extends StatelessWidget {
               color: hasError
                   ? colors.error
                   : enabled
-                  ? colors.border
-                  : colors.border.withAlpha(128),
+                  ? colors.outline
+                  : colors.outline.withAlpha(128),
               width: hasError ? 2 : 1,
             ),
           ),

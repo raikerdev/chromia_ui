@@ -166,7 +166,7 @@ class ChromiaCheckbox extends StatelessWidget {
             border: Border.all(
               color: value == true
                   ? (isEnabled ? activeColor : colors.surfaceContainer)
-                  : (isEnabled ? colors.border : colors.surfaceContainer),
+                  : (isEnabled ? colors.outline : colors.surfaceContainer),
               width: 2,
             ),
             borderRadius: radius.circular(4),
@@ -181,7 +181,7 @@ class ChromiaCheckbox extends StatelessWidget {
               ? Icon(
                   tristateIcon,
                   size: size * 0.7,
-                  color: isEnabled ? activeColor : colors.border,
+                  color: isEnabled ? activeColor : colors.outline,
                 )
               : null,
         ),

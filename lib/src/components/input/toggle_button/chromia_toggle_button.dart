@@ -136,7 +136,7 @@ class _ChromiaToggleButtonState extends State<ChromiaToggleButton> with SingleTi
   ) {
     final theme = context.chromiaTheme;
     final Color effectiveActiveColor = widget.activeColor ?? colors.primary;
-    final Color effectiveInactiveColor = widget.inactiveColor ?? colors.border;
+    final Color effectiveInactiveColor = widget.inactiveColor ?? colors.outline;
     final Color effectiveThumbColor = widget.thumbColor ?? colors.surface;
 
     final dimensions = _getToggleButtonDimensions(widget.size, theme.spacing);

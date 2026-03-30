@@ -45,6 +45,18 @@ class ColorTokens {
   static const Color secondary800 = Color(0xFF6A1B9A);
   static const Color secondary900 = Color(0xFF4A148C);
 
+  // Tertiary colors (Teal)
+  static const Color tertiary50 = Color(0xFFE0F2F1);
+  static const Color tertiary100 = Color(0xFFB2DFDB);
+  static const Color tertiary200 = Color(0xFF80CBC4);
+  static const Color tertiary300 = Color(0xFF4DB6AC);
+  static const Color tertiary400 = Color(0xFF26A69A);
+  static const Color tertiary500 = Color(0xFF009688);
+  static const Color tertiary600 = Color(0xFF00897B);
+  static const Color tertiary700 = Color(0xFF00796B);
+  static const Color tertiary800 = Color(0xFF00695C);
+  static const Color tertiary900 = Color(0xFF004D40);
+
   // Success colors (Green)
   static const Color success50 = Color(0xFFE8F5E9);
   static const Color success100 = Color(0xFFC8E6C9);

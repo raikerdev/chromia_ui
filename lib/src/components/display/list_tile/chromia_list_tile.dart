@@ -162,7 +162,7 @@ class ChromiaListTile extends StatelessWidget {
     if (variant == ChromiaListTileVariant.outlined) {
       tile = Container(
         decoration: BoxDecoration(
-          border: Border.all(color: colors.border),
+          border: Border.all(color: colors.outline),
           borderRadius: theme.radius.radiusM,
           color: selected ? selectedTileColor ?? colors.surface : tileColor,
         ),

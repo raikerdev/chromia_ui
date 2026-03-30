@@ -82,7 +82,7 @@ class BrandsScreen extends StatelessWidget {
       decoration: BoxDecoration(
         color: colors.surfaceContainer,
         borderRadius: theme.radius.radiusL,
-        border: Border.all(color: colors.border),
+        border: Border.all(color: colors.outline),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -193,7 +193,7 @@ class _ColorSwatch extends StatelessWidget {
           decoration: BoxDecoration(
             color: color,
             borderRadius: theme.radius.radiusM,
-            border: Border.all(color: colors.border),
+            border: Border.all(color: colors.outline),
           ),
         ),
         spacing.gapVXS,

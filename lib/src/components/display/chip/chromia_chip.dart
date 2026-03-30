@@ -132,7 +132,7 @@ class ChromiaChip extends StatelessWidget {
         color: effectiveBackgroundColor,
         borderRadius: theme.radius.radiusL,
         border: Border.all(
-          color: colors.border,
+          color: colors.outline,
           width: 1,
         ),
       ),
@@ -231,7 +231,7 @@ class _ChromiaFilterChip extends ChromiaChip {
           color: effectiveBackgroundColor,
           borderRadius: theme.radius.radiusL,
           border: Border.all(
-            color: selected ? colors.primary : colors.border,
+            color: selected ? colors.primary : colors.outline,
             width: selected ? 2 : 1,
           ),
         ),
