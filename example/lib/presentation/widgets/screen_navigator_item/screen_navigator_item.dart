@@ -11,8 +11,7 @@ class ScreenNavigatorItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
 
     final fullPath = pathPrefix != null ? '$pathPrefix${route.path}' : route.path;
 
@@ -20,7 +19,7 @@ class ScreenNavigatorItem extends StatelessWidget {
       title: ChromiaText(route.title, type: ChromiaTypographyType.headlineSmall),
       subtitle: ChromiaText(fullPath, type: ChromiaTypographyType.bodyMedium),
       leading: Icon(route.icon, color: colors.primary),
-      trailing: Icon(Icons.chevron_right, color: colors.textSecondary),
+      trailing: Icon(Icons.chevron_right, color: colors.onSurfaceVariant),
       onTap: () {
         if (route.navigateWithGo) {
           context.go(fullPath);

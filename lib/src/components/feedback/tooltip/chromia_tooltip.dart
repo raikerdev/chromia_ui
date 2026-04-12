@@ -85,7 +85,7 @@ class ChromiaTooltip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return Tooltip(
@@ -129,7 +129,7 @@ class _ChromiaRichTooltip extends ChromiaTooltip {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return Tooltip(
@@ -258,7 +258,7 @@ class _TooltipOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = ChromiaTheme.of(context);
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return GestureDetector(
@@ -318,15 +318,14 @@ class ChromiaHelpIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
 
     return ChromiaTooltip(
       message: message,
       child: Icon(
         icon,
         size: size ?? 18,
-        color: color ?? colors.textTertiary,
+        color: color ?? colors.onSurfaceVariant,
       ),
     );
   }

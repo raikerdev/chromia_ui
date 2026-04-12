@@ -47,7 +47,7 @@ class ChromiaLinearProgress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     final Color effectiveBackgroundColor = backgroundColor ?? colors.surfaceVariant;
@@ -79,7 +79,7 @@ class ChromiaLinearProgress extends StatelessWidget {
               ChromiaText(
                 label,
                 type: ChromiaTypographyType.labelSmall,
-                color: colors.textSecondary,
+                color: colors.onSurfaceVariant,
               ),
             ],
           ),

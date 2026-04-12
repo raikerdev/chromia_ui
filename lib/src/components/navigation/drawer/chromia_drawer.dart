@@ -48,8 +48,7 @@ class ChromiaDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
 
     return Drawer(
       backgroundColor: backgroundColor ?? colors.surface,
@@ -106,12 +105,12 @@ class ChromiaDrawerItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     final Color effectiveBackgroundColor = selected ? colors.surface : Colors.transparent;
-    final Color effectiveTextColor = selected ? colors.primary : colors.textPrimary;
-    final Color effectiveIconColor = selected ? colors.primary : colors.textSecondary;
+    final Color effectiveTextColor = selected ? colors.primary : colors.onSurface;
+    final Color effectiveIconColor = selected ? colors.primary : colors.onSurfaceVariant;
 
     return InkWell(
       onTap: onTap,
@@ -194,7 +193,7 @@ class ChromiaDrawerSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return Padding(
@@ -210,7 +209,7 @@ class ChromiaDrawerSection extends StatelessWidget {
         title.toUpperCase(),
         type: ChromiaTypographyType.labelSmall,
         style: TextStyle(
-          color: colors.textTertiary,
+          color: colors.onSurfaceVariant,
           fontWeight: FontWeight.w600,
           letterSpacing: 1.2,
         ),
@@ -232,7 +231,7 @@ class ChromiaDrawerDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return Container(
@@ -243,7 +242,7 @@ class ChromiaDrawerDivider extends StatelessWidget {
             vertical: spacing.m,
           ),
       height: 1,
-      color: colors.divider,
+      color: colors.outline,
     );
   }
 }
@@ -281,7 +280,7 @@ class ChromiaDrawerHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return GestureDetector(

@@ -15,78 +15,55 @@ import 'package:flutter/material.dart';
 /// - **success**, **warning**, **info** each with their `on*` and `*Container` variants.
 class ChromiaColors {
   const ChromiaColors({
+    required this.brightness,
     // Primary role
     required this.primary,
     required this.onPrimary,
     required this.primaryContainer,
     required this.onPrimaryContainer,
-    required this.primaryHover,
-    required this.primaryPressed,
-    required this.primaryDisabled,
     // Secondary role
     required this.secondary,
     required this.onSecondary,
     required this.secondaryContainer,
     required this.onSecondaryContainer,
-    required this.secondaryHover,
-    required this.secondaryPressed,
-    required this.secondaryDisabled,
     // Tertiary role
     required this.tertiary,
     required this.onTertiary,
     required this.tertiaryContainer,
     required this.onTertiaryContainer,
-    required this.tertiaryHover,
-    required this.tertiaryPressed,
-    required this.tertiaryDisabled,
     // Error role
     required this.error,
     required this.onError,
     required this.errorContainer,
     required this.onErrorContainer,
-    required this.errorHover,
     // Success role
     required this.success,
     required this.onSuccess,
     required this.successContainer,
     required this.onSuccessContainer,
-    required this.successHover,
     // Warning role
     required this.warning,
     required this.onWarning,
     required this.warningContainer,
     required this.onWarningContainer,
-    required this.warningHover,
     // Info role
     required this.info,
     required this.onInfo,
     required this.infoContainer,
     required this.onInfoContainer,
-    required this.infoHover,
-    // Surface system
+    // Surface role
     required this.surface,
-    required this.surfaceHover,
-    required this.surfacePressed,
-    required this.surfaceVariant,
-    required this.surfaceContainer,
-    required this.surfaceContainerHigh,
-    required this.surfaceContainerHighest,
     required this.onSurface,
+    required this.surfaceVariant,
     required this.onSurfaceVariant,
-    // Background
-    required this.background,
-    required this.onBackground,
-    // Outline system (MD3)
+    required this.surfaceContainerHighest,
+    required this.surfaceContainerHigh,
+    required this.surfaceContainer,
+    required this.surfaceContainerLow,
+    required this.surfaceContainerLowest,
+    // Outline role
     required this.outline,
     required this.outlineVariant,
-    required this.outlineStrong,
-    // Divider
-    required this.divider,
-    // Text
-    required this.textPrimary,
-    required this.textSecondary,
-    required this.textTertiary,
-    required this.textDisabled,
     // Other
     required this.shadow,
     required this.overlay,
@@ -94,94 +71,64 @@ class ChromiaColors {
     required this.transparent,
   });
 
-  // ── Primary ──────────────────────────────────────────────────────────────
+  final Brightness brightness;
+
+  // ── Primary ───────────────────────────────────────────────────────────────
   final Color primary;
   final Color onPrimary;
   final Color primaryContainer;
   final Color onPrimaryContainer;
-  final Color primaryHover;
-  final Color primaryPressed;
-  final Color primaryDisabled;
 
   // ── Secondary ─────────────────────────────────────────────────────────────
   final Color secondary;
   final Color onSecondary;
   final Color secondaryContainer;
   final Color onSecondaryContainer;
-  final Color secondaryHover;
-  final Color secondaryPressed;
-  final Color secondaryDisabled;
 
   // ── Tertiary ──────────────────────────────────────────────────────────────
   final Color tertiary;
   final Color onTertiary;
   final Color tertiaryContainer;
   final Color onTertiaryContainer;
-  final Color tertiaryHover;
-  final Color tertiaryPressed;
-  final Color tertiaryDisabled;
 
   // ── Error ─────────────────────────────────────────────────────────────────
   final Color error;
   final Color onError;
   final Color errorContainer;
   final Color onErrorContainer;
-  final Color errorHover;
 
   // ── Success ───────────────────────────────────────────────────────────────
   final Color success;
   final Color onSuccess;
   final Color successContainer;
   final Color onSuccessContainer;
-  final Color successHover;
 
   // ── Warning ───────────────────────────────────────────────────────────────
   final Color warning;
   final Color onWarning;
   final Color warningContainer;
   final Color onWarningContainer;
-  final Color warningHover;
 
   // ── Info ──────────────────────────────────────────────────────────────────
   final Color info;
   final Color onInfo;
   final Color infoContainer;
   final Color onInfoContainer;
-  final Color infoHover;
 
   // ── Surface ───────────────────────────────────────────────────────────────
   final Color surface;
-  final Color surfaceHover;
-  final Color surfacePressed;
-  final Color surfaceVariant;
-  final Color surfaceContainer;
-  final Color surfaceContainerHigh;
-  final Color surfaceContainerHighest;
   final Color onSurface;
+  final Color surfaceVariant;
   final Color onSurfaceVariant;
+  final Color surfaceContainerHighest;
+  final Color surfaceContainerHigh;
+  final Color surfaceContainer;
+  final Color surfaceContainerLow;
+  final Color surfaceContainerLowest;
 
-  // ── Background ────────────────────────────────────────────────────────────
-  final Color background;
-  final Color onBackground;
-
-  // ── Outline (MD3) ─────────────────────────────────────────────────────────
-  /// Medium-emphasis borders and input decorations. Formerly `border`.
+  // ── Outline ───────────────────────────────────────────────────────────────
   final Color outline;
-
-  /// Low-emphasis borders, hover states. Formerly `borderHover`.
   final Color outlineVariant;
-
-  /// High-emphasis borders. Formerly `borderStrong`.
-  final Color outlineStrong;
-
-  // ── Divider ───────────────────────────────────────────────────────────────
-  final Color divider;
-
-  // ── Text ──────────────────────────────────────────────────────────────────
-  final Color textPrimary;
-  final Color textSecondary;
-  final Color textTertiary;
-  final Color textDisabled;
 
   // ── Other ─────────────────────────────────────────────────────────────────
   final Color shadow;
@@ -189,171 +136,162 @@ class ChromiaColors {
   final Color scrim;
   final Color transparent;
 
+  bool get isDark => brightness == Brightness.dark;
+
+  Color get textDisabled => onSurface.withAlpha(97);
+
+  // ── State Variations ──────────────────────────────────────────────────────
+  Color get primaryHover => _adjustBrightness(primary, isDark ? 0.1 : -0.1);
+  Color get primaryPressed => _adjustBrightness(primary, isDark ? 0.2 : -0.2);
+  Color get primaryDisabled => _adjustBrightness(primary, isDark ? -0.3 : 0.3);
+
+  Color get secondaryHover => _adjustBrightness(secondary, isDark ? 0.1 : -0.1);
+  Color get secondaryPressed => _adjustBrightness(secondary, isDark ? 0.2 : -0.2);
+  Color get secondaryDisabled => _adjustBrightness(secondary, isDark ? -0.3 : 0.3);
+
+  Color get tertiaryHover => _adjustBrightness(tertiary, isDark ? 0.1 : -0.1);
+  Color get tertiaryPressed => _adjustBrightness(tertiary, isDark ? 0.2 : -0.2);
+  Color get tertiaryDisabled => _adjustBrightness(tertiary, isDark ? -0.3 : 0.3);
+
+  Color get errorHover => _adjustBrightness(error, isDark ? 0.1 : -0.1);
+  Color get errorPressed => _adjustBrightness(error, isDark ? 0.2 : -0.2);
+  Color get errorDisabled => _adjustBrightness(error, isDark ? -0.3 : 0.3);
+
+  Color get successHover => _adjustBrightness(success, isDark ? 0.1 : -0.1);
+  Color get successPressed => _adjustBrightness(success, isDark ? 0.2 : -0.2);
+  Color get successDisabled => _adjustBrightness(success, isDark ? -0.3 : 0.3);
+
+  Color get warningHover => _adjustBrightness(warning, isDark ? 0.1 : -0.1);
+  Color get warningPressed => _adjustBrightness(warning, isDark ? 0.2 : -0.2);
+  Color get warningDisabled => _adjustBrightness(warning, isDark ? -0.3 : 0.3);
+
+  Color get infoHover => _adjustBrightness(info, isDark ? 0.1 : -0.1);
+  Color get infoPressed => _adjustBrightness(info, isDark ? 0.2 : -0.2);
+  Color get infoDisabled => _adjustBrightness(info, isDark ? -0.3 : 0.3);
+
+  Color get surfaceHover => _adjustBrightness(surface, isDark ? 0.1 : -0.1);
+  Color get surfacePressed => _adjustBrightness(surface, isDark ? 0.2 : -0.2);
+  Color get surfaceDisabled => _adjustBrightness(surface, isDark ? -0.3 : 0.3);
+
   // ── Factories ─────────────────────────────────────────────────────────────
 
   /// Default light color scheme
   factory ChromiaColors.light() {
     return const ChromiaColors(
+      brightness: Brightness.light,
       // Primary
       primary: ColorTokens.primary600,
       onPrimary: ColorTokens.neutral0,
       primaryContainer: ColorTokens.primary100,
       onPrimaryContainer: ColorTokens.primary900,
-      primaryHover: ColorTokens.primary800,
-      primaryPressed: ColorTokens.primary900,
-      primaryDisabled: ColorTokens.primary200,
       // Secondary
       secondary: ColorTokens.secondary600,
       onSecondary: ColorTokens.neutral0,
       secondaryContainer: ColorTokens.secondary100,
       onSecondaryContainer: ColorTokens.secondary900,
-      secondaryHover: ColorTokens.secondary700,
-      secondaryPressed: ColorTokens.secondary800,
-      secondaryDisabled: ColorTokens.secondary200,
       // Tertiary
       tertiary: ColorTokens.tertiary600,
       onTertiary: ColorTokens.neutral0,
       tertiaryContainer: ColorTokens.tertiary100,
       onTertiaryContainer: ColorTokens.tertiary900,
-      tertiaryHover: ColorTokens.tertiary700,
-      tertiaryPressed: ColorTokens.tertiary800,
-      tertiaryDisabled: ColorTokens.tertiary200,
       // Error
       error: ColorTokens.error600,
       onError: ColorTokens.neutral0,
       errorContainer: ColorTokens.error100,
       onErrorContainer: ColorTokens.error900,
-      errorHover: ColorTokens.error700,
       // Success
       success: ColorTokens.success600,
       onSuccess: ColorTokens.neutral0,
       successContainer: ColorTokens.success100,
       onSuccessContainer: ColorTokens.success900,
-      successHover: ColorTokens.success700,
       // Warning
       warning: ColorTokens.warning600,
       onWarning: ColorTokens.neutral0,
       warningContainer: ColorTokens.warning100,
       onWarningContainer: ColorTokens.warning900,
-      warningHover: ColorTokens.warning700,
       // Info
       info: ColorTokens.info600,
       onInfo: ColorTokens.neutral0,
       infoContainer: ColorTokens.info100,
       onInfoContainer: ColorTokens.info900,
-      infoHover: ColorTokens.info700,
       // Surface
-      surface: ColorTokens.neutral0,
-      surfaceHover: ColorTokens.neutral200,
-      surfacePressed: ColorTokens.neutral300,
-      surfaceVariant: ColorTokens.neutral100,
-      surfaceContainer: ColorTokens.neutral200,
-      surfaceContainerHigh: ColorTokens.neutral200,
-      surfaceContainerHighest: ColorTokens.neutral300,
-      onSurface: ColorTokens.neutral900,
-      onSurfaceVariant: ColorTokens.neutral700,
-      // Background
-      background: ColorTokens.neutral50,
-      onBackground: ColorTokens.neutral900,
+      surface: ColorTokens.surfaceLight,
+      onSurface: ColorTokens.onSurfaceLight,
+      surfaceVariant: ColorTokens.surfaceVariantLight,
+      onSurfaceVariant: ColorTokens.onSurfaceVariantLight,
+      surfaceContainerHighest: ColorTokens.surfaceContainerHighestLight,
+      surfaceContainerHigh: ColorTokens.surfaceContainerHighLight,
+      surfaceContainer: ColorTokens.surfaceContainerLight,
+      surfaceContainerLow: ColorTokens.surfaceContainerLowLight,
+      surfaceContainerLowest: ColorTokens.surfaceContainerLowestLight,
       // Outline
       outline: ColorTokens.neutral300,
       outlineVariant: ColorTokens.neutral400,
-      outlineStrong: ColorTokens.neutral500,
-      // Divider
-      divider: ColorTokens.neutral200,
-      // Text
-      textPrimary: ColorTokens.neutral900,
-      textSecondary: ColorTokens.neutral700,
-      textTertiary: ColorTokens.neutral500,
-      textDisabled: ColorTokens.neutral500,
       // Other
-      shadow: ColorTokens.neutral900,
-      overlay: Color(0x52000000),
-      scrim: Color(0x52000000),
-      transparent: Color(0x00FFFFFF),
+      shadow: ColorTokens.shadowLight,
+      overlay: ColorTokens.overlayLight,
+      scrim: ColorTokens.scrimLight,
+      transparent: ColorTokens.transparentLight,
     );
   }
 
   /// Default dark color scheme
   factory ChromiaColors.dark() {
     return const ChromiaColors(
+      brightness: Brightness.dark,
       // Primary
       primary: ColorTokens.primary400,
       onPrimary: ColorTokens.neutral900,
       primaryContainer: ColorTokens.primary800,
       onPrimaryContainer: ColorTokens.primary100,
-      primaryHover: ColorTokens.primary300,
-      primaryPressed: ColorTokens.primary200,
-      primaryDisabled: ColorTokens.primary800,
       // Secondary
       secondary: ColorTokens.secondary400,
       onSecondary: ColorTokens.neutral900,
       secondaryContainer: ColorTokens.secondary800,
       onSecondaryContainer: ColorTokens.secondary100,
-      secondaryHover: ColorTokens.secondary300,
-      secondaryPressed: ColorTokens.secondary200,
-      secondaryDisabled: ColorTokens.secondary800,
       // Tertiary
       tertiary: ColorTokens.tertiary400,
       onTertiary: ColorTokens.neutral900,
       tertiaryContainer: ColorTokens.tertiary800,
       onTertiaryContainer: ColorTokens.tertiary100,
-      tertiaryHover: ColorTokens.tertiary300,
-      tertiaryPressed: ColorTokens.tertiary200,
-      tertiaryDisabled: ColorTokens.tertiary800,
       // Error
       error: ColorTokens.error400,
       onError: ColorTokens.neutral900,
       errorContainer: ColorTokens.error800,
       onErrorContainer: ColorTokens.error100,
-      errorHover: ColorTokens.error300,
       // Success
       success: ColorTokens.success400,
       onSuccess: ColorTokens.neutral900,
       successContainer: ColorTokens.success800,
       onSuccessContainer: ColorTokens.success100,
-      successHover: ColorTokens.success300,
       // Warning
       warning: ColorTokens.warning400,
       onWarning: ColorTokens.neutral900,
       warningContainer: ColorTokens.warning800,
       onWarningContainer: ColorTokens.warning100,
-      warningHover: ColorTokens.warning300,
       // Info
       info: ColorTokens.info400,
       onInfo: ColorTokens.neutral900,
       infoContainer: ColorTokens.info800,
       onInfoContainer: ColorTokens.info100,
-      infoHover: ColorTokens.info300,
       // Surface
-      surface: ColorTokens.neutral900,
-      surfaceHover: ColorTokens.neutral800,
-      surfacePressed: ColorTokens.neutral700,
-      surfaceVariant: ColorTokens.neutral800,
-      surfaceContainer: ColorTokens.neutral800,
-      surfaceContainerHigh: ColorTokens.neutral800,
-      surfaceContainerHighest: ColorTokens.neutral700,
-      onSurface: ColorTokens.neutral100,
-      onSurfaceVariant: ColorTokens.neutral300,
-      // Background
-      background: ColorTokens.neutral1000,
-      onBackground: ColorTokens.neutral100,
+      surface: ColorTokens.surfaceDark,
+      onSurface: ColorTokens.onSurfaceDark,
+      surfaceVariant: ColorTokens.surfaceVariantDark,
+      onSurfaceVariant: ColorTokens.onSurfaceVariantDark,
+      surfaceContainerHighest: ColorTokens.surfaceContainerHighestDark,
+      surfaceContainerHigh: ColorTokens.surfaceContainerHighDark,
+      surfaceContainer: ColorTokens.surfaceContainerDark,
+      surfaceContainerLow: ColorTokens.surfaceContainerLowDark,
+      surfaceContainerLowest: ColorTokens.surfaceContainerLowestDark,
       // Outline
       outline: ColorTokens.neutral700,
       outlineVariant: ColorTokens.neutral600,
-      outlineStrong: ColorTokens.neutral500,
-      // Divider
-      divider: ColorTokens.neutral800,
-      // Text
-      textPrimary: ColorTokens.neutral100,
-      textSecondary: ColorTokens.neutral300,
-      textTertiary: ColorTokens.neutral500,
-      textDisabled: ColorTokens.neutral600,
       // Other
-      shadow: ColorTokens.neutral1000,
-      overlay: Color(0x52FFFFFF),
-      scrim: Color(0x52000000),
-      transparent: ColorTokens.transparent,
+      shadow: ColorTokens.shadowDark,
+      overlay: ColorTokens.overlayDark,
+      scrim: ColorTokens.scrimDark,
+      transparent: ColorTokens.transparentDark,
     );
   }
 
@@ -363,9 +301,6 @@ class ChromiaColors {
 
     return base.copyWith(
       primary: primaryColor,
-      primaryHover: _adjustBrightness(primaryColor, isDark ? 0.1 : -0.1),
-      primaryPressed: _adjustBrightness(primaryColor, isDark ? 0.2 : -0.2),
-      primaryDisabled: _adjustBrightness(primaryColor, isDark ? -0.3 : 0.3),
       primaryContainer: _adjustBrightness(primaryColor, isDark ? -0.4 : 0.4),
       onPrimaryContainer: _adjustBrightness(primaryColor, isDark ? 0.5 : -0.5),
     );
@@ -381,78 +316,55 @@ class ChromiaColors {
   // ── copyWith ──────────────────────────────────────────────────────────────
 
   ChromiaColors copyWith({
+    Brightness? brightness,
     // Primary
     Color? primary,
     Color? onPrimary,
     Color? primaryContainer,
     Color? onPrimaryContainer,
-    Color? primaryHover,
-    Color? primaryPressed,
-    Color? primaryDisabled,
     // Secondary
     Color? secondary,
     Color? onSecondary,
     Color? secondaryContainer,
     Color? onSecondaryContainer,
-    Color? secondaryHover,
-    Color? secondaryPressed,
-    Color? secondaryDisabled,
     // Tertiary
     Color? tertiary,
     Color? onTertiary,
     Color? tertiaryContainer,
     Color? onTertiaryContainer,
-    Color? tertiaryHover,
-    Color? tertiaryPressed,
-    Color? tertiaryDisabled,
     // Error
     Color? error,
     Color? onError,
     Color? errorContainer,
     Color? onErrorContainer,
-    Color? errorHover,
     // Success
     Color? success,
     Color? onSuccess,
     Color? successContainer,
     Color? onSuccessContainer,
-    Color? successHover,
     // Warning
     Color? warning,
     Color? onWarning,
     Color? warningContainer,
     Color? onWarningContainer,
-    Color? warningHover,
     // Info
     Color? info,
     Color? onInfo,
     Color? infoContainer,
     Color? onInfoContainer,
-    Color? infoHover,
     // Surface
     Color? surface,
-    Color? surfaceHover,
-    Color? surfacePressed,
-    Color? surfaceVariant,
-    Color? surfaceContainer,
-    Color? surfaceContainerHigh,
-    Color? surfaceContainerHighest,
     Color? onSurface,
+    Color? surfaceVariant,
     Color? onSurfaceVariant,
-    // Background
-    Color? background,
-    Color? onBackground,
+    Color? surfaceContainerHighest,
+    Color? surfaceContainerHigh,
+    Color? surfaceContainer,
+    Color? surfaceContainerLow,
+    Color? surfaceContainerLowest,
     // Outline
     Color? outline,
     Color? outlineVariant,
-    Color? outlineStrong,
-    // Divider
-    Color? divider,
-    // Text
-    Color? textPrimary,
-    Color? textSecondary,
-    Color? textTertiary,
-    Color? textDisabled,
     // Other
     Color? shadow,
     Color? overlay,
@@ -460,76 +372,60 @@ class ChromiaColors {
     Color? transparent,
   }) {
     return ChromiaColors(
+      brightness: brightness ?? this.brightness,
+      // Primary
       primary: primary ?? this.primary,
       onPrimary: onPrimary ?? this.onPrimary,
       primaryContainer: primaryContainer ?? this.primaryContainer,
       onPrimaryContainer: onPrimaryContainer ?? this.onPrimaryContainer,
-      primaryHover: primaryHover ?? this.primaryHover,
-      primaryPressed: primaryPressed ?? this.primaryPressed,
-      primaryDisabled: primaryDisabled ?? this.primaryDisabled,
+      // Secondary
       secondary: secondary ?? this.secondary,
       onSecondary: onSecondary ?? this.onSecondary,
       secondaryContainer: secondaryContainer ?? this.secondaryContainer,
       onSecondaryContainer: onSecondaryContainer ?? this.onSecondaryContainer,
-      secondaryHover: secondaryHover ?? this.secondaryHover,
-      secondaryPressed: secondaryPressed ?? this.secondaryPressed,
-      secondaryDisabled: secondaryDisabled ?? this.secondaryDisabled,
+      // Tertiary
       tertiary: tertiary ?? this.tertiary,
       onTertiary: onTertiary ?? this.onTertiary,
       tertiaryContainer: tertiaryContainer ?? this.tertiaryContainer,
       onTertiaryContainer: onTertiaryContainer ?? this.onTertiaryContainer,
-      tertiaryHover: tertiaryHover ?? this.tertiaryHover,
-      tertiaryPressed: tertiaryPressed ?? this.tertiaryPressed,
-      tertiaryDisabled: tertiaryDisabled ?? this.tertiaryDisabled,
+      // Error
       error: error ?? this.error,
       onError: onError ?? this.onError,
       errorContainer: errorContainer ?? this.errorContainer,
       onErrorContainer: onErrorContainer ?? this.onErrorContainer,
-      errorHover: errorHover ?? this.errorHover,
+      // Success
       success: success ?? this.success,
       onSuccess: onSuccess ?? this.onSuccess,
       successContainer: successContainer ?? this.successContainer,
       onSuccessContainer: onSuccessContainer ?? this.onSuccessContainer,
-      successHover: successHover ?? this.successHover,
+      // Warning
       warning: warning ?? this.warning,
       onWarning: onWarning ?? this.onWarning,
       warningContainer: warningContainer ?? this.warningContainer,
       onWarningContainer: onWarningContainer ?? this.onWarningContainer,
-      warningHover: warningHover ?? this.warningHover,
+      // Info
       info: info ?? this.info,
       onInfo: onInfo ?? this.onInfo,
       infoContainer: infoContainer ?? this.infoContainer,
       onInfoContainer: onInfoContainer ?? this.onInfoContainer,
-      infoHover: infoHover ?? this.infoHover,
+      // Surface
       surface: surface ?? this.surface,
-      surfaceHover: surfaceHover ?? this.surfaceHover,
-      surfacePressed: surfacePressed ?? this.surfacePressed,
-      surfaceVariant: surfaceVariant ?? this.surfaceVariant,
-      surfaceContainer: surfaceContainer ?? this.surfaceContainer,
-      surfaceContainerHigh: surfaceContainerHigh ?? this.surfaceContainerHigh,
-      surfaceContainerHighest: surfaceContainerHighest ?? this.surfaceContainerHighest,
       onSurface: onSurface ?? this.onSurface,
+      surfaceVariant: surfaceVariant ?? this.surfaceVariant,
       onSurfaceVariant: onSurfaceVariant ?? this.onSurfaceVariant,
-      background: background ?? this.background,
-      onBackground: onBackground ?? this.onBackground,
+      surfaceContainerHighest: surfaceContainerHighest ?? this.surfaceContainerHighest,
+      surfaceContainerHigh: surfaceContainerHigh ?? this.surfaceContainerHigh,
+      surfaceContainer: surfaceContainer ?? this.surfaceContainer,
+      surfaceContainerLow: surfaceContainerLow ?? this.surfaceContainerLow,
+      surfaceContainerLowest: surfaceContainerLowest ?? this.surfaceContainerLowest,
+      // Outline
       outline: outline ?? this.outline,
       outlineVariant: outlineVariant ?? this.outlineVariant,
-      outlineStrong: outlineStrong ?? this.outlineStrong,
-      divider: divider ?? this.divider,
-      textPrimary: textPrimary ?? this.textPrimary,
-      textSecondary: textSecondary ?? this.textSecondary,
-      textTertiary: textTertiary ?? this.textTertiary,
-      textDisabled: textDisabled ?? this.textDisabled,
+      // Other
       shadow: shadow ?? this.shadow,
       overlay: overlay ?? this.overlay,
       scrim: scrim ?? this.scrim,
       transparent: transparent ?? this.transparent,
     );
   }
-}
-
-/// Extension to add missing neutral color shades
-extension ColorTokensExtension on ColorTokens {
-  /// Neutral 850 color (between 800 and 900)
-  static const Color neutral850 = Color(0xFF303030);
 }

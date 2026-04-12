@@ -21,7 +21,7 @@ class CardsScreen extends StatelessWidget {
 
   Widget _buildCardsSection(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return Column(
@@ -31,7 +31,7 @@ class CardsScreen extends StatelessWidget {
         ChromiaText(
           'Basic Card',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         const ChromiaCard(
@@ -46,7 +46,7 @@ class CardsScreen extends StatelessWidget {
         ChromiaText(
           'Card with Header',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         const ChromiaCard(
@@ -61,7 +61,7 @@ class CardsScreen extends StatelessWidget {
         ChromiaText(
           'Card with Header and Footer',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         ChromiaCard(
@@ -93,7 +93,7 @@ class CardsScreen extends StatelessWidget {
         ChromiaText(
           'Interactive Card',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         ChromiaCard(
@@ -122,7 +122,7 @@ class CardsScreen extends StatelessWidget {
         ChromiaText(
           'Card with Image',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         ChromiaCard(
@@ -155,7 +155,7 @@ class CardsScreen extends StatelessWidget {
         ChromiaText(
           'Different Elevations',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         Row(
@@ -170,13 +170,13 @@ class CardsScreen extends StatelessWidget {
                     ChromiaText(
                       'Elevation 0',
                       type: ChromiaTypographyType.labelMedium,
-                      color: colors.textPrimary,
+                      color: colors.onSurface,
                     ),
                     spacing.gapVXS,
                     ChromiaText(
                       'Flat',
                       type: ChromiaTypographyType.bodySmall,
-                      color: colors.textSecondary,
+                      color: colors.onSurfaceVariant,
                     ),
                   ],
                 ),
@@ -191,13 +191,13 @@ class CardsScreen extends StatelessWidget {
                     ChromiaText(
                       'Elevation 2',
                       type: ChromiaTypographyType.labelMedium,
-                      color: colors.textPrimary,
+                      color: colors.onSurface,
                     ),
                     spacing.gapVXS,
                     ChromiaText(
                       'Default',
                       type: ChromiaTypographyType.bodySmall,
-                      color: colors.textSecondary,
+                      color: colors.onSurfaceVariant,
                     ),
                   ],
                 ),
@@ -212,13 +212,13 @@ class CardsScreen extends StatelessWidget {
                     ChromiaText(
                       'Elevation 4',
                       type: ChromiaTypographyType.labelMedium,
-                      color: colors.textPrimary,
+                      color: colors.onSurface,
                     ),
                     spacing.gapVXS,
                     ChromiaText(
                       'Raised',
                       type: ChromiaTypographyType.bodySmall,
-                      color: colors.textSecondary,
+                      color: colors.onSurfaceVariant,
                     ),
                   ],
                 ),
@@ -232,7 +232,7 @@ class CardsScreen extends StatelessWidget {
         ChromiaText(
           'List Cards',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         ChromiaListTileCard(
@@ -242,7 +242,7 @@ class CardsScreen extends StatelessWidget {
           ),
           title: const ChromiaText('John Doe'),
           subtitle: const ChromiaText('Software Engineer'),
-          trailing: Icon(Icons.chevron_right, color: colors.textSecondary),
+          trailing: Icon(Icons.chevron_right, color: colors.onSurfaceVariant),
           onTap: () {},
         ),
         spacing.gapVM,
@@ -256,7 +256,7 @@ class CardsScreen extends StatelessWidget {
           trailing: ChromiaText(
             '2 hours ago',
             type: ChromiaTypographyType.bodySmall,
-            color: colors.textTertiary,
+            color: colors.onSurfaceVariant,
           ),
           onTap: () {},
         ),
@@ -278,7 +278,7 @@ class CardsScreen extends StatelessWidget {
         ChromiaText(
           'Card Grid Layout',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         LayoutBuilder(
@@ -308,7 +308,7 @@ class CardsScreen extends StatelessWidget {
 
   Widget _buildGridItem(BuildContext context, IconData icon, String title) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
     return ChromiaCard(
       onTap: () {},

@@ -73,7 +73,7 @@ class ChromiaListTileCard extends StatelessWidget {
               children: [
                 DefaultTextStyle(
                   style: theme.typography.bodyMedium.copyWith(
-                    color: theme.colors.textPrimary,
+                    color: theme.colors.onSurface,
                     fontWeight: FontWeight.w500,
                   ),
                   child: title,
@@ -82,7 +82,7 @@ class ChromiaListTileCard extends StatelessWidget {
                   spacing.gapVXS,
                   DefaultTextStyle(
                     style: theme.typography.bodySmall.copyWith(
-                      color: theme.colors.textSecondary,
+                      color: theme.colors.onSurfaceVariant,
                     ),
                     child: subtitle!,
                   ),

@@ -10,6 +10,7 @@ class BrandConfig {
     required this.name,
     required this.primaryColor,
     this.secondaryColor,
+    this.tertiaryColor,
     this.logoPath,
     this.fontFamily,
     this.customColors,
@@ -24,6 +25,9 @@ class BrandConfig {
 
   /// Secondary brand color (optional, defaults to a variant of primary)
   final Color? secondaryColor;
+
+  /// Tertiary brand color (optional, defaults to a variant of primary)
+  final Color? tertiaryColor;
 
   /// Path to the brand logo asset (optional)
   final String? logoPath;
@@ -42,6 +46,7 @@ class BrandConfig {
     String? name,
     Color? primaryColor,
     Color? secondaryColor,
+    Color? tertiaryColor,
     String? logoPath,
     String? fontFamily,
     String? monospaceFontFamily,
@@ -51,6 +56,7 @@ class BrandConfig {
       name: name ?? this.name,
       primaryColor: primaryColor ?? this.primaryColor,
       secondaryColor: secondaryColor ?? this.secondaryColor,
+      tertiaryColor: tertiaryColor ?? this.tertiaryColor,
       logoPath: logoPath ?? this.logoPath,
       fontFamily: fontFamily ?? this.fontFamily,
       monospaceFontFamily: monospaceFontFamily ?? this.monospaceFontFamily,
@@ -73,6 +79,7 @@ class BrandConfig {
         other.name == name &&
         other.primaryColor == primaryColor &&
         other.secondaryColor == secondaryColor &&
+        other.tertiaryColor == tertiaryColor &&
         other.logoPath == logoPath &&
         other.fontFamily == fontFamily;
   }
@@ -83,6 +90,7 @@ class BrandConfig {
       name,
       primaryColor,
       secondaryColor,
+      tertiaryColor,
       logoPath,
       fontFamily,
     );
@@ -94,6 +102,7 @@ class BrandConfig {
         'name: $name, '
         'primaryColor: $primaryColor, '
         'secondaryColor: $secondaryColor, '
+        'tertiaryColor: $tertiaryColor, '
         'logoPath: $logoPath, '
         'fontFamily: $fontFamily'
         ')';
@@ -107,8 +116,9 @@ class BrandConfigs {
   /// Default Chromia brand
   static const BrandConfig chromia = BrandConfig(
     name: 'Chromia',
-    primaryColor: Color(0xFF181F32),
-    secondaryColor: Color(0xFF2196F3),
+    primaryColor: Color(0xFF48929B),
+    secondaryColor: Color(0xFFCCC2DC),
+    tertiaryColor: Color(0xFF766D9A)
   );
 
   /// Example brand with blue theme

@@ -30,7 +30,7 @@ class _DropdownsScreenState extends State<DropdownsScreen> {
 
   Widget _buildDropdownSection(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return Column(
@@ -39,7 +39,7 @@ class _DropdownsScreenState extends State<DropdownsScreen> {
         Text(
           'Dropdowns',
           style: theme.typography.headlineSmall.copyWith(
-            color: colors.textPrimary,
+            color: colors.onSurface,
           ),
         ),
         spacing.gapVM,
@@ -48,7 +48,7 @@ class _DropdownsScreenState extends State<DropdownsScreen> {
         Text(
           'Basic Dropdown',
           style: theme.typography.titleSmall.copyWith(
-            color: colors.textSecondary,
+            color: colors.onSurfaceVariant,
           ),
         ),
         spacing.gapVS,
@@ -67,7 +67,7 @@ class _DropdownsScreenState extends State<DropdownsScreen> {
         Text(
           'With Helper Text',
           style: theme.typography.titleSmall.copyWith(
-            color: colors.textSecondary,
+            color: colors.onSurfaceVariant,
           ),
         ),
         spacing.gapVS,
@@ -87,7 +87,7 @@ class _DropdownsScreenState extends State<DropdownsScreen> {
         Text(
           'With Icon',
           style: theme.typography.titleSmall.copyWith(
-            color: colors.textSecondary,
+            color: colors.onSurfaceVariant,
           ),
         ),
         spacing.gapVS,
@@ -107,7 +107,7 @@ class _DropdownsScreenState extends State<DropdownsScreen> {
         Text(
           'Disabled',
           style: theme.typography.titleSmall.copyWith(
-            color: colors.textSecondary,
+            color: colors.onSurfaceVariant,
           ),
         ),
         spacing.gapVS,
@@ -124,7 +124,7 @@ class _DropdownsScreenState extends State<DropdownsScreen> {
         Text(
           'Rich Dropdown',
           style: theme.typography.titleSmall.copyWith(
-            color: colors.textSecondary,
+            color: colors.onSurfaceVariant,
           ),
         ),
         spacing.gapVS,

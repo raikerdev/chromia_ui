@@ -54,8 +54,7 @@ class ChromiaBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
 
     if (!showBadge) {
       return child;

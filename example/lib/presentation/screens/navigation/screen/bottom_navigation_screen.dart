@@ -43,7 +43,7 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final currentPage = _pages[_currentIndex];
 
     return Scaffold(
@@ -55,7 +55,7 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
             child: IconButton(
               icon: Icon(
                 _useFloatingStyle ? Icons.dock : Icons.rocket_launch,
-                color: colors.textPrimary,
+                color: colors.onSurface,
               ),
               onPressed: () {
                 setState(() => _useFloatingStyle = !_useFloatingStyle);
@@ -119,7 +119,7 @@ class _HomeTabContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return ListView(
@@ -128,7 +128,7 @@ class _HomeTabContent extends StatelessWidget {
         Text(
           'Welcome to Home',
           style: theme.typography.headlineMedium.copyWith(
-            color: colors.textPrimary,
+            color: colors.onSurface,
           ),
         ),
         spacing.gapVL,
@@ -189,7 +189,7 @@ class _SearchTabContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return ListView(
@@ -198,7 +198,7 @@ class _SearchTabContent extends StatelessWidget {
         Text(
           'Search Results',
           style: theme.typography.headlineMedium.copyWith(
-            color: colors.textPrimary,
+            color: colors.onSurface,
           ),
         ),
         spacing.gapVL,
@@ -219,7 +219,7 @@ class _SearchTabContent extends StatelessWidget {
               Text(
                 'Notice the badge on this tab in the bottom navigation',
                 style: theme.typography.bodySmall.copyWith(
-                  color: colors.textSecondary,
+                  color: colors.onSurfaceVariant,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -238,7 +238,7 @@ class _SearchTabContent extends StatelessWidget {
               ),
               title: Text('Search Result ${index + 1}'),
               subtitle: const Text('This is a search result item'),
-              trailing: Icon(Icons.arrow_forward_ios, color: colors.textTertiary),
+              trailing: Icon(Icons.arrow_forward_ios, color: colors.onSurfaceVariant),
               onTap: () {},
             ),
           ),
@@ -254,7 +254,7 @@ class _FavoritesTabContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return ListView(
@@ -263,7 +263,7 @@ class _FavoritesTabContent extends StatelessWidget {
         Text(
           'Your Favorites',
           style: theme.typography.headlineMedium.copyWith(
-            color: colors.textPrimary,
+            color: colors.onSurface,
           ),
         ),
         spacing.gapVL,
@@ -311,7 +311,7 @@ class _ProfileTabContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return ListView(
@@ -335,7 +335,7 @@ class _ProfileTabContent extends StatelessWidget {
               Text(
                 'john.doe@example.com',
                 style: theme.typography.bodyMedium.copyWith(
-                  color: colors.textSecondary,
+                  color: colors.onSurfaceVariant,
                 ),
               ),
             ],
@@ -399,7 +399,7 @@ class _FeatureItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return Row(
@@ -419,7 +419,7 @@ class _FeatureItem extends StatelessWidget {
               Text(
                 description,
                 style: theme.typography.bodySmall.copyWith(
-                  color: colors.textSecondary,
+                  color: colors.onSurfaceVariant,
                 ),
               ),
             ],
@@ -487,7 +487,7 @@ class _ProfileMenuItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return InkWell(
@@ -496,7 +496,7 @@ class _ProfileMenuItem extends StatelessWidget {
         padding: spacing.paddingM,
         child: Row(
           children: [
-            Icon(icon, color: colors.textSecondary),
+            Icon(icon, color: colors.onSurfaceVariant),
             spacing.gapHM,
             Expanded(
               child: Text(
@@ -504,7 +504,7 @@ class _ProfileMenuItem extends StatelessWidget {
                 style: theme.typography.bodyMedium,
               ),
             ),
-            Icon(Icons.chevron_right, color: colors.textTertiary),
+            Icon(Icons.chevron_right, color: colors.onSurfaceVariant),
           ],
         ),
       ),

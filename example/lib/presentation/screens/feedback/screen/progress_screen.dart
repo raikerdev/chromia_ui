@@ -21,7 +21,7 @@ class ProgressScreen extends StatelessWidget {
 
   Widget _buildProgressSection(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return Column(
@@ -31,7 +31,7 @@ class ProgressScreen extends StatelessWidget {
         ChromiaText(
           'Linear Progress',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         const ChromiaLinearProgress(value: 0.3),
@@ -45,7 +45,7 @@ class ProgressScreen extends StatelessWidget {
         ChromiaText(
           'With Label',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         const ChromiaLinearProgress(
@@ -58,7 +58,7 @@ class ProgressScreen extends StatelessWidget {
         ChromiaText(
           'Indeterminate',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         const ChromiaLinearProgress(),
@@ -68,7 +68,7 @@ class ProgressScreen extends StatelessWidget {
         ChromiaText(
           'Circular Progress',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         Row(
@@ -88,7 +88,7 @@ class ProgressScreen extends StatelessWidget {
         ChromiaText(
           'Circular with Label',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         Row(
@@ -115,7 +115,7 @@ class ProgressScreen extends StatelessWidget {
         ChromiaText(
           'Customizable Progress',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         const ChromiaLinearProgress(
@@ -155,7 +155,7 @@ class ProgressScreen extends StatelessWidget {
         ChromiaText(
           'Stepped Progress',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         const ChromiaSteppedProgress(

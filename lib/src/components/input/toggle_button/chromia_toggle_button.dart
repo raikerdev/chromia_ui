@@ -97,7 +97,7 @@ class _ChromiaToggleButtonState extends State<ChromiaToggleButton> with SingleTi
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     final bool isEnabled = widget.onChanged != null;
@@ -117,7 +117,7 @@ class _ChromiaToggleButtonState extends State<ChromiaToggleButton> with SingleTi
                 child: ChromiaText(
                   widget.label!,
                   type: ChromiaTypographyType.bodyMedium,
-                  color: isEnabled ? colors.textPrimary : colors.textDisabled,
+                  color: isEnabled ? colors.onSurface : colors.textDisabled,
                 ),
               ),
             ],

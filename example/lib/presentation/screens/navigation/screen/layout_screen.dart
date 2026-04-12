@@ -81,7 +81,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
   }
 
   Widget _buildDrawer(ChromiaThemeData theme) {
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return ChromiaDrawer(
@@ -168,7 +168,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
   }
 
   Widget _buildMiniDrawer(ChromiaThemeData theme) {
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
 
     return ChromiaMiniDrawer(
       header: InkWell(
@@ -417,7 +417,7 @@ class _ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
     final spacing = theme.spacing;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
 
     return ListView(
       padding: spacing.paddingL,
@@ -441,7 +441,7 @@ class _ProfilePage extends StatelessWidget {
           child: Text(
             'john.doe@example.com',
             style: theme.typography.bodyMedium.copyWith(
-              color: colors.textSecondary,
+              color: colors.onSurfaceVariant,
             ),
           ),
         ),
@@ -559,7 +559,7 @@ class _NotificationTile extends StatelessWidget {
                 Text(
                   subtitle,
                   style: theme.typography.bodySmall.copyWith(
-                    color: theme.colors.textSecondary,
+                    color: theme.colors.onSurfaceVariant,
                   ),
                 ),
               ],
@@ -568,7 +568,7 @@ class _NotificationTile extends StatelessWidget {
           Text(
             time,
             style: theme.typography.labelSmall.copyWith(
-              color: theme.colors.textTertiary,
+              color: theme.colors.onSurfaceVariant,
             ),
           ),
         ],
@@ -633,7 +633,7 @@ class _ProfileItem extends StatelessWidget {
                 Text(
                   label,
                   style: theme.typography.labelSmall.copyWith(
-                    color: theme.colors.textSecondary,
+                    color: theme.colors.onSurfaceVariant,
                   ),
                 ),
                 Text(value, style: theme.typography.bodyMedium),

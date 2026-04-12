@@ -27,7 +27,7 @@ void showChromiaSnackBar({
   IconData? icon,
 }) {
   final theme = ChromiaTheme.of(context);
-  final colors = theme.colors;
+  final colors = context.chromiaColors;
   final spacing = theme.spacing;
 
   final snackBar = SnackBar(
@@ -74,8 +74,7 @@ extension ChromiaSnackBarExtension on BuildContext {
     VoidCallback? onActionPressed,
     Duration duration = const Duration(seconds: 4),
   }) {
-    final theme = ChromiaTheme.of(this);
-    final colors = theme.colors;
+    final colors = chromiaColors;
 
     showChromiaSnackBar(
       context: this,
@@ -96,8 +95,7 @@ extension ChromiaSnackBarExtension on BuildContext {
     VoidCallback? onActionPressed,
     Duration duration = const Duration(seconds: 4),
   }) {
-    final theme = ChromiaTheme.of(this);
-    final colors = theme.colors;
+    final colors = chromiaColors;
 
     showChromiaSnackBar(
       context: this,
@@ -118,8 +116,7 @@ extension ChromiaSnackBarExtension on BuildContext {
     VoidCallback? onActionPressed,
     Duration duration = const Duration(seconds: 4),
   }) {
-    final theme = ChromiaTheme.of(this);
-    final colors = theme.colors;
+    final colors = chromiaColors;
 
     showChromiaSnackBar(
       context: this,
@@ -140,8 +137,7 @@ extension ChromiaSnackBarExtension on BuildContext {
     VoidCallback? onActionPressed,
     Duration duration = const Duration(seconds: 4),
   }) {
-    final theme = ChromiaTheme.of(this);
-    final colors = theme.colors;
+    final colors = chromiaColors;
 
     showChromiaSnackBar(
       context: this,

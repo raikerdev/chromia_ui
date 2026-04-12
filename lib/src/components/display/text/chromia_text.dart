@@ -100,7 +100,6 @@ class ChromiaText extends StatelessWidget {
     this.locale,
     this.softWrap,
     this.overflow,
-    this.textScaleFactor,
     this.textScaler,
     this.maxLines,
     this.semanticsLabel,
@@ -163,13 +162,6 @@ class ChromiaText extends StatelessWidget {
   /// - [TextOverflow.ellipsis]: Show ellipsis (...) for overflow
   /// - [TextOverflow.fade]: Fade out overflowing text
   final TextOverflow? overflow;
-
-  /// Deprecated. Use [textScaler] instead.
-  @Deprecated(
-    'Use textScaler instead. '
-    'This feature was deprecated after v3.12.0-2.0.pre.',
-  )
-  final double? textScaleFactor;
 
   /// The font scaling strategy to use.
   ///

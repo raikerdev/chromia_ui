@@ -45,7 +45,7 @@ class TypographyScreen extends StatelessWidget {
           ChromiaText(
             'The quick brown fox jumps over the lazy dog',
             type: type,
-            color: colors.textPrimary,
+            color: colors.onSurface,
           ),
         ],
       ),

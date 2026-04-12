@@ -45,7 +45,7 @@ class _TextFieldsScreenState extends State<TextFieldsScreen> {
 
   Widget _buildVariantSection(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return Column(
@@ -54,7 +54,7 @@ class _TextFieldsScreenState extends State<TextFieldsScreen> {
         ChromiaText(
           'Select a variant to see the theme change dynamically:',
           type: ChromiaTypographyType.bodyMedium,
-          color: colors.textSecondary,
+          color: colors.onSurfaceVariant,
         ),
         spacing.gapVM,
         Wrap(
@@ -76,7 +76,7 @@ class _TextFieldsScreenState extends State<TextFieldsScreen> {
 
   Widget _buildTextFieldsSection(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return Column(
@@ -86,7 +86,7 @@ class _TextFieldsScreenState extends State<TextFieldsScreen> {
         ChromiaText(
           'Single line',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
 
@@ -127,7 +127,7 @@ class _TextFieldsScreenState extends State<TextFieldsScreen> {
         ChromiaText(
           'With Helper',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
 
@@ -154,7 +154,7 @@ class _TextFieldsScreenState extends State<TextFieldsScreen> {
         ChromiaText(
           'With Validation',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
 
@@ -182,7 +182,7 @@ class _TextFieldsScreenState extends State<TextFieldsScreen> {
         ChromiaText(
           'Multiline',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
 

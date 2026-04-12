@@ -75,7 +75,7 @@ class ChromiaRangeSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     final Color effectiveActiveColor = activeColor ?? colors.primary;
@@ -134,12 +134,12 @@ class ChromiaRangeSlider extends StatelessWidget {
               ChromiaText(
                 startValue,
                 type: ChromiaTypographyType.labelSmall,
-                color: enabled ? colors.textSecondary : colors.textDisabled,
+                color: enabled ? colors.onSurfaceVariant : colors.textDisabled,
               ),
               ChromiaText(
                 endValue,
                 type: ChromiaTypographyType.labelSmall,
-                color: enabled ? colors.textSecondary : colors.textDisabled,
+                color: enabled ? colors.onSurfaceVariant : colors.textDisabled,
               ),
             ],
           ),

@@ -38,7 +38,7 @@ class ChromiaMiniDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return Container(
@@ -97,12 +97,12 @@ class ChromiaMiniDrawerItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     final Color effectiveBackgroundColor = selected ? colors.surface : Colors.transparent;
 
-    final Color effectiveIconColor = selected ? colors.primary : colors.textSecondary;
+    final Color effectiveIconColor = selected ? colors.primary : colors.onSurfaceVariant;
 
     return Tooltip(
       message: label ?? '',

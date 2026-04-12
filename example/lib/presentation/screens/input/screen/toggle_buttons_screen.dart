@@ -32,7 +32,7 @@ class _ToggleButtonsScreenState extends State<ToggleButtonsScreen> {
 
   Widget _buildToggleButtonSection(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return Column(
@@ -42,7 +42,7 @@ class _ToggleButtonsScreenState extends State<ToggleButtonsScreen> {
         ChromiaText(
           'Basic',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         Row(
@@ -64,7 +64,7 @@ class _ToggleButtonsScreenState extends State<ToggleButtonsScreen> {
         ChromiaText(
           'Customizable',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         Row(
@@ -92,7 +92,7 @@ class _ToggleButtonsScreenState extends State<ToggleButtonsScreen> {
         ChromiaText(
           'With Labels',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         const ChromiaToggleButton(
@@ -112,7 +112,7 @@ class _ToggleButtonsScreenState extends State<ToggleButtonsScreen> {
         ChromiaText(
           'Sizes',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVM,
         Row(
@@ -163,7 +163,7 @@ class _ToggleButtonsScreenState extends State<ToggleButtonsScreen> {
         ChromiaText(
           'Switch Tiles',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         Container(
@@ -180,7 +180,7 @@ class _ToggleButtonsScreenState extends State<ToggleButtonsScreen> {
                 subtitle: const Text('Receive notifications on your device'),
                 secondary: Icon(Icons.notifications, color: colors.primary),
               ),
-              Divider(height: 1, color: colors.divider),
+              Divider(height: 1, color: colors.outline),
               ChromiaListTileToggleButton(
                 value: _listTileValue,
                 onChanged: (value) => setState(() => _listTileValue = value),

@@ -118,7 +118,7 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
             ChromiaText(
               widget.description!,
               type: ChromiaTypographyType.bodySmall,
-              color: theme.colors.textSecondary,
+              color: theme.colors.onSurfaceVariant,
             ),
           ],
           spacing.gapVM,
@@ -183,7 +183,7 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
   }
 
   Widget _buildCodeSection(ChromiaThemeData theme) {
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
     final isDark = theme.brightness == Brightness.dark;
 
@@ -287,7 +287,7 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
   }
 
   Widget _buildPreviewSection(ChromiaThemeData theme) {
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return Container(
@@ -342,7 +342,7 @@ class _ChromiaCodePreviewGroupState extends State<ChromiaCodePreviewGroup> {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return Column(
@@ -360,7 +360,7 @@ class _ChromiaCodePreviewGroupState extends State<ChromiaCodePreviewGroup> {
             ChromiaText(
               widget.description!,
               type: ChromiaTypographyType.bodyMedium,
-              color: colors.textSecondary,
+              color: colors.onSurfaceVariant,
             ),
           ],
           spacing.gapVL,
@@ -400,7 +400,7 @@ class _ChromiaCodePreviewGroupState extends State<ChromiaCodePreviewGroup> {
                         item.label,
                         type: ChromiaTypographyType.labelMedium,
                         style: TextStyle(
-                          color: isSelected ? colors.primary : colors.textSecondary,
+                          color: isSelected ? colors.primary : colors.onSurfaceVariant,
                           fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
                         ),
                       ),

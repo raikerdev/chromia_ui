@@ -112,12 +112,12 @@ class ChromiaChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     final Color effectiveBackgroundColor = backgroundColor ?? colors.surfaceContainerHigh;
-    final Color effectiveForegroundColor = foregroundColor ?? colors.textPrimary;
-    final Color effectiveDeleteIconColor = deleteIconColor ?? colors.textSecondary;
+    final Color effectiveForegroundColor = foregroundColor ?? colors.onSurface;
+    final Color effectiveDeleteIconColor = deleteIconColor ?? colors.onSurfaceVariant;
 
     final bool isInteractive = onPressed != null;
 
@@ -206,7 +206,7 @@ class _ChromiaFilterChip extends ChromiaChip {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     final Color effectiveBackgroundColor = selected
@@ -215,7 +215,7 @@ class _ChromiaFilterChip extends ChromiaChip {
 
     final Color effectiveForegroundColor = selected
         ? (selectedForegroundColor ?? colors.primary)
-        : (foregroundColor ?? colors.textPrimary);
+        : (foregroundColor ?? colors.onSurface);
 
     final IconData? effectiveIcon = selected && selectedIcon != null ? selectedIcon : icon;
 
@@ -284,7 +284,7 @@ class _ChromiaChoiceChip extends ChromiaChip {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     final Color effectiveBackgroundColor = selected
@@ -293,7 +293,7 @@ class _ChromiaChoiceChip extends ChromiaChip {
 
     final Color effectiveForegroundColor = selected
         ? (selectedForegroundColor ?? colors.onPrimary)
-        : (foregroundColor ?? colors.textPrimary);
+        : (foregroundColor ?? colors.onSurface);
 
     return InkWell(
       onTap: selected ? null : onSelected,

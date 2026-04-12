@@ -34,7 +34,7 @@ class _CheckboxesScreenState extends State<CheckboxesScreen> {
 
   Widget _buildCheckboxesSection(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return Column(
@@ -44,7 +44,7 @@ class _CheckboxesScreenState extends State<CheckboxesScreen> {
         ChromiaText(
           'Basic',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         Row(
@@ -65,7 +65,7 @@ class _CheckboxesScreenState extends State<CheckboxesScreen> {
         ChromiaText(
           'Tristate',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         Row(
@@ -88,7 +88,7 @@ class _CheckboxesScreenState extends State<CheckboxesScreen> {
         ChromiaText(
           'Customizable',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         Row(
@@ -119,7 +119,7 @@ class _CheckboxesScreenState extends State<CheckboxesScreen> {
         ChromiaText(
           'With Labels',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         const ChromiaCheckbox(
@@ -139,7 +139,7 @@ class _CheckboxesScreenState extends State<CheckboxesScreen> {
         ChromiaText(
           'Checkbox Tiles',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         Container(
@@ -156,7 +156,7 @@ class _CheckboxesScreenState extends State<CheckboxesScreen> {
                 subtitle: const ChromiaText('Receive alerts about new messages'),
                 secondary: Icon(Icons.notifications, color: colors.primary),
               ),
-              Divider(height: 1, color: colors.divider),
+              Divider(height: 1, color: colors.outline),
               ChromiaListTileCheckbox(
                 value: _tileValue,
                 onChanged: (value) => setState(() => _tileValue = value ?? false),
@@ -164,7 +164,7 @@ class _CheckboxesScreenState extends State<CheckboxesScreen> {
                 subtitle: const ChromiaText('Automatically save your progress'),
                 secondary: Icon(Icons.save, color: colors.primary),
               ),
-              Divider(height: 1, color: colors.divider),
+              Divider(height: 1, color: colors.outline),
               ChromiaListTileCheckbox(
                 value: _customTileValue,
                 onChanged: (value) => setState(() => _customTileValue = value ?? false),

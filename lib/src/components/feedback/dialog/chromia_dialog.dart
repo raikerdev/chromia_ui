@@ -87,7 +87,7 @@ class ChromiaDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
     final radius = theme.radius;
 
@@ -110,7 +110,7 @@ class ChromiaDialog extends StatelessWidget {
                   ChromiaText(
                     title!,
                     type: ChromiaTypographyType.headlineSmall,
-                    color: colors.textPrimary,
+                    color: colors.onSurface,
                   ),
               spacing.gapVL,
             ],
@@ -124,7 +124,7 @@ class ChromiaDialog extends StatelessWidget {
                     ChromiaText(
                       content!,
                       type: ChromiaTypographyType.bodyMedium,
-                      color: colors.textSecondary,
+                      color: colors.onSurfaceVariant,
                     ),
               ),
               spacing.gapVXL,
@@ -183,7 +183,7 @@ class _ActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     Color? backgroundColor;
@@ -197,7 +197,7 @@ class _ActionButton extends StatelessWidget {
       textColor = colors.error;
     } else {
       backgroundColor = Colors.transparent;
-      textColor = colors.textPrimary;
+      textColor = colors.onSurface;
     }
 
     return InkWell(
@@ -329,7 +329,7 @@ class ChromiaLoadingDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return Dialog(
@@ -350,7 +350,7 @@ class ChromiaLoadingDialog extends StatelessWidget {
               Text(
                 message!,
                 style: theme.typography.bodyMedium.copyWith(
-                  color: colors.textSecondary,
+                  color: colors.onSurfaceVariant,
                 ),
                 textAlign: TextAlign.center,
               ),

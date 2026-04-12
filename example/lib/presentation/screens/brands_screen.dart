@@ -37,7 +37,7 @@ class BrandsScreen extends StatelessWidget {
 
   Widget _buildBrandSection(BuildContext context, BrandConfig selectedBrand) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return Column(
@@ -46,13 +46,13 @@ class BrandsScreen extends StatelessWidget {
         ChromiaText(
           'Brand Themes',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVM,
         ChromiaText(
           'Select a brand to see the theme change dynamically:',
           type: ChromiaTypographyType.bodyMedium,
-          color: colors.textSecondary,
+          color: colors.onSurfaceVariant,
         ),
         spacing.gapVM,
         Wrap(
@@ -74,7 +74,7 @@ class BrandsScreen extends StatelessWidget {
 
   Widget _buildThemeInfoSection(BuildContext context, BrandConfig selectedBrand, ThemeMode themeMode) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return Container(
@@ -90,23 +90,23 @@ class BrandsScreen extends StatelessWidget {
           ChromiaText(
             'Current Theme',
             type: ChromiaTypographyType.titleMedium,
-            color: colors.textPrimary,
+            color: colors.onSurface,
           ),
           spacing.gapVS,
           ChromiaText(
             'Brand: ${selectedBrand.name}',
             type: ChromiaTypographyType.bodyMedium,
-            color: colors.textSecondary,
+            color: colors.onSurfaceVariant,
           ),
           ChromiaText(
             'Mode: ${themeMode == ThemeMode.light ? "Light" : "Dark"}',
             type: ChromiaTypographyType.bodyMedium,
-            color: colors.textSecondary,
+            color: colors.onSurfaceVariant,
           ),
           ChromiaText(
             'Platform: ${PlatformDetector.platformName}',
             type: ChromiaTypographyType.bodyMedium,
-            color: colors.textSecondary,
+            color: colors.onSurfaceVariant,
           ),
         ],
       ),
@@ -115,7 +115,7 @@ class BrandsScreen extends StatelessWidget {
 
   Widget _buildColorsSection(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return Column(
@@ -124,7 +124,7 @@ class BrandsScreen extends StatelessWidget {
         ChromiaText(
           'Colors',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVM,
         Wrap(
@@ -133,6 +133,7 @@ class BrandsScreen extends StatelessWidget {
           children: [
             _ColorSwatch(name: 'Primary', color: colors.primary),
             _ColorSwatch(name: 'Secondary', color: colors.secondary),
+            _ColorSwatch(name: 'Tertiary', color: colors.tertiary),
             _ColorSwatch(name: 'Success', color: colors.success),
             _ColorSwatch(name: 'Warning', color: colors.warning),
             _ColorSwatch(name: 'Error', color: colors.error),
@@ -145,7 +146,7 @@ class BrandsScreen extends StatelessWidget {
 
   Widget _buildSpacingSection(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return Column(
@@ -154,7 +155,7 @@ class BrandsScreen extends StatelessWidget {
         ChromiaText(
           'Spacing Scale',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVM,
         Column(
@@ -183,7 +184,7 @@ class _ColorSwatch extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
     final spacing = theme.spacing;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
 
     return Column(
       children: [
@@ -200,7 +201,7 @@ class _ColorSwatch extends StatelessWidget {
         ChromiaText(
           name,
           type: ChromiaTypographyType.caption,
-          color: colors.textSecondary,
+          color: colors.onSurfaceVariant,
         ),
       ],
     );
@@ -216,7 +217,7 @@ class _SpacingExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return Padding(
@@ -228,7 +229,7 @@ class _SpacingExample extends StatelessWidget {
             child: ChromiaText(
               label,
               type: ChromiaTypographyType.bodySmall,
-              color: colors.textSecondary,
+              color: colors.onSurfaceVariant,
             ),
           ),
           spacing.gapHM,
@@ -241,7 +242,7 @@ class _SpacingExample extends StatelessWidget {
           ChromiaText(
             '${value.toInt()}px',
             type: ChromiaTypographyType.bodySmall,
-            color: colors.textTertiary,
+            color: colors.onSurfaceVariant,
           ),
         ],
       ),

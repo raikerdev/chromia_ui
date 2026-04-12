@@ -119,7 +119,7 @@ class _ChromiaCardState extends State<ChromiaCard> {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
     final radius = theme.radius;
     final shadows = theme.shadows;
@@ -163,7 +163,7 @@ class _ChromiaCardState extends State<ChromiaCard> {
                 ),
             child: DefaultTextStyle(
               style: theme.typography.titleMedium.copyWith(
-                color: colors.textPrimary,
+                color: colors.onSurface,
               ),
               child: widget.header!,
             ),
@@ -174,7 +174,7 @@ class _ChromiaCardState extends State<ChromiaCard> {
           padding: widget.padding ?? spacing.paddingL,
           child: DefaultTextStyle(
             style: theme.typography.bodyMedium.copyWith(
-              color: colors.textSecondary,
+              color: colors.onSurfaceVariant,
             ),
             child: widget.child,
           ),

@@ -16,14 +16,14 @@ class ExampleScaffold extends StatelessWidget {
 
     final theme = context.chromiaTheme;
     final spacing = theme.spacing;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
 
     return Scaffold(
       appBar: ChromiaAppBar(
         title: title,
         actions: [
           IconButton(
-            icon: Icon(themeState.isDark ? Icons.light_mode : Icons.dark_mode, color: colors.textPrimary),
+            icon: Icon(themeState.isDark ? Icons.light_mode : Icons.dark_mode, color: colors.onSurface),
             onPressed: themeCubit.toggleTheme,
             tooltip: 'Toggle theme',
           ),

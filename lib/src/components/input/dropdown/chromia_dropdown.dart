@@ -67,7 +67,7 @@ class ChromiaDropdown<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     final bool hasError = errorText != null;
@@ -80,7 +80,7 @@ class ChromiaDropdown<T> extends StatelessWidget {
           Text(
             label!,
             style: theme.typography.labelMedium.copyWith(
-              color: enabled ? colors.textPrimary : colors.textDisabled,
+              color: enabled ? colors.onSurface : colors.textDisabled,
             ),
           ),
           spacing.gapVS,
@@ -116,17 +116,17 @@ class ChromiaDropdown<T> extends StatelessWidget {
                         ? Text(
                             hint!,
                             style: theme.typography.bodyMedium.copyWith(
-                              color: colors.textTertiary,
+                              color: colors.onSurfaceVariant,
                             ),
                           )
                         : null,
                     isExpanded: true,
                     icon: Icon(
                       Icons.arrow_drop_down,
-                      color: enabled ? colors.textSecondary : colors.textDisabled,
+                      color: enabled ? colors.onSurfaceVariant : colors.textDisabled,
                     ),
                     style: theme.typography.bodyMedium.copyWith(
-                      color: enabled ? colors.textPrimary : colors.textDisabled,
+                      color: enabled ? colors.onSurface : colors.textDisabled,
                     ),
                     dropdownColor: colors.surface,
                     items: items.map((T item) {
@@ -147,7 +147,7 @@ class ChromiaDropdown<T> extends StatelessWidget {
           Text(
             errorText ?? helperText!,
             style: theme.typography.bodySmall.copyWith(
-              color: hasError ? colors.error : colors.textSecondary,
+              color: hasError ? colors.error : colors.onSurfaceVariant,
             ),
           ),
         ],
@@ -219,7 +219,7 @@ class ChromiaRichDropdown<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     final bool hasError = errorText != null;
@@ -232,7 +232,7 @@ class ChromiaRichDropdown<T> extends StatelessWidget {
           Text(
             label!,
             style: theme.typography.labelMedium.copyWith(
-              color: enabled ? colors.textPrimary : colors.textDisabled,
+              color: enabled ? colors.onSurface : colors.textDisabled,
             ),
           ),
           spacing.gapVS,
@@ -261,14 +261,14 @@ class ChromiaRichDropdown<T> extends StatelessWidget {
                   ? Text(
                       hint!,
                       style: theme.typography.bodyMedium.copyWith(
-                        color: colors.textTertiary,
+                        color: colors.onSurfaceVariant,
                       ),
                     )
                   : null,
               isExpanded: true,
               icon: Icon(
                 Icons.arrow_drop_down,
-                color: enabled ? colors.textSecondary : colors.textDisabled,
+                color: enabled ? colors.onSurfaceVariant : colors.textDisabled,
               ),
               selectedItemBuilder: (BuildContext context) {
                 return items.map((ChromiaDropdownItem<T> item) {
@@ -286,7 +286,7 @@ class ChromiaRichDropdown<T> extends StatelessWidget {
                         child: Text(
                           item.label,
                           style: theme.typography.bodyMedium.copyWith(
-                            color: enabled ? colors.textPrimary : colors.textDisabled,
+                            color: enabled ? colors.onSurface : colors.textDisabled,
                           ),
                         ),
                       ),
@@ -303,7 +303,7 @@ class ChromiaRichDropdown<T> extends StatelessWidget {
                         Icon(
                           item.icon,
                           size: 20,
-                          color: colors.textSecondary,
+                          color: colors.onSurfaceVariant,
                         ),
                         spacing.gapHM,
                       ],
@@ -321,7 +321,7 @@ class ChromiaRichDropdown<T> extends StatelessWidget {
                               Text(
                                 item.description!,
                                 style: theme.typography.bodySmall.copyWith(
-                                  color: colors.textSecondary,
+                                  color: colors.onSurfaceVariant,
                                 ),
                               ),
                             ],
@@ -342,7 +342,7 @@ class ChromiaRichDropdown<T> extends StatelessWidget {
           Text(
             errorText ?? helperText!,
             style: theme.typography.bodySmall.copyWith(
-              color: hasError ? colors.error : colors.textSecondary,
+              color: hasError ? colors.error : colors.onSurfaceVariant,
             ),
           ),
         ],

@@ -51,7 +51,7 @@ class _ListTileExampleContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return ListView(
@@ -70,14 +70,14 @@ class _ListTileExampleContent extends StatelessWidget {
             ),
             spacing.gapVS,
             ChromiaListTile(
-              leading: Icon(Icons.drafts, color: colors.textSecondary),
+              leading: Icon(Icons.drafts, color: colors.onSurfaceVariant),
               title: const Text('Drafts'),
               trailing: const Text('3'),
               onTap: () => context.showInfoSnackBar(message: 'Drafts tapped'),
             ),
             spacing.gapVS,
             ChromiaListTile(
-              leading: Icon(Icons.send, color: colors.textSecondary),
+              leading: Icon(Icons.send, color: colors.onSurfaceVariant),
               title: const Text('Sent'),
               onTap: () => context.showInfoSnackBar(message: 'Sent tapped'),
             ),
@@ -105,7 +105,7 @@ class _ListTileExampleContent extends StatelessWidget {
               ),
               title: const Text('John Doe'),
               subtitle: const Text('Software Engineer'),
-              trailing: Icon(Icons.chevron_right, color: colors.textTertiary),
+              trailing: Icon(Icons.chevron_right, color: colors.onSurfaceVariant),
               onTap: () {},
             ),
             spacing.gapVS,
@@ -116,7 +116,7 @@ class _ListTileExampleContent extends StatelessWidget {
               ),
               title: const Text('Alice Smith'),
               subtitle: const Text('Product Manager'),
-              trailing: Icon(Icons.chevron_right, color: colors.textTertiary),
+              trailing: Icon(Icons.chevron_right, color: colors.onSurfaceVariant),
               onTap: () {},
             ),
             spacing.gapVS,
@@ -127,7 +127,7 @@ class _ListTileExampleContent extends StatelessWidget {
               ),
               title: const Text('Bob Johnson'),
               subtitle: const Text('UX Designer'),
-              trailing: Icon(Icons.chevron_right, color: colors.textTertiary),
+              trailing: Icon(Icons.chevron_right, color: colors.onSurfaceVariant),
               onTap: () {},
             ),
           ],
@@ -185,7 +185,7 @@ class _ListTileExampleContent extends StatelessWidget {
                       : index == 2
                       ? Icons.notifications
                       : Icons.settings,
-                  color: selectedIndex == index ? colors.primary : colors.textSecondary,
+                  color: selectedIndex == index ? colors.primary : colors.onSurfaceVariant,
                 ),
                 title: Text(
                   index == 0
@@ -270,7 +270,7 @@ class _ListTileExampleContent extends StatelessWidget {
                     leading: Container(
                       padding: spacing.paddingS,
                       decoration: BoxDecoration(
-                        color: colors.successHover,
+                        //color: colors.successHover,
                         borderRadius: theme.radius.radiusS,
                       ),
                       child: Icon(Icons.arrow_downward, color: colors.success, size: 20),
@@ -288,7 +288,7 @@ class _ListTileExampleContent extends StatelessWidget {
                     leading: Container(
                       padding: spacing.paddingS,
                       decoration: BoxDecoration(
-                        color: colors.errorHover,
+                        //color: colors.errorHover,
                         borderRadius: theme.radius.radiusS,
                       ),
                       child: Icon(Icons.arrow_upward, color: colors.error, size: 20),
@@ -306,7 +306,7 @@ class _ListTileExampleContent extends StatelessWidget {
                     leading: Container(
                       padding: spacing.paddingS,
                       decoration: BoxDecoration(
-                        color: colors.successHover,
+                        //color: colors.successHover,
                         borderRadius: theme.radius.radiusS,
                       ),
                       child: Icon(Icons.arrow_downward, color: colors.success, size: 20),

@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
     final spacing = theme.spacing;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
 
     return ExampleScaffold(
       title: 'Chromia UI',
@@ -19,13 +19,13 @@ class HomeScreen extends StatelessWidget {
         ChromiaText(
           'Welcome to Chromia UI',
           type: ChromiaTypographyType.displaySmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         ChromiaText(
           'A comprehensive Flutter UI component library for mobile, desktop, and web.',
           type: ChromiaTypographyType.bodyLarge,
-          color: colors.textSecondary,
+          color: colors.onSurfaceVariant,
         ),
         spacing.gapVXXL,
         ScreenNavigatorList(

@@ -35,7 +35,7 @@ class _ButtonsScreenState extends State<ButtonsScreen> {
 
   Widget _buildButtonsSection(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return Column(
@@ -45,7 +45,7 @@ class _ButtonsScreenState extends State<ButtonsScreen> {
         ChromiaText(
           'Variants',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         Wrap(
@@ -85,7 +85,7 @@ class _ButtonsScreenState extends State<ButtonsScreen> {
         ChromiaText(
           'Sizes',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         Wrap(
@@ -104,7 +104,7 @@ class _ButtonsScreenState extends State<ButtonsScreen> {
         ChromiaText(
           'States',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         Wrap(
@@ -122,7 +122,7 @@ class _ButtonsScreenState extends State<ButtonsScreen> {
         ChromiaText(
           'With Icons',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         Wrap(
@@ -150,7 +150,7 @@ class _ButtonsScreenState extends State<ButtonsScreen> {
         ChromiaText(
           'Full Width',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         ChromiaButton(variant: _variant, onPressed: () {}, isFullWidth: true, child: const Text('Full Width Button')),

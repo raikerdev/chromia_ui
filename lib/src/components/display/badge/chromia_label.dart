@@ -33,11 +33,11 @@ class ChromiaLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     final Color effectiveBackgroundColor = backgroundColor ?? colors.surfaceContainerHigh;
-    final Color effectiveTextColor = textColor ?? colors.textPrimary;
+    final Color effectiveTextColor = textColor ?? colors.onSurface;
 
     return Container(
       padding: EdgeInsets.symmetric(

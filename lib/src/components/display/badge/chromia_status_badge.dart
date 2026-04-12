@@ -22,7 +22,7 @@ class ChromiaStatusBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     final Color statusColor = switch (status) {
@@ -30,7 +30,7 @@ class ChromiaStatusBadge extends StatelessWidget {
       ChromiaStatusType.warning => colors.warning,
       ChromiaStatusType.error => colors.error,
       ChromiaStatusType.info => colors.info,
-      ChromiaStatusType.neutral => colors.textSecondary,
+      ChromiaStatusType.neutral => colors.onSurfaceVariant,
     };
 
     if (text == null && !showDot) {
@@ -65,7 +65,7 @@ class ChromiaStatusBadge extends StatelessWidget {
         ChromiaText(
           text!,
           type: ChromiaTypographyType.labelSmall,
-          color: colors.textSecondary,
+          color: colors.onSurfaceVariant,
         ),
       ],
     );

@@ -31,7 +31,7 @@ class _RadioButtonsScreenState extends State<RadioButtonsScreen> {
 
   Widget _buildRadioButtonSection(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return Column(
@@ -41,7 +41,7 @@ class _RadioButtonsScreenState extends State<RadioButtonsScreen> {
         ChromiaText(
           'Basic',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         Row(
@@ -77,7 +77,7 @@ class _RadioButtonsScreenState extends State<RadioButtonsScreen> {
         ChromiaText(
           'Customizable',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         Row(
@@ -122,7 +122,7 @@ class _RadioButtonsScreenState extends State<RadioButtonsScreen> {
         ChromiaText(
           'With Labels',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         ChromiaRadioButton<String>(
@@ -151,7 +151,7 @@ class _RadioButtonsScreenState extends State<RadioButtonsScreen> {
         ChromiaText(
           'Vertical Radio Group',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         ChromiaRadioButtonGroup<String>(
@@ -169,7 +169,7 @@ class _RadioButtonsScreenState extends State<RadioButtonsScreen> {
         ChromiaText(
           'Horizontal Radio Group',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         ChromiaRadioButtonGroup<String>(
@@ -188,7 +188,7 @@ class _RadioButtonsScreenState extends State<RadioButtonsScreen> {
         ChromiaText(
           'Radio Tiles',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         Container(
@@ -206,7 +206,7 @@ class _RadioButtonsScreenState extends State<RadioButtonsScreen> {
                 subtitle: const ChromiaText('For individuals'),
                 secondary: Icon(Icons.person, color: colors.primary),
               ),
-              Divider(height: 1, color: colors.divider),
+              Divider(height: 1, color: colors.outline),
               ChromiaListTileRadioButton<String>(
                 value: 'pro',
                 groupValue: _selectedWithLabel,
@@ -215,7 +215,7 @@ class _RadioButtonsScreenState extends State<RadioButtonsScreen> {
                 subtitle: const ChromiaText('For professionals'),
                 secondary: Icon(Icons.work, color: colors.primary),
               ),
-              Divider(height: 1, color: colors.divider),
+              Divider(height: 1, color: colors.outline),
               ChromiaListTileRadioButton<String>(
                 value: 'enterprise',
                 groupValue: _selectedWithLabel,

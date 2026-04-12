@@ -68,7 +68,7 @@ class ChromiaCheckbox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
     final radius = theme.radius;
 
@@ -111,7 +111,7 @@ class ChromiaCheckbox extends StatelessWidget {
                 child: ChromiaText(
                   label!,
                   type: ChromiaTypographyType.bodyMedium,
-                  color: isEnabled ? colors.textPrimary : colors.textDisabled,
+                  color: isEnabled ? colors.onSurface : colors.textDisabled,
                 ),
               ),
             ],
@@ -135,7 +135,7 @@ class ChromiaCheckbox extends StatelessWidget {
     Color checkColor,
   ) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final radius = theme.radius;
 
     return MouseRegion(

@@ -78,11 +78,11 @@ class ChromiaAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     final Color effectiveBackgroundColor = backgroundColor ?? colors.surface;
-    final Color effectiveForegroundColor = foregroundColor ?? colors.textPrimary;
+    final Color effectiveForegroundColor = foregroundColor ?? colors.onSurface;
 
     // Determine if we should show a back button
     final bool canPop = ModalRoute.of(context)?.canPop ?? false;
@@ -204,7 +204,7 @@ class _ChromiaSearchAppBarState extends State<ChromiaSearchAppBar> {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
 
     final Color effectiveBackgroundColor = widget.backgroundColor ?? colors.surface;
 
@@ -215,7 +215,7 @@ class _ChromiaSearchAppBarState extends State<ChromiaSearchAppBar> {
       leading:
           widget.leading ??
           IconButton(
-            icon: Icon(Icons.arrow_back, color: colors.textPrimary),
+            icon: Icon(Icons.arrow_back, color: colors.onSurface),
             onPressed: () => Navigator.pop(context),
           ),
       title: TextField(
@@ -223,17 +223,17 @@ class _ChromiaSearchAppBarState extends State<ChromiaSearchAppBar> {
         focusNode: _focusNode,
         onChanged: widget.onSearch,
         style: theme.typography.bodyMedium.copyWith(
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         decoration: InputDecoration(
           hintText: widget.hintText,
           hintStyle: theme.typography.bodyMedium.copyWith(
-            color: colors.textTertiary,
+            color: colors.onSurfaceVariant,
           ),
           border: InputBorder.none,
           suffixIcon: _controller.text.isNotEmpty
               ? IconButton(
-                  icon: Icon(Icons.clear, color: colors.textSecondary),
+                  icon: Icon(Icons.clear, color: colors.onSurfaceVariant),
                   onPressed: _clearSearch,
                 )
               : null,
@@ -281,7 +281,7 @@ class ChromiaTabBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
 
     return TabBar(
       controller: controller,
@@ -289,7 +289,7 @@ class ChromiaTabBar extends StatelessWidget implements PreferredSizeWidget {
       isScrollable: isScrollable,
       indicatorColor: indicatorColor ?? colors.primary,
       labelColor: labelColor ?? colors.primary,
-      unselectedLabelColor: unselectedLabelColor ?? colors.textSecondary,
+      unselectedLabelColor: unselectedLabelColor ?? colors.onSurfaceVariant,
       indicatorWeight: 3,
       labelStyle: theme.typography.labelMedium,
       unselectedLabelStyle: theme.typography.labelMedium,
@@ -357,11 +357,10 @@ class ChromiaSliverAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
 
     final Color effectiveBackgroundColor = backgroundColor ?? colors.surface;
-    final Color effectiveForegroundColor = foregroundColor ?? colors.textPrimary;
+    final Color effectiveForegroundColor = foregroundColor ?? colors.onSurface;
 
     return SliverAppBar(
       backgroundColor: effectiveBackgroundColor,

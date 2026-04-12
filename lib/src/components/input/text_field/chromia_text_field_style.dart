@@ -112,9 +112,9 @@ class ChromiaTextFieldStyle {
       focusedFillColor: theme.colors.surfaceContainerHigh,
       errorFillColor: theme.colors.errorContainer,
       disabledFillColor: theme.colors.surfaceVariant,
-      textColor: theme.colors.textPrimary,
-      hintColor: theme.colors.textTertiary,
-      labelColor: theme.colors.textSecondary,
+      textColor: theme.colors.onSurface,
+      hintColor: theme.colors.onSurfaceVariant,
+      labelColor: theme.colors.onSurfaceVariant,
       errorColor: theme.colors.error,
       disabledTextColor: theme.colors.textDisabled,
       borderColor: theme.colors.outline,
@@ -133,8 +133,8 @@ class ChromiaTextFieldStyle {
       labelStyle: theme.typography.bodySmall,
       errorStyle: theme.typography.bodySmall.copyWith(color: theme.colors.error),
       helperStyle: theme.typography.bodySmall,
-      prefixIconColor: theme.colors.textSecondary,
-      suffixIconColor: theme.colors.textSecondary,
+      prefixIconColor: theme.colors.onSurfaceVariant,
+      suffixIconColor: theme.colors.onSurfaceVariant,
     );
   }
 
@@ -145,9 +145,9 @@ class ChromiaTextFieldStyle {
       focusedFillColor: theme.colors.transparent,
       errorFillColor: theme.colors.transparent,
       disabledFillColor: theme.colors.surfaceVariant,
-      textColor: theme.colors.textPrimary,
-      hintColor: theme.colors.textTertiary,
-      labelColor: theme.colors.textSecondary,
+      textColor: theme.colors.onSurface,
+      hintColor: theme.colors.onSurfaceVariant,
+      labelColor: theme.colors.onSurfaceVariant,
       errorColor: theme.colors.error,
       disabledTextColor: theme.colors.textDisabled,
       borderColor: theme.colors.outline,
@@ -166,8 +166,8 @@ class ChromiaTextFieldStyle {
       labelStyle: theme.typography.bodySmall,
       errorStyle: theme.typography.bodySmall.copyWith(color: theme.colors.error),
       helperStyle: theme.typography.bodySmall,
-      prefixIconColor: theme.colors.textSecondary,
-      suffixIconColor: theme.colors.textSecondary,
+      prefixIconColor: theme.colors.onSurfaceVariant,
+      suffixIconColor: theme.colors.onSurfaceVariant,
     );
   }
 

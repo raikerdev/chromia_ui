@@ -84,10 +84,9 @@ class ChromiaDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
 
-    final Color effectiveColor = color ?? colors.divider;
+    final Color effectiveColor = color ?? colors.outline;
 
     if (isVertical) {
       return VerticalDivider(
@@ -126,11 +125,11 @@ class _ChromiaDividerWithText extends ChromiaDivider {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
-    final Color effectiveColor = color ?? colors.divider;
-    final Color effectiveTextColor = textColor ?? colors.textTertiary;
+    final Color effectiveColor = color ?? colors.outline;
+    final Color effectiveTextColor = textColor ?? colors.onSurfaceVariant;
 
     return Row(
       children: [
@@ -179,11 +178,11 @@ class _ChromiaDividerWithIcon extends ChromiaDivider {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
-    final Color effectiveColor = color ?? colors.divider;
-    final Color effectiveIconColor = iconColor ?? colors.textTertiary;
+    final Color effectiveColor = color ?? colors.outline;
+    final Color effectiveIconColor = iconColor ?? colors.onSurfaceVariant;
 
     return Row(
       children: [
@@ -233,7 +232,7 @@ class ChromiaSectionDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     if (title == null && trailing == null) {
@@ -256,7 +255,7 @@ class ChromiaSectionDivider extends StatelessWidget {
                       child: Text(
                         title!,
                         style: theme.typography.labelMedium.copyWith(
-                          color: colors.textSecondary,
+                          color: colors.onSurfaceVariant,
                           fontWeight: FontWeight.w600,
                         ),
                       ),

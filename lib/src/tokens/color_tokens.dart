@@ -8,7 +8,7 @@ class ColorTokens {
   ColorTokens._();
 
   // Neutral colors (Gray scale)
-  static const Color neutral0 = Color(0xFFFFFFFF); // White
+  static const Color neutral0 = Color(0xFFFFFFFF);
   static const Color neutral50 = Color(0xFFFAFAFA);
   static const Color neutral100 = Color(0xFFF5F5F5);
   static const Color neutral200 = Color(0xFFEEEEEE);
@@ -19,7 +19,7 @@ class ColorTokens {
   static const Color neutral700 = Color(0xFF616161);
   static const Color neutral800 = Color(0xFF424242);
   static const Color neutral900 = Color(0xFF2A2A2A);
-  static const Color neutral1000 = Color(0xFF212121); // Black
+  static const Color neutral1000 = Color(0xFF000000);
 
   // Primary colors (Blue)
   static const Color primary50 = Color(0xFFE3F2FD);
@@ -105,8 +105,40 @@ class ColorTokens {
   static const Color info800 = Color(0xFF00838F);
   static const Color info900 = Color(0xFF006064);
 
-  /// Transparent color
-  static const Color transparent = Color(0x00000000);
+  // Surface light colors
+  static const Color surfaceLight = Color(0xFFFEF7FF);
+  static const Color onSurfaceLight = Color(0xFF1D1B20);
+  static const Color surfaceVariantLight = Color(0xFFE7E0EC);
+  static const Color onSurfaceVariantLight = Color(0xFF49454F);
+  static const Color surfaceContainerHighestLight = Color(0xFFE6E0E9);
+  static const Color surfaceContainerHighLight = Color(0xFFECE6F0);
+  static const Color surfaceContainerLight = Color(0xFFF3EDF7);
+  static const Color surfaceContainerLowLight = Color(0xFFF7F2FA);
+  static const Color surfaceContainerLowestLight = Color(0xFFFFFFFF);
+
+  // Surface dark colors
+  static const Color surfaceDark = Color(0xFF141218);
+  static const Color onSurfaceDark = Color(0xFFE6E0E9);
+  static const Color surfaceVariantDark = Color(0xFF49454F);
+  static const Color onSurfaceVariantDark = Color(0xFFCAC4D0);
+  static const Color surfaceContainerHighestDark = Color(0xFF36343B);
+  static const Color surfaceContainerHighDark = Color(0xFF2B2930);
+  static const Color surfaceContainerDark = Color(0xFF211F26);
+  static const Color surfaceContainerLowDark = Color(0xFF1D1B20);
+  static const Color surfaceContainerLowestDark = Color(0xFF0F0D13);
+
+  // Other light
+  static const Color shadowLight = Color(0xFF2A2A2A);
+  static const Color overlayLight = Color(0x52000000);
+  static const Color scrimLight = Color(0x52000000);
+  static const Color transparentLight = Color(0x00FFFFFF);
+
+  // Other dark
+  static const Color shadowDark = Color(0xFF000000);
+  static const Color overlayDark = Color(0x52FFFFFF);
+  static const Color scrimDark = Color(0x52000000);
+  static const Color transparentDark = Color(0x00000000);
+
 
   /// Returns a color from a hex string (e.g., "#FF5733" or "FF5733")
   static Color fromHex(String hexString) {

@@ -54,7 +54,7 @@ class ChromiaRadioButton<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     final bool isEnabled = onChanged != null;
@@ -79,7 +79,7 @@ class ChromiaRadioButton<T> extends StatelessWidget {
                 child: ChromiaText(
                   label!,
                   type: ChromiaTypographyType.bodyMedium,
-                  color: isEnabled ? colors.textPrimary : colors.textDisabled,
+                  color: isEnabled ? colors.onSurface : colors.textDisabled,
                 ),
               ),
             ],
@@ -100,8 +100,7 @@ class ChromiaRadioButton<T> extends StatelessWidget {
     bool isEnabled,
     Color activeColor,
   ) {
-    final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
 
     return MouseRegion(
       cursor: SystemMouseCursors.click,

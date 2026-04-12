@@ -59,8 +59,7 @@ class ChromiaBottomNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
 
     return Container(
       decoration: BoxDecoration(
@@ -89,7 +88,7 @@ class ChromiaBottomNavigationBar extends StatelessWidget {
                 isSelected: isSelected,
                 onTap: () => onTap(index),
                 selectedColor: selectedItemColor ?? colors.primary,
-                unselectedColor: unselectedItemColor ?? colors.textSecondary,
+                unselectedColor: unselectedItemColor ?? colors.onSurfaceVariant,
                 showLabel: showLabels,
               );
             }),
@@ -228,7 +227,7 @@ class ChromiaFloatingBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return Padding(
@@ -251,7 +250,7 @@ class ChromiaFloatingBottomNavigationBar extends StatelessWidget {
               isSelected: isSelected,
               onTap: () => onTap(index),
               selectedColor: selectedItemColor ?? colors.primary,
-              unselectedColor: unselectedItemColor ?? colors.textSecondary,
+              unselectedColor: unselectedItemColor ?? colors.onSurfaceVariant,
               showLabel: false,
             );
           }),

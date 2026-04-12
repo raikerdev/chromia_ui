@@ -21,7 +21,7 @@ class AvatarsScreen extends StatelessWidget {
 
   Widget _buildAvatarSection(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return Column(
@@ -31,7 +31,7 @@ class AvatarsScreen extends StatelessWidget {
         ChromiaText(
           'Image Avatars',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         Wrap(
@@ -97,7 +97,7 @@ class AvatarsScreen extends StatelessWidget {
         ChromiaText(
           'Initials Avatars',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         Wrap(
@@ -132,7 +132,7 @@ class AvatarsScreen extends StatelessWidget {
         ChromiaText(
           'Icon Avatars',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         Wrap(
@@ -167,7 +167,7 @@ class AvatarsScreen extends StatelessWidget {
         ChromiaText(
           'Avatar Shapes',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         Wrap(
@@ -200,7 +200,7 @@ class AvatarsScreen extends StatelessWidget {
         ChromiaText(
           'Avatars with Status',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         Wrap(
@@ -234,7 +234,7 @@ class AvatarsScreen extends StatelessWidget {
             ChromiaAvatarWithStatus(
               avatar: ChromiaAvatar.initials(
                 initials: 'OF',
-                backgroundColor: colors.textTertiary,
+                backgroundColor: colors.onSurfaceVariant,
                 size: ChromiaAvatarSize.large,
               ),
               status: ChromiaAvatarStatus.offline,
@@ -247,7 +247,7 @@ class AvatarsScreen extends StatelessWidget {
         ChromiaText(
           'Avatar Group',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         ChromiaAvatarGroup(
@@ -284,7 +284,7 @@ class AvatarsScreen extends StatelessWidget {
         ChromiaText(
           'Interactive Avatar',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         ChromiaAvatar.initials(

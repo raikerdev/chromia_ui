@@ -30,7 +30,7 @@ class _DatePickersScreenState extends State<DatePickersScreen> {
 
   Widget _buildDatePickerSection(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return Column(
@@ -39,7 +39,7 @@ class _DatePickersScreenState extends State<DatePickersScreen> {
         Text(
           'Date & Time Pickers',
           style: theme.typography.headlineSmall.copyWith(
-            color: colors.textPrimary,
+            color: colors.onSurface,
           ),
         ),
         spacing.gapVM,
@@ -47,7 +47,7 @@ class _DatePickersScreenState extends State<DatePickersScreen> {
         Text(
           'Date Picker',
           style: theme.typography.titleSmall.copyWith(
-            color: colors.textSecondary,
+            color: colors.onSurfaceVariant,
           ),
         ),
         spacing.gapVS,
@@ -64,7 +64,7 @@ class _DatePickersScreenState extends State<DatePickersScreen> {
         Text(
           'Time Picker',
           style: theme.typography.titleSmall.copyWith(
-            color: colors.textSecondary,
+            color: colors.onSurfaceVariant,
           ),
         ),
         spacing.gapVS,
@@ -81,7 +81,7 @@ class _DatePickersScreenState extends State<DatePickersScreen> {
         Text(
           'Date & Time Picker',
           style: theme.typography.titleSmall.copyWith(
-            color: colors.textSecondary,
+            color: colors.onSurfaceVariant,
           ),
         ),
         spacing.gapVS,
@@ -98,7 +98,7 @@ class _DatePickersScreenState extends State<DatePickersScreen> {
         Text(
           'Selected Values',
           style: theme.typography.titleSmall.copyWith(
-            color: colors.textSecondary,
+            color: colors.onSurfaceVariant,
           ),
         ),
         spacing.gapVS,

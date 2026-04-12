@@ -21,7 +21,7 @@ class DividersScreen extends StatelessWidget {
 
   Widget _buildDividerSection(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return Column(
@@ -30,7 +30,7 @@ class DividersScreen extends StatelessWidget {
         Text(
           'Dividers',
           style: theme.typography.headlineSmall.copyWith(
-            color: colors.textPrimary,
+            color: colors.onSurface,
           ),
         ),
         spacing.gapVM,
@@ -39,7 +39,7 @@ class DividersScreen extends StatelessWidget {
         Text(
           'Basic Divider',
           style: theme.typography.titleSmall.copyWith(
-            color: colors.textSecondary,
+            color: colors.onSurfaceVariant,
           ),
         ),
         spacing.gapVS,
@@ -50,7 +50,7 @@ class DividersScreen extends StatelessWidget {
         Text(
           'Custom Thickness',
           style: theme.typography.titleSmall.copyWith(
-            color: colors.textSecondary,
+            color: colors.onSurfaceVariant,
           ),
         ),
         spacing.gapVS,
@@ -61,7 +61,7 @@ class DividersScreen extends StatelessWidget {
         Text(
           'With Indent',
           style: theme.typography.titleSmall.copyWith(
-            color: colors.textSecondary,
+            color: colors.onSurfaceVariant,
           ),
         ),
         spacing.gapVS,
@@ -76,7 +76,7 @@ class DividersScreen extends StatelessWidget {
         Text(
           'Divider with Text',
           style: theme.typography.titleSmall.copyWith(
-            color: colors.textSecondary,
+            color: colors.onSurfaceVariant,
           ),
         ),
         spacing.gapVS,
@@ -89,7 +89,7 @@ class DividersScreen extends StatelessWidget {
         Text(
           'Divider with Icon',
           style: theme.typography.titleSmall.copyWith(
-            color: colors.textSecondary,
+            color: colors.onSurfaceVariant,
           ),
         ),
         spacing.gapVS,
@@ -102,7 +102,7 @@ class DividersScreen extends StatelessWidget {
         Text(
           'Vertical Dividers',
           style: theme.typography.titleSmall.copyWith(
-            color: colors.textSecondary,
+            color: colors.onSurfaceVariant,
           ),
         ),
         spacing.gapVS,
@@ -125,7 +125,7 @@ class DividersScreen extends StatelessWidget {
         Text(
           'Section Divider',
           style: theme.typography.titleSmall.copyWith(
-            color: colors.textSecondary,
+            color: colors.onSurfaceVariant,
           ),
         ),
         spacing.gapVS,

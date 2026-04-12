@@ -86,6 +86,7 @@ class ChromiaThemeData {
           isDark: isDark,
         ).copyWith(
           secondary: brandConfig.secondaryColor ?? baseTheme.colors.secondary,
+          tertiary: brandConfig.tertiaryColor ?? baseTheme.colors.tertiary,
         );
 
     ChromiaTypography brandTypography = baseTheme.typography;
@@ -187,15 +188,15 @@ class ChromiaThemeData {
     );
 
     return ThemeData(
+      useMaterial3: true,
       colorScheme: colorScheme,
       textTheme: textTheme,
       brightness: brightness,
-      scaffoldBackgroundColor: colors.background,
-      dividerColor: colors.divider,
+      scaffoldBackgroundColor: colors.surface,
+      dividerColor: colors.outline,
       extensions: [
         if (brandConfig != null) BrandThemeExtension(brandConfig: brandConfig!),
       ],
-      useMaterial3: true,
     );
   }
 

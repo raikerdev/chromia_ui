@@ -371,7 +371,7 @@ class _ChromiaLabelValueText extends ChromiaRichText {
     final defaultLabelStyle =
         labelStyle ??
         theme.typography.labelMedium.copyWith(
-          color: theme.colors.textSecondary,
+          color: theme.colors.onSurfaceVariant,
         );
     final defaultValueStyle = valueStyle ?? theme.typography.bodyMedium;
 

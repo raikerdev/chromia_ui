@@ -39,8 +39,7 @@ class ChromiaSteppedProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
 
     final Color effectiveActiveColor = activeColor ?? colors.primary;
     final Color effectiveInactiveColor = inactiveColor ?? colors.surfaceVariant;

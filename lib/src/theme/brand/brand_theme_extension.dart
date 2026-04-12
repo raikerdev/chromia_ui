@@ -22,6 +22,9 @@ class BrandThemeExtension extends ThemeExtension<BrandThemeExtension> {
   /// Gets the secondary brand color
   Color? get secondaryBrandColor => brandConfig.secondaryColor;
 
+  /// Gets the tertiary brand color
+  Color? get tertiaryBrandColor => brandConfig.tertiaryColor;
+
   /// Gets the logo path
   String? get logoPath => brandConfig.logoPath;
 

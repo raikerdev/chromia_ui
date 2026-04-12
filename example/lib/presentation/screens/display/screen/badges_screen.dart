@@ -22,7 +22,7 @@ class BadgesScreen extends StatelessWidget {
 
   Widget _buildBadgeSection(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     final showBadge = ValueNotifier(true);
@@ -39,7 +39,7 @@ class BadgesScreen extends StatelessWidget {
         ChromiaText(
           'Basic Badges',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         Wrap(
@@ -76,7 +76,7 @@ class BadgesScreen extends StatelessWidget {
                     ChromiaText(
                       'Show Badge',
                       type: ChromiaTypographyType.headlineSmall,
-                      color: colors.textPrimary,
+                      color: colors.onSurface,
                     ),
                     spacing.gapHM,
                     ChromiaToggleButton(
@@ -103,7 +103,7 @@ class BadgesScreen extends StatelessWidget {
         ChromiaText(
           'Badge Sizes',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         Wrap(
@@ -152,7 +152,7 @@ class BadgesScreen extends StatelessWidget {
         ChromiaText(
           'Badge Shapes',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         Wrap(
@@ -252,7 +252,7 @@ class BadgesScreen extends StatelessWidget {
         ChromiaText(
           'Badge Positions',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         Wrap(
@@ -277,7 +277,7 @@ class BadgesScreen extends StatelessWidget {
         ChromiaText(
           'Labels',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         Wrap(
@@ -314,7 +314,7 @@ class BadgesScreen extends StatelessWidget {
         ChromiaText(
           'Status Badges',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         Wrap(
@@ -349,7 +349,7 @@ class BadgesScreen extends StatelessWidget {
         ChromiaText(
           'Status Dots',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         Wrap(

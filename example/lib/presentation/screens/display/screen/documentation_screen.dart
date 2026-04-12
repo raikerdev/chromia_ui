@@ -22,7 +22,7 @@ class DocumentationScreen extends StatelessWidget {
         Text(
           'This page demonstrates how to use the ChromiaCodePreview component to create beautiful documentation with syntax highlighting.',
           style: theme.typography.bodyMedium.copyWith(
-            color: theme.colors.textSecondary,
+            color: theme.colors.onSurfaceVariant,
           ),
         ),
         spacing.gapVXL,
@@ -847,7 +847,7 @@ ChromiaRichText(
         text: '\\\$99.99 ',
         style: theme.typography.bodyMedium.copyWith(
           decoration: TextDecoration.lineThrough,
-          color: theme.colors.textTertiary,
+          color: theme.colors.onSurfaceVariant,
         ),
       ),
       TextSpan(
@@ -870,7 +870,7 @@ ChromiaRichText(
                           text: '\$99.99 ',
                           style: theme.typography.bodyMedium.copyWith(
                             decoration: TextDecoration.lineThrough,
-                            color: theme.colors.textTertiary,
+                            color: theme.colors.onSurfaceVariant,
                           ),
                         ),
                         TextSpan(

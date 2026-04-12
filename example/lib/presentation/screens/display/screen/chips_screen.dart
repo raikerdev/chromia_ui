@@ -32,7 +32,7 @@ class _ChipsScreenState extends State<ChipsScreen> {
 
   Widget _buildChipSection(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return Column(
@@ -42,7 +42,7 @@ class _ChipsScreenState extends State<ChipsScreen> {
         ChromiaText(
           'Basic Chips',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         const ChromiaChipGroup(
@@ -59,7 +59,7 @@ class _ChipsScreenState extends State<ChipsScreen> {
         ChromiaText(
           'Chips with Icons',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         const ChromiaChipGroup(
@@ -84,7 +84,7 @@ class _ChipsScreenState extends State<ChipsScreen> {
         ChromiaText(
           'Deletable Chips (Tags)',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         ChromiaChipGroup(
@@ -116,7 +116,7 @@ class _ChipsScreenState extends State<ChipsScreen> {
         ChromiaText(
           'Filter Chips',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         ChromiaChipGroup(
@@ -156,7 +156,7 @@ class _ChipsScreenState extends State<ChipsScreen> {
         ChromiaText(
           'Choice Chips',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         ChromiaChipGroup(
@@ -188,7 +188,7 @@ class _ChipsScreenState extends State<ChipsScreen> {
         ChromiaText(
           'Selected: $_selectedChoice',
           style: theme.typography.bodySmall.copyWith(
-            color: colors.textSecondary,
+            color: colors.onSurfaceVariant,
           ),
         ),
         spacing.gapVL,
@@ -197,7 +197,7 @@ class _ChipsScreenState extends State<ChipsScreen> {
         ChromiaText(
           'Chips with Avatars',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         ChromiaChipGroup(

@@ -22,7 +22,7 @@ class DialogsScreen extends StatelessWidget {
 
   Widget _buildDialogSection(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return Column(
@@ -32,7 +32,7 @@ class DialogsScreen extends StatelessWidget {
         ChromiaText(
           'Alert Dialog',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         ChromiaButton(
@@ -51,7 +51,7 @@ class DialogsScreen extends StatelessWidget {
         ChromiaText(
           'Confirm Dialog',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         Row(
@@ -102,7 +102,7 @@ class DialogsScreen extends StatelessWidget {
         ChromiaText(
           'Custom Dialog',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         ChromiaButton(
@@ -145,7 +145,7 @@ class DialogsScreen extends StatelessWidget {
         ChromiaText(
           'Loading Dialog',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         ChromiaButton(
@@ -167,7 +167,7 @@ class DialogsScreen extends StatelessWidget {
         ChromiaText(
           'Bottom Sheet',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         ChromiaButton(

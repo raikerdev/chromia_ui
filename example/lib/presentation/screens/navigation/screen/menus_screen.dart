@@ -21,7 +21,7 @@ class MenusScreen extends StatelessWidget {
 
   Widget _buildMenuSection(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return Column(
@@ -30,7 +30,7 @@ class MenusScreen extends StatelessWidget {
         Text(
           'Menus',
           style: theme.typography.headlineSmall.copyWith(
-            color: colors.textPrimary,
+            color: colors.onSurface,
           ),
         ),
         spacing.gapVM,
@@ -38,7 +38,7 @@ class MenusScreen extends StatelessWidget {
         Text(
           'Popup Menu',
           style: theme.typography.titleSmall.copyWith(
-            color: colors.textSecondary,
+            color: colors.onSurfaceVariant,
           ),
         ),
         spacing.gapVS,
@@ -65,7 +65,7 @@ class MenusScreen extends StatelessWidget {
         Text(
           'Menu Button',
           style: theme.typography.titleSmall.copyWith(
-            color: colors.textSecondary,
+            color: colors.onSurfaceVariant,
           ),
         ),
         spacing.gapVS,
@@ -85,7 +85,7 @@ class MenusScreen extends StatelessWidget {
         Text(
           'Context Menu',
           style: theme.typography.titleSmall.copyWith(
-            color: colors.textSecondary,
+            color: colors.onSurfaceVariant,
           ),
         ),
         spacing.gapVS,
@@ -105,7 +105,7 @@ class MenusScreen extends StatelessWidget {
                 child: Text(
                   'Long press or right-click here',
                   style: theme.typography.bodyMedium.copyWith(
-                    color: colors.textSecondary,
+                    color: colors.onSurfaceVariant,
                   ),
                 ),
               ),

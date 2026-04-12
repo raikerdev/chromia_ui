@@ -78,7 +78,7 @@ class ChromiaListTileRangeSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     final String startValue = valueBuilder?.call(values.start) ?? values.start.toStringAsFixed(divisions != null ? 0 : 1);
@@ -101,14 +101,14 @@ class ChromiaListTileRangeSlider extends StatelessWidget {
                       ChromiaText(
                         title!,
                         type: ChromiaTypographyType.labelSmall,
-                        color: colors.textSecondary,
+                        color: colors.onSurfaceVariant,
                       ),
                       if (subtitle != null) ...[
                         spacing.gapVXS,
                         ChromiaText(
                           subtitle!,
                           type: ChromiaTypographyType.labelSmall,
-                          color: colors.textSecondary,
+                          color: colors.onSurfaceVariant,
                         ),
                       ],
                     ],

@@ -108,7 +108,7 @@ class ChromiaListTileCheckbox extends StatelessWidget {
                   if (title != null)
                     DefaultTextStyle(
                       style: theme.typography.bodyMedium.copyWith(
-                        color: theme.colors.textPrimary,
+                        color: theme.colors.onSurface,
                       ),
                       child: title!,
                     ),
@@ -116,7 +116,7 @@ class ChromiaListTileCheckbox extends StatelessWidget {
                     spacing.gapVXS,
                     DefaultTextStyle(
                       style: theme.typography.bodySmall.copyWith(
-                        color: theme.colors.textSecondary,
+                        color: theme.colors.onSurfaceVariant,
                       ),
                       child: subtitle!,
                     ),

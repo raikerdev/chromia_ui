@@ -46,7 +46,7 @@ class ChromiaPopupMenu<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
 
     return PopupMenuButton<T>(
       initialValue: initialValue,
@@ -73,7 +73,7 @@ class ChromiaPopupMenu<T> extends StatelessWidget {
           child ??
           Icon(
             icon ?? Icons.more_vert,
-            color: colors.textSecondary,
+            color: colors.onSurfaceVariant,
           ),
     );
   }
@@ -126,10 +126,10 @@ class _MenuItemContent<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
-    final Color textColor = item.enabled ? colors.textPrimary : colors.textDisabled;
+    final Color textColor = item.enabled ? colors.onSurface : colors.textDisabled;
 
     return Row(
       children: [
@@ -137,7 +137,7 @@ class _MenuItemContent<T> extends StatelessWidget {
           Icon(
             item.icon,
             size: 20,
-            color: item.enabled ? colors.textSecondary : colors.textDisabled,
+            color: item.enabled ? colors.onSurfaceVariant : colors.textDisabled,
           ),
           spacing.gapHM,
         ],
@@ -153,7 +153,7 @@ class _MenuItemContent<T> extends StatelessWidget {
           spacing.gapHM,
           DefaultTextStyle(
             style: theme.typography.bodySmall.copyWith(
-              color: colors.textTertiary,
+              color: colors.onSurfaceVariant,
             ),
             child: item.trailing!,
           ),
@@ -201,7 +201,7 @@ class ChromiaContextMenu<T> extends StatelessWidget {
         );
 
     final theme = ChromiaTheme.of(context);
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
 
     showMenu<T>(
       context: context,
@@ -263,7 +263,7 @@ class ChromiaMenuButton<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     final selectedItem = selectedValue != null
@@ -299,7 +299,7 @@ class ChromiaMenuButton<T> extends StatelessWidget {
                     color: isSelected
                         ? colors.primary
                         : item.enabled
-                        ? colors.textSecondary
+                        ? colors.onSurfaceVariant
                         : colors.textDisabled,
                   ),
                   spacing.gapHM,
@@ -311,7 +311,7 @@ class ChromiaMenuButton<T> extends StatelessWidget {
                       color: isSelected
                           ? colors.primary
                           : item.enabled
-                          ? colors.textPrimary
+                          ? colors.onSurface
                           : colors.textDisabled,
                       fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
                     ),
@@ -341,19 +341,19 @@ class ChromiaMenuButton<T> extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             if (icon != null) ...[
-              Icon(icon, size: 20, color: colors.textSecondary),
+              Icon(icon, size: 20, color: colors.onSurfaceVariant),
               spacing.gapHM,
             ],
             Text(
               label ?? selectedItem?.label ?? 'Select',
               style: theme.typography.bodyMedium.copyWith(
-                color: colors.textPrimary,
+                color: colors.onSurface,
               ),
             ),
             spacing.gapHM,
             Icon(
               Icons.arrow_drop_down,
-              color: colors.textSecondary,
+              color: colors.onSurfaceVariant,
             ),
           ],
         ),

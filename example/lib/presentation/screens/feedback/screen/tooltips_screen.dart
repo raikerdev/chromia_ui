@@ -21,7 +21,7 @@ class TooltipsScreen extends StatelessWidget {
 
   Widget _buildTooltipSection(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return Column(
@@ -31,13 +31,13 @@ class TooltipsScreen extends StatelessWidget {
         ChromiaText(
           'Basic Tooltips',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         ChromiaText(
           'Hover or long-press on the icons to see tooltips',
           style: theme.typography.bodySmall.copyWith(
-            color: colors.textTertiary,
+            color: colors.onSurfaceVariant,
           ),
         ),
         spacing.gapVS,
@@ -59,7 +59,7 @@ class TooltipsScreen extends StatelessWidget {
             ),
             ChromiaTooltip(
               message: 'This is a settings icon',
-              child: Icon(Icons.settings, size: 32, color: colors.textPrimary),
+              child: Icon(Icons.settings, size: 32, color: colors.onSurface),
             ),
           ],
         ),
@@ -69,7 +69,7 @@ class TooltipsScreen extends StatelessWidget {
         ChromiaText(
           'Rich Tooltips',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         Wrap(
@@ -94,7 +94,7 @@ class TooltipsScreen extends StatelessWidget {
         ChromiaText(
           'Help Icons',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         Row(
@@ -124,7 +124,7 @@ class TooltipsScreen extends StatelessWidget {
         ChromiaText(
           'Tooltips on Buttons',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         Wrap(
@@ -156,13 +156,13 @@ class TooltipsScreen extends StatelessWidget {
         ChromiaText(
           'Long Press Tooltip',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         ChromiaText(
           'Long press on the card below to see the tooltip',
           style: theme.typography.bodySmall.copyWith(
-            color: colors.textTertiary,
+            color: colors.onSurfaceVariant,
           ),
         ),
         spacing.gapVS,
@@ -187,7 +187,7 @@ class TooltipsScreen extends StatelessWidget {
         ChromiaText(
           'Tooltips in Form',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         ChromiaCard(

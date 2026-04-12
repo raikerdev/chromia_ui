@@ -52,7 +52,7 @@ class ChromiaCircularProgress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
 
     final Color effectiveBackgroundColor = backgroundColor ?? colors.surfaceVariant;
     final Color effectiveColor = color ?? colors.primary;
@@ -67,7 +67,7 @@ class ChromiaCircularProgress extends StatelessWidget {
         label,
         type: ChromiaTypographyType.labelSmall,
         style: theme.typography.labelSmall.copyWith(
-          color: colors.textPrimary,
+          color: colors.onSurface,
           fontWeight: FontWeight.bold,
         ),
       );

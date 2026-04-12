@@ -31,7 +31,7 @@ class _SlidersScreenState extends State<SlidersScreen> {
 
   Widget _buildSliderSection(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     return Column(
@@ -41,7 +41,7 @@ class _SlidersScreenState extends State<SlidersScreen> {
         ChromiaText(
           'Basic Slider',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         ChromiaSlider(
@@ -65,7 +65,7 @@ class _SlidersScreenState extends State<SlidersScreen> {
         ChromiaText(
           'Customizable Slider',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         ChromiaSlider(
@@ -101,7 +101,7 @@ class _SlidersScreenState extends State<SlidersScreen> {
         ChromiaText(
           'With Labels & Value Display',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         ChromiaSlider(
@@ -119,7 +119,7 @@ class _SlidersScreenState extends State<SlidersScreen> {
         ChromiaText(
           'With Divisions',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         ChromiaSlider(
@@ -136,7 +136,7 @@ class _SlidersScreenState extends State<SlidersScreen> {
         ChromiaText(
           'Range Slider',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         ChromiaRangeSlider(
@@ -157,7 +157,7 @@ class _SlidersScreenState extends State<SlidersScreen> {
         ChromiaText(
           'Slider Tiles',
           type: ChromiaTypographyType.headlineSmall,
-          color: colors.textPrimary,
+          color: colors.onSurface,
         ),
         spacing.gapVS,
         Container(
@@ -178,7 +178,7 @@ class _SlidersScreenState extends State<SlidersScreen> {
                 valueBuilder: (value) => '${value.toInt()}%',
                 onChanged: (value) => setState(() => _volume = value),
               ),
-              Divider(height: 1, color: colors.divider),
+              Divider(height: 1, color: colors.outline),
               ChromiaListTileSlider(
                 value: _brightness,
                 min: 0,
@@ -190,7 +190,7 @@ class _SlidersScreenState extends State<SlidersScreen> {
                 valueBuilder: (value) => '${value.toInt()}%',
                 onChanged: (value) => setState(() => _brightness = value),
               ),
-              Divider(height: 1, color: colors.divider),
+              Divider(height: 1, color: colors.outline),
               ChromiaListTileRangeSlider(
                 values: _priceRange,
                 min: 0,

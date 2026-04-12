@@ -111,8 +111,7 @@ class ChromiaAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
 
     final Color effectiveBackgroundColor = backgroundColor ?? colors.primary;
     final Color effectiveForegroundColor = foregroundColor ?? colors.onPrimary;
@@ -196,7 +195,7 @@ class ChromiaAvatarGroup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
 
     final int displayCount = avatars.length > max ? max : avatars.length;
     final int remainingCount = avatars.length - displayCount;
@@ -247,7 +246,7 @@ class ChromiaAvatarGroup extends StatelessWidget {
                   child: Text(
                     '+$remainingCount',
                     style: theme.typography.labelSmall.copyWith(
-                      color: colors.textPrimary,
+                      color: colors.onSurface,
                       fontWeight: FontWeight.w600,
                       fontSize: size.fontSize * 0.8,
                     ),
@@ -355,14 +354,13 @@ class ChromiaAvatarWithStatus extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
 
     final Color statusColor = switch (status) {
       ChromiaAvatarStatus.online => colors.success,
       ChromiaAvatarStatus.busy => colors.error,
       ChromiaAvatarStatus.away => colors.warning,
-      ChromiaAvatarStatus.offline => colors.textTertiary,
+      ChromiaAvatarStatus.offline => colors.onSurfaceVariant,
     };
 
     final double statusSize = avatar.size.radius * 0.4;

@@ -75,7 +75,7 @@ class ChromiaDatePicker extends StatelessWidget {
               primary: theme.colors.primary,
               onPrimary: theme.colors.onPrimary,
               surface: theme.colors.surface,
-              onSurface: theme.colors.textPrimary,
+              onSurface: theme.colors.onSurface,
             ),
           ),
           child: child!,
@@ -91,7 +91,7 @@ class ChromiaDatePicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     final bool hasError = errorText != null;
@@ -106,7 +106,7 @@ class ChromiaDatePicker extends StatelessWidget {
           Text(
             label!,
             style: theme.typography.labelMedium.copyWith(
-              color: enabled ? colors.textPrimary : colors.textDisabled,
+              color: enabled ? colors.onSurface : colors.textDisabled,
             ),
           ),
           spacing.gapVS,
@@ -136,14 +136,14 @@ class ChromiaDatePicker extends StatelessWidget {
                 Icon(
                   prefixIcon ?? Icons.calendar_today,
                   size: 20,
-                  color: enabled ? colors.textSecondary : colors.textDisabled,
+                  color: enabled ? colors.onSurfaceVariant : colors.textDisabled,
                 ),
                 spacing.gapHM,
                 Expanded(
                   child: Text(
                     displayText,
                     style: theme.typography.bodyMedium.copyWith(
-                      color: selectedDate != null ? (enabled ? colors.textPrimary : colors.textDisabled) : colors.textTertiary,
+                      color: selectedDate != null ? (enabled ? colors.onSurface : colors.textDisabled) : colors.onSurfaceVariant,
                     ),
                   ),
                 ),
@@ -154,7 +154,7 @@ class ChromiaDatePicker extends StatelessWidget {
                     child: Icon(
                       Icons.clear,
                       size: 20,
-                      color: colors.textSecondary,
+                      color: colors.onSurfaceVariant,
                     ),
                   ),
                 ],
@@ -167,7 +167,7 @@ class ChromiaDatePicker extends StatelessWidget {
           Text(
             errorText ?? helperText!,
             style: theme.typography.bodySmall.copyWith(
-              color: hasError ? colors.error : colors.textSecondary,
+              color: hasError ? colors.error : colors.onSurfaceVariant,
             ),
           ),
         ],
@@ -230,7 +230,7 @@ class ChromiaTimePicker extends StatelessWidget {
               primary: theme.colors.primary,
               onPrimary: theme.colors.onPrimary,
               surface: theme.colors.surface,
-              onSurface: theme.colors.textPrimary,
+              onSurface: theme.colors.onSurface,
             ),
           ),
           child: child!,
@@ -246,7 +246,7 @@ class ChromiaTimePicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     final bool hasError = errorText != null;
@@ -260,7 +260,7 @@ class ChromiaTimePicker extends StatelessWidget {
           Text(
             label!,
             style: theme.typography.labelMedium.copyWith(
-              color: enabled ? colors.textPrimary : colors.textDisabled,
+              color: enabled ? colors.onSurface : colors.textDisabled,
             ),
           ),
           spacing.gapVS,
@@ -290,14 +290,14 @@ class ChromiaTimePicker extends StatelessWidget {
                 Icon(
                   prefixIcon ?? Icons.access_time,
                   size: 20,
-                  color: enabled ? colors.textSecondary : colors.textDisabled,
+                  color: enabled ? colors.onSurfaceVariant : colors.textDisabled,
                 ),
                 spacing.gapHM,
                 Expanded(
                   child: Text(
                     displayText,
                     style: theme.typography.bodyMedium.copyWith(
-                      color: selectedTime != null ? (enabled ? colors.textPrimary : colors.textDisabled) : colors.textTertiary,
+                      color: selectedTime != null ? (enabled ? colors.onSurface : colors.textDisabled) : colors.onSurfaceVariant,
                     ),
                   ),
                 ),
@@ -308,7 +308,7 @@ class ChromiaTimePicker extends StatelessWidget {
                     child: Icon(
                       Icons.clear,
                       size: 20,
-                      color: colors.textSecondary,
+                      color: colors.onSurfaceVariant,
                     ),
                   ),
                 ],
@@ -321,7 +321,7 @@ class ChromiaTimePicker extends StatelessWidget {
           Text(
             errorText ?? helperText!,
             style: theme.typography.bodySmall.copyWith(
-              color: hasError ? colors.error : colors.textSecondary,
+              color: hasError ? colors.error : colors.onSurfaceVariant,
             ),
           ),
         ],
@@ -406,7 +406,7 @@ class ChromiaDateTimePicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
-    final colors = theme.colors;
+    final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
     final bool hasError = errorText != null;
@@ -423,7 +423,7 @@ class ChromiaDateTimePicker extends StatelessWidget {
           Text(
             label!,
             style: theme.typography.labelMedium.copyWith(
-              color: enabled ? colors.textPrimary : colors.textDisabled,
+              color: enabled ? colors.onSurface : colors.textDisabled,
             ),
           ),
           spacing.gapVS,
@@ -453,7 +453,7 @@ class ChromiaDateTimePicker extends StatelessWidget {
                 Icon(
                   prefixIcon ?? Icons.event,
                   size: 20,
-                  color: enabled ? colors.textSecondary : colors.textDisabled,
+                  color: enabled ? colors.onSurfaceVariant : colors.textDisabled,
                 ),
                 spacing.gapHM,
                 Expanded(
@@ -461,8 +461,8 @@ class ChromiaDateTimePicker extends StatelessWidget {
                     displayText,
                     style: theme.typography.bodyMedium.copyWith(
                       color: selectedDateTime != null
-                          ? (enabled ? colors.textPrimary : colors.textDisabled)
-                          : colors.textTertiary,
+                          ? (enabled ? colors.onSurface : colors.textDisabled)
+                          : colors.onSurfaceVariant,
                     ),
                   ),
                 ),
@@ -475,7 +475,7 @@ class ChromiaDateTimePicker extends StatelessWidget {
           Text(
             errorText ?? helperText!,
             style: theme.typography.bodySmall.copyWith(
-              color: hasError ? colors.error : colors.textSecondary,
+              color: hasError ? colors.error : colors.onSurfaceVariant,
             ),
           ),
         ],
