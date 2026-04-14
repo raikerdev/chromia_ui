@@ -1,4 +1,4 @@
-import 'package:chromia_ui/src/tokens/color_tokens.dart';
+import 'package:chromia_ui/chromia_ui.dart';
 import 'package:flutter/material.dart';
 
 /// Semantic color system for Chromia UI, aligned with Material Design 3 color roles.
@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 /// Color roles follow MD3 conventions:
 /// - **primary / onPrimary / primaryContainer / onPrimaryContainer**
 /// - **secondary / onSecondary / secondaryContainer / onSecondaryContainer**
-/// - **tertiary / onTertiary / tertiaryContainer / onTertiaryContainer**
 /// - **error / onError / errorContainer / onErrorContainer**
 /// - **surface** family with container levels
 /// - **outline / outlineVariant** (replaces legacy border names)
@@ -26,11 +25,6 @@ class ChromiaColors {
     required this.onSecondary,
     required this.secondaryContainer,
     required this.onSecondaryContainer,
-    // Tertiary role
-    required this.tertiary,
-    required this.onTertiary,
-    required this.tertiaryContainer,
-    required this.onTertiaryContainer,
     // Error role
     required this.error,
     required this.onError,
@@ -54,13 +48,9 @@ class ChromiaColors {
     // Surface role
     required this.surface,
     required this.onSurface,
-    required this.surfaceVariant,
     required this.onSurfaceVariant,
-    required this.surfaceContainerHighest,
-    required this.surfaceContainerHigh,
     required this.surfaceContainer,
-    required this.surfaceContainerLow,
-    required this.surfaceContainerLowest,
+    required this.onSurfaceContainer,
     // Outline role
     required this.outline,
     required this.outlineVariant,
@@ -84,12 +74,6 @@ class ChromiaColors {
   final Color onSecondary;
   final Color secondaryContainer;
   final Color onSecondaryContainer;
-
-  // ── Tertiary ──────────────────────────────────────────────────────────────
-  final Color tertiary;
-  final Color onTertiary;
-  final Color tertiaryContainer;
-  final Color onTertiaryContainer;
 
   // ── Error ─────────────────────────────────────────────────────────────────
   final Color error;
@@ -118,13 +102,9 @@ class ChromiaColors {
   // ── Surface ───────────────────────────────────────────────────────────────
   final Color surface;
   final Color onSurface;
-  final Color surfaceVariant;
   final Color onSurfaceVariant;
-  final Color surfaceContainerHighest;
-  final Color surfaceContainerHigh;
   final Color surfaceContainer;
-  final Color surfaceContainerLow;
-  final Color surfaceContainerLowest;
+  final Color onSurfaceContainer;
 
   // ── Outline ───────────────────────────────────────────────────────────────
   final Color outline;
@@ -142,35 +122,45 @@ class ChromiaColors {
 
   // ── State Variations ──────────────────────────────────────────────────────
   Color get primaryHover => _adjustBrightness(primary, isDark ? 0.1 : -0.1);
+
   Color get primaryPressed => _adjustBrightness(primary, isDark ? 0.2 : -0.2);
+
   Color get primaryDisabled => _adjustBrightness(primary, isDark ? -0.3 : 0.3);
 
   Color get secondaryHover => _adjustBrightness(secondary, isDark ? 0.1 : -0.1);
+
   Color get secondaryPressed => _adjustBrightness(secondary, isDark ? 0.2 : -0.2);
+
   Color get secondaryDisabled => _adjustBrightness(secondary, isDark ? -0.3 : 0.3);
 
-  Color get tertiaryHover => _adjustBrightness(tertiary, isDark ? 0.1 : -0.1);
-  Color get tertiaryPressed => _adjustBrightness(tertiary, isDark ? 0.2 : -0.2);
-  Color get tertiaryDisabled => _adjustBrightness(tertiary, isDark ? -0.3 : 0.3);
-
   Color get errorHover => _adjustBrightness(error, isDark ? 0.1 : -0.1);
+
   Color get errorPressed => _adjustBrightness(error, isDark ? 0.2 : -0.2);
+
   Color get errorDisabled => _adjustBrightness(error, isDark ? -0.3 : 0.3);
 
   Color get successHover => _adjustBrightness(success, isDark ? 0.1 : -0.1);
+
   Color get successPressed => _adjustBrightness(success, isDark ? 0.2 : -0.2);
+
   Color get successDisabled => _adjustBrightness(success, isDark ? -0.3 : 0.3);
 
   Color get warningHover => _adjustBrightness(warning, isDark ? 0.1 : -0.1);
+
   Color get warningPressed => _adjustBrightness(warning, isDark ? 0.2 : -0.2);
+
   Color get warningDisabled => _adjustBrightness(warning, isDark ? -0.3 : 0.3);
 
   Color get infoHover => _adjustBrightness(info, isDark ? 0.1 : -0.1);
+
   Color get infoPressed => _adjustBrightness(info, isDark ? 0.2 : -0.2);
+
   Color get infoDisabled => _adjustBrightness(info, isDark ? -0.3 : 0.3);
 
   Color get surfaceHover => _adjustBrightness(surface, isDark ? 0.1 : -0.1);
+
   Color get surfacePressed => _adjustBrightness(surface, isDark ? 0.2 : -0.2);
+
   Color get surfaceDisabled => _adjustBrightness(surface, isDark ? -0.3 : 0.3);
 
   // ── Factories ─────────────────────────────────────────────────────────────
@@ -180,50 +170,41 @@ class ChromiaColors {
     return const ChromiaColors(
       brightness: Brightness.light,
       // Primary
-      primary: ColorTokens.primary600,
-      onPrimary: ColorTokens.neutral0,
-      primaryContainer: ColorTokens.primary100,
-      onPrimaryContainer: ColorTokens.primary900,
+      primary: ChromiaBrandColorTokens.primaryLight,
+      onPrimary: ChromiaBrandColorTokens.onPrimaryLight,
+      primaryContainer: ChromiaBrandColorTokens.primaryContainerLight,
+      onPrimaryContainer: ChromiaBrandColorTokens.onPrimaryContainerLight,
       // Secondary
-      secondary: ColorTokens.secondary600,
-      onSecondary: ColorTokens.neutral0,
-      secondaryContainer: ColorTokens.secondary100,
-      onSecondaryContainer: ColorTokens.secondary900,
-      // Tertiary
-      tertiary: ColorTokens.tertiary600,
-      onTertiary: ColorTokens.neutral0,
-      tertiaryContainer: ColorTokens.tertiary100,
-      onTertiaryContainer: ColorTokens.tertiary900,
+      secondary: ChromiaBrandColorTokens.secondaryLight,
+      onSecondary: ChromiaBrandColorTokens.onSecondaryLight,
+      secondaryContainer: ChromiaBrandColorTokens.secondaryContainerLight,
+      onSecondaryContainer: ChromiaBrandColorTokens.onSecondaryContainerLight,
       // Error
-      error: ColorTokens.error600,
-      onError: ColorTokens.neutral0,
-      errorContainer: ColorTokens.error100,
-      onErrorContainer: ColorTokens.error900,
+      error: ColorTokens.errorLight,
+      onError: ColorTokens.onErrorLight,
+      errorContainer: ColorTokens.errorContainerLight,
+      onErrorContainer: ColorTokens.onErrorContainerLight,
       // Success
-      success: ColorTokens.success600,
-      onSuccess: ColorTokens.neutral0,
-      successContainer: ColorTokens.success100,
-      onSuccessContainer: ColorTokens.success900,
+      success: ColorTokens.successLight,
+      onSuccess: ColorTokens.onSuccessLight,
+      successContainer: ColorTokens.successContainerLight,
+      onSuccessContainer: ColorTokens.onSuccessContainerLight,
       // Warning
-      warning: ColorTokens.warning600,
-      onWarning: ColorTokens.neutral0,
-      warningContainer: ColorTokens.warning100,
-      onWarningContainer: ColorTokens.warning900,
+      warning: ColorTokens.warningLight,
+      onWarning: ColorTokens.onWarningLight,
+      warningContainer: ColorTokens.warningContainerLight,
+      onWarningContainer: ColorTokens.onWarningContainerLight,
       // Info
-      info: ColorTokens.info600,
-      onInfo: ColorTokens.neutral0,
-      infoContainer: ColorTokens.info100,
-      onInfoContainer: ColorTokens.info900,
+      info: ColorTokens.infoLight,
+      onInfo: ColorTokens.onInfoLight,
+      infoContainer: ColorTokens.infoContainerLight,
+      onInfoContainer: ColorTokens.onInfoContainerLight,
       // Surface
       surface: ColorTokens.surfaceLight,
       onSurface: ColorTokens.onSurfaceLight,
-      surfaceVariant: ColorTokens.surfaceVariantLight,
       onSurfaceVariant: ColorTokens.onSurfaceVariantLight,
-      surfaceContainerHighest: ColorTokens.surfaceContainerHighestLight,
-      surfaceContainerHigh: ColorTokens.surfaceContainerHighLight,
       surfaceContainer: ColorTokens.surfaceContainerLight,
-      surfaceContainerLow: ColorTokens.surfaceContainerLowLight,
-      surfaceContainerLowest: ColorTokens.surfaceContainerLowestLight,
+      onSurfaceContainer: ColorTokens.onSurfaceContainerLight,
       // Outline
       outline: ColorTokens.neutral300,
       outlineVariant: ColorTokens.neutral400,
@@ -240,50 +221,41 @@ class ChromiaColors {
     return const ChromiaColors(
       brightness: Brightness.dark,
       // Primary
-      primary: ColorTokens.primary400,
-      onPrimary: ColorTokens.neutral900,
-      primaryContainer: ColorTokens.primary800,
-      onPrimaryContainer: ColorTokens.primary100,
+      primary: ChromiaBrandColorTokens.primaryDark,
+      onPrimary: ChromiaBrandColorTokens.onPrimaryDark,
+      primaryContainer: ChromiaBrandColorTokens.primaryContainerDark,
+      onPrimaryContainer: ChromiaBrandColorTokens.onPrimaryContainerDark,
       // Secondary
-      secondary: ColorTokens.secondary400,
-      onSecondary: ColorTokens.neutral900,
-      secondaryContainer: ColorTokens.secondary800,
-      onSecondaryContainer: ColorTokens.secondary100,
-      // Tertiary
-      tertiary: ColorTokens.tertiary400,
-      onTertiary: ColorTokens.neutral900,
-      tertiaryContainer: ColorTokens.tertiary800,
-      onTertiaryContainer: ColorTokens.tertiary100,
+      secondary: ChromiaBrandColorTokens.secondaryDark,
+      onSecondary: ChromiaBrandColorTokens.onSecondaryDark,
+      secondaryContainer: ChromiaBrandColorTokens.secondaryContainerDark,
+      onSecondaryContainer: ChromiaBrandColorTokens.onSecondaryContainerDark,
       // Error
-      error: ColorTokens.error400,
-      onError: ColorTokens.neutral900,
-      errorContainer: ColorTokens.error800,
-      onErrorContainer: ColorTokens.error100,
+      error: ColorTokens.errorDark,
+      onError: ColorTokens.onErrorDark,
+      errorContainer: ColorTokens.errorContainerDark,
+      onErrorContainer: ColorTokens.onErrorContainerDark,
       // Success
-      success: ColorTokens.success400,
-      onSuccess: ColorTokens.neutral900,
-      successContainer: ColorTokens.success800,
-      onSuccessContainer: ColorTokens.success100,
+      success: ColorTokens.successDark,
+      onSuccess: ColorTokens.onSuccessDark,
+      successContainer: ColorTokens.successContainerDark,
+      onSuccessContainer: ColorTokens.onSuccessContainerDark,
       // Warning
-      warning: ColorTokens.warning400,
-      onWarning: ColorTokens.neutral900,
-      warningContainer: ColorTokens.warning800,
-      onWarningContainer: ColorTokens.warning100,
+      warning: ColorTokens.warningDark,
+      onWarning: ColorTokens.onWarningDark,
+      warningContainer: ColorTokens.warningContainerDark,
+      onWarningContainer: ColorTokens.onWarningContainerDark,
       // Info
-      info: ColorTokens.info400,
-      onInfo: ColorTokens.neutral900,
-      infoContainer: ColorTokens.info800,
-      onInfoContainer: ColorTokens.info100,
+      info: ColorTokens.infoDark,
+      onInfo: ColorTokens.onInfoDark,
+      infoContainer: ColorTokens.infoContainerDark,
+      onInfoContainer: ColorTokens.onInfoContainerDark,
       // Surface
       surface: ColorTokens.surfaceDark,
       onSurface: ColorTokens.onSurfaceDark,
-      surfaceVariant: ColorTokens.surfaceVariantDark,
       onSurfaceVariant: ColorTokens.onSurfaceVariantDark,
-      surfaceContainerHighest: ColorTokens.surfaceContainerHighestDark,
-      surfaceContainerHigh: ColorTokens.surfaceContainerHighDark,
       surfaceContainer: ColorTokens.surfaceContainerDark,
-      surfaceContainerLow: ColorTokens.surfaceContainerLowDark,
-      surfaceContainerLowest: ColorTokens.surfaceContainerLowestDark,
+      onSurfaceContainer: ColorTokens.onSurfaceContainerDark,
       // Outline
       outline: ColorTokens.neutral700,
       outlineVariant: ColorTokens.neutral600,
@@ -295,15 +267,30 @@ class ChromiaColors {
     );
   }
 
-  /// Creates a color scheme from a primary color
-  factory ChromiaColors.fromPrimary(Color primaryColor, {bool isDark = false}) {
-    final ChromiaColors base = isDark ? ChromiaColors.dark() : ChromiaColors.light();
-
-    return base.copyWith(
-      primary: primaryColor,
-      primaryContainer: _adjustBrightness(primaryColor, isDark ? -0.4 : 0.4),
-      onPrimaryContainer: _adjustBrightness(primaryColor, isDark ? 0.5 : -0.5),
-    );
+  /// Create a color scheme from a [ChromiaBrandColorConfig]
+  factory ChromiaColors.fromBrandColorConfig(ChromiaBrandColorConfig colorConfig, {bool isDark = false}) {
+    final ChromiaColors base = isDark
+        ? ChromiaColors.dark().copyWith(
+            primary: colorConfig.primaryDark,
+            onPrimary: colorConfig.onPrimaryDark,
+            primaryContainer: colorConfig.primaryContainerDark,
+            onPrimaryContainer: colorConfig.onPrimaryContainerDark,
+            secondary: colorConfig.secondaryDark,
+            onSecondary: colorConfig.onSecondaryDark,
+            secondaryContainer: colorConfig.secondaryContainerDark,
+            onSecondaryContainer: colorConfig.onSecondaryContainerDark,
+          )
+        : ChromiaColors.light().copyWith(
+            primary: colorConfig.primaryLight,
+            onPrimary: colorConfig.onPrimaryLight,
+            primaryContainer: colorConfig.primaryContainerLight,
+            onPrimaryContainer: colorConfig.onPrimaryContainerLight,
+            secondary: colorConfig.secondaryLight,
+            onSecondary: colorConfig.onSecondaryLight,
+            secondaryContainer: colorConfig.secondaryContainerLight,
+            onSecondaryContainer: colorConfig.onSecondaryContainerLight,
+          );
+    return base;
   }
 
   /// Adjusts the brightness of a color
@@ -327,11 +314,6 @@ class ChromiaColors {
     Color? onSecondary,
     Color? secondaryContainer,
     Color? onSecondaryContainer,
-    // Tertiary
-    Color? tertiary,
-    Color? onTertiary,
-    Color? tertiaryContainer,
-    Color? onTertiaryContainer,
     // Error
     Color? error,
     Color? onError,
@@ -355,13 +337,9 @@ class ChromiaColors {
     // Surface
     Color? surface,
     Color? onSurface,
-    Color? surfaceVariant,
     Color? onSurfaceVariant,
-    Color? surfaceContainerHighest,
-    Color? surfaceContainerHigh,
     Color? surfaceContainer,
-    Color? surfaceContainerLow,
-    Color? surfaceContainerLowest,
+    Color? onSurfaceContainer,
     // Outline
     Color? outline,
     Color? outlineVariant,
@@ -383,11 +361,6 @@ class ChromiaColors {
       onSecondary: onSecondary ?? this.onSecondary,
       secondaryContainer: secondaryContainer ?? this.secondaryContainer,
       onSecondaryContainer: onSecondaryContainer ?? this.onSecondaryContainer,
-      // Tertiary
-      tertiary: tertiary ?? this.tertiary,
-      onTertiary: onTertiary ?? this.onTertiary,
-      tertiaryContainer: tertiaryContainer ?? this.tertiaryContainer,
-      onTertiaryContainer: onTertiaryContainer ?? this.onTertiaryContainer,
       // Error
       error: error ?? this.error,
       onError: onError ?? this.onError,
@@ -411,13 +384,9 @@ class ChromiaColors {
       // Surface
       surface: surface ?? this.surface,
       onSurface: onSurface ?? this.onSurface,
-      surfaceVariant: surfaceVariant ?? this.surfaceVariant,
       onSurfaceVariant: onSurfaceVariant ?? this.onSurfaceVariant,
-      surfaceContainerHighest: surfaceContainerHighest ?? this.surfaceContainerHighest,
-      surfaceContainerHigh: surfaceContainerHigh ?? this.surfaceContainerHigh,
       surfaceContainer: surfaceContainer ?? this.surfaceContainer,
-      surfaceContainerLow: surfaceContainerLow ?? this.surfaceContainerLow,
-      surfaceContainerLowest: surfaceContainerLowest ?? this.surfaceContainerLowest,
+      onSurfaceContainer: onSurfaceContainer ?? this.onSurfaceContainer,
       // Outline
       outline: outline ?? this.outline,
       outlineVariant: outlineVariant ?? this.outlineVariant,

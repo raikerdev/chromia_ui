@@ -2,7 +2,7 @@ part of 'theme_cubit.dart';
 
 class ThemeState extends Equatable {
   final ThemeMode themeMode;
-  final BrandConfig selectedBrand;
+  final ChromiaBrandConfig selectedBrand;
 
   const ThemeState({
     this.themeMode = ThemeMode.light,
@@ -11,7 +11,7 @@ class ThemeState extends Equatable {
 
   bool get isDark => themeMode == ThemeMode.dark;
 
-  ThemeState copyWith({ThemeMode? themeMode, BrandConfig? selectedBrand}) => ThemeState(
+  ThemeState copyWith({ThemeMode? themeMode, ChromiaBrandConfig? selectedBrand}) => ThemeState(
     themeMode: themeMode ?? this.themeMode,
     selectedBrand: selectedBrand ?? this.selectedBrand,
   );

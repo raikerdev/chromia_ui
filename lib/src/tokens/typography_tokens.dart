@@ -7,26 +7,19 @@ import 'package:flutter/material.dart';
 class TypographyTokens {
   TypographyTokens._();
 
-  // Font families
-  static const String defaultFontFamily = 'Roboto';
-  static const String monospaceFontFamily = 'RobotoMono';
-
   // Font sizes
   static const double fontSize10 = 10.0;
+  static const double fontSize11 = 11.0;
   static const double fontSize12 = 12.0;
   static const double fontSize14 = 14.0;
   static const double fontSize16 = 16.0;
-  static const double fontSize18 = 18.0;
-  static const double fontSize20 = 20.0;
+  static const double fontSize22 = 22.0;
   static const double fontSize24 = 24.0;
   static const double fontSize28 = 28.0;
   static const double fontSize32 = 32.0;
   static const double fontSize36 = 36.0;
-  static const double fontSize40 = 40.0;
-  static const double fontSize48 = 48.0;
-  static const double fontSize56 = 56.0;
-  static const double fontSize64 = 64.0;
-  static const double fontSize72 = 72.0;
+  static const double fontSize45 = 45.0;
+  static const double fontSize57 = 57.0;
 
   // Font weights
   static const FontWeight thin = FontWeight.w100;
@@ -55,20 +48,17 @@ class TypographyTokens {
   /// Returns all font sizes as a map
   static Map<String, double> get allFontSizes => {
     'fontSize10': fontSize10,
+    'fontSize11': fontSize11,
     'fontSize12': fontSize12,
     'fontSize14': fontSize14,
     'fontSize16': fontSize16,
-    'fontSize18': fontSize18,
-    'fontSize20': fontSize20,
+    'fontSize22': fontSize22,
     'fontSize24': fontSize24,
     'fontSize28': fontSize28,
     'fontSize32': fontSize32,
     'fontSize36': fontSize36,
-    'fontSize40': fontSize40,
-    'fontSize48': fontSize48,
-    'fontSize56': fontSize56,
-    'fontSize64': fontSize64,
-    'fontSize72': fontSize72,
+    'fontSize45': fontSize45,
+    'fontSize57': fontSize57,
   };
 
   /// Returns all font weights as a map

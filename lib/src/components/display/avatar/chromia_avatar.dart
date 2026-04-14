@@ -242,7 +242,7 @@ class ChromiaAvatarGroup extends StatelessWidget {
                 ),
                 child: ChromiaAvatar(
                   size: size,
-                  backgroundColor: colors.surfaceContainerHigh,
+                  backgroundColor: colors.surfaceContainer,
                   child: Text(
                     '+$remainingCount',
                     style: theme.typography.labelSmall.copyWith(

@@ -35,7 +35,7 @@ class BrandsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildBrandSection(BuildContext context, BrandConfig selectedBrand) {
+  Widget _buildBrandSection(BuildContext context, ChromiaBrandConfig selectedBrand) {
     final theme = context.chromiaTheme;
     final colors = context.chromiaColors;
     final spacing = theme.spacing;
@@ -72,7 +72,7 @@ class BrandsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildThemeInfoSection(BuildContext context, BrandConfig selectedBrand, ThemeMode themeMode) {
+  Widget _buildThemeInfoSection(BuildContext context, ChromiaBrandConfig selectedBrand, ThemeMode themeMode) {
     final theme = context.chromiaTheme;
     final colors = context.chromiaColors;
     final spacing = theme.spacing;
@@ -133,7 +133,6 @@ class BrandsScreen extends StatelessWidget {
           children: [
             _ColorSwatch(name: 'Primary', color: colors.primary),
             _ColorSwatch(name: 'Secondary', color: colors.secondary),
-            _ColorSwatch(name: 'Tertiary', color: colors.tertiary),
             _ColorSwatch(name: 'Success', color: colors.success),
             _ColorSwatch(name: 'Warning', color: colors.warning),
             _ColorSwatch(name: 'Error', color: colors.error),

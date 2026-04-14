@@ -91,7 +91,7 @@ class ChromiaDropdown<T> extends StatelessWidget {
             vertical: spacing.xs,
           ),
           decoration: BoxDecoration(
-            color: enabled ? colors.surfaceContainerHigh : colors.surfaceVariant,
+            color: enabled ? colors.surfaceContainer : colors.surfaceContainer,
             borderRadius: theme.radius.radiusM,
             border: Border.all(
               color: hasError
@@ -243,7 +243,7 @@ class ChromiaRichDropdown<T> extends StatelessWidget {
             vertical: spacing.xs,
           ),
           decoration: BoxDecoration(
-            color: enabled ? colors.surfaceContainerHigh : colors.surfaceVariant,
+            color: enabled ? colors.surfaceContainer : colors.surfaceContainer,
             borderRadius: theme.radius.radiusM,
             border: Border.all(
               color: hasError

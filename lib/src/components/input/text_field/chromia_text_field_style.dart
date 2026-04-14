@@ -109,9 +109,9 @@ class ChromiaTextFieldStyle {
   factory ChromiaTextFieldStyle.filled(ChromiaThemeData theme) {
     return ChromiaTextFieldStyle(
       fillColor: theme.colors.surfaceContainer,
-      focusedFillColor: theme.colors.surfaceContainerHigh,
+      focusedFillColor: theme.colors.surfaceContainer,
       errorFillColor: theme.colors.errorContainer,
-      disabledFillColor: theme.colors.surfaceVariant,
+      disabledFillColor: theme.colors.surfaceContainer,
       textColor: theme.colors.onSurface,
       hintColor: theme.colors.onSurfaceVariant,
       labelColor: theme.colors.onSurfaceVariant,
@@ -144,7 +144,7 @@ class ChromiaTextFieldStyle {
       fillColor: theme.colors.transparent,
       focusedFillColor: theme.colors.transparent,
       errorFillColor: theme.colors.transparent,
-      disabledFillColor: theme.colors.surfaceVariant,
+      disabledFillColor: theme.colors.surfaceContainer,
       textColor: theme.colors.onSurface,
       hintColor: theme.colors.onSurfaceVariant,
       labelColor: theme.colors.onSurfaceVariant,

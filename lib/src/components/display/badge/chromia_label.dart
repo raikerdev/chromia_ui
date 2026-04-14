@@ -36,7 +36,7 @@ class ChromiaLabel extends StatelessWidget {
     final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
-    final Color effectiveBackgroundColor = backgroundColor ?? colors.surfaceContainerHigh;
+    final Color effectiveBackgroundColor = backgroundColor ?? colors.surfaceContainer;
     final Color effectiveTextColor = textColor ?? colors.onSurface;
 
     return Container(

@@ -50,7 +50,7 @@ class ChromiaLinearProgress extends StatelessWidget {
     final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
-    final Color effectiveBackgroundColor = backgroundColor ?? colors.surfaceVariant;
+    final Color effectiveBackgroundColor = backgroundColor ?? colors.surfaceContainer;
     final Color effectiveColor = color ?? colors.primary;
     final BorderRadius effectiveBorderRadius = borderRadius ?? BorderRadius.circular(height / 2);
 

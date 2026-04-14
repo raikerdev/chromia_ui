@@ -238,7 +238,7 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
               children: [
                 ChromiaText(
                   widget.language.name,
-                  type: ChromiaTypographyType.code,
+                  type: ChromiaTypographyType.bodyMedium,
                   color: isDark ? const Color(0xFF5C6370) : const Color(0xFF9E9E9E),
                 ),
                 const Spacer(),

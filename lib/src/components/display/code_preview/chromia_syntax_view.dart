@@ -52,7 +52,7 @@ class ChromiaSyntaxViewState extends State<ChromiaSyntaxView> {
   Widget build(BuildContext context) {
     final theme = context.chromiaTheme;
     final isDark = theme.brightness == Brightness.dark;
-    final fontFamily = theme.typography.code.fontFamily;
+    final fontFamily = theme.typography.bodyMedium.fontFamily;
 
     return Stack(
       alignment: AlignmentDirectional.bottomEnd,

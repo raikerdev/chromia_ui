@@ -31,8 +31,6 @@ class ChromiaTypography {
     // Caption styles
     required this.caption,
     required this.overline,
-    // Code style
-    required this.code,
   });
 
   // Display styles (largest text)
@@ -64,79 +62,67 @@ class ChromiaTypography {
   final TextStyle caption;
   final TextStyle overline;
 
-  // Code style
-  final TextStyle code;
-
   /// Default typography configuration
   factory ChromiaTypography.defaultTypography() {
     return const ChromiaTypography(
       // Display styles
       displayLarge: TextStyle(
-        fontSize: TypographyTokens.fontSize72,
-        fontWeight: TypographyTokens.bold,
+        fontSize: TypographyTokens.fontSize57,
+        fontWeight: TypographyTokens.regular,
         height: TypographyTokens.lineHeightTight,
         letterSpacing: TypographyTokens.letterSpacingTight,
-        fontFamily: TypographyTokens.defaultFontFamily,
       ),
       displayMedium: TextStyle(
-        fontSize: TypographyTokens.fontSize56,
-        fontWeight: TypographyTokens.bold,
+        fontSize: TypographyTokens.fontSize45,
+        fontWeight: TypographyTokens.regular,
         height: TypographyTokens.lineHeightTight,
         letterSpacing: TypographyTokens.letterSpacingNormal,
-        fontFamily: TypographyTokens.defaultFontFamily,
       ),
       displaySmall: TextStyle(
-        fontSize: TypographyTokens.fontSize48,
-        fontWeight: TypographyTokens.semiBold,
+        fontSize: TypographyTokens.fontSize36,
+        fontWeight: TypographyTokens.regular,
         height: TypographyTokens.lineHeightTight,
         letterSpacing: TypographyTokens.letterSpacingNormal,
-        fontFamily: TypographyTokens.defaultFontFamily,
       ),
 
       // Headline styles
       headlineLarge: TextStyle(
-        fontSize: TypographyTokens.fontSize40,
-        fontWeight: TypographyTokens.semiBold,
+        fontSize: TypographyTokens.fontSize32,
+        fontWeight: TypographyTokens.regular,
         height: TypographyTokens.lineHeightTight,
         letterSpacing: TypographyTokens.letterSpacingNormal,
-        fontFamily: TypographyTokens.defaultFontFamily,
       ),
       headlineMedium: TextStyle(
-        fontSize: TypographyTokens.fontSize32,
-        fontWeight: TypographyTokens.semiBold,
+        fontSize: TypographyTokens.fontSize28,
+        fontWeight: TypographyTokens.regular,
         height: TypographyTokens.lineHeightNormal,
         letterSpacing: TypographyTokens.letterSpacingNormal,
-        fontFamily: TypographyTokens.defaultFontFamily,
       ),
       headlineSmall: TextStyle(
-        fontSize: TypographyTokens.fontSize28,
-        fontWeight: TypographyTokens.medium,
+        fontSize: TypographyTokens.fontSize24,
+        fontWeight: TypographyTokens.regular,
         height: TypographyTokens.lineHeightNormal,
         letterSpacing: TypographyTokens.letterSpacingNormal,
-        fontFamily: TypographyTokens.defaultFontFamily,
       ),
 
       // Title styles
       titleLarge: TextStyle(
-        fontSize: TypographyTokens.fontSize24,
-        fontWeight: TypographyTokens.medium,
+        fontSize: TypographyTokens.fontSize22,
+        fontWeight: TypographyTokens.regular,
         height: TypographyTokens.lineHeightNormal,
         letterSpacing: TypographyTokens.letterSpacingNormal,
-        fontFamily: TypographyTokens.defaultFontFamily,
       ),
       titleMedium: TextStyle(
-        fontSize: TypographyTokens.fontSize20,
+        fontSize: TypographyTokens.fontSize16,
         fontWeight: TypographyTokens.medium,
         height: TypographyTokens.lineHeightNormal,
         letterSpacing: TypographyTokens.letterSpacingNormal,
-        fontFamily: TypographyTokens.defaultFontFamily,
       ),
       titleSmall: TextStyle(
-        fontSize: TypographyTokens.fontSize18,
+        fontSize: TypographyTokens.fontSize14,
         fontWeight: TypographyTokens.medium,
         height: TypographyTokens.lineHeightNormal,
         letterSpacing: TypographyTokens.letterSpacingNormal,
-        fontFamily: TypographyTokens.defaultFontFamily,
       ),
 
       // Body styles
@@ -145,44 +131,38 @@ class ChromiaTypography {
         fontWeight: TypographyTokens.regular,
         height: TypographyTokens.lineHeightNormal,
         letterSpacing: TypographyTokens.letterSpacingNormal,
-        fontFamily: TypographyTokens.defaultFontFamily,
       ),
       bodyMedium: TextStyle(
         fontSize: TypographyTokens.fontSize14,
         fontWeight: TypographyTokens.regular,
         height: TypographyTokens.lineHeightNormal,
         letterSpacing: TypographyTokens.letterSpacingNormal,
-        fontFamily: TypographyTokens.defaultFontFamily,
       ),
       bodySmall: TextStyle(
         fontSize: TypographyTokens.fontSize12,
         fontWeight: TypographyTokens.regular,
         height: TypographyTokens.lineHeightNormal,
         letterSpacing: TypographyTokens.letterSpacingNormal,
-        fontFamily: TypographyTokens.defaultFontFamily,
       ),
 
       // Label styles
       labelLarge: TextStyle(
-        fontSize: TypographyTokens.fontSize16,
-        fontWeight: TypographyTokens.medium,
-        height: TypographyTokens.lineHeightNormal,
-        letterSpacing: TypographyTokens.letterSpacingWide,
-        fontFamily: TypographyTokens.defaultFontFamily,
-      ),
-      labelMedium: TextStyle(
         fontSize: TypographyTokens.fontSize14,
         fontWeight: TypographyTokens.medium,
         height: TypographyTokens.lineHeightNormal,
         letterSpacing: TypographyTokens.letterSpacingWide,
-        fontFamily: TypographyTokens.defaultFontFamily,
       ),
-      labelSmall: TextStyle(
+      labelMedium: TextStyle(
         fontSize: TypographyTokens.fontSize12,
         fontWeight: TypographyTokens.medium,
         height: TypographyTokens.lineHeightNormal,
         letterSpacing: TypographyTokens.letterSpacingWide,
-        fontFamily: TypographyTokens.defaultFontFamily,
+      ),
+      labelSmall: TextStyle(
+        fontSize: TypographyTokens.fontSize11,
+        fontWeight: TypographyTokens.medium,
+        height: TypographyTokens.lineHeightNormal,
+        letterSpacing: TypographyTokens.letterSpacingWide,
       ),
 
       // Caption styles
@@ -191,23 +171,12 @@ class ChromiaTypography {
         fontWeight: TypographyTokens.regular,
         height: TypographyTokens.lineHeightNormal,
         letterSpacing: TypographyTokens.letterSpacingNormal,
-        fontFamily: TypographyTokens.defaultFontFamily,
       ),
       overline: TextStyle(
         fontSize: TypographyTokens.fontSize10,
         fontWeight: TypographyTokens.medium,
         height: TypographyTokens.lineHeightNormal,
         letterSpacing: TypographyTokens.letterSpacingWidest,
-        fontFamily: TypographyTokens.defaultFontFamily,
-      ),
-
-      // Code style
-      code: TextStyle(
-        fontSize: TypographyTokens.fontSize14,
-        fontWeight: TypographyTokens.regular,
-        height: TypographyTokens.lineHeightRelaxed,
-        letterSpacing: TypographyTokens.letterSpacingNormal,
-        fontFamily: TypographyTokens.monospaceFontFamily,
       ),
     );
   }
@@ -231,7 +200,6 @@ class ChromiaTypography {
     TextStyle? labelSmall,
     TextStyle? caption,
     TextStyle? overline,
-    TextStyle? code,
   }) {
     return ChromiaTypography(
       displayLarge: displayLarge ?? this.displayLarge,
@@ -251,7 +219,6 @@ class ChromiaTypography {
       labelSmall: labelSmall ?? this.labelSmall,
       caption: caption ?? this.caption,
       overline: overline ?? this.overline,
-      code: code ?? this.code,
     );
   }
 
@@ -275,7 +242,6 @@ class ChromiaTypography {
       labelSmall: labelSmall.copyWith(color: color),
       caption: caption.copyWith(color: color),
       overline: overline.copyWith(color: color),
-      code: code.copyWith(color: color),
     );
   }
 }
@@ -303,9 +269,8 @@ enum ChromiaTypographyType {
   labelSmall,
   // Caption styles
   caption,
-  overline,
-  // Code style
-  code;
+  overline
+  ;
 
   TextStyle getTextStyle(BuildContext context) {
     final typography = context.chromiaTheme.typography;
@@ -344,8 +309,6 @@ enum ChromiaTypographyType {
         return typography.caption;
       case ChromiaTypographyType.overline:
         return typography.overline;
-      case ChromiaTypographyType.code:
-        return typography.code;
     }
   }
 }

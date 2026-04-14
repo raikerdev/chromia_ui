@@ -54,7 +54,7 @@ class ChromiaCircularProgress extends StatelessWidget {
     final theme = context.chromiaTheme;
     final colors = context.chromiaColors;
 
-    final Color effectiveBackgroundColor = backgroundColor ?? colors.surfaceVariant;
+    final Color effectiveBackgroundColor = backgroundColor ?? colors.surfaceContainer;
     final Color effectiveColor = color ?? colors.primary;
 
     Widget centerWidget;

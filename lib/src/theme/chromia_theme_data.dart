@@ -1,10 +1,4 @@
-import 'package:chromia_ui/src/theme/brand/brand_config.dart';
-import 'package:chromia_ui/src/theme/brand/brand_theme_extension.dart';
-import 'package:chromia_ui/src/theme/chromia_colors.dart';
-import 'package:chromia_ui/src/theme/chromia_radius.dart';
-import 'package:chromia_ui/src/theme/chromia_shadows.dart';
-import 'package:chromia_ui/src/theme/chromia_spacing.dart';
-import 'package:chromia_ui/src/theme/chromia_typography.dart';
+import 'package:chromia_ui/chromia_ui.dart';
 import 'package:flutter/material.dart';
 
 /// Main theme data class for Chromia UI.
@@ -38,7 +32,7 @@ class ChromiaThemeData {
   final ChromiaShadows shadows;
 
   /// Brand configuration (optional)
-  final BrandConfig? brandConfig;
+  final ChromiaBrandConfig? brandConfig;
 
   /// Theme brightness
   final Brightness brightness;
@@ -75,28 +69,23 @@ class ChromiaThemeData {
 
   /// Creates a theme from a brand configuration
   factory ChromiaThemeData.fromBrand(
-    BrandConfig brandConfig, {
+    ChromiaBrandConfig brandConfig, {
     bool isDark = false,
   }) {
     final ChromiaThemeData baseTheme = isDark ? ChromiaThemeData.dark() : ChromiaThemeData.light();
 
-    final ChromiaColors brandColors =
-        ChromiaColors.fromPrimary(
-          brandConfig.primaryColor,
-          isDark: isDark,
-        ).copyWith(
-          secondary: brandConfig.secondaryColor ?? baseTheme.colors.secondary,
-          tertiary: brandConfig.tertiaryColor ?? baseTheme.colors.tertiary,
-        );
+    final ChromiaColors brandColors = ChromiaColors.fromBrandColorConfig(
+      brandConfig.colorConfig,
+      isDark: isDark,
+    );
 
     ChromiaTypography brandTypography = baseTheme.typography;
 
     // Apply custom font family if provided
-    if (brandConfig.fontFamily != null) {
+    if (brandConfig.typographyConfig != null) {
       brandTypography = _applyFontFamily(
         brandTypography,
-        brandConfig.fontFamily!,
-        brandConfig.monospaceFontFamily,
+        brandConfig.typographyConfig!,
       );
     }
 
@@ -114,28 +103,26 @@ class ChromiaThemeData {
   /// Applies a font family to all text styles in the typography
   static ChromiaTypography _applyFontFamily(
     ChromiaTypography typography,
-    String fontFamily,
-    String? monospaceFontFamily,
+    ChromiaBrandTypographyConfig typographyConfig,
   ) {
     return ChromiaTypography(
-      displayLarge: typography.displayLarge.copyWith(fontFamily: fontFamily),
-      displayMedium: typography.displayMedium.copyWith(fontFamily: fontFamily),
-      displaySmall: typography.displaySmall.copyWith(fontFamily: fontFamily),
-      headlineLarge: typography.headlineLarge.copyWith(fontFamily: fontFamily),
-      headlineMedium: typography.headlineMedium.copyWith(fontFamily: fontFamily),
-      headlineSmall: typography.headlineSmall.copyWith(fontFamily: fontFamily),
-      titleLarge: typography.titleLarge.copyWith(fontFamily: fontFamily),
-      titleMedium: typography.titleMedium.copyWith(fontFamily: fontFamily),
-      titleSmall: typography.titleSmall.copyWith(fontFamily: fontFamily),
-      bodyLarge: typography.bodyLarge.copyWith(fontFamily: fontFamily),
-      bodyMedium: typography.bodyMedium.copyWith(fontFamily: fontFamily),
-      bodySmall: typography.bodySmall.copyWith(fontFamily: fontFamily),
-      labelLarge: typography.labelLarge.copyWith(fontFamily: fontFamily),
-      labelMedium: typography.labelMedium.copyWith(fontFamily: fontFamily),
-      labelSmall: typography.labelSmall.copyWith(fontFamily: fontFamily),
-      caption: typography.caption.copyWith(fontFamily: fontFamily),
-      overline: typography.overline.copyWith(fontFamily: fontFamily),
-      code: typography.code.copyWith(fontFamily: monospaceFontFamily ?? fontFamily),
+      displayLarge: typography.displayLarge.copyWith(fontFamily: typographyConfig.displayFontFamily),
+      displayMedium: typography.displayMedium.copyWith(fontFamily: typographyConfig.displayFontFamily),
+      displaySmall: typography.displaySmall.copyWith(fontFamily: typographyConfig.displayFontFamily),
+      headlineLarge: typography.headlineLarge.copyWith(fontFamily: typographyConfig.headlineFontFamily),
+      headlineMedium: typography.headlineMedium.copyWith(fontFamily: typographyConfig.headlineFontFamily),
+      headlineSmall: typography.headlineSmall.copyWith(fontFamily: typographyConfig.headlineFontFamily),
+      titleLarge: typography.titleLarge.copyWith(fontFamily: typographyConfig.titleFontFamily),
+      titleMedium: typography.titleMedium.copyWith(fontFamily: typographyConfig.titleFontFamily),
+      titleSmall: typography.titleSmall.copyWith(fontFamily: typographyConfig.titleFontFamily),
+      bodyLarge: typography.bodyLarge.copyWith(fontFamily: typographyConfig.bodyFontFamily),
+      bodyMedium: typography.bodyMedium.copyWith(fontFamily: typographyConfig.bodyFontFamily),
+      bodySmall: typography.bodySmall.copyWith(fontFamily: typographyConfig.bodyFontFamily),
+      labelLarge: typography.labelLarge.copyWith(fontFamily: typographyConfig.labelFontFamily),
+      labelMedium: typography.labelMedium.copyWith(fontFamily: typographyConfig.labelFontFamily),
+      labelSmall: typography.labelSmall.copyWith(fontFamily: typographyConfig.labelFontFamily),
+      caption: typography.caption.copyWith(fontFamily: typographyConfig.bodyFontFamily),
+      overline: typography.overline.copyWith(fontFamily: typographyConfig.bodyFontFamily),
     );
   }
 
@@ -151,10 +138,6 @@ class ChromiaThemeData {
       onSecondary: colors.onSecondary,
       secondaryContainer: colors.secondaryContainer,
       onSecondaryContainer: colors.onSecondaryContainer,
-      tertiary: colors.tertiary,
-      onTertiary: colors.onTertiary,
-      tertiaryContainer: colors.tertiaryContainer,
-      onTertiaryContainer: colors.onTertiaryContainer,
       error: colors.error,
       onError: colors.onError,
       errorContainer: colors.errorContainer,
@@ -195,7 +178,7 @@ class ChromiaThemeData {
       scaffoldBackgroundColor: colors.surface,
       dividerColor: colors.outline,
       extensions: [
-        if (brandConfig != null) BrandThemeExtension(brandConfig: brandConfig!),
+        if (brandConfig != null) ChromiaBrandThemeExtension(brandConfig: brandConfig!),
       ],
     );
   }
@@ -207,7 +190,7 @@ class ChromiaThemeData {
     ChromiaSpacing? spacing,
     ChromiaRadius? radius,
     ChromiaShadows? shadows,
-    BrandConfig? brandConfig,
+    ChromiaBrandConfig? brandConfig,
     Brightness? brightness,
   }) {
     return ChromiaThemeData(

@@ -115,7 +115,7 @@ class ChromiaChip extends StatelessWidget {
     final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
-    final Color effectiveBackgroundColor = backgroundColor ?? colors.surfaceContainerHigh;
+    final Color effectiveBackgroundColor = backgroundColor ?? colors.surfaceContainer;
     final Color effectiveForegroundColor = foregroundColor ?? colors.onSurface;
     final Color effectiveDeleteIconColor = deleteIconColor ?? colors.onSurfaceVariant;
 
@@ -211,7 +211,7 @@ class _ChromiaFilterChip extends ChromiaChip {
 
     final Color effectiveBackgroundColor = selected
         ? (selectedBackgroundColor ?? colors.surface)
-        : (backgroundColor ?? colors.surfaceContainerHigh);
+        : (backgroundColor ?? colors.surfaceContainer);
 
     final Color effectiveForegroundColor = selected
         ? (selectedForegroundColor ?? colors.primary)
@@ -289,7 +289,7 @@ class _ChromiaChoiceChip extends ChromiaChip {
 
     final Color effectiveBackgroundColor = selected
         ? (selectedBackgroundColor ?? colors.primary)
-        : (backgroundColor ?? colors.surfaceContainerHigh);
+        : (backgroundColor ?? colors.surfaceContainer);
 
     final Color effectiveForegroundColor = selected
         ? (selectedForegroundColor ?? colors.onPrimary)

@@ -142,7 +142,7 @@ class ChromiaButtonStyle {
     return ChromiaButtonStyle(
       backgroundColor: theme.colors.primaryContainer,
       foregroundColor: theme.colors.onPrimaryContainer,
-      disabledBackgroundColor: theme.colors.surfaceVariant,
+      disabledBackgroundColor: theme.colors.surfaceContainer,
       disabledForegroundColor: theme.colors.textDisabled,
       hoverBackgroundColor: theme.colors.primaryHover,
       pressedBackgroundColor: theme.colors.primaryPressed,
@@ -162,7 +162,7 @@ class ChromiaButtonStyle {
     return ChromiaButtonStyle(
       backgroundColor: theme.colors.surface,
       foregroundColor: theme.colors.primary,
-      disabledBackgroundColor: theme.colors.surfaceVariant,
+      disabledBackgroundColor: theme.colors.surfaceContainer,
       disabledForegroundColor: theme.colors.textDisabled,
       hoverBackgroundColor: theme.colors.surfaceHover,
       pressedBackgroundColor: theme.colors.surfacePressed,

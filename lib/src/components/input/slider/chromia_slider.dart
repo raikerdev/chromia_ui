@@ -95,7 +95,7 @@ class ChromiaSlider extends StatelessWidget {
     final spacing = theme.spacing;
 
     final Color effectiveActiveColor = activeColor ?? colors.primary;
-    final Color effectiveInactiveColor = inactiveColor ?? colors.surfaceVariant;
+    final Color effectiveInactiveColor = inactiveColor ?? colors.surfaceContainer;
 
     final enabledThumbRadius = thumbRadius ?? trackHeight + 4;
 

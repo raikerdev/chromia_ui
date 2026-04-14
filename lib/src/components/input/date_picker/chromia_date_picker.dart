@@ -120,7 +120,7 @@ class ChromiaDatePicker extends StatelessWidget {
               vertical: spacing.m,
             ),
             decoration: BoxDecoration(
-              color: enabled ? colors.surfaceContainerHigh : colors.surfaceVariant,
+              color: enabled ? colors.surfaceContainer : colors.surfaceContainer,
               borderRadius: theme.radius.radiusM,
               border: Border.all(
                 color: hasError
@@ -274,7 +274,7 @@ class ChromiaTimePicker extends StatelessWidget {
               vertical: spacing.m,
             ),
             decoration: BoxDecoration(
-              color: enabled ? colors.surfaceContainerHigh : colors.surfaceVariant,
+              color: enabled ? colors.surfaceContainer : colors.surfaceContainer,
               borderRadius: theme.radius.radiusM,
               border: Border.all(
                 color: hasError
@@ -437,7 +437,7 @@ class ChromiaDateTimePicker extends StatelessWidget {
               vertical: spacing.m,
             ),
             decoration: BoxDecoration(
-              color: enabled ? colors.surfaceContainerHigh : colors.surfaceVariant,
+              color: enabled ? colors.surfaceContainer : colors.surfaceContainer,
               borderRadius: theme.radius.radiusM,
               border: Border.all(
                 color: hasError

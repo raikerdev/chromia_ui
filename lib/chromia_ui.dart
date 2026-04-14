@@ -101,12 +101,14 @@ export 'src/components/navigation/menu/chromia_menu.dart';
 // ============================================================================
 export 'src/foundation/constants.dart';
 export 'src/foundation/platform_detector.dart';
+export 'src/theme/brand/chromia_brand_color_config.dart';
 //
 // ============================================================================
 // THEME
 // ============================================================================
-export 'src/theme/brand/brand_config.dart';
-export 'src/theme/brand/brand_theme_extension.dart';
+export 'src/theme/brand/chromia_brand_config.dart';
+export 'src/theme/brand/chromia_brand_theme_extension.dart';
+export 'src/theme/brand/chromia_brand_typography_config.dart';
 export 'src/theme/chromia_colors.dart';
 export 'src/theme/chromia_radius.dart';
 export 'src/theme/chromia_shadows.dart';
@@ -120,7 +122,8 @@ export 'src/theme/chromia_typography.dart';
 // ============================================================================
 export 'src/tokens/animation_tokens.dart';
 export 'src/tokens/breakpoint_tokens.dart';
-export 'src/tokens/color_tokens.dart';
+export 'src/tokens/color/chromia_brand_color_tokens.dart';
+export 'src/tokens/color/color_tokens.dart';
 export 'src/tokens/spacing_tokens.dart';
 export 'src/tokens/typography_tokens.dart';
 //
