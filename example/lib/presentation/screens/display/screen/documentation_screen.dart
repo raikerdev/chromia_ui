@@ -188,26 +188,6 @@ ChromiaAvatar.icon(
                 size: ChromiaAvatarSize.large,
               ),
             ),
-            CodePreviewItem(
-              label: 'With Status',
-              code: '''
-ChromiaAvatarWithStatus(
-  avatar: ChromiaAvatar.initials(
-    initials: 'JD',
-    backgroundColor: colors.primary,
-    size: ChromiaAvatarSize.large,
-  ),
-  status: ChromiaAvatarStatus.online,
-)''',
-              preview: ChromiaAvatarWithStatus(
-                avatar: ChromiaAvatar.initials(
-                  initials: 'JD',
-                  backgroundColor: theme.colors.primary,
-                  size: ChromiaAvatarSize.large,
-                ),
-                status: ChromiaAvatarStatus.online,
-              ),
-            ),
           ],
         ),
         spacing.gapVXXL,

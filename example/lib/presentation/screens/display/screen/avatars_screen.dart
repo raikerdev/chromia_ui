@@ -65,29 +65,25 @@ class AvatarsScreen extends StatelessWidget {
           spacing: spacing.l,
           runSpacing: spacing.m,
           children: [
-            ChromiaAvatar(
+            ChromiaAvatar.image(
               imageProvider: const NetworkImage('https://picsum.photos/200'),
               backgroundColor: colors.primary,
               size: ChromiaAvatarSize.small,
-              child: Icon(Icons.person, color: colors.onPrimary),
             ),
-            ChromiaAvatar(
+            ChromiaAvatar.image(
               imageProvider: const NetworkImage('https://picsum.photos/200'),
               backgroundColor: colors.secondary,
               size: ChromiaAvatarSize.medium,
-              child: Icon(Icons.person, color: colors.onPrimary),
             ),
-            ChromiaAvatar(
+            ChromiaAvatar.image(
               imageProvider: const NetworkImage('https://picsum.photos/200'),
               backgroundColor: colors.success,
               size: ChromiaAvatarSize.large,
-              child: Icon(Icons.person, color: colors.onPrimary),
             ),
-            ChromiaAvatar(
+            ChromiaAvatar.image(
               imageProvider: const NetworkImage('https://picsum.photos/200'),
               backgroundColor: colors.warning,
               size: ChromiaAvatarSize.extraLarge,
-              child: Icon(Icons.person, color: colors.onPrimary),
             ),
           ],
         ),
@@ -196,53 +192,6 @@ class AvatarsScreen extends StatelessWidget {
         ),
         spacing.gapVL,
 
-        // Avatars with status
-        ChromiaText(
-          'Avatars with Status',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        Wrap(
-          spacing: spacing.xl,
-          runSpacing: spacing.m,
-          children: [
-            ChromiaAvatarWithStatus(
-              avatar: ChromiaAvatar.initials(
-                initials: 'ON',
-                backgroundColor: colors.primary,
-                size: ChromiaAvatarSize.large,
-              ),
-              status: ChromiaAvatarStatus.online,
-            ),
-            ChromiaAvatarWithStatus(
-              avatar: ChromiaAvatar.initials(
-                initials: 'BY',
-                backgroundColor: colors.error,
-                size: ChromiaAvatarSize.large,
-              ),
-              status: ChromiaAvatarStatus.busy,
-            ),
-            ChromiaAvatarWithStatus(
-              avatar: ChromiaAvatar.initials(
-                initials: 'AW',
-                backgroundColor: colors.warning,
-                size: ChromiaAvatarSize.large,
-              ),
-              status: ChromiaAvatarStatus.away,
-            ),
-            ChromiaAvatarWithStatus(
-              avatar: ChromiaAvatar.initials(
-                initials: 'OF',
-                backgroundColor: colors.onSurfaceVariant,
-                size: ChromiaAvatarSize.large,
-              ),
-              status: ChromiaAvatarStatus.offline,
-            ),
-          ],
-        ),
-        spacing.gapVL,
-
         // Avatar group
         ChromiaText(
           'Avatar Group',
@@ -256,17 +205,19 @@ class AvatarsScreen extends StatelessWidget {
               initials: 'AB',
               backgroundColor: colors.primary,
             ),
-            ChromiaAvatar.initials(
-              initials: 'CD',
-              backgroundColor: colors.secondary,
+            ChromiaAvatar.image(
+              imageProvider: const NetworkImage('https://picsum.photos/200'),
+              backgroundColor: colors.primary,
+              size: ChromiaAvatarSize.small,
             ),
             ChromiaAvatar.initials(
               initials: 'EF',
               backgroundColor: colors.success,
             ),
-            ChromiaAvatar.initials(
-              initials: 'GH',
-              backgroundColor: colors.warning,
+            ChromiaAvatar.image(
+              imageProvider: const NetworkImage('https://picsum.photos/200'),
+              backgroundColor: colors.primary,
+              size: ChromiaAvatarSize.small,
             ),
             ChromiaAvatar.initials(
               initials: 'IJ',
