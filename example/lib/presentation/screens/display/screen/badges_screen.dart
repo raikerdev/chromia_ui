@@ -284,25 +284,28 @@ class BadgesScreen extends StatelessWidget {
           spacing: spacing.m,
           runSpacing: spacing.m,
           children: [
-            const ChromiaLabel(text: 'New'),
-            const ChromiaLabel(
+            ChromiaLabelBadge(
+              text: 'New',
+              backgroundColor: colors.primary,
+              textColor: colors.onPrimary,
+            ),
+            const ChromiaLabelBadge(
               text: 'Featured',
-
               icon: Icons.star,
             ),
-            ChromiaLabel(
+            ChromiaLabelBadge(
               text: 'Pro',
               backgroundColor: colors.primary,
               textColor: colors.onPrimary,
-              borderRadius: BorderRadius.circular(10),
+              shape: ChromiaBadgeShape.circle,
             ),
-            ChromiaLabel(
+            ChromiaLabelBadge(
               text: 'Beta',
               backgroundColor: colors.warning,
               textColor: colors.onPrimary,
-              borderRadius: BorderRadius.circular(20),
+              shape: ChromiaBadgeShape.square,
             ),
-            ChromiaLabel(
+            ChromiaLabelBadge(
               text: 'Removable',
               onRemove: () {},
             ),
@@ -355,12 +358,37 @@ class BadgesScreen extends StatelessWidget {
         Wrap(
           spacing: spacing.l,
           runSpacing: spacing.m,
-          children: const [
-            ChromiaStatusBadge(status: ChromiaStatusType.success),
-            ChromiaStatusBadge(status: ChromiaStatusType.warning),
-            ChromiaStatusBadge(status: ChromiaStatusType.error),
-            ChromiaStatusBadge(status: ChromiaStatusType.info),
-            ChromiaStatusBadge(status: ChromiaStatusType.neutral),
+          children: [
+            ChromiaStatusBadge(
+              status: ChromiaStatusType.success,
+              child: ChromiaAvatar.icon(
+                icon: Symbols.person,
+              ),
+            ),
+            ChromiaStatusBadge(
+              status: ChromiaStatusType.warning,
+              child: ChromiaAvatar.icon(
+                icon: Symbols.person,
+              ),
+            ),
+            ChromiaStatusBadge(
+              status: ChromiaStatusType.error,
+              child: ChromiaAvatar.icon(
+                icon: Symbols.person,
+              ),
+            ),
+            ChromiaStatusBadge(
+              status: ChromiaStatusType.info,
+              child: ChromiaAvatar.icon(
+                icon: Symbols.person,
+              ),
+            ),
+            ChromiaStatusBadge(
+              status: ChromiaStatusType.neutral,
+              child: ChromiaAvatar.icon(
+                icon: Symbols.person,
+              ),
+            ),
           ],
         ),
       ],

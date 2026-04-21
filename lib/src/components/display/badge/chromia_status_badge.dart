@@ -1,14 +1,20 @@
 import 'package:chromia_ui/chromia_ui.dart';
+import 'package:chromia_ui/src/components/display/badge/chromia_badge_container.dart';
 import 'package:flutter/material.dart';
 
 /// A status badge for showing status indicators.
 class ChromiaStatusBadge extends StatelessWidget {
   const ChromiaStatusBadge({
     required this.status,
+    this.child,
     this.text,
     this.showDot = true,
+    this.position,
     super.key,
   });
+
+  /// The widget to display the badge on
+  final Widget? child;
 
   /// Status type
   final ChromiaStatusType status;
@@ -17,6 +23,38 @@ class ChromiaStatusBadge extends StatelessWidget {
   final String? text;
 
   /// Whether to show the status dot
+  final bool showDot;
+
+  /// Position of the badge relative to the child
+  final ChromiaBadgePosition? position;
+
+  @override
+  Widget build(BuildContext context) {
+    final String effectiveText = child == null ? text ?? '' : '';
+
+    final ChromiaBadgePosition effectivePosition = position ?? ChromiaBadgePosition.bottomRight(offset: -3);
+
+    return ChromiaBadgeContainer(
+      badge: _StatusBadge(
+        status: status,
+        text: effectiveText,
+        showDot: showDot,
+      ),
+      badgePosition: effectivePosition,
+      child: child,
+    );
+  }
+}
+
+class _StatusBadge extends StatelessWidget {
+  const _StatusBadge({
+    required this.status,
+    this.text,
+    this.showDot = true,
+  });
+
+  final ChromiaStatusType status;
+  final String? text;
   final bool showDot;
 
   @override
@@ -58,6 +96,10 @@ class ChromiaStatusBadge extends StatelessWidget {
             decoration: BoxDecoration(
               color: statusColor,
               shape: BoxShape.circle,
+              border: Border.all(
+                color: colors.surface,
+                width: 1,
+              ),
             ),
           ),
           spacing.gapHXS,

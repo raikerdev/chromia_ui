@@ -75,7 +75,6 @@ class ChromiaAvatar extends StatelessWidget {
         initials.toUpperCase(),
         type: ChromiaTypographyType.bodyMedium,
         style: TextStyle(
-          color: foregroundColor ?? Colors.white,
           fontSize: size.fontSize,
           fontWeight: FontWeight.w600,
           height: 1.1,
@@ -103,7 +102,6 @@ class ChromiaAvatar extends StatelessWidget {
       onTap: onTap,
       child: Icon(
         icon,
-        color: iconColor ?? Colors.white,
         size: size.iconSize,
       ),
     );
@@ -133,7 +131,7 @@ class ChromiaAvatar extends StatelessWidget {
     final radius = context.chromiaRadius;
 
     final Color effectiveBackgroundColor = backgroundColor ?? colors.primary;
-    final Color effectiveForegroundColor = foregroundColor ?? colors.onPrimary;
+    final Color effectiveForegroundColor = foregroundColor ?? colors.surface;
 
     final BorderRadius? borderRadius = switch (shape) {
       ChromiaAvatarShape.rounded => radius.radiusM,
@@ -142,8 +140,8 @@ class ChromiaAvatar extends StatelessWidget {
     };
 
     final avatar = Container(
-      width: size.radius * 2,
-      height: size.radius * 2,
+      width: size.value,
+      height: size.value,
       decoration: BoxDecoration(
         color: effectiveBackgroundColor,
         borderRadius: borderRadius,
@@ -161,7 +159,10 @@ class ChromiaAvatar extends StatelessWidget {
           ? Center(
               child: DefaultTextStyle(
                 style: TextStyle(color: effectiveForegroundColor),
-                child: child!,
+                child: IconTheme(
+                  data: IconThemeData(color: effectiveForegroundColor),
+                  child: child!,
+                ),
               ),
             )
           : null,
@@ -186,29 +187,29 @@ enum ChromiaAvatarShape {
 /// Size options for avatars
 enum ChromiaAvatarSize {
   /// Extra small (24px)
-  extraSmall(radius: 12, fontSize: 10, iconSize: 12),
+  extraSmall(value: 24, fontSize: 10, iconSize: 12),
 
   /// Small (32px)
-  small(radius: 16, fontSize: 12, iconSize: 16),
+  small(value: 32, fontSize: 12, iconSize: 16),
 
   /// Medium (40px, default)
-  medium(radius: 20, fontSize: 14, iconSize: 20),
+  medium(value: 40, fontSize: 14, iconSize: 20),
 
   /// Large (56px)
-  large(radius: 28, fontSize: 18, iconSize: 28),
+  large(value: 56, fontSize: 18, iconSize: 28),
 
   /// Extra large (72px)
-  extraLarge(radius: 36, fontSize: 24, iconSize: 36)
+  extraLarge(value: 72, fontSize: 24, iconSize: 36)
   ;
 
   const ChromiaAvatarSize({
-    required this.radius,
+    required this.value,
     required this.fontSize,
     required this.iconSize,
   });
 
   /// Radius of the avatar
-  final double radius;
+  final double value;
 
   /// Font size for text
   final double fontSize;

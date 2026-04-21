@@ -1,15 +1,16 @@
 import 'package:chromia_ui/chromia_ui.dart';
+import 'package:chromia_ui/src/utils/widget_utils.dart';
 import 'package:flutter/material.dart';
 
 /// A standalone badge that can be used inline.
-class ChromiaLabel extends StatelessWidget {
-  const ChromiaLabel({
+class ChromiaLabelBadge extends StatelessWidget {
+  const ChromiaLabelBadge({
     required this.text,
     this.backgroundColor,
     this.textColor,
     this.icon,
     this.onRemove,
-    this.borderRadius,
+    this.shape = ChromiaBadgeShape.rounded,
     super.key,
   });
 
@@ -28,16 +29,23 @@ class ChromiaLabel extends StatelessWidget {
   /// Callback when remove button is pressed
   final VoidCallback? onRemove;
 
-  final BorderRadiusGeometry? borderRadius;
+  /// Shape of the badge
+  final ChromiaBadgeShape shape;
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
     final colors = context.chromiaColors;
-    final spacing = theme.spacing;
+    final spacing = context.chromiaSpacing;
+    final radius = context.chromiaRadius;
 
     final Color effectiveBackgroundColor = backgroundColor ?? colors.surfaceContainer;
-    final Color effectiveTextColor = textColor ?? colors.onSurface;
+    final Color effectiveTextColor = textColor ?? colors.onSurfaceContainer;
+
+    final BorderRadius borderRadius = switch (shape) {
+      ChromiaBadgeShape.rounded => radius.radiusS,
+      ChromiaBadgeShape.square => radius.radiusNone,
+      ChromiaBadgeShape.circle => radius.radiusFull,
+    };
 
     return Container(
       padding: EdgeInsets.symmetric(
@@ -46,7 +54,7 @@ class ChromiaLabel extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         color: effectiveBackgroundColor,
-        borderRadius: borderRadius ?? theme.radius.radiusS,
+        borderRadius: borderRadius,
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -54,7 +62,7 @@ class ChromiaLabel extends StatelessWidget {
           if (icon != null) ...[
             Icon(
               icon,
-              size: 14,
+              size: TypographyTokens.fontSize14,
               color: effectiveTextColor,
             ),
             spacing.gapHXS,
@@ -66,17 +74,11 @@ class ChromiaLabel extends StatelessWidget {
           ),
           if (onRemove != null) ...[
             spacing.gapHXS,
-            MouseRegion(
-              cursor: SystemMouseCursors.click,
-              child: GestureDetector(
-                onTap: onRemove,
-                child: Icon(
-                  Icons.close,
-                  size: 14,
-                  color: effectiveTextColor,
-                ),
-              ),
-            ),
+            Icon(
+              Icons.close,
+              size: TypographyTokens.fontSize14,
+              color: effectiveTextColor,
+            ).wrapWithOnTap(onRemove),
           ],
         ],
       ),

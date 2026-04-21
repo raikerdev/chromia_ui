@@ -1,5 +1,5 @@
 import 'package:chromia_ui/chromia_ui.dart';
-import 'package:chromia_ui/src/theme/chromia_theme.dart';
+import 'package:chromia_ui/src/components/display/badge/chromia_badge_container.dart';
 import 'package:flutter/material.dart';
 
 /// A customizable badge component for displaying notifications and indicators.
@@ -22,6 +22,7 @@ class ChromiaBadge extends StatelessWidget {
     this.size = ChromiaBadgeSize.medium,
     this.shape = ChromiaBadgeShape.circle,
     this.maxValue = 9,
+    this.offset,
     super.key,
   });
 
@@ -49,8 +50,13 @@ class ChromiaBadge extends StatelessWidget {
   /// Shape of the badge
   final ChromiaBadgeShape shape;
 
-  /// Maximum value to display (values above this show as "99+")
+  /// Maximum value to display (values above this show as "9+")
   final int maxValue;
+
+  /// Offset of the badge relative to the child
+  final double? offset;
+
+  bool get isDot => value == null || value!.isEmpty;
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +65,6 @@ class ChromiaBadge extends StatelessWidget {
     if (!showBadge) {
       return child;
     }
-
-    final bool isDot = value == null || value!.isEmpty;
 
     final Color effectiveBackgroundColor = backgroundColor ?? colors.error;
     final Color effectiveTextColor = textColor ?? colors.onError;
@@ -75,24 +79,16 @@ class ChromiaBadge extends StatelessWidget {
       }
     }
 
-    return Stack(
-      clipBehavior: Clip.none,
-      children: [
-        child,
-        Positioned(
-          top: effectivePosition.top,
-          right: effectivePosition.right,
-          bottom: effectivePosition.bottom,
-          left: effectivePosition.left,
-          child: _Badge(
-            value: displayValue,
-            backgroundColor: effectiveBackgroundColor,
-            textColor: effectiveTextColor,
-            size: size,
-            shape: shape,
-          ),
-        ),
-      ],
+    return ChromiaBadgeContainer(
+      badge: _Badge(
+        value: displayValue,
+        backgroundColor: effectiveBackgroundColor,
+        textColor: effectiveTextColor,
+        size: size,
+        shape: shape,
+      ),
+      badgePosition: effectivePosition,
+      child: child,
     );
   }
 }
@@ -112,41 +108,37 @@ class _Badge extends StatelessWidget {
   final ChromiaBadgeSize size;
   final ChromiaBadgeShape shape;
 
+  bool get isDot => value == null || value!.isEmpty;
+
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
+    final colors = context.chromiaColors;
+    final radius = context.chromiaRadius;
+    final spacing = context.chromiaSpacing;
 
-    final bool isDot = value == null || value!.isEmpty;
-    final double minWidth = isDot ? size.value : size.value + 2;
-
-    BoxShape? boxShape;
-    BorderRadius? borderRadius;
-
-    if (shape == ChromiaBadgeShape.circle) {
-      boxShape = BoxShape.circle;
-    } else if (shape == ChromiaBadgeShape.rounded) {
-      borderRadius = BorderRadius.circular(size.value / 2);
-    } else if (shape == ChromiaBadgeShape.square) {
-      borderRadius = BorderRadius.circular(2);
-    }
+    final BorderRadius? borderRadius = switch (shape) {
+      ChromiaBadgeShape.rounded => radius.radiusM,
+      ChromiaBadgeShape.square => radius.radiusNone,
+      ChromiaBadgeShape.circle => null,
+    };
 
     return Container(
       constraints: BoxConstraints(
-        minWidth: isDot ? minWidth / 1.5 : minWidth,
+        minWidth: isDot ? size.value / 1.5 : size.value,
         minHeight: isDot ? size.value / 1.5 : size.value,
       ),
       padding: isDot
-          ? EdgeInsets.zero
-          : EdgeInsets.symmetric(
-              horizontal: size == ChromiaBadgeSize.small ? 4 : 6,
+          ? spacing.paddingNone
+          : spacing.symmetric(
+              horizontal: size.value / 4,
               vertical: 2,
             ),
       decoration: BoxDecoration(
         color: backgroundColor,
-        shape: boxShape ?? BoxShape.rectangle,
+        shape: shape == ChromiaBadgeShape.circle ? BoxShape.circle : BoxShape.rectangle,
         borderRadius: borderRadius,
         border: Border.all(
-          color: theme.colors.surface,
+          color: colors.surface,
           width: 1,
         ),
       ),
@@ -167,9 +159,10 @@ class _Badge extends StatelessWidget {
   }
 }
 
-const double customOffset = -6;
 /// Position configuration for badges
 class ChromiaBadgePosition {
+  static const double _customOffset = -4;
+
   const ChromiaBadgePosition({
     this.top,
     this.right,
@@ -184,7 +177,7 @@ class ChromiaBadgePosition {
 
   /// Top right corner (default)
   factory ChromiaBadgePosition.topRight({double? offset}) {
-    final double offsetValue = offset ?? customOffset;
+    final double offsetValue = offset ?? _customOffset;
     return ChromiaBadgePosition(
       top: offsetValue,
       right: offsetValue,
@@ -193,7 +186,7 @@ class ChromiaBadgePosition {
 
   /// Top left corner
   factory ChromiaBadgePosition.topLeft({double? offset}) {
-    final double offsetValue = offset ?? customOffset;
+    final double offsetValue = offset ?? _customOffset;
     return ChromiaBadgePosition(
       top: offsetValue,
       left: offsetValue,
@@ -202,7 +195,7 @@ class ChromiaBadgePosition {
 
   /// Bottom right corner
   factory ChromiaBadgePosition.bottomRight({double? offset}) {
-    final double offsetValue = offset ?? customOffset;
+    final double offsetValue = offset ?? _customOffset;
     return ChromiaBadgePosition(
       bottom: offsetValue,
       right: offsetValue,
@@ -211,7 +204,7 @@ class ChromiaBadgePosition {
 
   /// Bottom left corner
   factory ChromiaBadgePosition.bottomLeft({double? offset}) {
-    final double offsetValue = offset ?? customOffset;
+    final double offsetValue = offset ?? _customOffset;
     return ChromiaBadgePosition(
       bottom: offsetValue,
       left: offsetValue,
@@ -222,18 +215,22 @@ class ChromiaBadgePosition {
 /// Size options for badges
 enum ChromiaBadgeSize {
   /// Small badge (16px)
-  small(16, 8),
+  small(value: 16, fontSize: 8),
 
   /// Medium badge (18px, default)
-  medium(18, 10),
+  medium(value: 18, fontSize: 10),
 
   /// Large badge (20px)
-  large(20, 11);
+  large(value: 20, fontSize: 11)
+  ;
 
   final double value;
   final double fontSize;
 
-  const ChromiaBadgeSize(this.value, this.fontSize);
+  const ChromiaBadgeSize({
+    required this.value,
+    required this.fontSize,
+  });
 }
 
 /// Shape options for badges
@@ -247,7 +244,3 @@ enum ChromiaBadgeShape {
   /// Square badge with slight rounding
   square,
 }
-
-
-
-

@@ -41,7 +41,7 @@ library;
 export 'src/components/display/avatar/chromia_avatar.dart';
 export 'src/components/display/avatar/chromia_avatar_group.dart';
 export 'src/components/display/badge/chromia_badge.dart';
-export 'src/components/display/badge/chromia_label.dart';
+export 'src/components/display/badge/chromia_label_badge.dart';
 export 'src/components/display/badge/chromia_status_badge.dart';
 export 'src/components/display/chip/chromia_chip.dart';
 export 'src/components/display/code_preview/chromia_code_preview.dart';

@@ -35,7 +35,7 @@ class ChromiaAvatarGroup extends StatelessWidget {
     final int remainingCount = avatars.length - displayCount;
 
     // Calculate total width needed
-    final double avatarSize = size.radius * 2;
+    final double avatarSize = size.value;
     final double totalWidth = avatarSize + (displayCount - 1) * spacing;
     final double extraWidth = showMore && remainingCount > 0 ? spacing : 0;
 
