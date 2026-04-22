@@ -98,6 +98,12 @@ export 'src/components/navigation/drawer/chromia_mini_drawer.dart';
 export 'src/components/navigation/menu/chromia_menu.dart';
 //
 // ============================================================================
+// COMPONENTS - UTILS
+// ============================================================================
+export 'src/components/utils/interactive_widget/chromia_interactive_widget.dart';
+export 'src/components/utils/position_widget/chromia_position_widget.dart';
+//
+// ============================================================================
 // FOUNDATION
 // ============================================================================
 export 'src/foundation/constants.dart';

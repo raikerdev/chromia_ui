@@ -1,5 +1,4 @@
 import 'package:chromia_ui/chromia_ui.dart';
-import 'package:chromia_ui/src/components/display/badge/chromia_badge_container.dart';
 import 'package:flutter/material.dart';
 
 /// A customizable badge component for displaying notifications and indicators.
@@ -36,7 +35,7 @@ class ChromiaBadge extends StatelessWidget {
   final bool showBadge;
 
   /// Position of the badge relative to the child
-  final ChromiaBadgePosition? position;
+  final ChromiaPosition? position;
 
   /// Background color of the badge
   final Color? backgroundColor;
@@ -68,7 +67,7 @@ class ChromiaBadge extends StatelessWidget {
 
     final Color effectiveBackgroundColor = backgroundColor ?? colors.error;
     final Color effectiveTextColor = textColor ?? colors.onError;
-    final ChromiaBadgePosition effectivePosition = position ?? ChromiaBadgePosition.topRight(offset: isDot ? -2 : null);
+    final ChromiaPosition effectivePosition = position ?? ChromiaPosition.topRight(offset: isDot ? -2 : null);
 
     // Calculate display value
     String? displayValue = value;
@@ -79,7 +78,7 @@ class ChromiaBadge extends StatelessWidget {
       }
     }
 
-    return ChromiaBadgeContainer(
+    return ChromiaPositionWidget(
       badge: _Badge(
         value: displayValue,
         backgroundColor: effectiveBackgroundColor,
@@ -155,59 +154,6 @@ class _Badge extends StatelessWidget {
                 ),
               ),
             ),
-    );
-  }
-}
-
-/// Position configuration for badges
-class ChromiaBadgePosition {
-  static const double _customOffset = -4;
-
-  const ChromiaBadgePosition({
-    this.top,
-    this.right,
-    this.bottom,
-    this.left,
-  });
-
-  final double? top;
-  final double? right;
-  final double? bottom;
-  final double? left;
-
-  /// Top right corner (default)
-  factory ChromiaBadgePosition.topRight({double? offset}) {
-    final double offsetValue = offset ?? _customOffset;
-    return ChromiaBadgePosition(
-      top: offsetValue,
-      right: offsetValue,
-    );
-  }
-
-  /// Top left corner
-  factory ChromiaBadgePosition.topLeft({double? offset}) {
-    final double offsetValue = offset ?? _customOffset;
-    return ChromiaBadgePosition(
-      top: offsetValue,
-      left: offsetValue,
-    );
-  }
-
-  /// Bottom right corner
-  factory ChromiaBadgePosition.bottomRight({double? offset}) {
-    final double offsetValue = offset ?? _customOffset;
-    return ChromiaBadgePosition(
-      bottom: offsetValue,
-      right: offsetValue,
-    );
-  }
-
-  /// Bottom left corner
-  factory ChromiaBadgePosition.bottomLeft({double? offset}) {
-    final double offsetValue = offset ?? _customOffset;
-    return ChromiaBadgePosition(
-      bottom: offsetValue,
-      left: offsetValue,
     );
   }
 }

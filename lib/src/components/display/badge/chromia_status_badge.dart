@@ -1,5 +1,4 @@
 import 'package:chromia_ui/chromia_ui.dart';
-import 'package:chromia_ui/src/components/display/badge/chromia_badge_container.dart';
 import 'package:flutter/material.dart';
 
 /// A status badge for showing status indicators.
@@ -26,15 +25,15 @@ class ChromiaStatusBadge extends StatelessWidget {
   final bool showDot;
 
   /// Position of the badge relative to the child
-  final ChromiaBadgePosition? position;
+  final ChromiaPosition? position;
 
   @override
   Widget build(BuildContext context) {
     final String effectiveText = child == null ? text ?? '' : '';
 
-    final ChromiaBadgePosition effectivePosition = position ?? ChromiaBadgePosition.bottomRight(offset: -3);
+    final ChromiaPosition effectivePosition = position ?? ChromiaPosition.bottomRight(offset: -3);
 
-    return ChromiaBadgeContainer(
+    return ChromiaPositionWidget(
       badge: _StatusBadge(
         status: status,
         text: effectiveText,

@@ -259,16 +259,16 @@ class BadgesScreen extends StatelessWidget {
           spacing: spacing.xxl,
           runSpacing: spacing.m,
           children: [
-            ChromiaBadge(value: '1', position: ChromiaBadgePosition.topLeft(), child: starIcon),
-            ChromiaBadge(value: '2', position: ChromiaBadgePosition.topRight(), child: starIcon),
+            ChromiaBadge(value: '1', position: ChromiaPosition.topLeft(), child: starIcon),
+            ChromiaBadge(value: '2', position: ChromiaPosition.topRight(), child: starIcon),
           ],
         ),
         Wrap(
           spacing: spacing.xxl,
           runSpacing: spacing.m,
           children: [
-            ChromiaBadge(value: '3', position: ChromiaBadgePosition.bottomLeft(), child: starIcon),
-            ChromiaBadge(value: '4', position: ChromiaBadgePosition.bottomRight(), child: starIcon),
+            ChromiaBadge(value: '3', position: ChromiaPosition.bottomLeft(), child: starIcon),
+            ChromiaBadge(value: '4', position: ChromiaPosition.bottomRight(), child: starIcon),
           ],
         ),
         spacing.gapVL,

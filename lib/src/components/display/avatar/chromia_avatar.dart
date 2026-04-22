@@ -1,5 +1,4 @@
 import 'package:chromia_ui/chromia_ui.dart';
-import 'package:chromia_ui/src/utils/widget_utils.dart';
 import 'package:flutter/material.dart';
 
 /// A customizable avatar component for displaying user images or initials.
@@ -155,20 +154,23 @@ class ChromiaAvatar extends StatelessWidget {
             : null,
       ),
       clipBehavior: Clip.antiAlias,
-      child: child != null
-          ? Center(
-              child: DefaultTextStyle(
-                style: TextStyle(color: effectiveForegroundColor),
-                child: IconTheme(
-                  data: IconThemeData(color: effectiveForegroundColor),
-                  child: child!,
+      child: ChromiaInteractiveWidget(
+        onPressed: onTap,
+        child: child != null
+            ? Center(
+                child: DefaultTextStyle(
+                  style: TextStyle(color: effectiveForegroundColor),
+                  child: IconTheme(
+                    data: IconThemeData(color: effectiveForegroundColor),
+                    child: child!,
+                  ),
                 ),
-              ),
-            )
-          : null,
+              )
+            : null,
+      ),
     );
 
-    return avatar.wrapWithOnTap(onTap);
+    return avatar;
   }
 }
 

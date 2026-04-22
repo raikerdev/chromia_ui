@@ -1,5 +1,4 @@
 import 'package:chromia_ui/chromia_ui.dart';
-import 'package:chromia_ui/src/utils/widget_utils.dart';
 import 'package:flutter/material.dart';
 
 /// A standalone badge that can be used inline.
@@ -74,11 +73,15 @@ class ChromiaLabelBadge extends StatelessWidget {
           ),
           if (onRemove != null) ...[
             spacing.gapHXS,
-            Icon(
-              Icons.close,
-              size: TypographyTokens.fontSize14,
-              color: effectiveTextColor,
-            ).wrapWithOnTap(onRemove),
+            ChromiaInteractiveWidget(
+              onPressed: onRemove,
+              useCircleBorder: true,
+              child: Icon(
+                Icons.close,
+                size: TypographyTokens.fontSize14,
+                color: effectiveTextColor,
+              ),
+            ),
           ],
         ],
       ),

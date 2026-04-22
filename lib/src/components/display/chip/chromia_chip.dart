@@ -1,4 +1,4 @@
-import 'package:chromia_ui/src/theme/chromia_theme.dart';
+import 'package:chromia_ui/chromia_ui.dart';
 import 'package:flutter/material.dart';
 
 /// A customizable chip component for displaying compact information.
@@ -111,75 +111,36 @@ class ChromiaChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
     final colors = context.chromiaColors;
-    final spacing = theme.spacing;
 
     final Color effectiveBackgroundColor = backgroundColor ?? colors.surfaceContainer;
-    final Color effectiveForegroundColor = foregroundColor ?? colors.onSurface;
-    final Color effectiveDeleteIconColor = deleteIconColor ?? colors.onSurfaceVariant;
+    final Color effectiveForegroundColor = foregroundColor ?? colors.onSurfaceContainer;
+    final Color effectiveDeleteIconColor = deleteIconColor ?? colors.onSurfaceContainer;
 
-    final bool isInteractive = onPressed != null;
-
-    Widget chip = Container(
-      padding:
-          padding ??
-          EdgeInsets.symmetric(
-            horizontal: spacing.m,
-            vertical: spacing.xs,
-          ),
-      decoration: BoxDecoration(
-        color: effectiveBackgroundColor,
-        borderRadius: theme.radius.radiusL,
-        border: Border.all(
-          color: colors.outline,
-          width: 1,
-        ),
+    return _Chip(
+      label: label,
+      backgroundColor: effectiveBackgroundColor,
+      foregroundColor: effectiveForegroundColor,
+      border: Border.all(
+        color: colors.outline,
+        width: 1,
       ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (avatar != null) ...[
-            avatar!,
-            spacing.gapHXS,
-          ] else if (icon != null) ...[
-            Icon(
-              icon,
-              size: 16,
-              color: effectiveForegroundColor,
-            ),
-            spacing.gapHXS,
-          ],
-          Text(
-            label,
-            style: theme.typography.labelMedium.copyWith(
-              color: effectiveForegroundColor,
-            ),
-          ),
-          if (onDeleted != null) ...[
-            spacing.gapHXS,
-            GestureDetector(
-              onTap: onDeleted,
+      padding: padding,
+      onPressed: onPressed,
+      avatar: avatar,
+      icon: icon,
+      deleteWidget: onDeleted != null
+          ? ChromiaInteractiveWidget(
+              onPressed: onDeleted,
+              useCircleBorder: true,
               child: Icon(
                 Icons.close,
                 size: 16,
                 color: effectiveDeleteIconColor,
               ),
-            ),
-          ],
-        ],
-      ),
+            )
+          : null,
     );
-
-    if (isInteractive) {
-      chip = InkWell(
-        onTap: onPressed,
-        borderRadius: theme.radius.radiusL,
-        child: chip,
-      );
-    }
-
-    return chip;
   }
 }
 
@@ -205,9 +166,7 @@ class _ChromiaFilterChip extends ChromiaChip {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
     final colors = context.chromiaColors;
-    final spacing = theme.spacing;
 
     final Color effectiveBackgroundColor = selected
         ? (selectedBackgroundColor ?? colors.surface)
@@ -215,50 +174,22 @@ class _ChromiaFilterChip extends ChromiaChip {
 
     final Color effectiveForegroundColor = selected
         ? (selectedForegroundColor ?? colors.primary)
-        : (foregroundColor ?? colors.onSurface);
+        : (foregroundColor ?? colors.onSurfaceContainer);
 
     final IconData? effectiveIcon = selected && selectedIcon != null ? selectedIcon : icon;
 
-    return InkWell(
-      onTap: () => onSelected(!selected),
-      borderRadius: theme.radius.radiusL,
-      child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: spacing.m,
-          vertical: spacing.xs,
-        ),
-        decoration: BoxDecoration(
-          color: effectiveBackgroundColor,
-          borderRadius: theme.radius.radiusL,
-          border: Border.all(
-            color: selected ? colors.primary : colors.outline,
-            width: selected ? 2 : 1,
-          ),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (avatar != null) ...[
-              avatar!,
-              spacing.gapHXS,
-            ] else if (effectiveIcon != null) ...[
-              Icon(
-                effectiveIcon,
-                size: 16,
-                color: effectiveForegroundColor,
-              ),
-              spacing.gapHXS,
-            ],
-            Text(
-              label,
-              style: theme.typography.labelMedium.copyWith(
-                color: effectiveForegroundColor,
-                fontWeight: selected ? FontWeight.w600 : FontWeight.normal,
-              ),
-            ),
-          ],
-        ),
+    return _Chip(
+      label: label,
+      backgroundColor: effectiveBackgroundColor,
+      foregroundColor: effectiveForegroundColor,
+      border: Border.all(
+        color: selected ? effectiveForegroundColor : colors.outline,
+        width: selected ? 2 : 1,
       ),
+      padding: padding,
+      onPressed: () => onSelected(!selected),
+      avatar: avatar,
+      icon: effectiveIcon,
     );
   }
 }
@@ -283,9 +214,7 @@ class _ChromiaChoiceChip extends ChromiaChip {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
     final colors = context.chromiaColors;
-    final spacing = theme.spacing;
 
     final Color effectiveBackgroundColor = selected
         ? (selectedBackgroundColor ?? colors.primary)
@@ -293,42 +222,95 @@ class _ChromiaChoiceChip extends ChromiaChip {
 
     final Color effectiveForegroundColor = selected
         ? (selectedForegroundColor ?? colors.onPrimary)
-        : (foregroundColor ?? colors.onSurface);
+        : (foregroundColor ?? colors.onSurfaceContainer);
 
-    return InkWell(
-      onTap: selected ? null : onSelected,
-      borderRadius: theme.radius.radiusL,
-      child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: spacing.m,
-          vertical: spacing.xs,
-        ),
-        decoration: BoxDecoration(
-          color: effectiveBackgroundColor,
-          borderRadius: theme.radius.radiusL,
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (avatar != null) ...[
-              avatar!,
-              spacing.gapHXS,
-            ] else if (icon != null) ...[
-              Icon(
-                icon,
-                size: 16,
-                color: effectiveForegroundColor,
+    return _Chip(
+      label: label,
+      backgroundColor: effectiveBackgroundColor,
+      foregroundColor: effectiveForegroundColor,
+      padding: padding,
+      onPressed: selected ? null : onSelected,
+      avatar: avatar,
+      icon: icon,
+      fontWeight: selected ? TypographyTokens.semiBold : TypographyTokens.regular,
+    );
+  }
+}
+
+class _Chip extends StatelessWidget {
+  const _Chip({
+    required this.label,
+    required this.backgroundColor,
+    required this.foregroundColor,
+    this.border,
+    this.onPressed,
+    this.avatar,
+    this.icon,
+    this.deleteWidget,
+    this.padding,
+    this.fontWeight = TypographyTokens.regular,
+  });
+
+  final String label;
+  final Color backgroundColor;
+  final Color foregroundColor;
+  final BoxBorder? border;
+  final VoidCallback? onPressed;
+  final Widget? avatar;
+  final IconData? icon;
+  final Widget? deleteWidget;
+  final EdgeInsetsGeometry? padding;
+  final FontWeight fontWeight;
+
+  @override
+  Widget build(BuildContext context) {
+    final spacing = context.chromiaSpacing;
+    final radius = context.chromiaRadius;
+
+    return Container(
+      decoration: BoxDecoration(
+        color: backgroundColor,
+        borderRadius: radius.radiusL,
+        border: border,
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: ChromiaInteractiveWidget(
+        onPressed: onPressed,
+        child: Padding(
+          padding:
+              padding ??
+              spacing.symmetric(
+                horizontal: spacing.m,
+                vertical: spacing.xs,
               ),
-              spacing.gapHXS,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (avatar != null) ...[
+                avatar!,
+                spacing.gapHXS,
+              ] else if (icon != null) ...[
+                Icon(
+                  icon,
+                  size: TypographyTokens.fontSize16,
+                  color: foregroundColor,
+                ),
+                spacing.gapHXS,
+              ],
+              ChromiaText(
+                label,
+                type: ChromiaTypographyType.labelMedium,
+                style: TextStyle(
+                  color: foregroundColor,
+                  fontWeight: fontWeight,
+                ),
+              ),
+              if (deleteWidget != null) ...[
+                spacing.gapHXS,
+                deleteWidget!,
+              ],
             ],
-            Text(
-              label,
-              style: theme.typography.labelMedium.copyWith(
-                color: effectiveForegroundColor,
-                fontWeight: selected ? FontWeight.w600 : FontWeight.normal,
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
@@ -359,9 +341,9 @@ class ChromiaChipGroup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final effectiveSpacing = spacing ?? theme.spacing.s;
-    final effectiveRunSpacing = runSpacing ?? theme.spacing.s;
+    final chromiaSpacing = context.chromiaSpacing;
+    final effectiveSpacing = spacing ?? chromiaSpacing.s;
+    final effectiveRunSpacing = runSpacing ?? chromiaSpacing.s;
 
     return Wrap(
       spacing: effectiveSpacing,
