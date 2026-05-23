@@ -1,11 +1,12 @@
 import 'package:chromia_ui/chromia_ui.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 /// Main theme data class for Chromia UI.
 ///
 /// This class combines all the theme systems (colors, typography, spacing,
 /// radius, shadows, and brand) into a single cohesive theme configuration.
-class ChromiaThemeData {
+class ChromiaThemeData with Diagnosticable {
   const ChromiaThemeData({
     required this.colors,
     required this.typography,
@@ -490,10 +491,15 @@ class ChromiaThemeData {
   }
 
   @override
-  String toString() {
-    return 'ChromiaThemeData('
-        'brightness: $brightness, '
-        'brandConfig: $brandConfig'
-        ')';
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(EnumProperty<Brightness>('brightness', brightness))
+      ..add(DiagnosticsProperty<ChromiaColors>('colors', colors))
+      ..add(DiagnosticsProperty<ChromiaTypography>('typography', typography))
+      ..add(DiagnosticsProperty<ChromiaSpacing>('spacing', spacing))
+      ..add(DiagnosticsProperty<ChromiaRadius>('radius', radius))
+      ..add(DiagnosticsProperty<ChromiaShadows>('shadows', shadows))
+      ..add(DiagnosticsProperty<ChromiaBrandConfig>('brandConfig', brandConfig, defaultValue: null));
   }
 }

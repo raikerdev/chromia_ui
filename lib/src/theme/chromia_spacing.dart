@@ -1,13 +1,14 @@
 import 'dart:ui' show lerpDouble;
 
 import 'package:chromia_ui/src/tokens/spacing_tokens.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 /// Semantic spacing system for Chromia UI.
 ///
 /// Provides consistent spacing values for padding, margins, and gaps
 /// throughout the application.
-class ChromiaSpacing {
+class ChromiaSpacing with Diagnosticable {
   const ChromiaSpacing({
     required this.none,
     required this.xxs,
@@ -257,5 +258,19 @@ class ChromiaSpacing {
       xxhuge: xxhuge ?? this.xxhuge,
       massive: massive ?? this.massive,
     );
+  }
+
+  // ── debugFillProperties ───────────────────────────────────────────────────
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DoubleProperty('xs', xs))
+      ..add(DoubleProperty('s', s))
+      ..add(DoubleProperty('m', m))
+      ..add(DoubleProperty('l', l))
+      ..add(DoubleProperty('xl', xl))
+      ..add(DoubleProperty('xxl', xxl));
   }
 }

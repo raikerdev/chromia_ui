@@ -1,10 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 /// Shadow system for Chromia UI.
 ///
 /// Provides consistent shadow and elevation values to create
 /// visual hierarchy and depth in the interface.
-class ChromiaShadows {
+class ChromiaShadows with Diagnosticable {
   const ChromiaShadows({
     required this.none,
     required this.xs,
@@ -161,6 +162,21 @@ class ChromiaShadows {
       xl: xl ?? this.xl,
       xxl: xxl ?? this.xxl,
     );
+  }
+
+  // ── debugFillProperties ───────────────────────────────────────────────────
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty<List<BoxShadow>>('none', none))
+      ..add(DiagnosticsProperty<List<BoxShadow>>('xs', xs))
+      ..add(DiagnosticsProperty<List<BoxShadow>>('s', s))
+      ..add(DiagnosticsProperty<List<BoxShadow>>('m', m))
+      ..add(DiagnosticsProperty<List<BoxShadow>>('l', l))
+      ..add(DiagnosticsProperty<List<BoxShadow>>('xl', xl))
+      ..add(DiagnosticsProperty<List<BoxShadow>>('xxl', xxl));
   }
 }
 

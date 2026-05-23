@@ -1,12 +1,13 @@
 import 'package:chromia_ui/src/theme/chromia_theme.dart';
 import 'package:chromia_ui/src/tokens/typography_tokens.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 /// Semantic typography system for Chromia UI.
 ///
 /// Provides predefined text styles for different use cases,
 /// ensuring consistency and visual hierarchy across the application.
-class ChromiaTypography {
+class ChromiaTypography with Diagnosticable {
   const ChromiaTypography({
     // Display styles
     required this.displayLarge,
@@ -270,6 +271,18 @@ class ChromiaTypography {
       caption: caption.copyWith(color: color),
       overline: overline.copyWith(color: color),
     );
+  }
+
+  // ── debugFillProperties ───────────────────────────────────────────────────
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty<TextStyle>('displayLarge', displayLarge))
+      ..add(DiagnosticsProperty<TextStyle>('titleLarge', titleLarge))
+      ..add(DiagnosticsProperty<TextStyle>('bodyMedium', bodyMedium))
+      ..add(DiagnosticsProperty<TextStyle>('labelMedium', labelMedium));
   }
 }
 

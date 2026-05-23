@@ -1,4 +1,5 @@
 import 'package:chromia_ui/chromia_ui.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 /// Semantic color system for Chromia UI, aligned with Material Design 3 color roles.
@@ -12,7 +13,7 @@ import 'package:flutter/material.dart';
 ///
 /// Extended semantic roles (non-MD3, preserved for utility):
 /// - **success**, **warning**, **info** each with their `on*` and `*Container` variants.
-class ChromiaColors {
+class ChromiaColors with Diagnosticable {
   const ChromiaColors({
     required this.brightness,
     // Primary role
@@ -452,5 +453,20 @@ class ChromiaColors {
       scrim: scrim ?? this.scrim,
       transparent: transparent ?? this.transparent,
     );
+  }
+
+  // ── debugFillProperties ───────────────────────────────────────────────────
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(EnumProperty<Brightness>('brightness', brightness))
+      ..add(ColorProperty('primary', primary))
+      ..add(ColorProperty('onPrimary', onPrimary))
+      ..add(ColorProperty('secondary', secondary))
+      ..add(ColorProperty('error', error))
+      ..add(ColorProperty('surface', surface))
+      ..add(ColorProperty('outline', outline));
   }
 }

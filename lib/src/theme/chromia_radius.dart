@@ -1,12 +1,13 @@
 import 'dart:ui' show lerpDouble;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 /// Border radius system for Chromia UI.
 ///
 /// Provides consistent border radius values for creating
 /// rounded corners on components.
-class ChromiaRadius {
+class ChromiaRadius with Diagnosticable {
   const ChromiaRadius({
     required this.none,
     required this.xs,
@@ -205,5 +206,21 @@ class ChromiaRadius {
       xxl: xxl ?? this.xxl,
       full: full ?? this.full,
     );
+  }
+
+  // ── debugFillProperties ───────────────────────────────────────────────────
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DoubleProperty('none', none))
+      ..add(DoubleProperty('xs', xs))
+      ..add(DoubleProperty('s', s))
+      ..add(DoubleProperty('m', m))
+      ..add(DoubleProperty('l', l))
+      ..add(DoubleProperty('xl', xl))
+      ..add(DoubleProperty('xxl', xxl))
+      ..add(DoubleProperty('full', full));
   }
 }

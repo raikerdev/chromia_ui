@@ -1,4 +1,5 @@
 import 'package:chromia_ui/chromia_ui.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -438,9 +439,9 @@ void main() {
       final mid = ChromiaColors.lerp(a, b, 0.5);
 
       // 50% between black and white is grey (0xFF808080 approx.)
-      expect(mid.surface.red, closeTo(128, 2));
-      expect(mid.surface.green, closeTo(128, 2));
-      expect(mid.surface.blue, closeTo(128, 2));
+      expect(mid.surface.r, closeTo(128, 2));
+      expect(mid.surface.g, closeTo(128, 2));
+      expect(mid.surface.b, closeTo(128, 2));
     });
   });
 
@@ -727,6 +728,81 @@ void main() {
       );
 
       expect(value, isNotEmpty);
+    });
+  });
+
+  // ── debugFillProperties ─────────────────────────────────────────────────────
+
+  group('ChromiaThemeData.debugFillProperties', () {
+    test('exposes brightness property', () {
+      final theme = ChromiaThemeData.light();
+      final builder = DiagnosticPropertiesBuilder();
+      theme.debugFillProperties(builder);
+
+      final names = builder.properties.map((p) => p.name).toList();
+      expect(names, contains('brightness'));
+    });
+
+    test('exposes colors, typography, spacing, radius, shadows', () {
+      final theme = ChromiaThemeData.light();
+      final builder = DiagnosticPropertiesBuilder();
+      theme.debugFillProperties(builder);
+
+      final names = builder.properties.map((p) => p.name).toList();
+      expect(names, containsAll(['colors', 'typography', 'spacing', 'radius', 'shadows']));
+    });
+
+    test('brandConfig property is included in properties list', () {
+      final theme = ChromiaThemeData.light();
+      final builder = DiagnosticPropertiesBuilder();
+      theme.debugFillProperties(builder);
+
+      final names = builder.properties.map((p) => p.name).toList();
+      expect(names, contains('brandConfig'));
+    });
+
+    test('ChromiaColors exposes key color properties', () {
+      final colors = ChromiaThemeData.light().colors;
+      final builder = DiagnosticPropertiesBuilder();
+      colors.debugFillProperties(builder);
+
+      final names = builder.properties.map((p) => p.name).toList();
+      expect(names, containsAll(['brightness', 'primary', 'surface']));
+    });
+
+    test('ChromiaSpacing exposes spacing values', () {
+      final spacing = ChromiaThemeData.light().spacing;
+      final builder = DiagnosticPropertiesBuilder();
+      spacing.debugFillProperties(builder);
+
+      final names = builder.properties.map((p) => p.name).toList();
+      expect(names, containsAll(['xs', 's', 'm', 'l']));
+    });
+
+    test('ChromiaRadius exposes radius values', () {
+      final radius = ChromiaThemeData.light().radius;
+      final builder = DiagnosticPropertiesBuilder();
+      radius.debugFillProperties(builder);
+
+      final names = builder.properties.map((p) => p.name).toList();
+      expect(names, containsAll(['s', 'm', 'l', 'full']));
+    });
+
+    testWidgets('ChromiaTheme widget exposes data property', (tester) async {
+      final themeData = ChromiaThemeData.light();
+      await tester.pumpWidget(
+        ChromiaTheme(
+          data: themeData,
+          child: const SizedBox(),
+        ),
+      );
+
+      final chromiaTheme = tester.widget<ChromiaTheme>(find.byType(ChromiaTheme));
+      final builder = DiagnosticPropertiesBuilder();
+      chromiaTheme.debugFillProperties(builder);
+
+      final names = builder.properties.map((p) => p.name).toList();
+      expect(names, contains('data'));
     });
   });
 }

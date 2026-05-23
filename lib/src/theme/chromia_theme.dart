@@ -4,6 +4,7 @@ import 'package:chromia_ui/src/theme/chromia_shadows.dart';
 import 'package:chromia_ui/src/theme/chromia_spacing.dart';
 import 'package:chromia_ui/src/theme/chromia_theme_data.dart';
 import 'package:chromia_ui/src/theme/chromia_typography.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 /// An InheritedWidget that propagates the Chromia theme down the widget tree.
@@ -56,6 +57,12 @@ class ChromiaTheme extends StatelessWidget {
       data: data,
       child: child,
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty<ChromiaThemeData>('data', data));
   }
 }
 
