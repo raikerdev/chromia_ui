@@ -126,8 +126,14 @@ class ChromiaThemeData {
     );
   }
 
-  /// Converts this ChromiaThemeData to a Material ThemeData
+  /// Converts this ChromiaThemeData to a Material [ThemeData].
+  ///
+  /// All Material sub-themes (InputDecoration, Slider, AppBar, Dialog, etc.)
+  /// are configured with Chromia tokens so that both Chromia wrapper
+  /// components **and** native Material widgets inherit the correct brand
+  /// colours in both light and dark mode.
   ThemeData toMaterialTheme() {
+    // ── ColorScheme ───────────────────────────────────────────────────────────
     final ColorScheme colorScheme = ColorScheme(
       brightness: brightness,
       primary: colors.primary,
@@ -152,6 +158,7 @@ class ChromiaThemeData {
       surfaceTint: colors.primary,
     );
 
+    // ── TextTheme ─────────────────────────────────────────────────────────────
     final TextTheme textTheme = TextTheme(
       displayLarge: typography.displayLarge,
       displayMedium: typography.displayMedium,
@@ -170,6 +177,13 @@ class ChromiaThemeData {
       labelSmall: typography.labelSmall,
     );
 
+    // ── Shared helpers ────────────────────────────────────────────────────────
+    final BorderRadius radiusS = radius.radiusS;
+    final BorderRadius radiusM = radius.radiusM;
+    final BorderRadius radiusL = radius.radiusL;
+    final RoundedRectangleBorder shapeM = RoundedRectangleBorder(borderRadius: radiusM);
+    final RoundedRectangleBorder shapeL = RoundedRectangleBorder(borderRadius: radiusL);
+
     return ThemeData(
       useMaterial3: true,
       colorScheme: colorScheme,
@@ -177,6 +191,228 @@ class ChromiaThemeData {
       brightness: brightness,
       scaffoldBackgroundColor: colors.surface,
       dividerColor: colors.outline,
+
+      // ── Icons ───────────────────────────────────────────────────────────────
+      iconTheme: IconThemeData(color: colors.onSurface),
+      primaryIconTheme: IconThemeData(color: colors.onPrimary),
+
+      // ── AppBar ──────────────────────────────────────────────────────────────
+      appBarTheme: AppBarTheme(
+        backgroundColor: colors.surface,
+        foregroundColor: colors.onSurface,
+        elevation: 0,
+        shadowColor: colors.shadow,
+        surfaceTintColor: colors.transparent,
+        titleTextStyle: typography.titleLarge.copyWith(color: colors.onSurface),
+        iconTheme: IconThemeData(color: colors.onSurface),
+        actionsIconTheme: IconThemeData(color: colors.onSurface),
+      ),
+
+      // ── Card ────────────────────────────────────────────────────────────────
+      cardTheme: CardThemeData(
+        color: colors.surfaceContainer,
+        surfaceTintColor: colors.transparent,
+        elevation: 0,
+        shape: shapeL,
+        margin: EdgeInsets.zero,
+      ),
+
+      // ── Dialog ──────────────────────────────────────────────────────────────
+      dialogTheme: DialogThemeData(
+        backgroundColor: colors.surface,
+        surfaceTintColor: colors.transparent,
+        elevation: 0,
+        shape: shapeL,
+        titleTextStyle: typography.titleLarge.copyWith(color: colors.onSurface),
+        contentTextStyle: typography.bodyMedium.copyWith(color: colors.onSurface),
+      ),
+
+      // ── Popup / Menu ─────────────────────────────────────────────────────────
+      popupMenuTheme: PopupMenuThemeData(
+        color: colors.surface,
+        surfaceTintColor: colors.transparent,
+        elevation: 2,
+        shape: shapeM,
+        textStyle: typography.bodyMedium.copyWith(color: colors.onSurface),
+      ),
+
+      // ── Tooltip ──────────────────────────────────────────────────────────────
+      tooltipTheme: TooltipThemeData(
+        decoration: BoxDecoration(
+          color: colors.surface,
+          borderRadius: radiusS,
+          boxShadow: shadows.m,
+        ),
+        textStyle: typography.bodySmall.copyWith(color: colors.onSurface),
+        padding: EdgeInsets.symmetric(
+          horizontal: spacing.m,
+          vertical: spacing.s,
+        ),
+      ),
+
+      // ── SnackBar ─────────────────────────────────────────────────────────────
+      snackBarTheme: SnackBarThemeData(
+        backgroundColor: colors.surfaceContainer,
+        contentTextStyle: typography.bodyMedium.copyWith(color: colors.onSurface),
+        actionTextColor: colors.primary,
+        shape: shapeM,
+        behavior: SnackBarBehavior.floating,
+        elevation: 2,
+      ),
+
+      // ── Progress ─────────────────────────────────────────────────────────────
+      progressIndicatorTheme: ProgressIndicatorThemeData(
+        color: colors.primary,
+        linearTrackColor: colors.surfaceContainer,
+        circularTrackColor: colors.surfaceContainer,
+      ),
+
+      // ── Slider ───────────────────────────────────────────────────────────────
+      sliderTheme: SliderThemeData(
+        activeTrackColor: colors.primary,
+        inactiveTrackColor: colors.surfaceContainer,
+        thumbColor: colors.primary,
+        overlayColor: colors.primary.withAlpha(30),
+        activeTickMarkColor: colors.onPrimary,
+        inactiveTickMarkColor: colors.primary,
+        valueIndicatorColor: colors.primary,
+        valueIndicatorTextStyle: typography.labelSmall.copyWith(color: colors.onPrimary),
+        trackHeight: 4,
+      ),
+
+      // ── Input ────────────────────────────────────────────────────────────────
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: colors.surfaceContainer,
+        contentPadding: EdgeInsets.symmetric(
+          horizontal: spacing.l,
+          vertical: spacing.m,
+        ),
+        border: OutlineInputBorder(
+          borderRadius: radiusM,
+          borderSide: BorderSide(color: colors.outline),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: radiusM,
+          borderSide: BorderSide(color: colors.outline),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: radiusM,
+          borderSide: BorderSide(color: colors.primary, width: 2),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: radiusM,
+          borderSide: BorderSide(color: colors.error),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: radiusM,
+          borderSide: BorderSide(color: colors.error, width: 2),
+        ),
+        disabledBorder: OutlineInputBorder(
+          borderRadius: radiusM,
+          borderSide: BorderSide(color: colors.outline.withAlpha(128)),
+        ),
+        labelStyle: typography.bodyMedium.copyWith(color: colors.onSurfaceVariant),
+        hintStyle: typography.bodyMedium.copyWith(color: colors.onSurfaceVariant),
+        errorStyle: typography.bodySmall.copyWith(color: colors.error),
+        helperStyle: typography.bodySmall.copyWith(color: colors.onSurfaceVariant),
+        prefixIconColor: colors.onSurfaceVariant,
+        suffixIconColor: colors.onSurfaceVariant,
+      ),
+
+      // ── Checkbox / Radio / Switch ─────────────────────────────────────────────
+      checkboxTheme: CheckboxThemeData(
+        fillColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return colors.primary;
+          }
+          if (states.contains(WidgetState.disabled)) {
+            return colors.surfaceContainer;
+          }
+          return colors.transparent;
+        }),
+        checkColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.disabled)) {
+            return colors.textDisabled;
+          }
+          return colors.onPrimary;
+        }),
+        side: BorderSide(color: colors.outline, width: 2),
+        shape: RoundedRectangleBorder(borderRadius: radiusS),
+      ),
+      radioTheme: RadioThemeData(
+        fillColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.disabled)) {
+            return colors.surfaceContainer;
+          }
+          if (states.contains(WidgetState.selected)) {
+            return colors.primary;
+          }
+          return colors.outline;
+        }),
+      ),
+      switchTheme: SwitchThemeData(
+        thumbColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.disabled)) {
+            return colors.textDisabled;
+          }
+          if (states.contains(WidgetState.selected)) {
+            return colors.surface;
+          }
+          return colors.outline;
+        }),
+        trackColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.disabled)) {
+            return colors.surfaceContainer;
+          }
+          if (states.contains(WidgetState.selected)) {
+            return colors.primary;
+          }
+          return colors.surfaceContainer;
+        }),
+        trackOutlineColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return colors.transparent;
+          }
+          return colors.outline;
+        }),
+      ),
+
+      // ── Buttons (native Material) ─────────────────────────────────────────────
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: colors.surface,
+          foregroundColor: colors.primary,
+          shadowColor: colors.shadow,
+          shape: shapeL,
+          textStyle: typography.labelLarge,
+        ),
+      ),
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          backgroundColor: colors.primary,
+          foregroundColor: colors.onPrimary,
+          shape: shapeL,
+          textStyle: typography.labelLarge,
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          foregroundColor: colors.primary,
+          side: BorderSide(color: colors.primary),
+          shape: shapeL,
+          textStyle: typography.labelLarge,
+        ),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          foregroundColor: colors.primary,
+          shape: shapeL,
+          textStyle: typography.labelLarge,
+        ),
+      ),
+
+      // ── Extensions ───────────────────────────────────────────────────────────
       extensions: [
         if (brandConfig != null) ChromiaBrandThemeExtension(brandConfig: brandConfig!),
       ],
