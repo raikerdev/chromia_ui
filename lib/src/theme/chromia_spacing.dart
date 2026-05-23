@@ -1,3 +1,5 @@
+import 'dart:ui' show lerpDouble;
+
 import 'package:chromia_ui/src/tokens/spacing_tokens.dart';
 import 'package:flutter/widgets.dart';
 
@@ -200,6 +202,29 @@ class ChromiaSpacing {
 
   /// Extra extra large vertical gap
   SizedBox get gapVXXL => gapV(xxl);
+
+  // ── lerp ──────────────────────────────────────────────────────────────────
+
+  /// Linearly interpolates between two [ChromiaSpacing] instances.
+  ///
+  /// All spacing values are lerped with [lerpDouble].
+  static ChromiaSpacing lerp(ChromiaSpacing a, ChromiaSpacing b, double t) {
+    return ChromiaSpacing(
+      none: lerpDouble(a.none, b.none, t)!,
+      xxs: lerpDouble(a.xxs, b.xxs, t)!,
+      xs: lerpDouble(a.xs, b.xs, t)!,
+      s: lerpDouble(a.s, b.s, t)!,
+      m: lerpDouble(a.m, b.m, t)!,
+      l: lerpDouble(a.l, b.l, t)!,
+      xl: lerpDouble(a.xl, b.xl, t)!,
+      xxl: lerpDouble(a.xxl, b.xxl, t)!,
+      xxxl: lerpDouble(a.xxxl, b.xxxl, t)!,
+      huge: lerpDouble(a.huge, b.huge, t)!,
+      xhuge: lerpDouble(a.xhuge, b.xhuge, t)!,
+      xxhuge: lerpDouble(a.xxhuge, b.xxhuge, t)!,
+      massive: lerpDouble(a.massive, b.massive, t)!,
+    );
+  }
 
   /// Creates a copy of this spacing with the given fields replaced
   ChromiaSpacing copyWith({

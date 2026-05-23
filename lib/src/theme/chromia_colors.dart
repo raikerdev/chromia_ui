@@ -300,6 +300,62 @@ class ChromiaColors {
     return hsl.withLightness(lightness).toColor();
   }
 
+  // ── lerp ──────────────────────────────────────────────────────────────────
+
+  /// Linearly interpolates between two [ChromiaColors] instances.
+  ///
+  /// All color fields are lerped with [Color.lerp].
+  /// [brightness] switches at `t >= 0.5`.
+  static ChromiaColors lerp(ChromiaColors a, ChromiaColors b, double t) {
+    return ChromiaColors(
+      brightness: t < 0.5 ? a.brightness : b.brightness,
+      // Primary
+      primary: Color.lerp(a.primary, b.primary, t)!,
+      onPrimary: Color.lerp(a.onPrimary, b.onPrimary, t)!,
+      primaryContainer: Color.lerp(a.primaryContainer, b.primaryContainer, t)!,
+      onPrimaryContainer: Color.lerp(a.onPrimaryContainer, b.onPrimaryContainer, t)!,
+      // Secondary
+      secondary: Color.lerp(a.secondary, b.secondary, t)!,
+      onSecondary: Color.lerp(a.onSecondary, b.onSecondary, t)!,
+      secondaryContainer: Color.lerp(a.secondaryContainer, b.secondaryContainer, t)!,
+      onSecondaryContainer: Color.lerp(a.onSecondaryContainer, b.onSecondaryContainer, t)!,
+      // Error
+      error: Color.lerp(a.error, b.error, t)!,
+      onError: Color.lerp(a.onError, b.onError, t)!,
+      errorContainer: Color.lerp(a.errorContainer, b.errorContainer, t)!,
+      onErrorContainer: Color.lerp(a.onErrorContainer, b.onErrorContainer, t)!,
+      // Success
+      success: Color.lerp(a.success, b.success, t)!,
+      onSuccess: Color.lerp(a.onSuccess, b.onSuccess, t)!,
+      successContainer: Color.lerp(a.successContainer, b.successContainer, t)!,
+      onSuccessContainer: Color.lerp(a.onSuccessContainer, b.onSuccessContainer, t)!,
+      // Warning
+      warning: Color.lerp(a.warning, b.warning, t)!,
+      onWarning: Color.lerp(a.onWarning, b.onWarning, t)!,
+      warningContainer: Color.lerp(a.warningContainer, b.warningContainer, t)!,
+      onWarningContainer: Color.lerp(a.onWarningContainer, b.onWarningContainer, t)!,
+      // Info
+      info: Color.lerp(a.info, b.info, t)!,
+      onInfo: Color.lerp(a.onInfo, b.onInfo, t)!,
+      infoContainer: Color.lerp(a.infoContainer, b.infoContainer, t)!,
+      onInfoContainer: Color.lerp(a.onInfoContainer, b.onInfoContainer, t)!,
+      // Surface
+      surface: Color.lerp(a.surface, b.surface, t)!,
+      onSurface: Color.lerp(a.onSurface, b.onSurface, t)!,
+      onSurfaceVariant: Color.lerp(a.onSurfaceVariant, b.onSurfaceVariant, t)!,
+      surfaceContainer: Color.lerp(a.surfaceContainer, b.surfaceContainer, t)!,
+      onSurfaceContainer: Color.lerp(a.onSurfaceContainer, b.onSurfaceContainer, t)!,
+      // Outline
+      outline: Color.lerp(a.outline, b.outline, t)!,
+      outlineVariant: Color.lerp(a.outlineVariant, b.outlineVariant, t)!,
+      // Other
+      shadow: Color.lerp(a.shadow, b.shadow, t)!,
+      overlay: Color.lerp(a.overlay, b.overlay, t)!,
+      scrim: Color.lerp(a.scrim, b.scrim, t)!,
+      transparent: Color.lerp(a.transparent, b.transparent, t)!,
+    );
+  }
+
   // ── copyWith ──────────────────────────────────────────────────────────────
 
   ChromiaColors copyWith({

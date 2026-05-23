@@ -181,6 +181,33 @@ class ChromiaTypography {
     );
   }
 
+  // ── lerp ──────────────────────────────────────────────────────────────────
+
+  /// Linearly interpolates between two [ChromiaTypography] instances.
+  ///
+  /// Every [TextStyle] is lerped with [TextStyle.lerp].
+  static ChromiaTypography lerp(ChromiaTypography a, ChromiaTypography b, double t) {
+    return ChromiaTypography(
+      displayLarge: TextStyle.lerp(a.displayLarge, b.displayLarge, t)!,
+      displayMedium: TextStyle.lerp(a.displayMedium, b.displayMedium, t)!,
+      displaySmall: TextStyle.lerp(a.displaySmall, b.displaySmall, t)!,
+      headlineLarge: TextStyle.lerp(a.headlineLarge, b.headlineLarge, t)!,
+      headlineMedium: TextStyle.lerp(a.headlineMedium, b.headlineMedium, t)!,
+      headlineSmall: TextStyle.lerp(a.headlineSmall, b.headlineSmall, t)!,
+      titleLarge: TextStyle.lerp(a.titleLarge, b.titleLarge, t)!,
+      titleMedium: TextStyle.lerp(a.titleMedium, b.titleMedium, t)!,
+      titleSmall: TextStyle.lerp(a.titleSmall, b.titleSmall, t)!,
+      bodyLarge: TextStyle.lerp(a.bodyLarge, b.bodyLarge, t)!,
+      bodyMedium: TextStyle.lerp(a.bodyMedium, b.bodyMedium, t)!,
+      bodySmall: TextStyle.lerp(a.bodySmall, b.bodySmall, t)!,
+      labelLarge: TextStyle.lerp(a.labelLarge, b.labelLarge, t)!,
+      labelMedium: TextStyle.lerp(a.labelMedium, b.labelMedium, t)!,
+      labelSmall: TextStyle.lerp(a.labelSmall, b.labelSmall, t)!,
+      caption: TextStyle.lerp(a.caption, b.caption, t)!,
+      overline: TextStyle.lerp(a.overline, b.overline, t)!,
+    );
+  }
+
   /// Creates a copy of this typography with the given fields replaced
   ChromiaTypography copyWith({
     TextStyle? displayLarge,

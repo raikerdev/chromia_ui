@@ -125,6 +125,23 @@ class ChromiaShadows {
     );
   }
 
+  // ── lerp ──────────────────────────────────────────────────────────────────
+
+  /// Linearly interpolates between two [ChromiaShadows] instances.
+  ///
+  /// Each shadow list is lerped with [BoxShadow.lerpList].
+  static ChromiaShadows lerp(ChromiaShadows a, ChromiaShadows b, double t) {
+    return ChromiaShadows(
+      none: BoxShadow.lerpList(a.none, b.none, t) ?? const [],
+      xs: BoxShadow.lerpList(a.xs, b.xs, t) ?? const [],
+      s: BoxShadow.lerpList(a.s, b.s, t) ?? const [],
+      m: BoxShadow.lerpList(a.m, b.m, t) ?? const [],
+      l: BoxShadow.lerpList(a.l, b.l, t) ?? const [],
+      xl: BoxShadow.lerpList(a.xl, b.xl, t) ?? const [],
+      xxl: BoxShadow.lerpList(a.xxl, b.xxl, t) ?? const [],
+    );
+  }
+
   /// Creates a copy of this shadow with the given fields replaced
   ChromiaShadows copyWith({
     List<BoxShadow>? none,

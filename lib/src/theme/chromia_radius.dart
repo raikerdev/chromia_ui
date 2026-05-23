@@ -1,3 +1,5 @@
+import 'dart:ui' show lerpDouble;
+
 import 'package:flutter/widgets.dart';
 
 /// Border radius system for Chromia UI.
@@ -163,6 +165,24 @@ class ChromiaRadius {
 
   /// Full shape (pill)
   RoundedRectangleBorder get shapeFull => shape(full);
+
+  // ── lerp ──────────────────────────────────────────────────────────────────
+
+  /// Linearly interpolates between two [ChromiaRadius] instances.
+  ///
+  /// All radius values are lerped with [lerpDouble].
+  static ChromiaRadius lerp(ChromiaRadius a, ChromiaRadius b, double t) {
+    return ChromiaRadius(
+      none: lerpDouble(a.none, b.none, t)!,
+      xs: lerpDouble(a.xs, b.xs, t)!,
+      s: lerpDouble(a.s, b.s, t)!,
+      m: lerpDouble(a.m, b.m, t)!,
+      l: lerpDouble(a.l, b.l, t)!,
+      xl: lerpDouble(a.xl, b.xl, t)!,
+      xxl: lerpDouble(a.xxl, b.xxl, t)!,
+      full: lerpDouble(a.full, b.full, t)!,
+    );
+  }
 
   /// Creates a copy of this radius with the given fields replaced
   ChromiaRadius copyWith({

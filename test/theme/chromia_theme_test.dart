@@ -365,6 +365,274 @@ void main() {
     });
   });
 
+  // ── lerp ────────────────────────────────────────────────────────────────────
+
+  group('ChromiaThemeData.lerp', () {
+    test('lerp at t=0 equals a', () {
+      final a = ChromiaThemeData.light();
+      final b = ChromiaThemeData.dark();
+      final result = ChromiaThemeData.lerp(a, b, 0.0);
+
+      expect(result.brightness, Brightness.light);
+      expect(result.colors.primary, a.colors.primary);
+      expect(result.spacing.m, a.spacing.m);
+      expect(result.radius.m, a.radius.m);
+    });
+
+    test('lerp at t=1 equals b', () {
+      final a = ChromiaThemeData.light();
+      final b = ChromiaThemeData.dark();
+      final result = ChromiaThemeData.lerp(a, b, 1.0);
+
+      expect(result.brightness, Brightness.dark);
+      expect(result.colors.primary, b.colors.primary);
+      expect(result.spacing.m, b.spacing.m);
+      expect(result.radius.m, b.radius.m);
+    });
+
+    test('brightness switches at t=0.5', () {
+      final a = ChromiaThemeData.light();
+      final b = ChromiaThemeData.dark();
+
+      expect(ChromiaThemeData.lerp(a, b, 0.499).brightness, Brightness.light);
+      expect(ChromiaThemeData.lerp(a, b, 0.5).brightness, Brightness.dark);
+    });
+
+    test('colors are interpolated at t=0.5', () {
+      final a = ChromiaThemeData.light();
+      final b = ChromiaThemeData.dark();
+      final mid = ChromiaThemeData.lerp(a, b, 0.5);
+
+      // Midpoint color must be strictly between the endpoints (not equal to either).
+      expect(mid.colors.surface, isNot(a.colors.surface));
+      expect(mid.colors.surface, isNot(b.colors.surface));
+    });
+  });
+
+  group('ChromiaColors.lerp', () {
+    test('lerp at t=0 returns a colors', () {
+      final a = ChromiaColors.light();
+      final b = ChromiaColors.dark();
+      final result = ChromiaColors.lerp(a, b, 0.0);
+
+      expect(result.primary, a.primary);
+      expect(result.surface, a.surface);
+      expect(result.error, a.error);
+    });
+
+    test('lerp at t=1 returns b colors', () {
+      final a = ChromiaColors.light();
+      final b = ChromiaColors.dark();
+      final result = ChromiaColors.lerp(a, b, 1.0);
+
+      expect(result.primary, b.primary);
+      expect(result.surface, b.surface);
+      expect(result.error, b.error);
+    });
+
+    test('lerp at t=0.5 produces intermediate color', () {
+      const black = Color(0xFF000000);
+      const white = Color(0xFFFFFFFF);
+      final a = ChromiaColors.light().copyWith(surface: black);
+      final b = ChromiaColors.light().copyWith(surface: white);
+      final mid = ChromiaColors.lerp(a, b, 0.5);
+
+      // 50% between black and white is grey (0xFF808080 approx.)
+      expect(mid.surface.red, closeTo(128, 2));
+      expect(mid.surface.green, closeTo(128, 2));
+      expect(mid.surface.blue, closeTo(128, 2));
+    });
+  });
+
+  group('ChromiaSpacing.lerp', () {
+    test('lerp at t=0 returns a spacing', () {
+      final a = ChromiaSpacing.defaultSpacing();
+      final b = a.copyWith(m: 100.0);
+      expect(ChromiaSpacing.lerp(a, b, 0.0).m, a.m);
+    });
+
+    test('lerp at t=1 returns b spacing', () {
+      final a = ChromiaSpacing.defaultSpacing();
+      final b = a.copyWith(m: 100.0);
+      expect(ChromiaSpacing.lerp(a, b, 1.0).m, 100.0);
+    });
+
+    test('lerp at t=0.5 produces midpoint', () {
+      final a = ChromiaSpacing.defaultSpacing().copyWith(m: 0.0);
+      final b = ChromiaSpacing.defaultSpacing().copyWith(m: 100.0);
+      expect(ChromiaSpacing.lerp(a, b, 0.5).m, closeTo(50.0, 0.001));
+    });
+  });
+
+  group('ChromiaRadius.lerp', () {
+    test('lerp at t=0 returns a radius', () {
+      final a = ChromiaRadius.defaultRadius();
+      final b = a.copyWith(m: 100.0);
+      expect(ChromiaRadius.lerp(a, b, 0.0).m, a.m);
+    });
+
+    test('lerp at t=1 returns b radius', () {
+      final a = ChromiaRadius.defaultRadius();
+      final b = a.copyWith(m: 100.0);
+      expect(ChromiaRadius.lerp(a, b, 1.0).m, 100.0);
+    });
+
+    test('lerp at t=0.5 produces midpoint', () {
+      final a = ChromiaRadius.defaultRadius().copyWith(m: 0.0);
+      final b = ChromiaRadius.defaultRadius().copyWith(m: 100.0);
+      expect(ChromiaRadius.lerp(a, b, 0.5).m, closeTo(50.0, 0.001));
+    });
+  });
+
+  group('ChromiaShadows.lerp', () {
+    test('lerp at t=0 returns a shadows', () {
+      final a = ChromiaShadows.light();
+      final b = ChromiaShadows.dark();
+      final result = ChromiaShadows.lerp(a, b, 0.0);
+
+      expect(result.s.first.color, a.s.first.color);
+    });
+
+    test('lerp at t=1 returns b shadows', () {
+      final a = ChromiaShadows.light();
+      final b = ChromiaShadows.dark();
+      final result = ChromiaShadows.lerp(a, b, 1.0);
+
+      expect(result.s.first.color, b.s.first.color);
+    });
+  });
+
+  group('ChromiaTypography.lerp', () {
+    test('lerp at t=0 returns a text styles', () {
+      final a = ChromiaTypography.defaultTypography();
+      final b = a.copyWith(
+        bodyMedium: a.bodyMedium.copyWith(fontSize: 100.0),
+      );
+      expect(ChromiaTypography.lerp(a, b, 0.0).bodyMedium.fontSize, a.bodyMedium.fontSize);
+    });
+
+    test('lerp at t=1 returns b text styles', () {
+      final a = ChromiaTypography.defaultTypography();
+      final b = a.copyWith(
+        bodyMedium: a.bodyMedium.copyWith(fontSize: 100.0),
+      );
+      expect(ChromiaTypography.lerp(a, b, 1.0).bodyMedium.fontSize, 100.0);
+    });
+  });
+
+  // ── ChromiaTheme.maybeOf ────────────────────────────────────────────────────
+
+  group('ChromiaTheme.maybeOf', () {
+    testWidgets('returns null when no ancestor', (tester) async {
+      ChromiaThemeData? result;
+
+      await tester.pumpWidget(
+        Builder(
+          builder: (context) {
+            result = ChromiaTheme.maybeOf(context);
+            return const SizedBox();
+          },
+        ),
+      );
+
+      expect(result, isNull);
+    });
+
+    testWidgets('returns theme data when ancestor is present', (tester) async {
+      final theme = ChromiaThemeData.light();
+      ChromiaThemeData? result;
+
+      await tester.pumpWidget(
+        ChromiaTheme(
+          data: theme,
+          child: Builder(
+            builder: (context) {
+              result = ChromiaTheme.maybeOf(context);
+              return const SizedBox();
+            },
+          ),
+        ),
+      );
+
+      expect(result, isNotNull);
+      expect(result?.brightness, Brightness.light);
+    });
+  });
+
+  // ── AnimatedChromiaTheme ────────────────────────────────────────────────────
+
+  group('AnimatedChromiaTheme', () {
+    testWidgets('renders without crash', (tester) async {
+      await tester.pumpWidget(
+        AnimatedChromiaTheme(
+          data: ChromiaThemeData.light(),
+          child: const SizedBox(),
+        ),
+      );
+      expect(find.byType(AnimatedChromiaTheme), findsOneWidget);
+    });
+
+    testWidgets('provides theme to descendants', (tester) async {
+      ChromiaThemeData? received;
+
+      await tester.pumpWidget(
+        AnimatedChromiaTheme(
+          data: ChromiaThemeData.light(),
+          child: Builder(
+            builder: (context) {
+              received = ChromiaTheme.of(context);
+              return const SizedBox();
+            },
+          ),
+        ),
+      );
+
+      expect(received, isNotNull);
+    });
+
+    testWidgets('transitions to new theme after pumpAndSettle', (tester) async {
+      Brightness? captured;
+
+      // Start with light theme.
+      await tester.pumpWidget(
+        Directionality(
+          textDirection: TextDirection.ltr,
+          child: AnimatedChromiaTheme(
+            data: ChromiaThemeData.light(),
+            duration: const Duration(milliseconds: 100),
+            child: Builder(
+              builder: (context) {
+                captured = ChromiaTheme.of(context).brightness;
+                return const SizedBox();
+              },
+            ),
+          ),
+        ),
+      );
+      expect(captured, Brightness.light);
+
+      // Switch to dark theme and settle the animation.
+      await tester.pumpWidget(
+        Directionality(
+          textDirection: TextDirection.ltr,
+          child: AnimatedChromiaTheme(
+            data: ChromiaThemeData.dark(),
+            duration: const Duration(milliseconds: 100),
+            child: Builder(
+              builder: (context) {
+                captured = ChromiaTheme.of(context).brightness;
+                return const SizedBox();
+              },
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(captured, Brightness.dark);
+    });
+  });
+
   // ── ColorUtils ──────────────────────────────────────────────────────────────
 
   group('ColorUtils', () {

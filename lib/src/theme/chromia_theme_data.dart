@@ -419,6 +419,26 @@ class ChromiaThemeData {
     );
   }
 
+  // ── lerp ──────────────────────────────────────────────────────────────────
+
+  /// Linearly interpolates between two [ChromiaThemeData] instances.
+  ///
+  /// Delegates to each sub-system's own `lerp`. Non-lerpable values
+  /// ([brightness], [brandConfig]) switch at `t >= 0.5`.
+  ///
+  /// Used by [AnimatedChromiaTheme] to produce smooth theme transitions.
+  static ChromiaThemeData lerp(ChromiaThemeData a, ChromiaThemeData b, double t) {
+    return ChromiaThemeData(
+      colors: ChromiaColors.lerp(a.colors, b.colors, t),
+      typography: ChromiaTypography.lerp(a.typography, b.typography, t),
+      spacing: ChromiaSpacing.lerp(a.spacing, b.spacing, t),
+      radius: ChromiaRadius.lerp(a.radius, b.radius, t),
+      shadows: ChromiaShadows.lerp(a.shadows, b.shadows, t),
+      brandConfig: t < 0.5 ? a.brandConfig : b.brandConfig,
+      brightness: t < 0.5 ? a.brightness : b.brightness,
+    );
+  }
+
   /// Creates a copy of this theme with the given fields replaced
   ChromiaThemeData copyWith({
     ChromiaColors? colors,

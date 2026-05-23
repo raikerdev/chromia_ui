@@ -74,6 +74,128 @@ class _InheritedChromiaTheme extends InheritedWidget {
   }
 }
 
+/// Asserts in debug mode that there is a [ChromiaTheme] ancestor in the tree.
+///
+/// Call this inside `build` methods of custom widgets that depend on
+/// [ChromiaTheme.of] to get a clear error message when the widget is used
+/// outside a [ChromiaTheme] — instead of silently falling back to the
+/// default light theme.
+///
+/// ```dart
+/// @override
+/// Widget build(BuildContext context) {
+///   assert(debugCheckHasChromiaTheme(context));
+///   final theme = ChromiaTheme.of(context);
+///   // ...
+/// }
+/// ```
+bool debugCheckHasChromiaTheme(BuildContext context) {
+  assert(() {
+    if (context.widget is ChromiaTheme) {
+      return true;
+    }
+    final bool found =
+        context.dependOnInheritedWidgetOfExactType<_InheritedChromiaTheme>() != null;
+    if (!found) {
+      throw FlutterError.fromParts(<DiagnosticsNode>[
+        ErrorSummary('No ChromiaTheme widget found.'),
+        ErrorDescription(
+          '${context.widget.runtimeType} requires a ChromiaTheme ancestor.\n'
+          'The specific widget that could not find a ChromiaTheme was:\n'
+          '  ${context.widget.runtimeType}',
+        ),
+        ErrorHint(
+          'Ensure that a ChromiaTheme widget is above the widget tree:\n'
+          '  ChromiaTheme(\n'
+          '    data: ChromiaThemeData.light(),\n'
+          '    child: YourWidget(),\n'
+          '  )',
+        ),
+        context.describeElement('The context being searched was'),
+      ]);
+    }
+    return true;
+  }());
+  return true;
+}
+
+// ── AnimatedChromiaTheme ──────────────────────────────────────────────────────
+
+/// A [Tween] that interpolates between two [ChromiaThemeData] instances.
+///
+/// Uses [ChromiaThemeData.lerp] for the interpolation.
+class ChromiaThemeDataTween extends Tween<ChromiaThemeData> {
+  /// Creates a tween for [ChromiaThemeData].
+  ChromiaThemeDataTween({super.begin, super.end});
+
+  @override
+  ChromiaThemeData lerp(double t) => ChromiaThemeData.lerp(begin!, end!, t);
+}
+
+/// An animated [ChromiaTheme] that smoothly transitions between themes.
+///
+/// When [data] changes, the widget interpolates from the previous theme to
+/// the new one over [duration] using [ChromiaThemeData.lerp]. This enables
+/// butter-smooth dark/light mode toggles and brand-switch animations.
+///
+/// ```dart
+/// AnimatedChromiaTheme(
+///   data: isDark ? ChromiaThemeData.dark() : ChromiaThemeData.light(),
+///   duration: const Duration(milliseconds: 300),
+///   child: MyApp(),
+/// )
+/// ```
+///
+/// See also:
+/// - [ChromiaTheme] — the non-animated version.
+/// - [ChromiaThemeData.lerp] — the interpolation function.
+class AnimatedChromiaTheme extends ImplicitlyAnimatedWidget {
+  /// Creates an animated Chromia theme.
+  const AnimatedChromiaTheme({
+    required this.data,
+    required this.child,
+    super.duration = const Duration(milliseconds: 200),
+    super.curve,
+    super.onEnd,
+    super.key,
+  });
+
+  /// The target theme. When this changes the widget animates toward it.
+  final ChromiaThemeData data;
+
+  /// The widget subtree that receives the animated theme.
+  final Widget child;
+
+  @override
+  AnimatedWidgetBaseState<AnimatedChromiaTheme> createState() =>
+      _AnimatedChromiaThemeState();
+}
+
+class _AnimatedChromiaThemeState
+    extends AnimatedWidgetBaseState<AnimatedChromiaTheme> {
+  ChromiaThemeDataTween? _data;
+
+  @override
+  void forEachTween(TweenVisitor<dynamic> visitor) {
+    _data = visitor(
+      _data,
+      widget.data,
+      (dynamic value) =>
+          ChromiaThemeDataTween(begin: value as ChromiaThemeData),
+    ) as ChromiaThemeDataTween?;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ChromiaTheme(
+      data: _data!.evaluate(animation),
+      child: widget.child,
+    );
+  }
+}
+
+// ── BuildContext extensions ───────────────────────────────────────────────────
+
 /// Extension on BuildContext for easy access to the theme.
 extension ChromiaThemeExtension on BuildContext {
   /// Returns the ChromiaThemeData from the closest ChromiaTheme ancestor.
