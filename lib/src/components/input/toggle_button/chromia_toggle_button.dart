@@ -1,15 +1,26 @@
 import 'package:chromia_ui/chromia_ui.dart';
 import 'package:flutter/material.dart';
 
-/// A customizable toggle button component that follows the Chromia design system.
+/// A customizable toggle button (switch) component that follows the Chromia
+/// design system.
 ///
-/// The [ChromiaToggleButton] is a widget that toggle the state of a single setting on or off.
+/// When [label] is provided the entire row (toggle + text) responds to taps
+/// as a single unit via [ChromiaInlineLabel].
 ///
 /// Example usage:
 /// ```dart
 /// ChromiaToggleButton(
 ///   value: isEnabled,
 ///   onChanged: (value) => setState(() => isEnabled = value),
+/// )
+/// ```
+///
+/// With label:
+/// ```dart
+/// ChromiaToggleButton(
+///   value: isEnabled,
+///   onChanged: (value) => setState(() => isEnabled = value),
+///   label: 'Enable notifications',
 /// )
 /// ```
 class ChromiaToggleButton extends StatefulWidget {
@@ -27,29 +38,30 @@ class ChromiaToggleButton extends StatefulWidget {
   /// Whether the toggle button is on or off
   final bool value;
 
-  /// Called when the user toggles the toggle button
+  /// Called when the user toggles. Pass `null` to disable.
   final ValueChanged<bool>? onChanged;
 
-  /// Optional label text
+  /// Optional label text. When set, the entire row responds to taps.
   final String? label;
 
-  /// Color when the toggle button is on
+  /// Color when on. Defaults to [ChromiaColors.primary].
   final Color? activeColor;
 
-  /// Color when the toggle button is off
+  /// Color when off. Defaults to [ChromiaColors.outline].
   final Color? inactiveColor;
 
-  /// Color of the thumb
+  /// Color of the thumb. Defaults to [ChromiaColors.surface].
   final Color? thumbColor;
 
-  /// Size of the toggle button
+  /// Size of the toggle. Defaults to [ChromiaToggleButtonSize.medium].
   final ChromiaToggleButtonSize size;
 
   @override
   State<ChromiaToggleButton> createState() => _ChromiaToggleButtonState();
 }
 
-class _ChromiaToggleButtonState extends State<ChromiaToggleButton> with SingleTickerProviderStateMixin {
+class _ChromiaToggleButtonState extends State<ChromiaToggleButton>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -94,57 +106,50 @@ class _ChromiaToggleButtonState extends State<ChromiaToggleButton> with SingleTi
     }
   }
 
+  // ── Build ──────────────────────────────────────────────────────────────────
+
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final colors = context.chromiaColors;
-    final spacing = theme.spacing;
-
     final bool isEnabled = widget.onChanged != null;
 
-    if (widget.label != null) {
-      return InkWell(
-        onTap: isEnabled ? _handleTap : null,
-        borderRadius: theme.radius.radiusS,
-        child: Padding(
-          padding: spacing.paddingXS,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _buildToggleButton(context, isEnabled, colors),
-              spacing.gapHM,
-              Flexible(
-                child: ChromiaText(
-                  widget.label!,
-                  type: ChromiaTypographyType.bodyMedium,
-                  color: isEnabled ? colors.onSurface : colors.textDisabled,
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
+    // Pass null so _buildToggleButton doesn't register its own tap —
+    // ChromiaInlineLabel's InkWell handles it when there is a label.
+    final control = _buildToggleButton(
+      context,
+      isEnabled: isEnabled,
+      onTap: widget.label == null ? (isEnabled ? _handleTap : null) : null,
+    );
+
+    if (widget.label == null) {
+      return control;
     }
 
-    return _buildToggleButton(context, isEnabled, colors);
+    return ChromiaInlineLabel(
+      label: widget.label!,
+      control: control,
+      isEnabled: isEnabled,
+      onTap: isEnabled ? _handleTap : null,
+    );
   }
 
+  // ── Visual ─────────────────────────────────────────────────────────────────
+
   Widget _buildToggleButton(
-    BuildContext context,
-    bool isEnabled,
-    ChromiaColors colors,
-  ) {
+    BuildContext context, {
+    required bool isEnabled,
+    VoidCallback? onTap, // receives the tap directly — no longer calculated here
+  }) {
     final theme = context.chromiaTheme;
+    final colors = context.chromiaColors;
     final Color effectiveActiveColor = widget.activeColor ?? colors.primary;
     final Color effectiveInactiveColor = widget.inactiveColor ?? colors.outline;
     final Color effectiveThumbColor = widget.thumbColor ?? colors.surface;
-
     final dimensions = _getToggleButtonDimensions(widget.size, theme.spacing);
 
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
-        onTap: isEnabled && widget.label == null ? _handleTap : null,
+        onTap: onTap,
         child: AnimatedBuilder(
           animation: _animation,
           builder: (context, child) {
@@ -193,7 +198,7 @@ class _ChromiaToggleButtonState extends State<ChromiaToggleButton> with SingleTi
 
   _ToggleButtonDimensions _getToggleButtonDimensions(
     ChromiaToggleButtonSize size,
-    spacing,
+    ChromiaSpacing spacing,
   ) {
     return switch (size) {
       ChromiaToggleButtonSize.small => const _ToggleButtonDimensions(
@@ -232,14 +237,14 @@ class _ToggleButtonDimensions {
   final double padding;
 }
 
-/// Size options for ChromiaToggleButton
+/// Size options for [ChromiaToggleButton]
 enum ChromiaToggleButtonSize {
-  /// Small toggle button
+  /// Small toggle (36×20)
   small,
 
-  /// Medium toggle button (default)
+  /// Medium toggle (44×24, default)
   medium,
 
-  /// Large toggle button
+  /// Large toggle (52×28)
   large,
 }

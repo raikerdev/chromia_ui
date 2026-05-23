@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  // ── ChromiaThemeData ────────────────────────────────────────────────────────
+
   group('ChromiaThemeData', () {
     test('creates light theme with default values', () {
       final theme = ChromiaThemeData.light();
@@ -27,21 +29,25 @@ void main() {
     });
 
     test('creates theme from brand config', () {
-      const brandConfig = BrandConfig(
+      const brandConfig = ChromiaBrandConfig(
         name: 'Test Brand',
-        primaryColor: Color(0xFFFF0000),
+        colorConfig: ChromiaBrandColorConfig(
+          primaryLight: Color(0xFFFF0000),
+        ),
       );
       final theme = ChromiaThemeData.fromBrand(brandConfig);
 
       expect(theme.brandConfig, brandConfig);
       expect(theme.brandConfig?.name, 'Test Brand');
-      expect(theme.brandConfig?.primaryColor, const Color(0xFFFF0000));
+      expect(theme.brandConfig?.colorConfig.primaryLight, const Color(0xFFFF0000));
     });
 
     test('creates dark theme from brand config', () {
-      const brandConfig = BrandConfig(
+      const brandConfig = ChromiaBrandConfig(
         name: 'Test Brand',
-        primaryColor: Color(0xFFFF0000),
+        colorConfig: ChromiaBrandColorConfig(
+          primaryLight: Color(0xFFFF0000),
+        ),
       );
       final theme = ChromiaThemeData.fromBrand(brandConfig, isDark: true);
 
@@ -51,12 +57,11 @@ void main() {
 
     test('copyWith creates new instance with updated values', () {
       final theme1 = ChromiaThemeData.light();
-      final theme2 = theme1.copyWith(
-        brightness: Brightness.dark,
-      );
+      final theme2 = theme1.copyWith(brightness: Brightness.dark);
 
       expect(theme1.brightness, Brightness.light);
       expect(theme2.brightness, Brightness.dark);
+      // colors are preserved when only brightness changes
       expect(theme1.colors, theme2.colors);
     });
 
@@ -69,6 +74,8 @@ void main() {
       expect(materialTheme.useMaterial3, true);
     });
   });
+
+  // ── ChromiaColors ───────────────────────────────────────────────────────────
 
   group('ChromiaColors', () {
     test('creates light color scheme', () {
@@ -88,26 +95,29 @@ void main() {
       expect(colors.primary, isNotNull);
       expect(colors.onPrimary, isNotNull);
       expect(colors.surface, isNotNull);
+      expect(colors.isDark, true);
     });
 
-    test('creates color scheme from primary color', () {
-      final colors = ChromiaColors.fromPrimary(const Color(0xFFFF0000));
+    test('creates color scheme from brand color config', () {
+      final colors = ChromiaColors.fromBrandColorConfig(
+        const ChromiaBrandColorConfig(primaryLight: Color(0xFFFF0000)),
+      );
 
       expect(colors.primary, const Color(0xFFFF0000));
-      //expect(colors.primaryHover, isNot(const Color(0xFFFF0000)));
     });
 
     test('copyWith creates new instance with updated colors', () {
       final colors1 = ChromiaColors.light();
-      final colors2 = colors1.copyWith(
-        primary: const Color(0xFFFF0000),
-      );
+      final colors2 = colors1.copyWith(primary: const Color(0xFFFF0000));
 
       expect(colors1.primary, isNot(const Color(0xFFFF0000)));
       expect(colors2.primary, const Color(0xFFFF0000));
+      // unchanged fields carry over
       expect(colors1.secondary, colors2.secondary);
     });
   });
+
+  // ── ChromiaTypography ───────────────────────────────────────────────────────
 
   group('ChromiaTypography', () {
     test('creates default typography', () {
@@ -130,6 +140,8 @@ void main() {
       expect(coloredTypography.labelSmall.color, Colors.red);
     });
   });
+
+  // ── ChromiaSpacing ──────────────────────────────────────────────────────────
 
   group('ChromiaSpacing', () {
     test('creates default spacing', () {
@@ -160,8 +172,10 @@ void main() {
     });
   });
 
+  // ── ChromiaRadius ───────────────────────────────────────────────────────────
+
   group('ChromiaRadius', () {
-    test('creates default radius', () {
+    test('creates default radius values', () {
       final radius = ChromiaRadius.defaultRadius();
 
       expect(radius.none, 0.0);
@@ -173,7 +187,7 @@ void main() {
       expect(radius.full, 9999.0);
     });
 
-    test('creates BorderRadius correctly', () {
+    test('creates BorderRadius getters correctly', () {
       final radius = ChromiaRadius.defaultRadius();
 
       expect(radius.radiusM, BorderRadius.circular(8.0));
@@ -184,12 +198,11 @@ void main() {
       final radius = ChromiaRadius.defaultRadius();
 
       expect(radius.shapeM, isA<RoundedRectangleBorder>());
-      expect(
-        radius.shapeM.borderRadius,
-        BorderRadius.circular(8.0),
-      );
+      expect(radius.shapeM.borderRadius, BorderRadius.circular(8.0));
     });
   });
+
+  // ── ChromiaShadows ──────────────────────────────────────────────────────────
 
   group('ChromiaShadows', () {
     test('creates light shadows', () {
@@ -211,27 +224,32 @@ void main() {
     });
   });
 
-  group('BrandConfig', () {
+  // ── ChromiaBrandConfig ──────────────────────────────────────────────────────
+
+  group('ChromiaBrandConfig', () {
     test('creates brand config with required parameters', () {
-      const brand = BrandConfig(
+      const brand = ChromiaBrandConfig(
         name: 'Test Brand',
-        primaryColor: Color(0xFFFF0000),
+        colorConfig: ChromiaBrandColorConfig(
+          primaryLight: Color(0xFFFF0000),
+        ),
       );
 
       expect(brand.name, 'Test Brand');
-      expect(brand.primaryColor, const Color(0xFFFF0000));
-      expect(brand.secondaryColor, isNull);
-      expect(brand.logoPath, isNull);
+      expect(brand.colorConfig.primaryLight, const Color(0xFFFF0000));
+      expect(brand.typographyConfig, isNull);
     });
 
     test('creates brand config with custom colors', () {
-      const brand = BrandConfig(
+      const brand = ChromiaBrandConfig(
         name: 'Test Brand',
-        primaryColor: Color(0xFFFF0000),
-        customColors: {
-          'accent': Color(0xFF00FF00),
-          'highlight': Color(0xFF0000FF),
-        },
+        colorConfig: ChromiaBrandColorConfig(
+          primaryLight: Color(0xFFFF0000),
+          customColors: {
+            'accent': Color(0xFF00FF00),
+            'highlight': Color(0xFF0000FF),
+          },
+        ),
       );
 
       expect(brand.getCustomColor('accent'), const Color(0xFF00FF00));
@@ -240,25 +258,28 @@ void main() {
     });
 
     test('copyWith creates new instance', () {
-      const brand1 = BrandConfig(
+      const brand1 = ChromiaBrandConfig(
         name: 'Brand 1',
-        primaryColor: Color(0xFFFF0000),
+        colorConfig: ChromiaBrandColorConfig(
+          primaryLight: Color(0xFFFF0000),
+        ),
       );
-      final brand2 = brand1.copyWith(
-        name: 'Brand 2',
-      );
+      final brand2 = brand1.copyWith(name: 'Brand 2');
 
       expect(brand1.name, 'Brand 1');
       expect(brand2.name, 'Brand 2');
-      expect(brand1.primaryColor, brand2.primaryColor);
+      // colorConfig is unchanged
+      expect(brand1.colorConfig.primaryLight, brand2.colorConfig.primaryLight);
     });
 
     test('predefined brands are available', () {
-      expect(BrandConfigs.chromia.name, 'Chromia');
+      expect(BrandConfigs.chromia.name, 'Default Chromia Brand');
       expect(BrandConfigs.all, isNotEmpty);
       expect(BrandConfigs.all.length, greaterThan(1));
     });
   });
+
+  // ── ChromiaTheme Widget ─────────────────────────────────────────────────────
 
   group('ChromiaTheme Widget', () {
     testWidgets('provides theme data to descendants', (tester) async {
@@ -286,13 +307,16 @@ void main() {
       final theme2 = ChromiaThemeData.dark();
 
       await tester.pumpWidget(
-        ChromiaTheme(
-          data: theme1,
-          child: Builder(
-            builder: (context) {
-              final theme = ChromiaTheme.of(context);
-              return Text(theme.brightness.toString());
-            },
+        Directionality(
+          textDirection: TextDirection.ltr,
+          child: ChromiaTheme(
+            data: theme1,
+            child: Builder(
+              builder: (context) {
+                final theme = ChromiaTheme.of(context);
+                return Text(theme.brightness.toString());
+              },
+            ),
           ),
         ),
       );
@@ -300,13 +324,16 @@ void main() {
       expect(find.text('Brightness.light'), findsOneWidget);
 
       await tester.pumpWidget(
-        ChromiaTheme(
-          data: theme2,
-          child: Builder(
-            builder: (context) {
-              final theme = ChromiaTheme.of(context);
-              return Text(theme.brightness.toString());
-            },
+        Directionality(
+          textDirection: TextDirection.ltr,
+          child: ChromiaTheme(
+            data: theme2,
+            child: Builder(
+              builder: (context) {
+                final theme = ChromiaTheme.of(context);
+                return Text(theme.brightness.toString());
+              },
+            ),
           ),
         ),
       );
@@ -338,6 +365,8 @@ void main() {
     });
   });
 
+  // ── ColorUtils ──────────────────────────────────────────────────────────────
+
   group('ColorUtils', () {
     test('detects dark colors correctly', () {
       expect(ColorUtils.isDark(Colors.black), true);
@@ -357,9 +386,7 @@ void main() {
       expect(lightened, isNot(color));
       expect(
         ColorUtils.getLuminance(lightened),
-        greaterThan(
-          ColorUtils.getLuminance(color),
-        ),
+        greaterThan(ColorUtils.getLuminance(color)),
       );
     });
 
@@ -370,9 +397,7 @@ void main() {
       expect(darkened, isNot(color));
       expect(
         ColorUtils.getLuminance(darkened),
-        lessThan(
-          ColorUtils.getLuminance(color),
-        ),
+        lessThan(ColorUtils.getLuminance(color)),
       );
     });
 
@@ -383,10 +408,11 @@ void main() {
     });
 
     test('converts color to hex', () {
-      expect(ColorUtils.toHex(const Color(0xFFFF0000)), '#FFFF0000');
+      // default: includeAlpha is false
+      expect(ColorUtils.toHex(const Color(0xFFFF0000)), '#FF0000');
       expect(
-        ColorUtils.toHex(const Color(0xFFFF0000), includeAlpha: false),
-        '#FF0000',
+        ColorUtils.toHex(const Color(0xFFFF0000), includeAlpha: true),
+        '#FFFF0000',
       );
     });
 
@@ -412,11 +438,15 @@ void main() {
     });
   });
 
+  // ── PlatformDetector ────────────────────────────────────────────────────────
+
   group('PlatformDetector', () {
     test('detects platform type', () {
       expect(PlatformDetector.platformName, isNotEmpty);
       expect(
-        PlatformDetector.isWeb || PlatformDetector.isMobile || PlatformDetector.isDesktop,
+        PlatformDetector.isWeb ||
+            PlatformDetector.isMobile ||
+            PlatformDetector.isDesktop,
         true,
       );
     });

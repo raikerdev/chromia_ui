@@ -3,16 +3,14 @@ import 'package:flutter/material.dart';
 
 /// A customizable checkbox component that follows the Chromia design system.
 ///
-/// The [ChromiaCheckbox] widget is a customizable checkbox component that
-/// follows the Chromia design system.
+/// When [label] is provided the entire row (checkbox + text) responds to taps
+/// as a single unit via [ChromiaInlineLabel].
 ///
 /// Example usage:
 /// ```dart
 /// ChromiaCheckbox(
 ///   value: isChecked,
-///   onChanged: (value) {
-///     setState(() => isChecked = value ?? false);
-///   },
+///   onChanged: (value) => setState(() => isChecked = value ?? false),
 /// )
 /// ```
 ///
@@ -41,99 +39,91 @@ class ChromiaCheckbox extends StatelessWidget {
   /// Whether the checkbox is checked
   final bool? value;
 
-  /// Called when the value changes
+  /// Called when the value changes. Pass `null` to disable.
   final ValueChanged<bool?>? onChanged;
 
-  /// Optional label text
+  /// Optional label text. When set, the entire row responds to taps.
   final String? label;
 
   /// Whether the checkbox can be in an indeterminate state
   final bool tristate;
 
-  /// The color when checked
+  /// The color when checked. Defaults to [ChromiaColors.primary].
   final Color? activeColor;
 
-  /// The color of the check mark
+  /// The color of the check mark. Defaults to [ChromiaColors.onPrimary].
   final Color? checkColor;
 
-  /// The size of the checkbox
+  /// The size of the checkbox box
   final double size;
 
-  /// The icon to display when the checkbox is checked
+  /// The icon to display when checked
   final IconData checkIcon;
 
-  /// The icon to display when the checkbox is null
+  /// The icon to display in indeterminate state
   final IconData tristateIcon;
+
+  // ── Tap logic ──────────────────────────────────────────────────────────────
+
+  VoidCallback? _buildOnTap(bool isEnabled) {
+    if (!isEnabled) {
+      return null;
+    }
+    return () {
+      if (tristate) {
+        if (value == false) {
+          onChanged!(true);
+        } else if (value == true) {
+          onChanged!(null);
+        } else {
+          onChanged!(false);
+        }
+      } else {
+        onChanged!(!(value ?? false));
+      }
+    };
+  }
+
+  // ── Build ──────────────────────────────────────────────────────────────────
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
     final colors = context.chromiaColors;
-    final spacing = theme.spacing;
-    final radius = theme.radius;
-
     final bool isEnabled = onChanged != null;
     final Color effectiveActiveColor = activeColor ?? colors.primary;
     final Color effectiveCheckColor = checkColor ?? colors.onPrimary;
 
-    if (label != null) {
-      return InkWell(
-        onTap: isEnabled
-            ? () {
-                if (tristate) {
-                  // Cycle through: false -> true -> null -> false
-                  if (value == false) {
-                    onChanged!(true);
-                  } else if (value == true) {
-                    onChanged!(null);
-                  } else {
-                    onChanged!(false);
-                  }
-                } else {
-                  onChanged!(!(value ?? false));
-                }
-              }
-            : null,
-        borderRadius: radius.radiusS,
-        child: Padding(
-          padding: spacing.paddingXS,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _buildCheckbox(
-                context,
-                isEnabled,
-                effectiveActiveColor,
-                effectiveCheckColor,
-              ),
-              spacing.gapHM,
-              Flexible(
-                child: ChromiaText(
-                  label!,
-                  type: ChromiaTypographyType.bodyMedium,
-                  color: isEnabled ? colors.onSurface : colors.textDisabled,
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
+    // When wrapped in ChromiaInlineLabel the InkWell above handles the tap,
+    // so the bare control must not register a second tap handler.
+    final control = _buildCheckbox(
+      context,
+      isEnabled: isEnabled,
+      activeColor: effectiveActiveColor,
+      checkColor: effectiveCheckColor,
+      onTap: label == null ? _buildOnTap(isEnabled) : null,
+    );
+
+    if (label == null) {
+      return control;
     }
 
-    return _buildCheckbox(
-      context,
-      isEnabled,
-      effectiveActiveColor,
-      effectiveCheckColor,
+    return ChromiaInlineLabel(
+      label: label!,
+      control: control,
+      isEnabled: isEnabled,
+      onTap: _buildOnTap(isEnabled),
     );
   }
 
+  // ── Visual ─────────────────────────────────────────────────────────────────
+
   Widget _buildCheckbox(
-    BuildContext context,
-    bool isEnabled,
-    Color activeColor,
-    Color checkColor,
-  ) {
+    BuildContext context, {
+    required bool isEnabled,
+    required Color activeColor,
+    required Color checkColor,
+    VoidCallback? onTap,
+  }) {
     final theme = context.chromiaTheme;
     final colors = context.chromiaColors;
     final radius = theme.radius;
@@ -141,28 +131,16 @@ class ChromiaCheckbox extends StatelessWidget {
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
-        onTap: isEnabled && label == null
-            ? () {
-                if (tristate) {
-                  if (value == false) {
-                    onChanged!(true);
-                  } else if (value == true) {
-                    onChanged!(null);
-                  } else {
-                    onChanged!(false);
-                  }
-                } else {
-                  onChanged!(!(value ?? false));
-                }
-              }
-            : null,
+        onTap: onTap,
         child: AnimatedContainer(
           duration: AnimationTokens.fast,
           curve: AnimationTokens.easeOut,
           width: size,
           height: size,
           decoration: BoxDecoration(
-            color: value == true ? (isEnabled ? activeColor : colors.surfaceContainer) : colors.transparent,
+            color: value == true
+                ? (isEnabled ? activeColor : colors.surfaceContainer)
+                : colors.transparent,
             border: Border.all(
               color: value == true
                   ? (isEnabled ? activeColor : colors.surfaceContainer)
@@ -172,11 +150,7 @@ class ChromiaCheckbox extends StatelessWidget {
             borderRadius: radius.circular(4),
           ),
           child: value == true
-              ? Icon(
-                  checkIcon,
-                  size: size * 0.7,
-                  color: checkColor,
-                )
+              ? Icon(checkIcon, size: size * 0.7, color: checkColor)
               : value == null
               ? Icon(
                   tristateIcon,

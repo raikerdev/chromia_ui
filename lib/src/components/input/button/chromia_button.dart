@@ -104,9 +104,9 @@ class _ChromiaButtonState extends State<ChromiaButton> {
     final ChromiaButtonStyle finalStyle = widget.style != null ? sizedStyle.merge(widget.style) : sizedStyle;
 
     // Determine current background color based on state
-    final Color backgroundColor = _getBackgroundColor(finalStyle, isEnabled);
-    final Color foregroundColor = _getForegroundColor(finalStyle, isEnabled);
-    final Color? borderColor = _getBorderColor(finalStyle, isEnabled);
+    final Color backgroundColor = _getBackgroundColor(finalStyle, isEnabled, theme);
+    final Color foregroundColor = _getForegroundColor(finalStyle, isEnabled, theme);
+    final Color? borderColor = _getBorderColor(finalStyle, isEnabled, theme);
 
     return MouseRegion(
       onEnter: isEnabled ? (_) => setState(() => _isHovered = true) : null,
@@ -289,35 +289,51 @@ class _ChromiaButtonState extends State<ChromiaButton> {
   }
 
   /// Gets the current background color based on state
-  Color _getBackgroundColor(ChromiaButtonStyle style, bool isEnabled) {
+  Color _getBackgroundColor(
+    ChromiaButtonStyle style,
+    bool isEnabled,
+    ChromiaThemeData theme,
+  ) {
     if (!isEnabled) {
-      return style.disabledBackgroundColor ?? Colors.grey.shade300;
+      return style.disabledBackgroundColor ?? theme.colors.surfaceContainer;
     }
     if (_isPressed) {
-      return style.pressedBackgroundColor ?? style.backgroundColor ?? Colors.blue;
+      return style.pressedBackgroundColor ??
+          style.backgroundColor ??
+          theme.colors.primaryPressed;
     }
     if (_isHovered) {
-      return style.hoverBackgroundColor ?? style.backgroundColor ?? Colors.blue;
+      return style.hoverBackgroundColor ??
+          style.backgroundColor ??
+          theme.colors.primaryHover;
     }
-    return style.backgroundColor ?? Colors.blue;
+    return style.backgroundColor ?? theme.colors.primary;
   }
 
   /// Gets the current foreground color based on state
-  Color _getForegroundColor(ChromiaButtonStyle style, bool isEnabled) {
+  Color _getForegroundColor(
+    ChromiaButtonStyle style,
+    bool isEnabled,
+    ChromiaThemeData theme,
+  ) {
     if (!isEnabled) {
-      return style.disabledForegroundColor ?? Colors.grey.shade600;
+      return style.disabledForegroundColor ?? theme.colors.textDisabled;
     }
-    return style.foregroundColor ?? Colors.white;
+    return style.foregroundColor ?? theme.colors.onPrimary;
   }
 
   /// Gets the current border color based on state
-  Color? _getBorderColor(ChromiaButtonStyle style, bool isEnabled) {
+  Color? _getBorderColor(
+    ChromiaButtonStyle style,
+    bool isEnabled,
+    ChromiaThemeData theme,
+  ) {
     if (style.borderColor == null) {
       return null;
     }
 
     if (!isEnabled) {
-      return style.disabledBorderColor ?? Colors.grey.shade400;
+      return style.disabledBorderColor ?? theme.colors.outline;
     }
     if (_isHovered) {
       return style.hoverBorderColor ?? style.borderColor;

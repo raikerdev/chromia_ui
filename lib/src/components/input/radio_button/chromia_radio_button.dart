@@ -3,17 +3,25 @@ import 'package:flutter/material.dart';
 
 /// A customizable radio button component that follows the Chromia design system.
 ///
-/// The [ChromiaRadioButton] widget allow users to select
-/// a single option from a set of options.
+/// When [label] is provided the entire row (radio + text) responds to taps
+/// as a single unit via [ChromiaInlineLabel].
 ///
 /// Example usage:
 /// ```dart
-/// String selectedValue = 'option1';
-///
-/// ChromiaRadio<String>(
+/// ChromiaRadioButton<String>(
 ///   value: 'option1',
 ///   groupValue: selectedValue,
 ///   onChanged: (value) => setState(() => selectedValue = value!),
+/// )
+/// ```
+///
+/// With label:
+/// ```dart
+/// ChromiaRadioButton<String>(
+///   value: 'option1',
+///   groupValue: selectedValue,
+///   onChanged: (value) => setState(() => selectedValue = value!),
+///   label: 'Option 1',
 /// )
 /// ```
 class ChromiaRadioButton<T> extends StatelessWidget {
@@ -26,7 +34,10 @@ class ChromiaRadioButton<T> extends StatelessWidget {
     this.size = 20.0,
     this.thumbScale = 0.4,
     super.key,
-  }) : assert(thumbScale <= 1.0 && thumbScale >= 0.0, 'thumbScale must be between 0.0 and 1.0');
+  }) : assert(
+         thumbScale <= 1.0 && thumbScale >= 0.0,
+         'thumbScale must be between 0.0 and 1.0',
+       );
 
   /// The value represented by this radio button
   final T value;
@@ -34,78 +45,66 @@ class ChromiaRadioButton<T> extends StatelessWidget {
   /// The currently selected value for the group
   final T? groupValue;
 
-  /// Called when the user selects this radio button
+  /// Called when the user selects this radio button. Pass `null` to disable.
   final ValueChanged<T?>? onChanged;
 
-  /// Optional label text
+  /// Optional label text. When set, the entire row responds to taps.
   final String? label;
 
-  /// The color when selected
+  /// The color when selected. Defaults to [ChromiaColors.primary].
   final Color? activeColor;
 
-  /// The size of the radio button
+  /// The size of the radio circle
   final double size;
 
-  /// The scale of the thumb when selected
+  /// The scale of the inner thumb when selected (0.0–1.0)
   final double thumbScale;
 
   bool get _isSelected => value == groupValue;
 
+  // ── Build ──────────────────────────────────────────────────────────────────
+
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
     final colors = context.chromiaColors;
-    final spacing = theme.spacing;
-
     final bool isEnabled = onChanged != null;
     final Color effectiveActiveColor = activeColor ?? colors.primary;
+    final VoidCallback? onTap = isEnabled ? () => onChanged!(value) : null;
 
-    if (label != null) {
-      return InkWell(
-        onTap: isEnabled ? () => onChanged!(value) : null,
-        borderRadius: theme.radius.radiusS,
-        child: Padding(
-          padding: spacing.paddingXS,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _buildRadio(
-                context,
-                isEnabled,
-                effectiveActiveColor,
-              ),
-              spacing.gapHM,
-              Flexible(
-                child: ChromiaText(
-                  label!,
-                  type: ChromiaTypographyType.bodyMedium,
-                  color: isEnabled ? colors.onSurface : colors.textDisabled,
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
+    // Only self-handle tap when not wrapped in ChromiaInlineLabel.
+    final control = _buildRadio(
+      context,
+      isEnabled: isEnabled,
+      activeColor: effectiveActiveColor,
+      onTap: label == null ? onTap : null,
+    );
+
+    if (label == null) {
+      return control;
     }
 
-    return _buildRadio(
-      context,
-      isEnabled,
-      effectiveActiveColor,
+    return ChromiaInlineLabel(
+      label: label!,
+      control: control,
+      isEnabled: isEnabled,
+      onTap: onTap,
     );
   }
 
+  // ── Visual ─────────────────────────────────────────────────────────────────
+
   Widget _buildRadio(
-    BuildContext context,
-    bool isEnabled,
-    Color activeColor,
-  ) {
+    BuildContext context, {
+    required bool isEnabled,
+    required Color activeColor,
+    VoidCallback? onTap,
+  }) {
     final colors = context.chromiaColors;
 
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
-        onTap: isEnabled && label == null ? () => onChanged!(value) : null,
+        onTap: onTap,
         child: AnimatedContainer(
           duration: AnimationTokens.fast,
           curve: AnimationTokens.easeOut,
@@ -113,7 +112,9 @@ class ChromiaRadioButton<T> extends StatelessWidget {
           height: size,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: _isSelected ? (isEnabled ? activeColor : colors.surfaceContainer) : colors.transparent,
+            color: _isSelected
+                ? (isEnabled ? activeColor : colors.surfaceContainer)
+                : colors.transparent,
             border: Border.all(
               color: _isSelected
                   ? (isEnabled ? activeColor : colors.surfaceContainer)

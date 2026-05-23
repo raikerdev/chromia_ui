@@ -1,23 +1,18 @@
 import 'package:chromia_ui/chromia_ui.dart';
 import 'package:flutter/material.dart';
 
-/// A checkbox with a tile layout similar to CheckboxListTile.
+/// A checkbox with a tile layout.
 ///
-/// The [ChromiaListTileCheckbox] is a widget that displays a
-/// checkbox with a tile layout.
+/// Displays a [ChromiaCheckbox] at the trailing end with optional
+/// [title], [subtitle] and [secondary] widgets.
 ///
 /// Example usage:
 /// ```dart
-/// ChromiaCheckboxListTile(
+/// ChromiaListTileCheckbox(
 ///   value: isChecked,
-///   title: Text('Checkbox ListTile'),
-///   subtitle: Text('This is a subtitle'),
-///   secondary: Icon(Icons.check),
-///   onChanged: (value) {
-///     setState(() {
-///       isChecked = value;
-///     });
-///   },
+///   onChanged: (value) => setState(() => isChecked = value ?? false),
+///   title: Text('Accept terms and conditions'),
+///   subtitle: Text('Read carefully before accepting'),
 /// )
 /// ```
 class ChromiaListTileCheckbox extends StatelessWidget {
@@ -39,7 +34,7 @@ class ChromiaListTileCheckbox extends StatelessWidget {
   /// Whether the checkbox is checked
   final bool? value;
 
-  /// Called when the value changes
+  /// Called when the value changes. Pass `null` to disable.
   final ValueChanged<bool?>? onChanged;
 
   /// The primary content
@@ -48,94 +43,62 @@ class ChromiaListTileCheckbox extends StatelessWidget {
   /// Additional content displayed below the title
   final Widget? subtitle;
 
-  /// A widget to display before the checkbox
+  /// A widget to display at the leading edge
   final Widget? secondary;
 
   /// Whether the checkbox can be in an indeterminate state
   final bool tristate;
 
-  /// The color when checked
+  /// The color when checked. Defaults to [ChromiaColors.primary].
   final Color? activeColor;
 
-  /// The color of the check mark
+  /// The color of the check mark. Defaults to [ChromiaColors.onPrimary].
   final Color? checkColor;
 
-  /// Padding around the tile
+  /// Padding around the tile. Defaults to [ChromiaSpacing.paddingM].
   final EdgeInsetsGeometry? contentPadding;
 
-  /// The icon to display when the checkbox is checked
+  /// The icon to display when checked
   final IconData checkIcon;
 
-  /// The icon to display when the checkbox is null
+  /// The icon to display in indeterminate state
   final IconData tristateIcon;
+
+  VoidCallback? _buildOnTap() {
+    if (onChanged == null) {
+      return null;
+    }
+    return () {
+      if (tristate) {
+        if (value == false) {
+          onChanged!(true);
+        } else if (value == true) {
+          onChanged!(null);
+        } else {
+          onChanged!(false);
+        }
+      } else {
+        onChanged!(!(value ?? false));
+      }
+    };
+  }
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final spacing = theme.spacing;
-    final radius = theme.radius;
-
-    return InkWell(
-      onTap: onChanged != null
-          ? () {
-              if (tristate) {
-                if (value == false) {
-                  onChanged!(true);
-                } else if (value == true) {
-                  onChanged!(null);
-                } else {
-                  onChanged!(false);
-                }
-              } else {
-                onChanged!(!(value ?? false));
-              }
-            }
-          : null,
-      borderRadius: radius.radiusS,
-      child: Padding(
-        padding: contentPadding ?? spacing.paddingM,
-        child: Row(
-          children: [
-            if (secondary != null) ...[
-              secondary!,
-              spacing.gapHM,
-            ],
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if (title != null)
-                    DefaultTextStyle(
-                      style: theme.typography.bodyMedium.copyWith(
-                        color: theme.colors.onSurface,
-                      ),
-                      child: title!,
-                    ),
-                  if (subtitle != null) ...[
-                    spacing.gapVXS,
-                    DefaultTextStyle(
-                      style: theme.typography.bodySmall.copyWith(
-                        color: theme.colors.onSurfaceVariant,
-                      ),
-                      child: subtitle!,
-                    ),
-                  ],
-                ],
-              ),
-            ),
-            spacing.gapHM,
-            ChromiaCheckbox(
-              value: value,
-              onChanged: onChanged,
-              tristate: tristate,
-              activeColor: activeColor,
-              checkColor: checkColor,
-              checkIcon: checkIcon,
-              tristateIcon: tristateIcon,
-            ),
-          ],
-        ),
+    return ChromiaListTileShell(
+      onTap: _buildOnTap(),
+      title: title,
+      subtitle: subtitle,
+      secondary: secondary,
+      contentPadding: contentPadding,
+      control: ChromiaCheckbox(
+        value: value,
+        onChanged: onChanged,
+        tristate: tristate,
+        activeColor: activeColor,
+        checkColor: checkColor,
+        checkIcon: checkIcon,
+        tristateIcon: tristateIcon,
       ),
     );
   }

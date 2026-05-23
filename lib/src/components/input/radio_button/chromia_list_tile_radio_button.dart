@@ -1,14 +1,12 @@
 import 'package:chromia_ui/chromia_ui.dart';
 import 'package:flutter/material.dart';
 
-/// A radio button with a tile layout similar to RadioListTile.
+/// A radio button with a tile layout.
 ///
-/// The [ChromiaListTileRadioButton] is a widget that displays a radio button
-/// with a tile layout.
+/// Displays a [ChromiaRadioButton] at the trailing end with optional
+/// [title], [subtitle] and [secondary] widgets.
 ///
 /// Example usage:
-/// String selectedValue = 'option1';
-///
 /// ```dart
 /// ChromiaListTileRadioButton<String>(
 ///   value: 'option1',
@@ -16,8 +14,6 @@ import 'package:flutter/material.dart';
 ///   onChanged: (value) => setState(() => selectedOption = value),
 ///   title: Text('Option 1'),
 ///   subtitle: Text('Description for Option 1'),
-///   secondary: Icon(Icons.radio_button_checked),
-///   activeColor: Colors.blue,
 /// )
 /// ```
 class ChromiaListTileRadioButton<T> extends StatelessWidget {
@@ -39,7 +35,7 @@ class ChromiaListTileRadioButton<T> extends StatelessWidget {
   /// The currently selected value for the group
   final T? groupValue;
 
-  /// Called when the user selects this radio button
+  /// Called when the user selects this option. Pass `null` to disable.
   final ValueChanged<T?>? onChanged;
 
   /// The primary content
@@ -48,65 +44,28 @@ class ChromiaListTileRadioButton<T> extends StatelessWidget {
   /// Additional content displayed below the title
   final Widget? subtitle;
 
-  /// A widget to display before the radio button
+  /// A widget to display at the leading edge
   final Widget? secondary;
 
-  /// The color when selected
+  /// The color when selected. Defaults to [ChromiaColors.primary].
   final Color? activeColor;
 
-  /// Padding around the tile
+  /// Padding around the tile. Defaults to [ChromiaSpacing.paddingM].
   final EdgeInsetsGeometry? contentPadding;
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final spacing = theme.spacing;
-    final radius = theme.radius;
-
-    return InkWell(
+    return ChromiaListTileShell(
       onTap: onChanged != null ? () => onChanged!(value) : null,
-      borderRadius: radius.radiusS,
-      child: Padding(
-        padding: contentPadding ?? spacing.paddingM,
-        child: Row(
-          children: [
-            if (secondary != null) ...[
-              secondary!,
-              spacing.gapHM,
-            ],
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if (title != null)
-                    DefaultTextStyle(
-                      style: theme.typography.bodyMedium.copyWith(
-                        color: theme.colors.onSurface,
-                      ),
-                      child: title!,
-                    ),
-                  if (subtitle != null) ...[
-                    spacing.gapVXS,
-                    DefaultTextStyle(
-                      style: theme.typography.bodySmall.copyWith(
-                        color: theme.colors.onSurfaceVariant,
-                      ),
-                      child: subtitle!,
-                    ),
-                  ],
-                ],
-              ),
-            ),
-            spacing.gapHM,
-            ChromiaRadioButton<T>(
-              value: value,
-              groupValue: groupValue,
-              onChanged: onChanged,
-              activeColor: activeColor,
-            ),
-          ],
-        ),
+      title: title,
+      subtitle: subtitle,
+      secondary: secondary,
+      contentPadding: contentPadding,
+      control: ChromiaRadioButton<T>(
+        value: value,
+        groupValue: groupValue,
+        onChanged: onChanged,
+        activeColor: activeColor,
       ),
     );
   }

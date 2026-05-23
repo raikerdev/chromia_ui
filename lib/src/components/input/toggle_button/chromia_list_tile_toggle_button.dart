@@ -1,19 +1,18 @@
 import 'package:chromia_ui/chromia_ui.dart';
 import 'package:flutter/material.dart';
 
-/// A switch with a tile layout similar to SwitchListTile.
+/// A toggle button with a tile layout.
 ///
-/// The [ChromiaListTileToggleButton] is a widget that displays a toggle button
-/// with a tile layout.
+/// Displays a [ChromiaToggleButton] at the trailing end with optional
+/// [title], [subtitle] and [secondary] widgets.
 ///
 /// Example usage:
 /// ```dart
 /// ChromiaListTileToggleButton(
 ///   value: isOn,
 ///   onChanged: (value) => setState(() => isOn = value),
-///   title: Text('Toggle Button'),
-///   subtitle: Text('This is a toggle button'),
-///   activeColor: Colors.green,
+///   title: Text('Enable notifications'),
+///   subtitle: Text('Receive alerts when something happens'),
 /// )
 /// ```
 class ChromiaListTileToggleButton extends StatelessWidget {
@@ -30,10 +29,10 @@ class ChromiaListTileToggleButton extends StatelessWidget {
     super.key,
   });
 
-  /// Whether the switch is on or off
+  /// Whether the toggle is on or off
   final bool value;
 
-  /// Called when the user toggles the switch
+  /// Called when the user toggles. Pass `null` to disable.
   final ValueChanged<bool>? onChanged;
 
   /// The primary content
@@ -42,72 +41,35 @@ class ChromiaListTileToggleButton extends StatelessWidget {
   /// Additional content displayed below the title
   final Widget? subtitle;
 
-  /// A widget to display before the switch
+  /// A widget to display at the leading edge
   final Widget? secondary;
 
-  /// Color when the switch is on
+  /// Color when on. Defaults to [ChromiaColors.primary].
   final Color? activeColor;
 
-  /// Color when the switch is off
+  /// Color when off. Defaults to [ChromiaColors.outline].
   final Color? inactiveColor;
 
-  /// Padding around the tile
+  /// Padding around the tile. Defaults to [ChromiaSpacing.paddingM].
   final EdgeInsetsGeometry? contentPadding;
 
-  /// Size of the switch
+  /// Size of the toggle. Defaults to [ChromiaToggleButtonSize.medium].
   final ChromiaToggleButtonSize size;
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final spacing = theme.spacing;
-    final radius = theme.radius;
-
-    return InkWell(
+    return ChromiaListTileShell(
       onTap: onChanged != null ? () => onChanged!(!value) : null,
-      borderRadius: radius.radiusS,
-      child: Padding(
-        padding: contentPadding ?? spacing.paddingM,
-        child: Row(
-          children: [
-            if (secondary != null) ...[
-              secondary!,
-              spacing.gapHM,
-            ],
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if (title != null)
-                    DefaultTextStyle(
-                      style: theme.typography.bodyMedium.copyWith(
-                        color: theme.colors.onSurface,
-                      ),
-                      child: title!,
-                    ),
-                  if (subtitle != null) ...[
-                    spacing.gapVXS,
-                    DefaultTextStyle(
-                      style: theme.typography.bodySmall.copyWith(
-                        color: theme.colors.onSurfaceVariant,
-                      ),
-                      child: subtitle!,
-                    ),
-                  ],
-                ],
-              ),
-            ),
-            spacing.gapHM,
-            ChromiaToggleButton(
-              value: value,
-              onChanged: onChanged,
-              activeColor: activeColor,
-              inactiveColor: inactiveColor,
-              size: size,
-            ),
-          ],
-        ),
+      title: title,
+      subtitle: subtitle,
+      secondary: secondary,
+      contentPadding: contentPadding,
+      control: ChromiaToggleButton(
+        value: value,
+        onChanged: onChanged,
+        activeColor: activeColor,
+        inactiveColor: inactiveColor,
+        size: size,
       ),
     );
   }

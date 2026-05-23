@@ -101,6 +101,8 @@ export 'src/components/navigation/menu/chromia_menu.dart';
 // COMPONENTS - UTILS
 // ============================================================================
 export 'src/components/utils/interactive_widget/chromia_interactive_widget.dart';
+export 'src/components/utils/list_tile/chromia_inline_label.dart';
+export 'src/components/utils/list_tile/chromia_list_tile_shell.dart';
 export 'src/components/utils/position_widget/chromia_position_widget.dart';
 //
 // ============================================================================
