@@ -237,10 +237,10 @@ class _ChromiaTextFieldState extends State<ChromiaTextField> {
           duration: AnimationTokens.fast,
           curve: AnimationTokens.easeOut,
           decoration: BoxDecoration(
-            color: _getFillColor(finalStyle, hasError),
+            color: _getFillColor(finalStyle, hasError, theme),
             borderRadius: finalStyle.borderRadius,
             border: Border.all(
-              color: _getBorderColor(finalStyle, hasError),
+              color: _getBorderColor(finalStyle, hasError, theme),
               width: _getBorderWidth(finalStyle),
             ),
           ),
@@ -364,31 +364,39 @@ class _ChromiaTextFieldState extends State<ChromiaTextField> {
   }
 
   /// Gets the current fill color based on state
-  Color _getFillColor(ChromiaTextFieldStyle style, bool hasError) {
+  Color _getFillColor(
+    ChromiaTextFieldStyle style,
+    bool hasError,
+    ChromiaThemeData theme,
+  ) {
     if (!widget.enabled) {
-      return style.disabledFillColor ?? Colors.grey.shade200;
+      return style.disabledFillColor ?? theme.colors.surfaceContainer;
     }
     if (hasError) {
-      return style.errorFillColor ?? Colors.red.shade50;
+      return style.errorFillColor ?? theme.colors.errorContainer;
     }
     if (_isFocused) {
-      return style.focusedFillColor ?? style.fillColor ?? Colors.grey.shade100;
+      return style.focusedFillColor ?? style.fillColor ?? theme.colors.surfaceContainer;
     }
-    return style.fillColor ?? Colors.grey.shade100;
+    return style.fillColor ?? theme.colors.surfaceContainer;
   }
 
   /// Gets the current border color based on state
-  Color _getBorderColor(ChromiaTextFieldStyle style, bool hasError) {
+  Color _getBorderColor(
+    ChromiaTextFieldStyle style,
+    bool hasError,
+    ChromiaThemeData theme,
+  ) {
     if (!widget.enabled) {
-      return style.disabledBorderColor ?? Colors.grey.shade400;
+      return style.disabledBorderColor ?? theme.colors.outline;
     }
     if (hasError) {
-      return style.errorBorderColor ?? Colors.red;
+      return style.errorBorderColor ?? theme.colors.error;
     }
     if (_isFocused) {
-      return style.focusedBorderColor ?? Colors.blue;
+      return style.focusedBorderColor ?? theme.colors.primary;
     }
-    return style.borderColor ?? Colors.grey.shade400;
+    return style.borderColor ?? theme.colors.outline;
   }
 
   /// Gets the current border width based on state

@@ -88,6 +88,7 @@ class ChromiaRangeSlider extends StatelessWidget {
             startIcon: startThumbIcon!,
             endIcon: endThumbIcon ?? startThumbIcon!,
             thumbRadius: enabledThumbRadius,
+            shadowColor: colors.shadow,
           )
         : null;
     final enabledRangeThumbShape =

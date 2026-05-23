@@ -99,7 +99,13 @@ class ChromiaSlider extends StatelessWidget {
 
     final enabledThumbRadius = thumbRadius ?? trackHeight + 4;
 
-    final iconThumbShape = (thumbIcon != null) ? ChromiaSliderIconShape(icon: thumbIcon!, thumbRadius: enabledThumbRadius) : null;
+    final iconThumbShape = (thumbIcon != null)
+        ? ChromiaSliderIconShape(
+            icon: thumbIcon!,
+            thumbRadius: enabledThumbRadius,
+            shadowColor: colors.shadow,
+          )
+        : null;
     final enabledThumbShape = iconThumbShape ?? thumbShape ?? RoundSliderThumbShape(enabledThumbRadius: enabledThumbRadius);
 
     final SliderThemeData sliderTheme = SliderTheme.of(context).copyWith(

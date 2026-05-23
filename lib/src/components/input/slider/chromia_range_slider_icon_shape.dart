@@ -5,10 +5,15 @@ class ChromiaRangeSliderIconShape extends RangeSliderThumbShape {
   final IconData endIcon;
   final double thumbRadius;
 
+  /// Color used for the icon shadow. Pass `theme.colors.shadow` from the
+  /// parent build method so dark mode is handled correctly.
+  final Color shadowColor;
+
   const ChromiaRangeSliderIconShape({
     required this.startIcon,
     required this.endIcon,
     required this.thumbRadius,
+    this.shadowColor = Colors.black87,
   });
 
   @override
@@ -45,7 +50,7 @@ class ChromiaRangeSliderIconShape extends RangeSliderThumbShape {
           fontSize: thumbRadius * 2.5,
           fontFamily: iconToUse.fontFamily,
           color: sliderTheme.thumbColor,
-          shadows: const [Shadow(color: Colors.black87, blurRadius: 1)],
+          shadows: [Shadow(color: shadowColor.withAlpha(180), blurRadius: 1)],
         ),
       )
       ..layout();

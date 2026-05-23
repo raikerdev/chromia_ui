@@ -4,7 +4,15 @@ class ChromiaSliderIconShape extends SliderComponentShape {
   final IconData icon;
   final double thumbRadius;
 
-  const ChromiaSliderIconShape({required this.icon, required this.thumbRadius});
+  /// Color used for the icon shadow. Pass `theme.colors.shadow` from the
+  /// parent build method so dark mode is handled correctly.
+  final Color shadowColor;
+
+  const ChromiaSliderIconShape({
+    required this.icon,
+    required this.thumbRadius,
+    this.shadowColor = Colors.black87,
+  });
 
   @override
   Size getPreferredSize(bool isEnabled, bool isDiscrete) {
@@ -39,7 +47,7 @@ class ChromiaSliderIconShape extends SliderComponentShape {
           fontSize: thumbRadius * 2.5,
           fontFamily: icon.fontFamily,
           color: sliderTheme.thumbColor,
-          shadows: const [Shadow(color: Colors.black87 ,blurRadius: 1)],
+          shadows: [Shadow(color: shadowColor.withAlpha(180), blurRadius: 1)],
         ),
       )
       ..layout();
