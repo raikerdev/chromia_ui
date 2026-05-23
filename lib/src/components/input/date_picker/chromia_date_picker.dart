@@ -2,6 +2,37 @@ import 'package:chromia_ui/src/theme/chromia_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+/// Shared [TransitionBuilder] for `showDatePicker` / `showTimePicker`.
+///
+/// Wraps the native picker dialog in a [Theme] that uses Chromia brand colors
+/// and adapts to the current brightness (light **or** dark mode).
+Widget _pickerTheme(BuildContext context, Widget? child) {
+  final chromiaTheme = ChromiaTheme.of(context);
+  final colors = chromiaTheme.colors;
+  final bool isDark = chromiaTheme.isDark;
+
+  final colorScheme = isDark
+      ? ColorScheme.dark(
+          primary: colors.primary,
+          onPrimary: colors.onPrimary,
+          surface: colors.surface,
+          onSurface: colors.onSurface,
+        )
+      : ColorScheme.light(
+          primary: colors.primary,
+          onPrimary: colors.onPrimary,
+          surface: colors.surface,
+          onSurface: colors.onSurface,
+        );
+
+  return Theme(
+    data: (isDark ? ThemeData.dark() : ThemeData.light()).copyWith(
+      colorScheme: colorScheme,
+    ),
+    child: child!,
+  );
+}
+
 /// A customizable date picker field.
 ///
 /// Example usage:
@@ -67,20 +98,7 @@ class ChromiaDatePicker extends StatelessWidget {
       initialDate: selectedDate ?? DateTime.now(),
       firstDate: firstDate ?? DateTime(1900),
       lastDate: lastDate ?? DateTime(2100),
-      builder: (context, child) {
-        final theme = ChromiaTheme.of(context);
-        return Theme(
-          data: ThemeData.light().copyWith(
-            colorScheme: ColorScheme.light(
-              primary: theme.colors.primary,
-              onPrimary: theme.colors.onPrimary,
-              surface: theme.colors.surface,
-              onSurface: theme.colors.onSurface,
-            ),
-          ),
-          child: child!,
-        );
-      },
+      builder: _pickerTheme,
     );
 
     if (picked != null) {
@@ -222,20 +240,7 @@ class ChromiaTimePicker extends StatelessWidget {
     final TimeOfDay? picked = await showTimePicker(
       context: context,
       initialTime: selectedTime ?? TimeOfDay.now(),
-      builder: (context, child) {
-        final theme = ChromiaTheme.of(context);
-        return Theme(
-          data: ThemeData.light().copyWith(
-            colorScheme: ColorScheme.light(
-              primary: theme.colors.primary,
-              onPrimary: theme.colors.onPrimary,
-              surface: theme.colors.surface,
-              onSurface: theme.colors.onSurface,
-            ),
-          ),
-          child: child!,
-        );
-      },
+      builder: _pickerTheme,
     );
 
     if (picked != null) {
@@ -382,12 +387,14 @@ class ChromiaDateTimePicker extends StatelessWidget {
       initialDate: selectedDateTime ?? DateTime.now(),
       firstDate: firstDate ?? DateTime(1900),
       lastDate: lastDate ?? DateTime(2100),
+      builder: _pickerTheme,
     );
 
     if (pickedDate != null && context.mounted) {
       final TimeOfDay? pickedTime = await showTimePicker(
         context: context,
         initialTime: selectedDateTime != null ? TimeOfDay.fromDateTime(selectedDateTime!) : TimeOfDay.now(),
+        builder: _pickerTheme,
       );
 
       if (pickedTime != null) {

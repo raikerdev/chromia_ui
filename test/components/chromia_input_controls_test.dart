@@ -71,10 +71,10 @@ void main() {
     });
 
     testWidgets('does not call onChanged when disabled', (tester) async {
-      bool called = false;
+      const bool called = false;
 
       await tester.pumpWidget(buildTestApp(
-        ChromiaCheckbox(value: false, onChanged: null),
+        const ChromiaCheckbox(value: false, onChanged: null),
       ));
 
       await tester.tap(find.byType(ChromiaCheckbox), warnIfMissed: false);
@@ -114,7 +114,7 @@ void main() {
     testWidgets('tristate cycles: null→false, false→true, true→null',
         (tester) async {
       // Cycle: null → false → true → null (see _buildOnTap implementation)
-      bool? currentValue = null;
+      bool? currentValue;
       bool? received;
 
       // null → false
@@ -216,10 +216,10 @@ void main() {
     });
 
     testWidgets('does not call onChanged when disabled', (tester) async {
-      bool called = false;
+      const bool called = false;
 
       await tester.pumpWidget(buildTestApp(
-        ChromiaToggleButton(value: false, onChanged: null),
+        const ChromiaToggleButton(value: false, onChanged: null),
       ));
 
       await tester.tap(find.byType(ChromiaToggleButton), warnIfMissed: false);
@@ -301,10 +301,10 @@ void main() {
     });
 
     testWidgets('does not call onChanged when disabled', (tester) async {
-      bool called = false;
+      const bool called = false;
 
       await tester.pumpWidget(buildTestApp(
-        ChromiaRadioButton<String>(
+        const ChromiaRadioButton<String>(
           value: 'a',
           groupValue: 'b',
           onChanged: null,

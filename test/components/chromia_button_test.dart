@@ -120,12 +120,12 @@ void main() {
     });
 
     testWidgets('does not call onPressed when disabled', (tester) async {
-      int count = 0;
+      const int count = 0;
 
       await tester.pumpWidget(buildTestApp(
-        ChromiaButton(
+        const ChromiaButton(
           onPressed: null,
-          child: const Text('Disabled'),
+          child: Text('Disabled'),
         ),
       ));
 
