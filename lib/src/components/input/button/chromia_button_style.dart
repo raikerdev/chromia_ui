@@ -199,10 +199,13 @@ class ChromiaButtonStyle {
     return ChromiaButtonStyle(
       backgroundColor: backgroundColor ?? this.backgroundColor,
       foregroundColor: foregroundColor ?? this.foregroundColor,
-      disabledBackgroundColor: disabledBackgroundColor ?? this.disabledBackgroundColor,
-      disabledForegroundColor: disabledForegroundColor ?? this.disabledForegroundColor,
+      disabledBackgroundColor:
+          disabledBackgroundColor ?? this.disabledBackgroundColor,
+      disabledForegroundColor:
+          disabledForegroundColor ?? this.disabledForegroundColor,
       hoverBackgroundColor: hoverBackgroundColor ?? this.hoverBackgroundColor,
-      pressedBackgroundColor: pressedBackgroundColor ?? this.pressedBackgroundColor,
+      pressedBackgroundColor:
+          pressedBackgroundColor ?? this.pressedBackgroundColor,
       borderColor: borderColor ?? this.borderColor,
       disabledBorderColor: disabledBorderColor ?? this.disabledBorderColor,
       hoverBorderColor: hoverBorderColor ?? this.hoverBorderColor,

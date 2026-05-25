@@ -43,19 +43,23 @@ class ChromiaBrandColorConfig {
         primaryLight: ChromiaBrandColorTokens.primaryLight,
         onPrimaryLight: ChromiaBrandColorTokens.onPrimaryLight,
         primaryContainerLight: ChromiaBrandColorTokens.primaryContainerLight,
-        onPrimaryContainerLight: ChromiaBrandColorTokens.onPrimaryContainerLight,
+        onPrimaryContainerLight:
+            ChromiaBrandColorTokens.onPrimaryContainerLight,
         primaryDark: ChromiaBrandColorTokens.primaryDark,
         onPrimaryDark: ChromiaBrandColorTokens.onPrimaryDark,
         primaryContainerDark: ChromiaBrandColorTokens.primaryContainerDark,
         onPrimaryContainerDark: ChromiaBrandColorTokens.onPrimaryContainerDark,
         secondaryLight: ChromiaBrandColorTokens.secondaryLight,
         onSecondaryLight: ChromiaBrandColorTokens.onSecondaryLight,
-        secondaryContainerLight: ChromiaBrandColorTokens.secondaryContainerLight,
-        onSecondaryContainerLight: ChromiaBrandColorTokens.onSecondaryContainerLight,
+        secondaryContainerLight:
+            ChromiaBrandColorTokens.secondaryContainerLight,
+        onSecondaryContainerLight:
+            ChromiaBrandColorTokens.onSecondaryContainerLight,
         secondaryDark: ChromiaBrandColorTokens.secondaryDark,
         onSecondaryDark: ChromiaBrandColorTokens.onSecondaryDark,
         secondaryContainerDark: ChromiaBrandColorTokens.secondaryContainerDark,
-        onSecondaryContainerDark: ChromiaBrandColorTokens.onSecondaryContainerDark,
+        onSecondaryContainerDark:
+            ChromiaBrandColorTokens.onSecondaryContainerDark,
       );
 
   final Color _primaryLight;
@@ -81,9 +85,11 @@ class ChromiaBrandColorConfig {
 
   Color get primaryLight => _primaryLight;
 
-  Color get onPrimaryLight => _onPrimaryLight ?? ColorUtils.getContrastColor(primaryLight);
+  Color get onPrimaryLight =>
+      _onPrimaryLight ?? ColorUtils.getContrastColor(primaryLight);
 
-  Color get primaryContainerLight => _primaryContainerLight ?? ColorUtils.lighten(primaryLight, 0.35);
+  Color get primaryContainerLight =>
+      _primaryContainerLight ?? ColorUtils.lighten(primaryLight, 0.35);
 
   Color get onPrimaryContainerLight =>
       _onPrimaryContainerLight ??
@@ -94,9 +100,11 @@ class ChromiaBrandColorConfig {
 
   Color get primaryDark => _primaryDark ?? _deriveDark(primaryLight);
 
-  Color get onPrimaryDark => _onPrimaryDark ?? ColorUtils.getContrastColor(primaryDark);
+  Color get onPrimaryDark =>
+      _onPrimaryDark ?? ColorUtils.getContrastColor(primaryDark);
 
-  Color get primaryContainerDark => _primaryContainerDark ?? ColorUtils.darken(primaryDark, 0.25);
+  Color get primaryContainerDark =>
+      _primaryContainerDark ?? ColorUtils.darken(primaryDark, 0.25);
 
   Color get onPrimaryContainerDark =>
       _onPrimaryContainerDark ??
@@ -107,9 +115,11 @@ class ChromiaBrandColorConfig {
 
   Color get secondaryLight => _secondaryLight ?? _deriveSecondary(primaryLight);
 
-  Color get onSecondaryLight => _onSecondaryLight ?? ColorUtils.getContrastColor(secondaryLight);
+  Color get onSecondaryLight =>
+      _onSecondaryLight ?? ColorUtils.getContrastColor(secondaryLight);
 
-  Color get secondaryContainerLight => _secondaryContainerLight ?? ColorUtils.lighten(secondaryLight, 0.35);
+  Color get secondaryContainerLight =>
+      _secondaryContainerLight ?? ColorUtils.lighten(secondaryLight, 0.35);
 
   Color get onSecondaryContainerLight =>
       _onSecondaryContainerLight ??
@@ -120,9 +130,11 @@ class ChromiaBrandColorConfig {
 
   Color get secondaryDark => _secondaryDark ?? _deriveDark(secondaryLight);
 
-  Color get onSecondaryDark => _onSecondaryDark ?? ColorUtils.getContrastColor(secondaryDark);
+  Color get onSecondaryDark =>
+      _onSecondaryDark ?? ColorUtils.getContrastColor(secondaryDark);
 
-  Color get secondaryContainerDark => _secondaryContainerDark ?? ColorUtils.darken(secondaryDark, 0.25);
+  Color get secondaryContainerDark =>
+      _secondaryContainerDark ?? ColorUtils.darken(secondaryDark, 0.25);
 
   Color get onSecondaryContainerDark =>
       _onSecondaryContainerDark ??

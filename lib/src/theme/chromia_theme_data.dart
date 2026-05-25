@@ -73,7 +73,9 @@ class ChromiaThemeData with Diagnosticable {
     ChromiaBrandConfig brandConfig, {
     bool isDark = false,
   }) {
-    final ChromiaThemeData baseTheme = isDark ? ChromiaThemeData.dark() : ChromiaThemeData.light();
+    final ChromiaThemeData baseTheme = isDark
+        ? ChromiaThemeData.dark()
+        : ChromiaThemeData.light();
 
     final ChromiaColors brandColors = ChromiaColors.fromBrandColorConfig(
       brandConfig.colorConfig,
@@ -107,23 +109,57 @@ class ChromiaThemeData with Diagnosticable {
     ChromiaBrandTypographyConfig typographyConfig,
   ) {
     return ChromiaTypography(
-      displayLarge: typography.displayLarge.copyWith(fontFamily: typographyConfig.displayFontFamily),
-      displayMedium: typography.displayMedium.copyWith(fontFamily: typographyConfig.displayFontFamily),
-      displaySmall: typography.displaySmall.copyWith(fontFamily: typographyConfig.displayFontFamily),
-      headlineLarge: typography.headlineLarge.copyWith(fontFamily: typographyConfig.headlineFontFamily),
-      headlineMedium: typography.headlineMedium.copyWith(fontFamily: typographyConfig.headlineFontFamily),
-      headlineSmall: typography.headlineSmall.copyWith(fontFamily: typographyConfig.headlineFontFamily),
-      titleLarge: typography.titleLarge.copyWith(fontFamily: typographyConfig.titleFontFamily),
-      titleMedium: typography.titleMedium.copyWith(fontFamily: typographyConfig.titleFontFamily),
-      titleSmall: typography.titleSmall.copyWith(fontFamily: typographyConfig.titleFontFamily),
-      bodyLarge: typography.bodyLarge.copyWith(fontFamily: typographyConfig.bodyFontFamily),
-      bodyMedium: typography.bodyMedium.copyWith(fontFamily: typographyConfig.bodyFontFamily),
-      bodySmall: typography.bodySmall.copyWith(fontFamily: typographyConfig.bodyFontFamily),
-      labelLarge: typography.labelLarge.copyWith(fontFamily: typographyConfig.labelFontFamily),
-      labelMedium: typography.labelMedium.copyWith(fontFamily: typographyConfig.labelFontFamily),
-      labelSmall: typography.labelSmall.copyWith(fontFamily: typographyConfig.labelFontFamily),
-      caption: typography.caption.copyWith(fontFamily: typographyConfig.bodyFontFamily),
-      overline: typography.overline.copyWith(fontFamily: typographyConfig.bodyFontFamily),
+      displayLarge: typography.displayLarge.copyWith(
+        fontFamily: typographyConfig.displayFontFamily,
+      ),
+      displayMedium: typography.displayMedium.copyWith(
+        fontFamily: typographyConfig.displayFontFamily,
+      ),
+      displaySmall: typography.displaySmall.copyWith(
+        fontFamily: typographyConfig.displayFontFamily,
+      ),
+      headlineLarge: typography.headlineLarge.copyWith(
+        fontFamily: typographyConfig.headlineFontFamily,
+      ),
+      headlineMedium: typography.headlineMedium.copyWith(
+        fontFamily: typographyConfig.headlineFontFamily,
+      ),
+      headlineSmall: typography.headlineSmall.copyWith(
+        fontFamily: typographyConfig.headlineFontFamily,
+      ),
+      titleLarge: typography.titleLarge.copyWith(
+        fontFamily: typographyConfig.titleFontFamily,
+      ),
+      titleMedium: typography.titleMedium.copyWith(
+        fontFamily: typographyConfig.titleFontFamily,
+      ),
+      titleSmall: typography.titleSmall.copyWith(
+        fontFamily: typographyConfig.titleFontFamily,
+      ),
+      bodyLarge: typography.bodyLarge.copyWith(
+        fontFamily: typographyConfig.bodyFontFamily,
+      ),
+      bodyMedium: typography.bodyMedium.copyWith(
+        fontFamily: typographyConfig.bodyFontFamily,
+      ),
+      bodySmall: typography.bodySmall.copyWith(
+        fontFamily: typographyConfig.bodyFontFamily,
+      ),
+      labelLarge: typography.labelLarge.copyWith(
+        fontFamily: typographyConfig.labelFontFamily,
+      ),
+      labelMedium: typography.labelMedium.copyWith(
+        fontFamily: typographyConfig.labelFontFamily,
+      ),
+      labelSmall: typography.labelSmall.copyWith(
+        fontFamily: typographyConfig.labelFontFamily,
+      ),
+      caption: typography.caption.copyWith(
+        fontFamily: typographyConfig.bodyFontFamily,
+      ),
+      overline: typography.overline.copyWith(
+        fontFamily: typographyConfig.bodyFontFamily,
+      ),
     );
   }
 
@@ -182,8 +218,12 @@ class ChromiaThemeData with Diagnosticable {
     final BorderRadius radiusS = radius.radiusS;
     final BorderRadius radiusM = radius.radiusM;
     final BorderRadius radiusL = radius.radiusL;
-    final RoundedRectangleBorder shapeM = RoundedRectangleBorder(borderRadius: radiusM);
-    final RoundedRectangleBorder shapeL = RoundedRectangleBorder(borderRadius: radiusL);
+    final RoundedRectangleBorder shapeM = RoundedRectangleBorder(
+      borderRadius: radiusM,
+    );
+    final RoundedRectangleBorder shapeL = RoundedRectangleBorder(
+      borderRadius: radiusL,
+    );
 
     return ThemeData(
       useMaterial3: true,
@@ -225,7 +265,9 @@ class ChromiaThemeData with Diagnosticable {
         elevation: 0,
         shape: shapeL,
         titleTextStyle: typography.titleLarge.copyWith(color: colors.onSurface),
-        contentTextStyle: typography.bodyMedium.copyWith(color: colors.onSurface),
+        contentTextStyle: typography.bodyMedium.copyWith(
+          color: colors.onSurface,
+        ),
       ),
 
       // ── Popup / Menu ─────────────────────────────────────────────────────────
@@ -254,7 +296,9 @@ class ChromiaThemeData with Diagnosticable {
       // ── SnackBar ─────────────────────────────────────────────────────────────
       snackBarTheme: SnackBarThemeData(
         backgroundColor: colors.surfaceContainer,
-        contentTextStyle: typography.bodyMedium.copyWith(color: colors.onSurface),
+        contentTextStyle: typography.bodyMedium.copyWith(
+          color: colors.onSurface,
+        ),
         actionTextColor: colors.primary,
         shape: shapeM,
         behavior: SnackBarBehavior.floating,
@@ -277,7 +321,9 @@ class ChromiaThemeData with Diagnosticable {
         activeTickMarkColor: colors.onPrimary,
         inactiveTickMarkColor: colors.primary,
         valueIndicatorColor: colors.primary,
-        valueIndicatorTextStyle: typography.labelSmall.copyWith(color: colors.onPrimary),
+        valueIndicatorTextStyle: typography.labelSmall.copyWith(
+          color: colors.onPrimary,
+        ),
         trackHeight: 4,
       ),
 
@@ -313,10 +359,16 @@ class ChromiaThemeData with Diagnosticable {
           borderRadius: radiusM,
           borderSide: BorderSide(color: colors.outline.withAlpha(128)),
         ),
-        labelStyle: typography.bodyMedium.copyWith(color: colors.onSurfaceVariant),
-        hintStyle: typography.bodyMedium.copyWith(color: colors.onSurfaceVariant),
+        labelStyle: typography.bodyMedium.copyWith(
+          color: colors.onSurfaceVariant,
+        ),
+        hintStyle: typography.bodyMedium.copyWith(
+          color: colors.onSurfaceVariant,
+        ),
         errorStyle: typography.bodySmall.copyWith(color: colors.error),
-        helperStyle: typography.bodySmall.copyWith(color: colors.onSurfaceVariant),
+        helperStyle: typography.bodySmall.copyWith(
+          color: colors.onSurfaceVariant,
+        ),
         prefixIconColor: colors.onSurfaceVariant,
         suffixIconColor: colors.onSurfaceVariant,
       ),
@@ -415,7 +467,8 @@ class ChromiaThemeData with Diagnosticable {
 
       // ── Extensions ───────────────────────────────────────────────────────────
       extensions: [
-        if (brandConfig != null) ChromiaBrandThemeExtension(brandConfig: brandConfig!),
+        if (brandConfig != null)
+          ChromiaBrandThemeExtension(brandConfig: brandConfig!),
       ],
     );
   }
@@ -428,7 +481,11 @@ class ChromiaThemeData with Diagnosticable {
   /// ([brightness], [brandConfig]) switch at `t >= 0.5`.
   ///
   /// Used by [AnimatedChromiaTheme] to produce smooth theme transitions.
-  static ChromiaThemeData lerp(ChromiaThemeData a, ChromiaThemeData b, double t) {
+  static ChromiaThemeData lerp(
+    ChromiaThemeData a,
+    ChromiaThemeData b,
+    double t,
+  ) {
     return ChromiaThemeData(
       colors: ChromiaColors.lerp(a.colors, b.colors, t),
       typography: ChromiaTypography.lerp(a.typography, b.typography, t),
@@ -500,6 +557,12 @@ class ChromiaThemeData with Diagnosticable {
       ..add(DiagnosticsProperty<ChromiaSpacing>('spacing', spacing))
       ..add(DiagnosticsProperty<ChromiaRadius>('radius', radius))
       ..add(DiagnosticsProperty<ChromiaShadows>('shadows', shadows))
-      ..add(DiagnosticsProperty<ChromiaBrandConfig>('brandConfig', brandConfig, defaultValue: null));
+      ..add(
+        DiagnosticsProperty<ChromiaBrandConfig>(
+          'brandConfig',
+          brandConfig,
+          defaultValue: null,
+        ),
+      );
   }
 }

@@ -50,9 +50,11 @@ class ChromiaLinearProgress extends StatelessWidget {
     final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
-    final Color effectiveBackgroundColor = backgroundColor ?? colors.surfaceContainer;
+    final Color effectiveBackgroundColor =
+        backgroundColor ?? colors.surfaceContainer;
     final Color effectiveColor = color ?? colors.primary;
-    final BorderRadius effectiveBorderRadius = borderRadius ?? BorderRadius.circular(height / 2);
+    final BorderRadius effectiveBorderRadius =
+        borderRadius ?? BorderRadius.circular(height / 2);
 
     final Widget progressBar = ClipRRect(
       borderRadius: effectiveBorderRadius,
@@ -67,7 +69,8 @@ class ChromiaLinearProgress extends StatelessWidget {
     );
 
     if (showLabel && value != null) {
-      final String label = labelBuilder?.call(value!) ?? '${(value! * 100).toStringAsFixed(0)}%';
+      final String label =
+          labelBuilder?.call(value!) ?? '${(value! * 100).toStringAsFixed(0)}%';
 
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

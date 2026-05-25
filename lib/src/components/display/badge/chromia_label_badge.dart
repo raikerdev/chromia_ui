@@ -37,7 +37,8 @@ class ChromiaLabelBadge extends StatelessWidget {
     final spacing = context.chromiaSpacing;
     final radius = context.chromiaRadius;
 
-    final Color effectiveBackgroundColor = backgroundColor ?? colors.surfaceContainer;
+    final Color effectiveBackgroundColor =
+        backgroundColor ?? colors.surfaceContainer;
     final Color effectiveTextColor = textColor ?? colors.onSurfaceContainer;
 
     final BorderRadius borderRadius = switch (shape) {

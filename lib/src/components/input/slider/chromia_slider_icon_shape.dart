@@ -40,23 +40,33 @@ class ChromiaSliderIconShape extends SliderComponentShape {
       ..style = PaintingStyle.fill
       ..color = Colors.white;
 
-    final TextPainter textPainter = TextPainter(textDirection: TextDirection.rtl)
-      ..text = TextSpan(
-        text: String.fromCharCode(icon.codePoint),
-        style: TextStyle(
-          fontSize: thumbRadius * 2.5,
-          fontFamily: icon.fontFamily,
-          color: sliderTheme.thumbColor,
-          shadows: [Shadow(color: shadowColor.withAlpha(180), blurRadius: 1)],
-        ),
-      )
-      ..layout();
+    final TextPainter textPainter =
+        TextPainter(textDirection: TextDirection.rtl)
+          ..text = TextSpan(
+            text: String.fromCharCode(icon.codePoint),
+            style: TextStyle(
+              fontSize: thumbRadius * 2.5,
+              fontFamily: icon.fontFamily,
+              color: sliderTheme.thumbColor,
+              shadows: [
+                Shadow(color: shadowColor.withAlpha(180), blurRadius: 1),
+              ],
+            ),
+          )
+          ..layout();
 
-    final Offset textCenter = Offset(center.dx - (textPainter.width / 2), center.dy - (textPainter.height / 2));
+    final Offset textCenter = Offset(
+      center.dx - (textPainter.width / 2),
+      center.dy - (textPainter.height / 2),
+    );
     const cornerRadius = 4.0;
 
     canvas.drawRRect(
-      RRect.fromRectXY(Rect.fromCenter(center: center, width: 1, height: 1), cornerRadius, cornerRadius),
+      RRect.fromRectXY(
+        Rect.fromCenter(center: center, width: 1, height: 1),
+        cornerRadius,
+        cornerRadius,
+      ),
       paint,
     );
 

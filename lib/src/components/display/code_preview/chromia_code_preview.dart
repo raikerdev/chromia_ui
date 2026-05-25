@@ -194,13 +194,27 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
 
     final syntaxTheme = SyntaxTheme(
       baseStyle: TextStyle(color: colors.onSurfaceVariant),
-      numberStyle: TextStyle(color: isDark ? const Color(0xFF2AACB8) : const Color(0xFF1750EB)),
-      commentStyle: TextStyle(color: isDark ? const Color(0xFF7A7E85) : const Color(0xFF8C8C8C)),
-      keywordStyle: TextStyle(color: isDark ? const Color(0xFFCF8E6D) : const Color(0xFFEd864A)),
-      stringStyle: TextStyle(color: isDark ? const Color(0xFF6AAB73) : const Color(0xFF067D17)),
-      classStyle: TextStyle(color: isDark ? const Color(0xFF57AAF7) : const Color(0xFF0033B3)),
-      constantStyle: TextStyle(color: isDark ? const Color(0xFFC77DBB) : const Color(0xFF871094)),
-      linesCountColor: isDark ? const Color(0xFF5C6370) : const Color(0xFF9E9E9E),
+      numberStyle: TextStyle(
+        color: isDark ? const Color(0xFF2AACB8) : const Color(0xFF1750EB),
+      ),
+      commentStyle: TextStyle(
+        color: isDark ? const Color(0xFF7A7E85) : const Color(0xFF8C8C8C),
+      ),
+      keywordStyle: TextStyle(
+        color: isDark ? const Color(0xFFCF8E6D) : const Color(0xFFEd864A),
+      ),
+      stringStyle: TextStyle(
+        color: isDark ? const Color(0xFF6AAB73) : const Color(0xFF067D17),
+      ),
+      classStyle: TextStyle(
+        color: isDark ? const Color(0xFF57AAF7) : const Color(0xFF0033B3),
+      ),
+      constantStyle: TextStyle(
+        color: isDark ? const Color(0xFFC77DBB) : const Color(0xFF871094),
+      ),
+      linesCountColor: isDark
+          ? const Color(0xFF5C6370)
+          : const Color(0xFF9E9E9E),
       backgroundColor: codeBackgroundColor,
       zoomIconColor: isDark ? const Color(0xFF5C6370) : const Color(0xFF9E9E9E),
     );
@@ -230,7 +244,9 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
               ),
               border: Border(
                 bottom: BorderSide(
-                  color: isDark ? const Color(0xFF181A1F) : const Color(0xFFDDDDDD),
+                  color: isDark
+                      ? const Color(0xFF181A1F)
+                      : const Color(0xFFDDDDDD),
                 ),
               ),
             ),
@@ -239,7 +255,9 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
                 ChromiaText(
                   widget.language.name,
                   type: ChromiaTypographyType.bodyMedium,
-                  color: isDark ? const Color(0xFF5C6370) : const Color(0xFF9E9E9E),
+                  color: isDark
+                      ? const Color(0xFF5C6370)
+                      : const Color(0xFF9E9E9E),
                 ),
                 const Spacer(),
                 if (widget.showCopyButton)
@@ -254,13 +272,21 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
                           Icon(
                             _copied ? Icons.check : Icons.copy,
                             size: 16,
-                            color: _copied ? colors.success : (isDark ? const Color(0xFF5C6370) : const Color(0xFF9E9E9E)),
+                            color: _copied
+                                ? colors.success
+                                : (isDark
+                                      ? const Color(0xFF5C6370)
+                                      : const Color(0xFF9E9E9E)),
                           ),
                           spacing.gapHXS,
                           ChromiaText(
                             _copied ? 'Copied!' : 'Copy',
                             type: ChromiaTypographyType.labelSmall,
-                            color: _copied ? colors.success : (isDark ? const Color(0xFF5C6370) : const Color(0xFF9E9E9E)),
+                            color: _copied
+                                ? colors.success
+                                : (isDark
+                                      ? const Color(0xFF5C6370)
+                                      : const Color(0xFF9E9E9E)),
                           ),
                         ],
                       ),
@@ -270,7 +296,9 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
             ),
           ),
           // Code content with syntax highlighting
-          widget.codeHeight != null ? Expanded(child: _buildCodeContent(syntaxTheme)) : _buildCodeContent(syntaxTheme),
+          widget.codeHeight != null
+              ? Expanded(child: _buildCodeContent(syntaxTheme))
+              : _buildCodeContent(syntaxTheme),
         ],
       ),
     );
@@ -333,7 +361,8 @@ class ChromiaCodePreviewGroup extends StatefulWidget {
   final String? description;
 
   @override
-  State<ChromiaCodePreviewGroup> createState() => _ChromiaCodePreviewGroupState();
+  State<ChromiaCodePreviewGroup> createState() =>
+      _ChromiaCodePreviewGroupState();
 }
 
 class _ChromiaCodePreviewGroupState extends State<ChromiaCodePreviewGroup> {
@@ -391,7 +420,9 @@ class _ChromiaCodePreviewGroupState extends State<ChromiaCodePreviewGroup> {
                       decoration: BoxDecoration(
                         border: Border(
                           bottom: BorderSide(
-                            color: isSelected ? colors.primary : Colors.transparent,
+                            color: isSelected
+                                ? colors.primary
+                                : Colors.transparent,
                             width: 2,
                           ),
                         ),
@@ -400,8 +431,12 @@ class _ChromiaCodePreviewGroupState extends State<ChromiaCodePreviewGroup> {
                         item.label,
                         type: ChromiaTypographyType.labelMedium,
                         style: TextStyle(
-                          color: isSelected ? colors.primary : colors.onSurfaceVariant,
-                          fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+                          color: isSelected
+                              ? colors.primary
+                              : colors.onSurfaceVariant,
+                          fontWeight: isSelected
+                              ? FontWeight.w600
+                              : FontWeight.normal,
                         ),
                       ),
                     ),

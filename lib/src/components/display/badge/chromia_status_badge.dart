@@ -31,7 +31,8 @@ class ChromiaStatusBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     final String effectiveText = child == null ? text ?? '' : '';
 
-    final ChromiaPosition effectivePosition = position ?? ChromiaPosition.bottomRight(offset: -3);
+    final ChromiaPosition effectivePosition =
+        position ?? ChromiaPosition.bottomRight(offset: -3);
 
     return ChromiaPositionWidget(
       badge: _StatusBadge(

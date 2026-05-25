@@ -163,7 +163,8 @@ class _ChromiaTextFieldState extends State<ChromiaTextField> {
     super.initState();
     _focusNode = widget.focusNode ?? FocusNode();
     _focusNode.addListener(_onFocusChange);
-    _controller = widget.controller ?? TextEditingController(text: widget.initialValue);
+    _controller =
+        widget.controller ?? TextEditingController(text: widget.initialValue);
   }
 
   @override
@@ -212,10 +213,15 @@ class _ChromiaTextFieldState extends State<ChromiaTextField> {
     final ChromiaTextFieldStyle baseStyle = _getBaseStyle(theme);
 
     // Apply size modifications
-    final ChromiaTextFieldStyle sizedStyle = _applySizeToStyle(baseStyle, theme);
+    final ChromiaTextFieldStyle sizedStyle = _applySizeToStyle(
+      baseStyle,
+      theme,
+    );
 
     // Merge with custom style if provided
-    final ChromiaTextFieldStyle finalStyle = widget.style != null ? sizedStyle.merge(widget.style) : sizedStyle;
+    final ChromiaTextFieldStyle finalStyle = widget.style != null
+        ? sizedStyle.merge(widget.style)
+        : sizedStyle;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -226,7 +232,11 @@ class _ChromiaTextFieldState extends State<ChromiaTextField> {
           Text(
             widget.label!,
             style: finalStyle.labelStyle?.copyWith(
-              color: hasError ? finalStyle.errorColor : (widget.enabled ? finalStyle.labelColor : finalStyle.disabledTextColor),
+              color: hasError
+                  ? finalStyle.errorColor
+                  : (widget.enabled
+                        ? finalStyle.labelColor
+                        : finalStyle.disabledTextColor),
             ),
           ),
           SizedBox(height: theme.spacing.xs),
@@ -265,7 +275,9 @@ class _ChromiaTextFieldState extends State<ChromiaTextField> {
             onTap: widget.onTap,
             onEditingComplete: widget.onEditingComplete,
             style: finalStyle.textStyle?.copyWith(
-              color: widget.enabled ? finalStyle.textColor : finalStyle.disabledTextColor,
+              color: widget.enabled
+                  ? finalStyle.textColor
+                  : finalStyle.disabledTextColor,
             ),
             decoration: InputDecoration(
               hintText: widget.hintText,
@@ -303,18 +315,24 @@ class _ChromiaTextFieldState extends State<ChromiaTextField> {
         ),
 
         // Helper or error text
-        if (widget.helperText != null || displayError != null || currentLength != null) ...[
+        if (widget.helperText != null ||
+            displayError != null ||
+            currentLength != null) ...[
           SizedBox(height: theme.spacing.xs),
           Row(
             children: [
               Text(
                 displayError ?? widget.helperText ?? '',
-                style: (hasError ? finalStyle.errorStyle : finalStyle.helperStyle),
+                style: (hasError
+                    ? finalStyle.errorStyle
+                    : finalStyle.helperStyle),
               ),
               const Spacer(),
               Text(
                 currentLength ?? '',
-                style: (hasError ? finalStyle.errorStyle : finalStyle.helperStyle),
+                style: (hasError
+                    ? finalStyle.errorStyle
+                    : finalStyle.helperStyle),
               ),
             ],
           ),
@@ -376,7 +394,9 @@ class _ChromiaTextFieldState extends State<ChromiaTextField> {
       return style.errorFillColor ?? theme.colors.errorContainer;
     }
     if (_isFocused) {
-      return style.focusedFillColor ?? style.fillColor ?? theme.colors.surfaceContainer;
+      return style.focusedFillColor ??
+          style.fillColor ??
+          theme.colors.surfaceContainer;
     }
     return style.fillColor ?? theme.colors.surfaceContainer;
   }

@@ -129,7 +129,9 @@ class _MenuItemContent<T> extends StatelessWidget {
     final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
-    final Color textColor = item.enabled ? colors.onSurface : colors.textDisabled;
+    final Color textColor = item.enabled
+        ? colors.onSurface
+        : colors.textDisabled;
 
     return Row(
       children: [
@@ -185,13 +187,15 @@ class ChromiaContextMenu<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onLongPress: () => _showMenu(context),
-      onSecondaryTapDown: (details) => _showMenu(context, details.globalPosition),
+      onSecondaryTapDown: (details) =>
+          _showMenu(context, details.globalPosition),
       child: child,
     );
   }
 
   void _showMenu(BuildContext context, [Offset? position]) {
-    final RenderBox overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
+    final RenderBox overlay =
+        Overlay.of(context).context.findRenderObject() as RenderBox;
     final RenderBox renderBox = context.findRenderObject() as RenderBox;
     final Offset targetPosition =
         position ??
@@ -313,7 +317,9 @@ class ChromiaMenuButton<T> extends StatelessWidget {
                           : item.enabled
                           ? colors.onSurface
                           : colors.textDisabled,
-                      fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+                      fontWeight: isSelected
+                          ? FontWeight.w600
+                          : FontWeight.normal,
                     ),
                   ),
                 ),

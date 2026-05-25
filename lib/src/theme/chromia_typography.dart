@@ -187,7 +187,11 @@ class ChromiaTypography with Diagnosticable {
   /// Linearly interpolates between two [ChromiaTypography] instances.
   ///
   /// Every [TextStyle] is lerped with [TextStyle.lerp].
-  static ChromiaTypography lerp(ChromiaTypography a, ChromiaTypography b, double t) {
+  static ChromiaTypography lerp(
+    ChromiaTypography a,
+    ChromiaTypography b,
+    double t,
+  ) {
     return ChromiaTypography(
       displayLarge: TextStyle.lerp(a.displayLarge, b.displayLarge, t)!,
       displayMedium: TextStyle.lerp(a.displayMedium, b.displayMedium, t)!,

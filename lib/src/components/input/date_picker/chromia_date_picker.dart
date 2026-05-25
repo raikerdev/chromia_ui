@@ -114,7 +114,9 @@ class ChromiaDatePicker extends StatelessWidget {
 
     final bool hasError = errorText != null;
     final DateFormat formatter = dateFormat ?? DateFormat('MMM dd, yyyy');
-    final String displayText = selectedDate != null ? formatter.format(selectedDate!) : hintText ?? 'Select date';
+    final String displayText = selectedDate != null
+        ? formatter.format(selectedDate!)
+        : hintText ?? 'Select date';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -138,7 +140,9 @@ class ChromiaDatePicker extends StatelessWidget {
               vertical: spacing.m,
             ),
             decoration: BoxDecoration(
-              color: enabled ? colors.surfaceContainer : colors.surfaceContainer,
+              color: enabled
+                  ? colors.surfaceContainer
+                  : colors.surfaceContainer,
               borderRadius: theme.radius.radiusM,
               border: Border.all(
                 color: hasError
@@ -154,14 +158,18 @@ class ChromiaDatePicker extends StatelessWidget {
                 Icon(
                   prefixIcon ?? Icons.calendar_today,
                   size: 20,
-                  color: enabled ? colors.onSurfaceVariant : colors.textDisabled,
+                  color: enabled
+                      ? colors.onSurfaceVariant
+                      : colors.textDisabled,
                 ),
                 spacing.gapHM,
                 Expanded(
                   child: Text(
                     displayText,
                     style: theme.typography.bodyMedium.copyWith(
-                      color: selectedDate != null ? (enabled ? colors.onSurface : colors.textDisabled) : colors.onSurfaceVariant,
+                      color: selectedDate != null
+                          ? (enabled ? colors.onSurface : colors.textDisabled)
+                          : colors.onSurfaceVariant,
                     ),
                   ),
                 ),
@@ -255,7 +263,9 @@ class ChromiaTimePicker extends StatelessWidget {
     final spacing = theme.spacing;
 
     final bool hasError = errorText != null;
-    final String displayText = selectedTime != null ? selectedTime!.format(context) : hintText ?? 'Select time';
+    final String displayText = selectedTime != null
+        ? selectedTime!.format(context)
+        : hintText ?? 'Select time';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -279,7 +289,9 @@ class ChromiaTimePicker extends StatelessWidget {
               vertical: spacing.m,
             ),
             decoration: BoxDecoration(
-              color: enabled ? colors.surfaceContainer : colors.surfaceContainer,
+              color: enabled
+                  ? colors.surfaceContainer
+                  : colors.surfaceContainer,
               borderRadius: theme.radius.radiusM,
               border: Border.all(
                 color: hasError
@@ -295,14 +307,18 @@ class ChromiaTimePicker extends StatelessWidget {
                 Icon(
                   prefixIcon ?? Icons.access_time,
                   size: 20,
-                  color: enabled ? colors.onSurfaceVariant : colors.textDisabled,
+                  color: enabled
+                      ? colors.onSurfaceVariant
+                      : colors.textDisabled,
                 ),
                 spacing.gapHM,
                 Expanded(
                   child: Text(
                     displayText,
                     style: theme.typography.bodyMedium.copyWith(
-                      color: selectedTime != null ? (enabled ? colors.onSurface : colors.textDisabled) : colors.onSurfaceVariant,
+                      color: selectedTime != null
+                          ? (enabled ? colors.onSurface : colors.textDisabled)
+                          : colors.onSurfaceVariant,
                     ),
                   ),
                 ),
@@ -393,7 +409,9 @@ class ChromiaDateTimePicker extends StatelessWidget {
     if (pickedDate != null && context.mounted) {
       final TimeOfDay? pickedTime = await showTimePicker(
         context: context,
-        initialTime: selectedDateTime != null ? TimeOfDay.fromDateTime(selectedDateTime!) : TimeOfDay.now(),
+        initialTime: selectedDateTime != null
+            ? TimeOfDay.fromDateTime(selectedDateTime!)
+            : TimeOfDay.now(),
         builder: _pickerTheme,
       );
 
@@ -444,7 +462,9 @@ class ChromiaDateTimePicker extends StatelessWidget {
               vertical: spacing.m,
             ),
             decoration: BoxDecoration(
-              color: enabled ? colors.surfaceContainer : colors.surfaceContainer,
+              color: enabled
+                  ? colors.surfaceContainer
+                  : colors.surfaceContainer,
               borderRadius: theme.radius.radiusM,
               border: Border.all(
                 color: hasError
@@ -460,7 +480,9 @@ class ChromiaDateTimePicker extends StatelessWidget {
                 Icon(
                   prefixIcon ?? Icons.event,
                   size: 20,
-                  color: enabled ? colors.onSurfaceVariant : colors.textDisabled,
+                  color: enabled
+                      ? colors.onSurfaceVariant
+                      : colors.textDisabled,
                 ),
                 spacing.gapHM,
                 Expanded(

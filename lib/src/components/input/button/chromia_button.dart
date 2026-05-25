@@ -101,11 +101,21 @@ class _ChromiaButtonState extends State<ChromiaButton> {
     final ChromiaButtonStyle sizedStyle = _applySizeToStyle(baseStyle, theme);
 
     // Merge with custom style if provided
-    final ChromiaButtonStyle finalStyle = widget.style != null ? sizedStyle.merge(widget.style) : sizedStyle;
+    final ChromiaButtonStyle finalStyle = widget.style != null
+        ? sizedStyle.merge(widget.style)
+        : sizedStyle;
 
     // Determine current background color based on state
-    final Color backgroundColor = _getBackgroundColor(finalStyle, isEnabled, theme);
-    final Color foregroundColor = _getForegroundColor(finalStyle, isEnabled, theme);
+    final Color backgroundColor = _getBackgroundColor(
+      finalStyle,
+      isEnabled,
+      theme,
+    );
+    final Color foregroundColor = _getForegroundColor(
+      finalStyle,
+      isEnabled,
+      theme,
+    );
     final Color? borderColor = _getBorderColor(finalStyle, isEnabled, theme);
 
     return MouseRegion(
@@ -115,7 +125,9 @@ class _ChromiaButtonState extends State<ChromiaButton> {
       child: GestureDetector(
         onTapDown: isEnabled ? (_) => setState(() => _isPressed = true) : null,
         onTapUp: isEnabled ? (_) => setState(() => _isPressed = false) : null,
-        onTapCancel: isEnabled ? () => setState(() => _isPressed = false) : null,
+        onTapCancel: isEnabled
+            ? () => setState(() => _isPressed = false)
+            : null,
         onTap: isEnabled ? widget.onPressed : null,
         onLongPress: isEnabled ? widget.onLongPress : null,
         child: AnimatedContainer(
@@ -124,7 +136,9 @@ class _ChromiaButtonState extends State<ChromiaButton> {
           constraints: BoxConstraints(
             minWidth: finalStyle.minimumSize?.width ?? 0,
             minHeight: finalStyle.minimumSize?.height ?? 0,
-            maxWidth: widget.isFullWidth ? double.infinity : (finalStyle.maximumSize?.width ?? double.infinity),
+            maxWidth: widget.isFullWidth
+                ? double.infinity
+                : (finalStyle.maximumSize?.width ?? double.infinity),
             maxHeight: finalStyle.maximumSize?.height ?? double.infinity,
           ),
           decoration: BoxDecoration(
@@ -213,7 +227,9 @@ class _ChromiaButtonState extends State<ChromiaButton> {
     );
 
     final Widget textWidget = DefaultTextStyle(
-      style: textStyle?.copyWith(color: foregroundColor) ?? TextStyle(color: foregroundColor),
+      style:
+          textStyle?.copyWith(color: foregroundColor) ??
+          TextStyle(color: foregroundColor),
       child: widget.child,
     );
 
@@ -243,7 +259,9 @@ class _ChromiaButtonState extends State<ChromiaButton> {
   /// Builds content without icon
   Widget _buildContent(Color foregroundColor, TextStyle? textStyle) {
     return DefaultTextStyle(
-      style: textStyle?.copyWith(color: foregroundColor) ?? TextStyle(color: foregroundColor),
+      style:
+          textStyle?.copyWith(color: foregroundColor) ??
+          TextStyle(color: foregroundColor),
       textAlign: TextAlign.center,
       child: widget.child,
     );

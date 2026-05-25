@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 ///
 /// This extension allows brand configuration to be stored in Flutter's
 /// theme system and accessed throughout the app.
-class ChromiaBrandThemeExtension extends ThemeExtension<ChromiaBrandThemeExtension> {
+class ChromiaBrandThemeExtension
+    extends ThemeExtension<ChromiaBrandThemeExtension> {
   const ChromiaBrandThemeExtension({
     required this.brandConfig,
   });
@@ -23,7 +24,8 @@ class ChromiaBrandThemeExtension extends ThemeExtension<ChromiaBrandThemeExtensi
   Color? getCustomColor(String key) => brandConfig.getCustomColor(key);
 
   /// Gets the brand typography config
-  ChromiaBrandTypographyConfig? get typographyConfig => brandConfig.typographyConfig;
+  ChromiaBrandTypographyConfig? get typographyConfig =>
+      brandConfig.typographyConfig;
 
   @override
   ThemeExtension<ChromiaBrandThemeExtension> copyWith({
@@ -58,7 +60,8 @@ class ChromiaBrandThemeExtension extends ThemeExtension<ChromiaBrandThemeExtensi
       return true;
     }
 
-    return other is ChromiaBrandThemeExtension && other.brandConfig == brandConfig;
+    return other is ChromiaBrandThemeExtension &&
+        other.brandConfig == brandConfig;
   }
 
   @override

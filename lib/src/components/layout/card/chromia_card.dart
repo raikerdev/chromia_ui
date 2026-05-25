@@ -126,7 +126,8 @@ class _ChromiaCardState extends State<ChromiaCard> {
 
     final bool isInteractive = widget.onTap != null;
     final BorderRadius effectiveRadius = widget.borderRadius ?? radius.radiusL;
-    final Color effectiveBackgroundColor = widget.backgroundColor ?? colors.surface;
+    final Color effectiveBackgroundColor =
+        widget.backgroundColor ?? colors.surface;
 
     // Determine shadow based on elevation and state
     List<BoxShadow> effectiveShadows;
@@ -143,7 +144,8 @@ class _ChromiaCardState extends State<ChromiaCard> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         // Top image
-        if (widget.image != null && widget.imagePosition == CardImagePosition.top)
+        if (widget.image != null &&
+            widget.imagePosition == CardImagePosition.top)
           ClipRRect(
             borderRadius: BorderRadius.only(
               topLeft: effectiveRadius.topLeft,
@@ -193,7 +195,8 @@ class _ChromiaCardState extends State<ChromiaCard> {
           ),
 
         // Bottom image
-        if (widget.image != null && widget.imagePosition == CardImagePosition.bottom)
+        if (widget.image != null &&
+            widget.imagePosition == CardImagePosition.bottom)
           ClipRRect(
             borderRadius: BorderRadius.only(
               bottomLeft: effectiveRadius.bottomLeft,
@@ -244,7 +247,10 @@ class _ChromiaCardState extends State<ChromiaCard> {
   }
 
   /// Gets shadows based on elevation level
-  List<BoxShadow> _getElevatedShadows(double elevation, ChromiaShadows shadows) {
+  List<BoxShadow> _getElevatedShadows(
+    double elevation,
+    ChromiaShadows shadows,
+  ) {
     if (elevation <= 0) {
       return shadows.none;
     }

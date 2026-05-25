@@ -20,84 +20,99 @@ void main() {
     // ── Render ────────────────────────────────────────────────────────────────
 
     testWidgets('renders filled variant without crash', (tester) async {
-      await tester.pumpWidget(buildTestApp(
-        ChromiaButton(
-          onPressed: () {},
-          child: const Text('Filled'),
+      await tester.pumpWidget(
+        buildTestApp(
+          ChromiaButton(
+            onPressed: () {},
+            child: const Text('Filled'),
+          ),
         ),
-      ));
+      );
       expect(find.text('Filled'), findsOneWidget);
     });
 
     testWidgets('renders all variants without crash', (tester) async {
       for (final variant in ChromiaButtonVariant.values) {
-        await tester.pumpWidget(buildTestApp(
-          ChromiaButton(
-            variant: variant,
-            onPressed: () {},
-            child: Text(variant.name),
+        await tester.pumpWidget(
+          buildTestApp(
+            ChromiaButton(
+              variant: variant,
+              onPressed: () {},
+              child: Text(variant.name),
+            ),
           ),
-        ));
+        );
         expect(find.text(variant.name), findsOneWidget);
       }
     });
 
     testWidgets('renders all sizes without crash', (tester) async {
       for (final size in ChromiaButtonSize.values) {
-        await tester.pumpWidget(buildTestApp(
-          ChromiaButton(
-            size: size,
-            onPressed: () {},
-            child: Text(size.name),
+        await tester.pumpWidget(
+          buildTestApp(
+            ChromiaButton(
+              size: size,
+              onPressed: () {},
+              child: Text(size.name),
+            ),
           ),
-        ));
+        );
         expect(find.text(size.name), findsOneWidget);
       }
     });
 
     testWidgets('renders disabled when onPressed is null', (tester) async {
-      await tester.pumpWidget(buildTestApp(
-        const ChromiaButton(
-          onPressed: null,
-          child: Text('Disabled'),
+      await tester.pumpWidget(
+        buildTestApp(
+          const ChromiaButton(
+            onPressed: null,
+            child: Text('Disabled'),
+          ),
         ),
-      ));
+      );
       expect(find.text('Disabled'), findsOneWidget);
     });
 
-    testWidgets('renders loading indicator when isLoading is true',
-        (tester) async {
-      await tester.pumpWidget(buildTestApp(
-        ChromiaButton(
-          onPressed: () {},
-          isLoading: true,
-          child: const Text('Loading'),
+    testWidgets('renders loading indicator when isLoading is true', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        buildTestApp(
+          ChromiaButton(
+            onPressed: () {},
+            isLoading: true,
+            child: const Text('Loading'),
+          ),
         ),
-      ));
+      );
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
     });
 
     testWidgets('renders leading icon', (tester) async {
-      await tester.pumpWidget(buildTestApp(
-        ChromiaButton(
-          onPressed: () {},
-          icon: const Icon(Icons.star),
-          child: const Text('With Icon'),
+      await tester.pumpWidget(
+        buildTestApp(
+          ChromiaButton(
+            onPressed: () {},
+            icon: const Icon(Icons.star),
+            child: const Text('With Icon'),
+          ),
         ),
-      ));
+      );
       expect(find.byIcon(Icons.star), findsOneWidget);
       expect(find.text('With Icon'), findsOneWidget);
     });
 
     testWidgets('renders trailing icon', (tester) async {
-      await tester.pumpWidget(buildTestApp(
-        ChromiaButton(
-          onPressed: () {},
-          icon: const Icon(Icons.arrow_forward),
-          iconPosition: IconPosition.trailing,
-          child: const Text('Trailing'),
+      await tester.pumpWidget(
+        buildTestApp(
+          ChromiaButton(
+            onPressed: () {},
+            icon: const Icon(Icons.arrow_forward),
+            iconPosition: IconPosition.trailing,
+            child: const Text('Trailing'),
+          ),
         ),
-      ));
+      );
       expect(find.byIcon(Icons.arrow_forward), findsOneWidget);
     });
 
@@ -106,12 +121,14 @@ void main() {
     testWidgets('calls onPressed when tapped', (tester) async {
       int count = 0;
 
-      await tester.pumpWidget(buildTestApp(
-        ChromiaButton(
-          onPressed: () => count++,
-          child: const Text('Tap me'),
+      await tester.pumpWidget(
+        buildTestApp(
+          ChromiaButton(
+            onPressed: () => count++,
+            child: const Text('Tap me'),
+          ),
         ),
-      ));
+      );
 
       await tester.tap(find.byType(ChromiaButton));
       await tester.pump();
@@ -122,12 +139,14 @@ void main() {
     testWidgets('does not call onPressed when disabled', (tester) async {
       const int count = 0;
 
-      await tester.pumpWidget(buildTestApp(
-        const ChromiaButton(
-          onPressed: null,
-          child: Text('Disabled'),
+      await tester.pumpWidget(
+        buildTestApp(
+          const ChromiaButton(
+            onPressed: null,
+            child: Text('Disabled'),
+          ),
         ),
-      ));
+      );
 
       await tester.tap(find.byType(ChromiaButton));
       await tester.pump();
@@ -138,13 +157,15 @@ void main() {
     testWidgets('does not call onPressed while loading', (tester) async {
       int count = 0;
 
-      await tester.pumpWidget(buildTestApp(
-        ChromiaButton(
-          onPressed: () => count++,
-          isLoading: true,
-          child: const Text('Loading'),
+      await tester.pumpWidget(
+        buildTestApp(
+          ChromiaButton(
+            onPressed: () => count++,
+            isLoading: true,
+            child: const Text('Loading'),
+          ),
         ),
-      ));
+      );
 
       await tester.tap(find.byType(ChromiaButton));
       await tester.pump();
@@ -155,13 +176,15 @@ void main() {
     testWidgets('calls onLongPress when long pressed', (tester) async {
       int count = 0;
 
-      await tester.pumpWidget(buildTestApp(
-        ChromiaButton(
-          onPressed: () {},
-          onLongPress: () => count++,
-          child: const Text('Long press'),
+      await tester.pumpWidget(
+        buildTestApp(
+          ChromiaButton(
+            onPressed: () {},
+            onLongPress: () => count++,
+            child: const Text('Long press'),
+          ),
         ),
-      ));
+      );
 
       await tester.longPress(find.byType(ChromiaButton));
       await tester.pump();
@@ -172,16 +195,18 @@ void main() {
     // ── Custom style ──────────────────────────────────────────────────────────
 
     testWidgets('applies custom style without crash', (tester) async {
-      await tester.pumpWidget(buildTestApp(
-        ChromiaButton(
-          onPressed: () {},
-          style: const ChromiaButtonStyle(
-            backgroundColor: Color(0xFF123456),
-            foregroundColor: Colors.white,
+      await tester.pumpWidget(
+        buildTestApp(
+          ChromiaButton(
+            onPressed: () {},
+            style: const ChromiaButtonStyle(
+              backgroundColor: Color(0xFF123456),
+              foregroundColor: Colors.white,
+            ),
+            child: const Text('Custom'),
           ),
-          child: const Text('Custom'),
         ),
-      ));
+      );
       expect(find.text('Custom'), findsOneWidget);
     });
   });

@@ -1,6 +1,9 @@
 ### Dart ###
 # See https://www.dartlang.org/guides/libraries/private-files
 
+#Claude
+CLAUDE_CONTEXT.md
+
 # Files and directories created by pub
 .dart_tool/
 .packages
@@ -39,7 +42,6 @@ doc/api/
 .pub/
 coverage/
 lib/generated_plugin_registrant.dart
-**/lib/generated/
 # For library packages, don’t commit the pubspec.lock file.
 # Regenerating the pubspec.lock file lets you test your package against the latest compatible versions of its dependencies.
 # See https://dart.dev/guides/libraries/private-files#pubspeclock

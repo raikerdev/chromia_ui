@@ -40,7 +40,10 @@ void main() {
 
       expect(theme.brandConfig, brandConfig);
       expect(theme.brandConfig?.name, 'Test Brand');
-      expect(theme.brandConfig?.colorConfig.primaryLight, const Color(0xFFFF0000));
+      expect(
+        theme.brandConfig?.colorConfig.primaryLight,
+        const Color(0xFFFF0000),
+      );
     });
 
     test('creates dark theme from brand config', () {
@@ -438,10 +441,11 @@ void main() {
       final b = ChromiaColors.light().copyWith(surface: white);
       final mid = ChromiaColors.lerp(a, b, 0.5);
 
-      // 50% between black and white is grey (0xFF808080 approx.)
-      expect(mid.surface.r, closeTo(128, 2));
-      expect(mid.surface.g, closeTo(128, 2));
-      expect(mid.surface.b, closeTo(128, 2));
+      // Flutter 3.27+: Color.r/g/b return doubles in [0.0, 1.0].
+      // 50% between black and white → ~0.5 (≈ 128/255).
+      expect(mid.surface.r, closeTo(0.5, 0.01));
+      expect(mid.surface.g, closeTo(0.5, 0.01));
+      expect(mid.surface.b, closeTo(0.5, 0.01));
     });
   });
 
@@ -509,7 +513,10 @@ void main() {
       final b = a.copyWith(
         bodyMedium: a.bodyMedium.copyWith(fontSize: 100.0),
       );
-      expect(ChromiaTypography.lerp(a, b, 0.0).bodyMedium.fontSize, a.bodyMedium.fontSize);
+      expect(
+        ChromiaTypography.lerp(a, b, 0.0).bodyMedium.fontSize,
+        a.bodyMedium.fontSize,
+      );
     });
 
     test('lerp at t=1 returns b text styles', () {
@@ -749,7 +756,10 @@ void main() {
       theme.debugFillProperties(builder);
 
       final names = builder.properties.map((p) => p.name).toList();
-      expect(names, containsAll(['colors', 'typography', 'spacing', 'radius', 'shadows']));
+      expect(
+        names,
+        containsAll(['colors', 'typography', 'spacing', 'radius', 'shadows']),
+      );
     });
 
     test('brandConfig property is included in properties list', () {
@@ -797,7 +807,9 @@ void main() {
         ),
       );
 
-      final chromiaTheme = tester.widget<ChromiaTheme>(find.byType(ChromiaTheme));
+      final chromiaTheme = tester.widget<ChromiaTheme>(
+        find.byType(ChromiaTheme),
+      );
       final builder = DiagnosticPropertiesBuilder();
       chromiaTheme.debugFillProperties(builder);
 

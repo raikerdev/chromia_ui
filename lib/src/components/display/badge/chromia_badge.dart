@@ -67,7 +67,8 @@ class ChromiaBadge extends StatelessWidget {
 
     final Color effectiveBackgroundColor = backgroundColor ?? colors.error;
     final Color effectiveTextColor = textColor ?? colors.onError;
-    final ChromiaPosition effectivePosition = position ?? ChromiaPosition.topRight(offset: isDot ? -2 : null);
+    final ChromiaPosition effectivePosition =
+        position ?? ChromiaPosition.topRight(offset: isDot ? -2 : null);
 
     // Calculate display value
     String? displayValue = value;
@@ -134,7 +135,9 @@ class _Badge extends StatelessWidget {
             ),
       decoration: BoxDecoration(
         color: backgroundColor,
-        shape: shape == ChromiaBadgeShape.circle ? BoxShape.circle : BoxShape.rectangle,
+        shape: shape == ChromiaBadgeShape.circle
+            ? BoxShape.circle
+            : BoxShape.rectangle,
         borderRadius: borderRadius,
         border: Border.all(
           color: colors.surface,

@@ -45,7 +45,10 @@ class ChromiaAvatarGroup extends StatelessWidget {
     );
 
     return SizedBox(
-      width: totalWidth + extraWidth + (showMore && remainingCount > 0 ? avatarSize : 0),
+      width:
+          totalWidth +
+          extraWidth +
+          (showMore && remainingCount > 0 ? avatarSize : 0),
       height: avatarSize + SpacingTokens.s,
       child: Stack(
         children: [

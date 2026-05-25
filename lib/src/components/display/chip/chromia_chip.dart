@@ -113,9 +113,12 @@ class ChromiaChip extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = context.chromiaColors;
 
-    final Color effectiveBackgroundColor = backgroundColor ?? colors.surfaceContainer;
-    final Color effectiveForegroundColor = foregroundColor ?? colors.onSurfaceContainer;
-    final Color effectiveDeleteIconColor = deleteIconColor ?? colors.onSurfaceContainer;
+    final Color effectiveBackgroundColor =
+        backgroundColor ?? colors.surfaceContainer;
+    final Color effectiveForegroundColor =
+        foregroundColor ?? colors.onSurfaceContainer;
+    final Color effectiveDeleteIconColor =
+        deleteIconColor ?? colors.onSurfaceContainer;
 
     return _Chip(
       label: label,
@@ -176,7 +179,9 @@ class _ChromiaFilterChip extends ChromiaChip {
         ? (selectedForegroundColor ?? colors.primary)
         : (foregroundColor ?? colors.onSurfaceContainer);
 
-    final IconData? effectiveIcon = selected && selectedIcon != null ? selectedIcon : icon;
+    final IconData? effectiveIcon = selected && selectedIcon != null
+        ? selectedIcon
+        : icon;
 
     return _Chip(
       label: label,
@@ -232,7 +237,9 @@ class _ChromiaChoiceChip extends ChromiaChip {
       onPressed: selected ? null : onSelected,
       avatar: avatar,
       icon: icon,
-      fontWeight: selected ? TypographyTokens.semiBold : TypographyTokens.regular,
+      fontWeight: selected
+          ? TypographyTokens.semiBold
+          : TypographyTokens.regular,
     );
   }
 }

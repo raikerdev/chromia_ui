@@ -108,9 +108,15 @@ class ChromiaDrawerItem extends StatelessWidget {
     final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
-    final Color effectiveBackgroundColor = selected ? colors.surface : Colors.transparent;
-    final Color effectiveTextColor = selected ? colors.primary : colors.onSurface;
-    final Color effectiveIconColor = selected ? colors.primary : colors.onSurfaceVariant;
+    final Color effectiveBackgroundColor = selected
+        ? colors.surface
+        : Colors.transparent;
+    final Color effectiveTextColor = selected
+        ? colors.primary
+        : colors.onSurface;
+    final Color effectiveIconColor = selected
+        ? colors.primary
+        : colors.onSurfaceVariant;
 
     return InkWell(
       onTap: onTap,
@@ -314,7 +320,9 @@ class ChromiaDrawerHeader extends StatelessWidget {
                 title!,
                 type: ChromiaTypographyType.titleLarge,
                 style: TextStyle(
-                  color: backgroundImage != null ? Colors.white : colors.onSurface,
+                  color: backgroundImage != null
+                      ? Colors.white
+                      : colors.onSurface,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -323,7 +331,9 @@ class ChromiaDrawerHeader extends StatelessWidget {
               ChromiaText(
                 subtitle!,
                 type: ChromiaTypographyType.bodySmall,
-                color: backgroundImage != null ? Colors.white.withAlpha(230) : colors.onSurface.withAlpha(204),
+                color: backgroundImage != null
+                    ? Colors.white.withAlpha(230)
+                    : colors.onSurface.withAlpha(204),
               ),
             ],
           ],

@@ -193,7 +193,8 @@ class ChromiaLongPressTooltip extends StatefulWidget {
   final Duration duration;
 
   @override
-  State<ChromiaLongPressTooltip> createState() => _ChromiaLongPressTooltipState();
+  State<ChromiaLongPressTooltip> createState() =>
+      _ChromiaLongPressTooltipState();
 }
 
 class _ChromiaLongPressTooltipState extends State<ChromiaLongPressTooltip> {
@@ -201,7 +202,8 @@ class _ChromiaLongPressTooltipState extends State<ChromiaLongPressTooltip> {
   OverlayEntry? _overlayEntry;
 
   void _showTooltip() {
-    final RenderBox renderBox = _key.currentContext!.findRenderObject() as RenderBox;
+    final RenderBox renderBox =
+        _key.currentContext!.findRenderObject() as RenderBox;
     final Offset offset = renderBox.localToGlobal(Offset.zero);
     final Size size = renderBox.size;
 

@@ -42,8 +42,10 @@ class ChromiaSteppedProgress extends StatelessWidget {
     final colors = context.chromiaColors;
 
     final Color effectiveActiveColor = activeColor ?? colors.primary;
-    final Color effectiveInactiveColor = inactiveColor ?? colors.surfaceContainer;
-    final BorderRadius effectiveBorderRadius = borderRadius ?? BorderRadius.circular(height / 2);
+    final Color effectiveInactiveColor =
+        inactiveColor ?? colors.surfaceContainer;
+    final BorderRadius effectiveBorderRadius =
+        borderRadius ?? BorderRadius.circular(height / 2);
 
     return Row(
       children: List.generate(totalSteps, (index) {

@@ -81,8 +81,12 @@ class ChromiaListTileRangeSlider extends StatelessWidget {
     final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
-    final String startValue = valueBuilder?.call(values.start) ?? values.start.toStringAsFixed(divisions != null ? 0 : 1);
-    final String endValue = valueBuilder?.call(values.end) ?? values.end.toStringAsFixed(divisions != null ? 0 : 1);
+    final String startValue =
+        valueBuilder?.call(values.start) ??
+        values.start.toStringAsFixed(divisions != null ? 0 : 1);
+    final String endValue =
+        valueBuilder?.call(values.end) ??
+        values.end.toStringAsFixed(divisions != null ? 0 : 1);
 
     return Padding(
       padding: contentPadding ?? spacing.paddingM,

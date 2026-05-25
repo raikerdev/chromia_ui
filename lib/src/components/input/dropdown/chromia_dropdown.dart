@@ -123,7 +123,9 @@ class ChromiaDropdown<T> extends StatelessWidget {
                     isExpanded: true,
                     icon: Icon(
                       Icons.arrow_drop_down,
-                      color: enabled ? colors.onSurfaceVariant : colors.textDisabled,
+                      color: enabled
+                          ? colors.onSurfaceVariant
+                          : colors.textDisabled,
                     ),
                     style: theme.typography.bodyMedium.copyWith(
                       color: enabled ? colors.onSurface : colors.textDisabled,
@@ -286,7 +288,9 @@ class ChromiaRichDropdown<T> extends StatelessWidget {
                         child: Text(
                           item.label,
                           style: theme.typography.bodyMedium.copyWith(
-                            color: enabled ? colors.onSurface : colors.textDisabled,
+                            color: enabled
+                                ? colors.onSurface
+                                : colors.textDisabled,
                           ),
                         ),
                       ),

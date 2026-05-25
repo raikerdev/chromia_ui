@@ -131,7 +131,8 @@ class ChromiaDialog extends StatelessWidget {
             ],
 
             // Actions
-            if (actions != null && actions!.isNotEmpty) _buildActions(context, theme),
+            if (actions != null && actions!.isNotEmpty)
+              _buildActions(context, theme),
           ],
         ),
       ),

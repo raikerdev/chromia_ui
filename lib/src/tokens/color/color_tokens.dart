@@ -102,7 +102,18 @@ class ColorTokens {
 
   /// Returns a MaterialColor from a Color
   static MaterialColor createMaterialColor(Color color) {
-    final strengths = <double>[0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9];
+    final strengths = <double>[
+      0.05,
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.9,
+    ];
     final swatch = <int, Color>{};
     final r = (color.r * 255.0).round().clamp(0, 255);
     final g = (color.g * 255.0).round().clamp(0, 255);

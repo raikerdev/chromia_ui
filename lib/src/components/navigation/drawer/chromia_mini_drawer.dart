@@ -100,9 +100,13 @@ class ChromiaMiniDrawerItem extends StatelessWidget {
     final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
-    final Color effectiveBackgroundColor = selected ? colors.surface : Colors.transparent;
+    final Color effectiveBackgroundColor = selected
+        ? colors.surface
+        : Colors.transparent;
 
-    final Color effectiveIconColor = selected ? colors.primary : colors.onSurfaceVariant;
+    final Color effectiveIconColor = selected
+        ? colors.primary
+        : colors.onSurfaceVariant;
 
     return Tooltip(
       message: label ?? '',

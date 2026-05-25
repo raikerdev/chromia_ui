@@ -33,7 +33,10 @@ class ChromiaSlider extends StatelessWidget {
     this.thumbIcon,
     this.thumbShape,
     super.key,
-  }) : assert(!(thumbIcon != null && thumbShape != null), 'Either thumbIcon or thumbShape must be provided, not both.');
+  }) : assert(
+         !(thumbIcon != null && thumbShape != null),
+         'Either thumbIcon or thumbShape must be provided, not both.',
+       );
 
   /// The current value of the slider
   final double value;
@@ -86,7 +89,8 @@ class ChromiaSlider extends StatelessWidget {
   /// Shape of the slider thumb
   final SliderComponentShape? thumbShape;
 
-  bool get _showInfo => valueBuilder != null || minLabel != null || maxLabel != null;
+  bool get _showInfo =>
+      valueBuilder != null || minLabel != null || maxLabel != null;
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +99,8 @@ class ChromiaSlider extends StatelessWidget {
     final spacing = theme.spacing;
 
     final Color effectiveActiveColor = activeColor ?? colors.primary;
-    final Color effectiveInactiveColor = inactiveColor ?? colors.surfaceContainer;
+    final Color effectiveInactiveColor =
+        inactiveColor ?? colors.surfaceContainer;
 
     final enabledThumbRadius = thumbRadius ?? trackHeight + 4;
 
@@ -106,14 +111,19 @@ class ChromiaSlider extends StatelessWidget {
             shadowColor: colors.shadow,
           )
         : null;
-    final enabledThumbShape = iconThumbShape ?? thumbShape ?? RoundSliderThumbShape(enabledThumbRadius: enabledThumbRadius);
+    final enabledThumbShape =
+        iconThumbShape ??
+        thumbShape ??
+        RoundSliderThumbShape(enabledThumbRadius: enabledThumbRadius);
 
     final SliderThemeData sliderTheme = SliderTheme.of(context).copyWith(
       activeTrackColor: effectiveActiveColor,
       inactiveTrackColor: effectiveInactiveColor,
       thumbColor: thumbColor ?? effectiveActiveColor,
       overlayColor: effectiveActiveColor.withAlpha(31),
-      overlayShape: RoundSliderOverlayShape(overlayRadius: enabledThumbRadius + 10),
+      overlayShape: RoundSliderOverlayShape(
+        overlayRadius: enabledThumbRadius + 10,
+      ),
       valueIndicatorColor: effectiveActiveColor,
       trackHeight: trackHeight,
       thumbShape: enabledThumbShape,

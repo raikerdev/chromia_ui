@@ -1,5 +1,6 @@
-import 'dart:io' show Platform;
-
+import 'package:chromia_ui/src/foundation/_platform_io.dart'
+    if (dart.library.html) 'package:chromia_ui/src/foundation/_platform_web.dart'
+    as platform;
 import 'package:flutter/foundation.dart' show kIsWeb;
 
 /// Detects the current platform and provides utilities for platform-specific logic.
@@ -17,7 +18,7 @@ class PlatformDetector {
     if (kIsWeb) {
       return false;
     }
-    return Platform.isAndroid || Platform.isIOS;
+    return platform.isAndroid || platform.isIOS;
   }
 
   /// Returns true if running on desktop platform (Windows, macOS, or Linux)
@@ -25,7 +26,7 @@ class PlatformDetector {
     if (kIsWeb) {
       return false;
     }
-    return Platform.isWindows || Platform.isMacOS || Platform.isLinux;
+    return platform.isWindows || platform.isMacOS || platform.isLinux;
   }
 
   /// Returns true if running on Android
@@ -33,7 +34,7 @@ class PlatformDetector {
     if (kIsWeb) {
       return false;
     }
-    return Platform.isAndroid;
+    return platform.isAndroid;
   }
 
   /// Returns true if running on iOS
@@ -41,7 +42,7 @@ class PlatformDetector {
     if (kIsWeb) {
       return false;
     }
-    return Platform.isIOS;
+    return platform.isIOS;
   }
 
   /// Returns true if running on Windows
@@ -49,7 +50,7 @@ class PlatformDetector {
     if (kIsWeb) {
       return false;
     }
-    return Platform.isWindows;
+    return platform.isWindows;
   }
 
   /// Returns true if running on macOS
@@ -57,7 +58,7 @@ class PlatformDetector {
     if (kIsWeb) {
       return false;
     }
-    return Platform.isMacOS;
+    return platform.isMacOS;
   }
 
   /// Returns true if running on Linux
@@ -65,7 +66,7 @@ class PlatformDetector {
     if (kIsWeb) {
       return false;
     }
-    return Platform.isLinux;
+    return platform.isLinux;
   }
 
   /// Returns true if running on Apple platform (iOS or macOS)
@@ -96,35 +97,41 @@ class PlatformDetector {
   /// Example:
   /// ```dart
   /// final spacing = PlatformDetector.when(
+  ///   orElse: 16.0,
   ///   android: 12.0,
   ///   iOS: 16.0,
   ///   windows: 20.0,
   ///   macOS: 18.0,
   ///   linux: 20.0,
   ///   web: 24.0,
-  ///   orElse: 16.0,
   /// );
   /// ```
-  static T when<T>({T? android, T? iOS, T? windows, T? macOS, T? linux, T? web, required T orElse}) {
+  static T when<T>({
+    required T orElse,
+    T? android,
+    T? iOS,
+    T? windows,
+    T? macOS,
+    T? linux,
+    T? web,
+  }) {
     if (kIsWeb) {
       return web ?? orElse;
     }
-    if (!kIsWeb) {
-      if (Platform.isAndroid) {
-        return android ?? orElse;
-      }
-      if (Platform.isIOS) {
-        return iOS ?? orElse;
-      }
-      if (Platform.isWindows) {
-        return windows ?? orElse;
-      }
-      if (Platform.isMacOS) {
-        return macOS ?? orElse;
-      }
-      if (Platform.isLinux) {
-        return linux ?? orElse;
-      }
+    if (platform.isAndroid) {
+      return android ?? orElse;
+    }
+    if (platform.isIOS) {
+      return iOS ?? orElse;
+    }
+    if (platform.isWindows) {
+      return windows ?? orElse;
+    }
+    if (platform.isMacOS) {
+      return macOS ?? orElse;
+    }
+    if (platform.isLinux) {
+      return linux ?? orElse;
     }
     return orElse;
   }
@@ -134,19 +141,19 @@ class PlatformDetector {
     if (kIsWeb) {
       return 'web';
     }
-    if (Platform.isAndroid) {
+    if (platform.isAndroid) {
       return 'android';
     }
-    if (Platform.isIOS) {
+    if (platform.isIOS) {
       return 'iOS';
     }
-    if (Platform.isWindows) {
+    if (platform.isWindows) {
       return 'windows';
     }
-    if (Platform.isMacOS) {
+    if (platform.isMacOS) {
       return 'macOS';
     }
-    if (Platform.isLinux) {
+    if (platform.isLinux) {
       return 'linux';
     }
     return 'unknown';

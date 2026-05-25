@@ -81,19 +81,24 @@ class AnimationTokens {
   static const Curve bounceInOut = Curves.bounceInOut;
 
   /// Returns a standard fade in animation configuration
-  static AnimationConfig get fadeIn => const AnimationConfig(duration: normal, curve: easeOut);
+  static AnimationConfig get fadeIn =>
+      const AnimationConfig(duration: normal, curve: easeOut);
 
   /// Returns a standard fade out animation configuration
-  static AnimationConfig get fadeOut => const AnimationConfig(duration: normal, curve: easeIn);
+  static AnimationConfig get fadeOut =>
+      const AnimationConfig(duration: normal, curve: easeIn);
 
   /// Returns a standard scale animation configuration
-  static AnimationConfig get scale => const AnimationConfig(duration: fast, curve: emphasized);
+  static AnimationConfig get scale =>
+      const AnimationConfig(duration: fast, curve: emphasized);
 
   /// Returns a standard slide animation configuration
-  static AnimationConfig get slide => const AnimationConfig(duration: normal, curve: standard);
+  static AnimationConfig get slide =>
+      const AnimationConfig(duration: normal, curve: standard);
 
   /// Returns a standard expand animation configuration
-  static AnimationConfig get expand => const AnimationConfig(duration: slow, curve: decelerated);
+  static AnimationConfig get expand =>
+      const AnimationConfig(duration: slow, curve: decelerated);
 }
 
 /// Configuration for an animation.
@@ -108,5 +113,8 @@ class AnimationConfig {
 
   /// Creates a copy of this config with the given fields replaced.
   AnimationConfig copyWith({Duration? duration, Curve? curve}) =>
-      AnimationConfig(duration: duration ?? this.duration, curve: curve ?? this.curve);
+      AnimationConfig(
+        duration: duration ?? this.duration,
+        curve: curve ?? this.curve,
+      );
 }

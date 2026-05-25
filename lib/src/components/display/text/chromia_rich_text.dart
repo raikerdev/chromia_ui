@@ -293,8 +293,12 @@ class _ChromiaHighlightText extends ChromiaRichText {
       bool foundHighlight = false;
 
       for (final highlight in highlights) {
-        final searchText = caseSensitive ? remainingText : remainingText.toLowerCase();
-        final searchHighlight = caseSensitive ? highlight : highlight.toLowerCase();
+        final searchText = caseSensitive
+            ? remainingText
+            : remainingText.toLowerCase();
+        final searchHighlight = caseSensitive
+            ? highlight
+            : highlight.toLowerCase();
         final index = searchText.indexOf(searchHighlight);
 
         if (index == 0) {
@@ -317,8 +321,12 @@ class _ChromiaHighlightText extends ChromiaRichText {
         // Find next highlight or end of string
         int nextHighlightIndex = remainingText.length;
         for (final highlight in highlights) {
-          final searchText = caseSensitive ? remainingText : remainingText.toLowerCase();
-          final searchHighlight = caseSensitive ? highlight : highlight.toLowerCase();
+          final searchText = caseSensitive
+              ? remainingText
+              : remainingText.toLowerCase();
+          final searchHighlight = caseSensitive
+              ? highlight
+              : highlight.toLowerCase();
           final index = searchText.indexOf(searchHighlight);
           if (index != -1 && index < nextHighlightIndex) {
             nextHighlightIndex = index;
@@ -379,7 +387,8 @@ class _ChromiaLabelValueText extends ChromiaRichText {
       text: TextSpan(
         children: [
           TextSpan(text: label, style: defaultLabelStyle),
-          if (separator.isNotEmpty) TextSpan(text: separator, style: defaultLabelStyle),
+          if (separator.isNotEmpty)
+            TextSpan(text: separator, style: defaultLabelStyle),
           TextSpan(text: value, style: defaultValueStyle),
         ],
       ),

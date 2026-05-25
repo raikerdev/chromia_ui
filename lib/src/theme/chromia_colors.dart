@@ -130,9 +130,11 @@ class ChromiaColors with Diagnosticable {
 
   Color get secondaryHover => _adjustBrightness(secondary, isDark ? 0.1 : -0.1);
 
-  Color get secondaryPressed => _adjustBrightness(secondary, isDark ? 0.2 : -0.2);
+  Color get secondaryPressed =>
+      _adjustBrightness(secondary, isDark ? 0.2 : -0.2);
 
-  Color get secondaryDisabled => _adjustBrightness(secondary, isDark ? -0.3 : 0.3);
+  Color get secondaryDisabled =>
+      _adjustBrightness(secondary, isDark ? -0.3 : 0.3);
 
   Color get errorHover => _adjustBrightness(error, isDark ? 0.1 : -0.1);
 
@@ -269,7 +271,10 @@ class ChromiaColors with Diagnosticable {
   }
 
   /// Create a color scheme from a [ChromiaBrandColorConfig]
-  factory ChromiaColors.fromBrandColorConfig(ChromiaBrandColorConfig colorConfig, {bool isDark = false}) {
+  factory ChromiaColors.fromBrandColorConfig(
+    ChromiaBrandColorConfig colorConfig, {
+    bool isDark = false,
+  }) {
     final ChromiaColors base = isDark
         ? ChromiaColors.dark().copyWith(
             primary: colorConfig.primaryDark,
@@ -314,12 +319,24 @@ class ChromiaColors with Diagnosticable {
       primary: Color.lerp(a.primary, b.primary, t)!,
       onPrimary: Color.lerp(a.onPrimary, b.onPrimary, t)!,
       primaryContainer: Color.lerp(a.primaryContainer, b.primaryContainer, t)!,
-      onPrimaryContainer: Color.lerp(a.onPrimaryContainer, b.onPrimaryContainer, t)!,
+      onPrimaryContainer: Color.lerp(
+        a.onPrimaryContainer,
+        b.onPrimaryContainer,
+        t,
+      )!,
       // Secondary
       secondary: Color.lerp(a.secondary, b.secondary, t)!,
       onSecondary: Color.lerp(a.onSecondary, b.onSecondary, t)!,
-      secondaryContainer: Color.lerp(a.secondaryContainer, b.secondaryContainer, t)!,
-      onSecondaryContainer: Color.lerp(a.onSecondaryContainer, b.onSecondaryContainer, t)!,
+      secondaryContainer: Color.lerp(
+        a.secondaryContainer,
+        b.secondaryContainer,
+        t,
+      )!,
+      onSecondaryContainer: Color.lerp(
+        a.onSecondaryContainer,
+        b.onSecondaryContainer,
+        t,
+      )!,
       // Error
       error: Color.lerp(a.error, b.error, t)!,
       onError: Color.lerp(a.onError, b.onError, t)!,
@@ -329,12 +346,20 @@ class ChromiaColors with Diagnosticable {
       success: Color.lerp(a.success, b.success, t)!,
       onSuccess: Color.lerp(a.onSuccess, b.onSuccess, t)!,
       successContainer: Color.lerp(a.successContainer, b.successContainer, t)!,
-      onSuccessContainer: Color.lerp(a.onSuccessContainer, b.onSuccessContainer, t)!,
+      onSuccessContainer: Color.lerp(
+        a.onSuccessContainer,
+        b.onSuccessContainer,
+        t,
+      )!,
       // Warning
       warning: Color.lerp(a.warning, b.warning, t)!,
       onWarning: Color.lerp(a.onWarning, b.onWarning, t)!,
       warningContainer: Color.lerp(a.warningContainer, b.warningContainer, t)!,
-      onWarningContainer: Color.lerp(a.onWarningContainer, b.onWarningContainer, t)!,
+      onWarningContainer: Color.lerp(
+        a.onWarningContainer,
+        b.onWarningContainer,
+        t,
+      )!,
       // Info
       info: Color.lerp(a.info, b.info, t)!,
       onInfo: Color.lerp(a.onInfo, b.onInfo, t)!,
@@ -345,7 +370,11 @@ class ChromiaColors with Diagnosticable {
       onSurface: Color.lerp(a.onSurface, b.onSurface, t)!,
       onSurfaceVariant: Color.lerp(a.onSurfaceVariant, b.onSurfaceVariant, t)!,
       surfaceContainer: Color.lerp(a.surfaceContainer, b.surfaceContainer, t)!,
-      onSurfaceContainer: Color.lerp(a.onSurfaceContainer, b.onSurfaceContainer, t)!,
+      onSurfaceContainer: Color.lerp(
+        a.onSurfaceContainer,
+        b.onSurfaceContainer,
+        t,
+      )!,
       // Outline
       outline: Color.lerp(a.outline, b.outline, t)!,
       outlineVariant: Color.lerp(a.outlineVariant, b.outlineVariant, t)!,

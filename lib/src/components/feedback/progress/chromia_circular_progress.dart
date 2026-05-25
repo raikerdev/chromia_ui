@@ -54,7 +54,8 @@ class ChromiaCircularProgress extends StatelessWidget {
     final theme = context.chromiaTheme;
     final colors = context.chromiaColors;
 
-    final Color effectiveBackgroundColor = backgroundColor ?? colors.surfaceContainer;
+    final Color effectiveBackgroundColor =
+        backgroundColor ?? colors.surfaceContainer;
     final Color effectiveColor = color ?? colors.primary;
 
     Widget centerWidget;
@@ -62,7 +63,8 @@ class ChromiaCircularProgress extends StatelessWidget {
     if (child != null) {
       centerWidget = child!;
     } else if (showLabel && value != null) {
-      final String label = labelBuilder?.call(value!) ?? '${(value! * 100).toStringAsFixed(0)}%';
+      final String label =
+          labelBuilder?.call(value!) ?? '${(value! * 100).toStringAsFixed(0)}%';
       centerWidget = ChromiaText(
         label,
         type: ChromiaTypographyType.labelSmall,

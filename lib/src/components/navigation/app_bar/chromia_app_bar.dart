@@ -125,7 +125,8 @@ class ChromiaAppBar extends StatelessWidget implements PreferredSizeWidget {
 }
 
 /// A search app bar with integrated search field.
-class ChromiaSearchAppBar extends StatefulWidget implements PreferredSizeWidget {
+class ChromiaSearchAppBar extends StatefulWidget
+    implements PreferredSizeWidget {
   const ChromiaSearchAppBar({
     required this.onSearch,
     this.hintText = 'Search...',
@@ -206,7 +207,8 @@ class _ChromiaSearchAppBarState extends State<ChromiaSearchAppBar> {
     final theme = context.chromiaTheme;
     final colors = context.chromiaColors;
 
-    final Color effectiveBackgroundColor = widget.backgroundColor ?? colors.surface;
+    final Color effectiveBackgroundColor =
+        widget.backgroundColor ?? colors.surface;
 
     return AppBar(
       backgroundColor: effectiveBackgroundColor,

@@ -144,7 +144,9 @@ class ChromiaAvatar extends StatelessWidget {
       decoration: BoxDecoration(
         color: effectiveBackgroundColor,
         borderRadius: borderRadius,
-        shape: shape == ChromiaAvatarShape.circle ? BoxShape.circle : BoxShape.rectangle,
+        shape: shape == ChromiaAvatarShape.circle
+            ? BoxShape.circle
+            : BoxShape.rectangle,
         border: border,
         image: imageProvider != null
             ? DecorationImage(

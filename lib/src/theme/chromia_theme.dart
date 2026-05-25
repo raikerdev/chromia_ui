@@ -38,7 +38,8 @@ class ChromiaTheme extends StatelessWidget {
   ///
   /// If there is no ancestor, this method returns a default light theme.
   static ChromiaThemeData of(BuildContext context) {
-    final _InheritedChromiaTheme? inheritedTheme = context.dependOnInheritedWidgetOfExactType<_InheritedChromiaTheme>();
+    final _InheritedChromiaTheme? inheritedTheme = context
+        .dependOnInheritedWidgetOfExactType<_InheritedChromiaTheme>();
 
     return inheritedTheme?.data ?? ChromiaThemeData.light();
   }
@@ -46,7 +47,8 @@ class ChromiaTheme extends StatelessWidget {
   /// Returns the ChromiaThemeData from the closest ChromiaTheme ancestor,
   /// or null if there is no ancestor.
   static ChromiaThemeData? maybeOf(BuildContext context) {
-    final _InheritedChromiaTheme? inheritedTheme = context.dependOnInheritedWidgetOfExactType<_InheritedChromiaTheme>();
+    final _InheritedChromiaTheme? inheritedTheme = context
+        .dependOnInheritedWidgetOfExactType<_InheritedChromiaTheme>();
 
     return inheritedTheme?.data;
   }
@@ -62,7 +64,7 @@ class ChromiaTheme extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty<ChromiaThemeData>('data', data));
+    properties.add(DiagnosticsProperty<ChromiaThemeData>('data', data));
   }
 }
 
@@ -102,7 +104,8 @@ bool debugCheckHasChromiaTheme(BuildContext context) {
       return true;
     }
     final bool found =
-        context.dependOnInheritedWidgetOfExactType<_InheritedChromiaTheme>() != null;
+        context.dependOnInheritedWidgetOfExactType<_InheritedChromiaTheme>() !=
+        null;
     if (!found) {
       throw FlutterError.fromParts(<DiagnosticsNode>[
         ErrorSummary('No ChromiaTheme widget found.'),
@@ -184,12 +187,14 @@ class _AnimatedChromiaThemeState
 
   @override
   void forEachTween(TweenVisitor<dynamic> visitor) {
-    _data = visitor(
-      _data,
-      widget.data,
-      (dynamic value) =>
-          ChromiaThemeDataTween(begin: value as ChromiaThemeData),
-    ) as ChromiaThemeDataTween?;
+    _data =
+        visitor(
+              _data,
+              widget.data,
+              (dynamic value) =>
+                  ChromiaThemeDataTween(begin: value as ChromiaThemeData),
+            )
+            as ChromiaThemeDataTween?;
   }
 
   @override

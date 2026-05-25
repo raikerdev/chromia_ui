@@ -143,7 +143,9 @@ class _BottomNavigationItemWidget extends StatelessWidget {
     final theme = context.chromiaTheme;
     final spacing = theme.spacing;
 
-    final IconData effectiveIcon = isSelected && item.selectedIcon != null ? item.selectedIcon! : item.icon;
+    final IconData effectiveIcon = isSelected && item.selectedIcon != null
+        ? item.selectedIcon!
+        : item.icon;
     final Color effectiveColor = isSelected ? selectedColor : unselectedColor;
 
     Widget iconWidget = Icon(
@@ -176,7 +178,9 @@ class _BottomNavigationItemWidget extends StatelessWidget {
                   item.label,
                   style: theme.typography.labelSmall.copyWith(
                     color: effectiveColor,
-                    fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+                    fontWeight: isSelected
+                        ? FontWeight.w600
+                        : FontWeight.normal,
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,

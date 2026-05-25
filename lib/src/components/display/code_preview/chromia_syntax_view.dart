@@ -82,7 +82,9 @@ class ChromiaSyntaxViewState extends State<ChromiaSyntaxView> {
           width: 35,
           decoration: BoxDecoration(
             color: isDark ? const Color(0xFF21252B) : const Color(0xFFEEEEEE),
-            border: Border(right: BorderSide(color: widget.syntaxTheme!.linesCountColor!)),
+            border: Border(
+              right: BorderSide(color: widget.syntaxTheme!.linesCountColor!),
+            ),
           ),
           padding: const EdgeInsets.fromLTRB(0, 10, 0, 30),
           child: Column(
@@ -116,7 +118,9 @@ class ChromiaSyntaxViewState extends State<ChromiaSyntaxView> {
         textScaler: TextScaler.linear(_fontScaleFactor),
         text: TextSpan(
           style: TextStyle(fontFamily: fontFamily, fontSize: widget.fontSize),
-          children: <TextSpan>[getSyntax(widget.syntax, widget.syntaxTheme).format(widget.code)],
+          children: <TextSpan>[
+            getSyntax(widget.syntax, widget.syntaxTheme).format(widget.code),
+          ],
         ),
       ),
     );
@@ -129,13 +133,19 @@ class ChromiaSyntaxViewState extends State<ChromiaSyntaxView> {
         IconButton(
           icon: Icon(Icons.zoom_out, color: widget.syntaxTheme!.zoomIconColor),
           onPressed: () => setState(() {
-            _fontScaleFactor = math.max(minFontScaleFactor, _fontScaleFactor - 0.1);
+            _fontScaleFactor = math.max(
+              minFontScaleFactor,
+              _fontScaleFactor - 0.1,
+            );
           }),
         ),
         IconButton(
           icon: Icon(Icons.zoom_in, color: widget.syntaxTheme!.zoomIconColor),
           onPressed: () => setState(() {
-            _fontScaleFactor = math.min(maxFontScaleFactor, _fontScaleFactor + 0.1);
+            _fontScaleFactor = math.min(
+              maxFontScaleFactor,
+              _fontScaleFactor + 0.1,
+            );
           }),
         ),
       ],

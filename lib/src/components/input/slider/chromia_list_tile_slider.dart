@@ -73,7 +73,9 @@ class ChromiaListTileSlider extends StatelessWidget {
     final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
-    final String displayValue = valueBuilder?.call(value) ?? value.toStringAsFixed(divisions != null ? 0 : 1);
+    final String displayValue =
+        valueBuilder?.call(value) ??
+        value.toStringAsFixed(divisions != null ? 0 : 1);
 
     return Padding(
       padding: contentPadding ?? spacing.paddingM,

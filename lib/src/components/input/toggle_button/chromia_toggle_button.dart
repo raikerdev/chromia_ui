@@ -137,7 +137,8 @@ class _ChromiaToggleButtonState extends State<ChromiaToggleButton>
   Widget _buildToggleButton(
     BuildContext context, {
     required bool isEnabled,
-    VoidCallback? onTap, // receives the tap directly — no longer calculated here
+    VoidCallback?
+    onTap, // receives the tap directly — no longer calculated here
   }) {
     final theme = context.chromiaTheme;
     final colors = context.chromiaColors;

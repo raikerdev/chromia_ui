@@ -51,7 +51,8 @@ enum Breakpoint {
   desktop,
 
   /// Large desktop devices (1440px+)
-  desktopLarge;
+  desktopLarge
+  ;
 
   /// Returns true if this breakpoint is mobile.
   bool get isMobile => this == Breakpoint.mobile;
@@ -98,7 +99,13 @@ extension BreakpointExtension on BuildContext {
 
 /// Helper widget to build different layouts based on breakpoint.
 class ResponsiveBuilder extends StatelessWidget {
-  const ResponsiveBuilder({required this.mobile, this.tablet, this.desktop, this.desktopLarge, super.key});
+  const ResponsiveBuilder({
+    required this.mobile,
+    this.tablet,
+    this.desktop,
+    this.desktopLarge,
+    super.key,
+  });
 
   /// Widget to display on mobile breakpoint.
   final Widget mobile;

@@ -79,7 +79,8 @@ class ChromiaRangeSlider extends StatelessWidget {
     final spacing = theme.spacing;
 
     final Color effectiveActiveColor = activeColor ?? colors.primary;
-    final Color effectiveInactiveColor = inactiveColor ?? colors.surfaceContainer;
+    final Color effectiveInactiveColor =
+        inactiveColor ?? colors.surfaceContainer;
 
     final enabledThumbRadius = thumbRadius ?? trackHeight + 4;
 
@@ -92,14 +93,18 @@ class ChromiaRangeSlider extends StatelessWidget {
           )
         : null;
     final enabledRangeThumbShape =
-        iconThumbShape ?? rangeThumbShape ?? RoundRangeSliderThumbShape(enabledThumbRadius: enabledThumbRadius);
+        iconThumbShape ??
+        rangeThumbShape ??
+        RoundRangeSliderThumbShape(enabledThumbRadius: enabledThumbRadius);
 
     final SliderThemeData sliderTheme = SliderTheme.of(context).copyWith(
       activeTrackColor: effectiveActiveColor,
       inactiveTrackColor: effectiveInactiveColor,
       thumbColor: effectiveActiveColor,
       overlayColor: effectiveActiveColor.withAlpha(31),
-      overlayShape: RoundSliderOverlayShape(overlayRadius: enabledThumbRadius + 10),
+      overlayShape: RoundSliderOverlayShape(
+        overlayRadius: enabledThumbRadius + 10,
+      ),
       valueIndicatorColor: effectiveActiveColor,
       trackHeight: trackHeight,
       rangeThumbShape: enabledRangeThumbShape,
@@ -120,8 +125,12 @@ class ChromiaRangeSlider extends StatelessWidget {
     );
 
     if (showValues) {
-      final String startValue = valueBuilder?.call(values.start) ?? values.start.toStringAsFixed(divisions != null ? 0 : 1);
-      final String endValue = valueBuilder?.call(values.end) ?? values.end.toStringAsFixed(divisions != null ? 0 : 1);
+      final String startValue =
+          valueBuilder?.call(values.start) ??
+          values.start.toStringAsFixed(divisions != null ? 0 : 1);
+      final String endValue =
+          valueBuilder?.call(values.end) ??
+          values.end.toStringAsFixed(divisions != null ? 0 : 1);
 
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

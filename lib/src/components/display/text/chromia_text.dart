@@ -205,10 +205,14 @@ class ChromiaText extends StatelessWidget {
     final baseStyle = type.getTextStyle(context);
 
     // Apply color override if provided
-    final styledWithColor = color != null ? baseStyle.copyWith(color: color) : baseStyle;
+    final styledWithColor = color != null
+        ? baseStyle.copyWith(color: color)
+        : baseStyle;
 
     // Merge with custom style if provided
-    final finalStyle = style != null ? styledWithColor.merge(style) : styledWithColor;
+    final finalStyle = style != null
+        ? styledWithColor.merge(style)
+        : styledWithColor;
 
     return Padding(
       padding: margin,

@@ -131,7 +131,9 @@ class ChromiaTextFieldStyle {
       textStyle: theme.typography.bodyMedium,
       hintStyle: theme.typography.bodyMedium,
       labelStyle: theme.typography.bodySmall,
-      errorStyle: theme.typography.bodySmall.copyWith(color: theme.colors.error),
+      errorStyle: theme.typography.bodySmall.copyWith(
+        color: theme.colors.error,
+      ),
       helperStyle: theme.typography.bodySmall,
       prefixIconColor: theme.colors.onSurfaceVariant,
       suffixIconColor: theme.colors.onSurfaceVariant,
@@ -164,7 +166,9 @@ class ChromiaTextFieldStyle {
       textStyle: theme.typography.bodyMedium,
       hintStyle: theme.typography.bodyMedium,
       labelStyle: theme.typography.bodySmall,
-      errorStyle: theme.typography.bodySmall.copyWith(color: theme.colors.error),
+      errorStyle: theme.typography.bodySmall.copyWith(
+        color: theme.colors.error,
+      ),
       helperStyle: theme.typography.bodySmall,
       prefixIconColor: theme.colors.onSurfaceVariant,
       suffixIconColor: theme.colors.onSurfaceVariant,

@@ -1,9 +1,16 @@
 name: chromia_ui
-description: "A modern, dynamic Flutter design system with theming support."
+description: "A modern, dynamic Flutter design system with multi-brand theming, 40+ components, and Material 3 integration."
 version: 0.1.0
 homepage: https://github.com/raikerdev/chromia_ui
 repository: https://github.com/raikerdev/chromia_ui
 issue_tracker: https://github.com/raikerdev/chromia_ui/issues
+
+topics:
+  - ui
+  - design-system
+  - theming
+  - material
+  - components
 
 environment:
   sdk: ">=3.10.0 <4.0.0"
