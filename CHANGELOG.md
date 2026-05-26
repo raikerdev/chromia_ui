@@ -47,7 +47,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `ChromiaBadge` / `ChromiaLabelBadge` / `ChromiaStatusBadge` — notification and status badges
 - `ChromiaChip` — filter, input, and suggestion chip variants
 - `ChromiaListTile` — versatile list tile with leading/trailing/label support
-- `ChromiaCodePreview` / `ChromiaSyntaxView` — syntax-highlighted code display
 
 #### Components — Input
 - `ChromiaButton` — filled, outlined, text, tonal, and elevated variants with sizes, loading state, and icon support
