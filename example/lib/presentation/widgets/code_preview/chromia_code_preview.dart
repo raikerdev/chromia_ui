@@ -1,22 +1,21 @@
 import 'package:chromia_ui/chromia_ui.dart';
-import 'package:chromia_ui/src/components/display/code_preview/chromia_syntax_view.dart';
+import 'package:chromia_ui_example/presentation/widgets/code_preview/chromia_syntax_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_syntax_view/flutter_syntax_view.dart';
 
-/// A component that displays code alongside its rendered preview.
+/// A widget that displays code alongside its rendered preview.
 ///
-/// Perfect for documentation and showcasing component variations.
+/// Used internally by the example app to document Chromia UI components.
+/// Shows a live interactive preview paired with copyable source code.
 ///
-/// Example usage:
 /// ```dart
 /// ChromiaCodePreview(
 ///   code: '''
 /// ChromiaButton(
 ///   onPressed: () {},
 ///   child: Text('Click me'),
-/// )
-///   ''',
+/// )''',
 ///   preview: ChromiaButton(
 ///     onPressed: () {},
 ///     child: Text('Click me'),
@@ -38,13 +37,13 @@ class ChromiaCodePreview extends StatefulWidget {
     super.key,
   });
 
-  /// The code to display
+  /// The code snippet to display
   final String code;
 
   /// The widget to preview
   final Widget preview;
 
-  /// Optional title for the preview
+  /// Optional title
   final String? title;
 
   /// Optional description
@@ -59,10 +58,10 @@ class ChromiaCodePreview extends StatefulWidget {
   /// Fixed height (optional)
   final double? height;
 
-  /// Padding around the preview
+  /// Padding around the preview section
   final EdgeInsetsGeometry? previewPadding;
 
-  /// Alignment of the preview widget
+  /// Alignment of the preview widget inside its container
   final Alignment previewAlignment;
 
   /// Layout orientation
@@ -78,7 +77,7 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
   Future<void> _copyToClipboard() async {
     await Clipboard.setData(ClipboardData(text: widget.code));
     setState(() => _copied = true);
-    await Future.delayed(const Duration(seconds: 2), () {});
+    await Future.delayed(const Duration(seconds: 2));
     if (mounted) {
       setState(() => _copied = false);
     }
@@ -130,39 +129,23 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
 
   Widget _buildContent(BuildContext context) {
     if (widget.layout == CodePreviewLayout.vertical) {
-      _buildVerticalContent(context);
+      return _buildVerticalContent(context);
     }
 
-    // Horizontal layout
+    // Horizontal layout — falls back to vertical on narrow screens
     return LayoutBuilder(
       builder: (context, constraints) {
-        // If screen is too small, switch to vertical
         if (constraints.maxWidth < 800) {
-          return Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              _buildPreviewSection(context),
-              context.chromiaSpacing.gapVM,
-              _buildCodeSection(context),
-            ],
-          );
+          return _buildVerticalContent(context);
         }
 
-        // Horizontal layout
         return IntrinsicHeight(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Expanded(
-                flex: 1,
-                child: _buildCodeSection(context),
-              ),
+              Expanded(child: _buildCodeSection(context)),
               context.chromiaSpacing.gapHM,
-              Expanded(
-                flex: 1,
-                child: _buildPreviewSection(context),
-              ),
+              Expanded(child: _buildPreviewSection(context)),
             ],
           ),
         );
@@ -187,36 +170,41 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
     final spacing = context.chromiaSpacing;
     final isDark = context.chromiaTheme.brightness == Brightness.dark;
 
-    // Background color for code section
     final codeBackgroundColor = isDark
-        ? const Color(0xFF282C34) // Dark background
-        : const Color(0xFFFAFAFA); // Light background
+        ? const Color(0xFF282C34)
+        : const Color(0xFFFAFAFA);
 
     final syntaxTheme = SyntaxTheme(
       baseStyle: TextStyle(color: colors.onSurfaceVariant),
       numberStyle: TextStyle(
-        color: isDark ? const Color(0xFF2AACB8) : const Color(0xFF1750EB),
+        color:
+            isDark ? const Color(0xFF2AACB8) : const Color(0xFF1750EB),
       ),
       commentStyle: TextStyle(
-        color: isDark ? const Color(0xFF7A7E85) : const Color(0xFF8C8C8C),
+        color:
+            isDark ? const Color(0xFF7A7E85) : const Color(0xFF8C8C8C),
       ),
       keywordStyle: TextStyle(
-        color: isDark ? const Color(0xFFCF8E6D) : const Color(0xFFEd864A),
+        color:
+            isDark ? const Color(0xFFCF8E6D) : const Color(0xFFEd864A),
       ),
       stringStyle: TextStyle(
-        color: isDark ? const Color(0xFF6AAB73) : const Color(0xFF067D17),
+        color:
+            isDark ? const Color(0xFF6AAB73) : const Color(0xFF067D17),
       ),
       classStyle: TextStyle(
-        color: isDark ? const Color(0xFF57AAF7) : const Color(0xFF0033B3),
+        color:
+            isDark ? const Color(0xFF57AAF7) : const Color(0xFF0033B3),
       ),
       constantStyle: TextStyle(
-        color: isDark ? const Color(0xFFC77DBB) : const Color(0xFF871094),
+        color:
+            isDark ? const Color(0xFFC77DBB) : const Color(0xFF871094),
       ),
-      linesCountColor: isDark
-          ? const Color(0xFF5C6370)
-          : const Color(0xFF9E9E9E),
+      linesCountColor:
+          isDark ? const Color(0xFF5C6370) : const Color(0xFF9E9E9E),
       backgroundColor: codeBackgroundColor,
-      zoomIconColor: isDark ? const Color(0xFF5C6370) : const Color(0xFF9E9E9E),
+      zoomIconColor:
+          isDark ? const Color(0xFF5C6370) : const Color(0xFF9E9E9E),
     );
 
     return Container(
@@ -230,14 +218,16 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // Header with language and copy button
+          // Header bar with language label + copy button
           Container(
             padding: EdgeInsets.symmetric(
               horizontal: spacing.m,
               vertical: spacing.s,
             ),
             decoration: BoxDecoration(
-              color: isDark ? const Color(0xFF21252B) : const Color(0xFFEEEEEE),
+              color: isDark
+                  ? const Color(0xFF21252B)
+                  : const Color(0xFFEEEEEE),
               borderRadius: BorderRadius.only(
                 topLeft: context.chromiaRadius.radiusM.topLeft,
                 topRight: context.chromiaRadius.radiusM.topRight,
@@ -295,7 +285,7 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
               ],
             ),
           ),
-          // Code content with syntax highlighting
+          // Syntax-highlighted code
           widget.height != null
               ? Expanded(child: _buildCodeContent(syntaxTheme))
               : _buildCodeContent(syntaxTheme),
@@ -333,16 +323,41 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
   }
 }
 
-/// Layout options for code preview
+// ─────────────────────────────────────────────────────────────────────────────
+// Enums
+// ─────────────────────────────────────────────────────────────────────────────
+
+/// Layout orientation for [ChromiaCodePreview].
 enum CodePreviewLayout {
-  /// Code on left, preview on right (switches to vertical on small screens)
+  /// Code on left, preview on right (switches to vertical on narrow screens).
   horizontal,
 
-  /// Preview on top, code on bottom
+  /// Preview on top, code below.
   vertical,
 }
 
-/// A group of related code previews with tabs
+/// Supported syntax highlighting languages.
+enum CodePreviewLanguage {
+  dart,
+  c,
+  cpp,
+  javascript,
+  kotlin,
+  java,
+  swift,
+  yaml,
+  rust,
+  lua,
+  python,
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ChromiaCodePreviewGroup
+// ─────────────────────────────────────────────────────────────────────────────
+
+/// A tabbed group of [ChromiaCodePreview] items.
+///
+/// Each tab shows a different variant with its own code and preview.
 class ChromiaCodePreviewGroup extends StatefulWidget {
   const ChromiaCodePreviewGroup({
     required this.items,
@@ -351,13 +366,8 @@ class ChromiaCodePreviewGroup extends StatefulWidget {
     super.key,
   });
 
-  /// List of preview items
   final List<CodePreviewItem> items;
-
-  /// Optional title
   final String? title;
-
-  /// Optional description
   final String? description;
 
   @override
@@ -394,12 +404,10 @@ class _ChromiaCodePreviewGroupState extends State<ChromiaCodePreviewGroup> {
           ],
           spacing.gapVL,
         ],
-        // Tabs
+        // Tab row
         Container(
           decoration: BoxDecoration(
-            border: Border(
-              bottom: BorderSide(color: colors.outline),
-            ),
+            border: Border(bottom: BorderSide(color: colors.outline)),
           ),
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -447,7 +455,7 @@ class _ChromiaCodePreviewGroupState extends State<ChromiaCodePreviewGroup> {
           ),
         ),
         spacing.gapVL,
-        // Content
+        // Selected item content
         ChromiaCodePreview(
           code: widget.items[_selectedIndex].code,
           preview: widget.items[_selectedIndex].preview,
@@ -458,7 +466,11 @@ class _ChromiaCodePreviewGroupState extends State<ChromiaCodePreviewGroup> {
   }
 }
 
-/// A single item in a code preview group
+// ─────────────────────────────────────────────────────────────────────────────
+// CodePreviewItem
+// ─────────────────────────────────────────────────────────────────────────────
+
+/// A single tab entry for [ChromiaCodePreviewGroup].
 class CodePreviewItem {
   const CodePreviewItem({
     required this.label,
@@ -467,29 +479,8 @@ class CodePreviewItem {
     this.description,
   });
 
-  /// Tab label
   final String label;
-
-  /// Code to display
   final String code;
-
-  /// Widget to preview
   final Widget preview;
-
-  /// Optional description
   final String? description;
-}
-
-enum CodePreviewLanguage {
-  dart,
-  c,
-  cpp,
-  javascript,
-  kotlin,
-  java,
-  swift,
-  yaml,
-  rust,
-  lua,
-  python,
 }

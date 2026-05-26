@@ -19,10 +19,10 @@ class ChromiaSyntaxView extends StatefulWidget {
   /// Syntax/Language (Dart, C, C++...)
   final Syntax syntax;
 
-  /// Theme of syntax view example SyntaxTheme.dracula() (default: SyntaxTheme.dracula())
+  /// Theme of syntax view
   final SyntaxTheme? syntaxTheme;
 
-  /// Font Size with a default value of 14.0
+  /// Font Size (default: 14.0)
   final double fontSize;
 
   @override
@@ -30,7 +30,6 @@ class ChromiaSyntaxView extends StatefulWidget {
 }
 
 class ChromiaSyntaxViewState extends State<ChromiaSyntaxView> {
-  /// For zooming Controls
   static const double maxFontScaleFactor = 1.3;
   static const double minFontScaleFactor = 1;
   double _fontScaleFactor = 1.0;
@@ -60,18 +59,18 @@ class ChromiaSyntaxViewState extends State<ChromiaSyntaxView> {
         Container(
           width: double.infinity,
           color: widget.syntaxTheme!.backgroundColor,
-          child: buildCodeWithLinesCount(isDark, fontFamily),
+          child: _buildCodeWithLinesCount(isDark, fontFamily),
         ),
         Positioned(
           bottom: 5,
           right: 10,
-          child: zoomControls(),
+          child: _zoomControls(),
         ),
       ],
     );
   }
 
-  Widget buildCodeWithLinesCount(bool isDark, String? fontFamily) {
+  Widget _buildCodeWithLinesCount(bool isDark, String? fontFamily) {
     final int numLines = '\n'.allMatches(widget.code).length + 1;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,14 +80,14 @@ class ChromiaSyntaxViewState extends State<ChromiaSyntaxView> {
         Container(
           width: 35,
           decoration: BoxDecoration(
-            color: isDark ? const Color(0xFF21252B) : const Color(0xFFEEEEEE),
+            color:
+                isDark ? const Color(0xFF21252B) : const Color(0xFFEEEEEE),
             border: Border(
               right: BorderSide(color: widget.syntaxTheme!.linesCountColor!),
             ),
           ),
           padding: const EdgeInsets.fromLTRB(0, 10, 0, 30),
           child: Column(
-            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               for (int i = 1; i <= numLines; i++)
@@ -106,12 +105,12 @@ class ChromiaSyntaxViewState extends State<ChromiaSyntaxView> {
             ],
           ),
         ),
-        buildCode(fontFamily),
+        _buildCode(fontFamily),
       ],
     );
   }
 
-  Widget buildCode(String? fontFamily) {
+  Widget _buildCode(String? fontFamily) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 10, 0, 30),
       child: RichText(
@@ -126,7 +125,7 @@ class ChromiaSyntaxViewState extends State<ChromiaSyntaxView> {
     );
   }
 
-  Widget zoomControls() {
+  Widget _zoomControls() {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
