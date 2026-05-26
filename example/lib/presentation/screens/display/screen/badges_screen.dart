@@ -8,385 +8,299 @@ class BadgesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final spacing = theme.spacing;
     return ExampleScaffold(
-      title: 'Badges',
+      title: 'Badge',
       children: [
-        // Badges section
-        _buildBadgeSection(context),
-        spacing.gapVXXL,
-      ],
-    );
-  }
-
-  Widget _buildBadgeSection(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final colors = context.chromiaColors;
-    final spacing = theme.spacing;
-
-    final showBadge = ValueNotifier(true);
-
-    final notificationIcon = Icon(Symbols.notifications_rounded, size: 32, color: colors.primary, fill: 1);
-    final emailIcon = Icon(Symbols.email_rounded, size: 32, color: colors.primary, fill: 1);
-    final starIcon = Icon(Symbols.star_rounded, size: 32, color: colors.primary, fill: 1);
-    final shoppingCartIcon = Icon(Symbols.shopping_cart_rounded, size: 32, color: colors.primary, fill: 1);
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Basic badges
-        ChromiaText(
-          'Basic Badges',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        Wrap(
-          spacing: spacing.xl,
-          runSpacing: spacing.m,
+        ComponentPage(
+          description:
+              'Chromia provides ChromiaBadge for notification counts, '
+              'ChromiaLabelBadge for tag-style labels, and ChromiaStatusBadge '
+              'for semantic status indicators (success, warning, error, info, neutral).',
+          whenToUse:
+              'Use ChromiaBadge on icons and avatars to indicate unread counts. '
+              'Use ChromiaLabelBadge for tags, categories, or feature flags. '
+              'Use ChromiaStatusBadge to communicate the state of a record or entity.',
           children: [
-            ChromiaBadge(
-              value: '',
-              child: notificationIcon,
-            ),
-            ChromiaBadge(
-              value: '8',
-              child: notificationIcon,
-            ),
-            ChromiaBadge(
-              value: '99',
-              child: notificationIcon,
-            ),
-          ],
-        ),
-        spacing.gapVL,
+            // ── Basic Badges ──────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Basic Badges',
+              description:
+                  'Wrap any widget with ChromiaBadge. '
+                  'Pass an empty string for a dot indicator, or a number/text for a count.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+// Dot (no value)
+ChromiaBadge(
+  value: '',
+  child: Icon(Icons.notifications),
+)
 
-        // Show badges
-        ValueListenableBuilder(
-          valueListenable: showBadge,
-          builder: (context, value, child) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+// Count
+ChromiaBadge(
+  value: '8',
+  child: Icon(Icons.notifications),
+)
+
+// Overflow — capped with maxValue
+ChromiaBadge(
+  value: '999',
+  maxValue: 99,
+  child: Icon(Icons.notifications),
+)''',
+                preview: Builder(
+                  builder: (context) {
+                    final colors = context.chromiaColors;
+                    final icon = Icon(
+                      Symbols.notifications_rounded,
+                      size: 32,
+                      color: colors.primary,
+                      fill: 1,
+                    );
+                    return Wrap(
+                      spacing: 24,
+                      runSpacing: 12,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: [
+                        ChromiaBadge(value: '', child: icon),
+                        ChromiaBadge(value: '8', child: icon),
+                        ChromiaBadge(value: '99', child: icon),
+                        ChromiaBadge(
+                          value: '999',
+                          maxValue: 99,
+                          child: icon,
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+            ),
+
+            // ── Show / Hide ───────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Show / Hide',
+              description:
+                  'Use showBadge: false to hide the badge without removing '
+                  'the widget from the tree.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaBadge(
+  value: '8',
+  showBadge: isVisible,
+  child: Icon(Icons.notifications),
+)''',
+                preview: StatefulBuilder(
+                  builder: (context, setState) {
+                    bool isVisible = true;
+                    final colors = context.chromiaColors;
+                    return Row(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ChromiaBadge(
+                          value: '8',
+                          showBadge: isVisible,
+                          child: Icon(
+                            Symbols.notifications_rounded,
+                            size: 32,
+                            color: colors.primary,
+                            fill: 1,
+                          ),
+                        ),
+                        const SizedBox(width: 24),
+                        ChromiaToggleButton(
+                          value: isVisible,
+                          label: 'Show badge',
+                          size: ChromiaToggleButtonSize.small,
+                          onChanged: (v) => setState(() => isVisible = v),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+            ),
+
+            // ── Sizes ─────────────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Sizes',
+              description: 'Small, medium, and large badge sizes.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaBadge(value: '99', size: ChromiaBadgeSize.small, child: icon)
+ChromiaBadge(value: '99', size: ChromiaBadgeSize.medium, child: icon)
+ChromiaBadge(value: '99', size: ChromiaBadgeSize.large, child: icon)''',
+                preview: Builder(
+                  builder: (context) {
+                    final colors = context.chromiaColors;
+                    final icon = Icon(
+                      Symbols.shopping_cart_rounded,
+                      size: 32,
+                      color: colors.primary,
+                      fill: 1,
+                    );
+                    return Wrap(
+                      spacing: 24,
+                      runSpacing: 12,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: [
+                        ChromiaBadge(
+                          value: '99',
+                          size: ChromiaBadgeSize.small,
+                          child: icon,
+                        ),
+                        ChromiaBadge(
+                          value: '99',
+                          size: ChromiaBadgeSize.medium,
+                          child: icon,
+                        ),
+                        ChromiaBadge(
+                          value: '99',
+                          size: ChromiaBadgeSize.large,
+                          child: icon,
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+            ),
+
+            // ── Label Badges ──────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Label Badges',
+              description:
+                  'ChromiaLabelBadge renders tag-style chips with optional '
+                  'icons and a removable button.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaLabelBadge(
+  text: 'New',
+  backgroundColor: colors.primary,
+  textColor: colors.onPrimary,
+)
+
+ChromiaLabelBadge(
+  text: 'Featured',
+  icon: Icons.star,
+)
+
+ChromiaLabelBadge(
+  text: 'Removable',
+  onRemove: () {},
+)''',
+                preview: Builder(
+                  builder: (context) {
+                    final colors = context.chromiaColors;
+                    return Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: [
+                        ChromiaLabelBadge(
+                          text: 'New',
+                          backgroundColor: colors.primary,
+                          textColor: colors.onPrimary,
+                        ),
+                        const ChromiaLabelBadge(
+                          text: 'Featured',
+                          icon: Icons.star,
+                        ),
+                        ChromiaLabelBadge(
+                          text: 'Beta',
+                          backgroundColor: colors.warning,
+                          textColor: colors.onPrimary,
+                        ),
+                        ChromiaLabelBadge(
+                          text: 'Removable',
+                          onRemove: () {},
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+            ),
+
+            // ── Status Badges ─────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Status Badges',
+              description:
+                  'ChromiaStatusBadge communicates the state of a record. '
+                  'Omit text to render a status dot on an avatar.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+// With text labels
+ChromiaStatusBadge(status: ChromiaStatusType.success, text: 'Active')
+ChromiaStatusBadge(status: ChromiaStatusType.warning, text: 'Pending')
+ChromiaStatusBadge(status: ChromiaStatusType.error,   text: 'Error')
+ChromiaStatusBadge(status: ChromiaStatusType.info,    text: 'Info')
+ChromiaStatusBadge(status: ChromiaStatusType.neutral, text: 'Inactive')
+
+// Dot on an avatar
+ChromiaStatusBadge(
+  status: ChromiaStatusType.success,
+  child: ChromiaAvatar.icon(icon: Symbols.person),
+)''',
+                preview: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ChromiaText(
-                      'Show Badge',
-                      type: ChromiaTypographyType.headlineSmall,
-                      color: colors.onSurface,
+                    const Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: [
+                        ChromiaStatusBadge(
+                          status: ChromiaStatusType.success,
+                          text: 'Active',
+                        ),
+                        ChromiaStatusBadge(
+                          status: ChromiaStatusType.warning,
+                          text: 'Pending',
+                        ),
+                        ChromiaStatusBadge(
+                          status: ChromiaStatusType.error,
+                          text: 'Error',
+                        ),
+                        ChromiaStatusBadge(
+                          status: ChromiaStatusType.info,
+                          text: 'Info',
+                        ),
+                        ChromiaStatusBadge(
+                          status: ChromiaStatusType.neutral,
+                          text: 'Inactive',
+                        ),
+                      ],
                     ),
-                    spacing.gapHM,
-                    ChromiaToggleButton(
-                      value: value,
-                      size: ChromiaToggleButtonSize.small,
-                      onChanged: (value) => showBadge.value = value,
+                    const SizedBox(height: 16),
+                    Wrap(
+                      spacing: 16,
+                      runSpacing: 8,
+                      children: const [
+                        ChromiaStatusBadge(
+                          status: ChromiaStatusType.success,
+                          child: ChromiaAvatar(child: Icon(Symbols.person)),
+                        ),
+                        ChromiaStatusBadge(
+                          status: ChromiaStatusType.warning,
+                          child: ChromiaAvatar(child: Icon(Symbols.person)),
+                        ),
+                        ChromiaStatusBadge(
+                          status: ChromiaStatusType.error,
+                          child: ChromiaAvatar(child: Icon(Symbols.person)),
+                        ),
+                        ChromiaStatusBadge(
+                          status: ChromiaStatusType.info,
+                          child: ChromiaAvatar(child: Icon(Symbols.person)),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-                spacing.gapVS,
-                ChromiaBadge(
-                  showBadge: value,
-                  value: '8',
-                  child: notificationIcon,
-                ),
-                spacing.gapHL,
-              ],
-            );
-          },
-        ),
-        spacing.gapVL,
-
-        // Badge sizes
-        ChromiaText(
-          'Badge Sizes',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        Wrap(
-          spacing: spacing.xl,
-          runSpacing: spacing.m,
-          children: [
-            ChromiaBadge(
-              value: '99',
-              size: ChromiaBadgeSize.small,
-              child: shoppingCartIcon,
-            ),
-            ChromiaBadge(
-              value: '99',
-              size: ChromiaBadgeSize.medium,
-              child: shoppingCartIcon,
-            ),
-            ChromiaBadge(
-              value: '99',
-              size: ChromiaBadgeSize.large,
-              child: shoppingCartIcon,
-            ),
-          ],
-        ),
-        spacing.gapVM,
-        Wrap(
-          spacing: spacing.xl,
-          runSpacing: spacing.m,
-          children: [
-            ChromiaBadge(
-              size: ChromiaBadgeSize.small,
-              child: shoppingCartIcon,
-            ),
-            ChromiaBadge(
-              size: ChromiaBadgeSize.medium,
-              child: shoppingCartIcon,
-            ),
-            ChromiaBadge(
-              size: ChromiaBadgeSize.large,
-              child: shoppingCartIcon,
-            ),
-          ],
-        ),
-        spacing.gapVL,
-
-        // Badge shapes
-        ChromiaText(
-          'Badge Shapes',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        Wrap(
-          spacing: spacing.xl,
-          runSpacing: spacing.m,
-          children: [
-            ChromiaBadge(
-              value: '8',
-              backgroundColor: Colors.yellow,
-              textColor: Colors.black,
-              shape: ChromiaBadgeShape.circle,
-              child: emailIcon,
-            ),
-            ChromiaBadge(
-              value: '88',
-              backgroundColor: Colors.yellow,
-              textColor: Colors.black,
-              shape: ChromiaBadgeShape.circle,
-              child: emailIcon,
-            ),
-            ChromiaBadge(
-              value: '888',
-              backgroundColor: Colors.yellow,
-              textColor: Colors.black,
-              maxValue: 99,
-              shape: ChromiaBadgeShape.circle,
-              child: emailIcon,
-            ),
-            ChromiaBadge(
-              value: 'S',
-              backgroundColor: Colors.yellow,
-              textColor: Colors.black,
-              shape: ChromiaBadgeShape.circle,
-              child: emailIcon,
-            ),
-          ],
-        ),
-        spacing.gapVM,
-        Wrap(
-          spacing: spacing.xl,
-          runSpacing: spacing.m,
-          children: [
-            ChromiaBadge(
-              value: '8',
-              shape: ChromiaBadgeShape.rounded,
-              child: emailIcon,
-            ),
-            ChromiaBadge(
-              value: '88',
-              shape: ChromiaBadgeShape.rounded,
-              child: emailIcon,
-            ),
-            ChromiaBadge(
-              value: '888',
-              maxValue: 99,
-              shape: ChromiaBadgeShape.rounded,
-              child: emailIcon,
-            ),
-            ChromiaBadge(
-              value: 'new',
-              shape: ChromiaBadgeShape.rounded,
-              child: emailIcon,
-            ),
-          ],
-        ),
-        spacing.gapVM,
-        Wrap(
-          spacing: spacing.xl,
-          runSpacing: spacing.m,
-          children: [
-            ChromiaBadge(
-              value: '8',
-              shape: ChromiaBadgeShape.square,
-              child: emailIcon,
-            ),
-            ChromiaBadge(
-              value: '88',
-              shape: ChromiaBadgeShape.square,
-              child: emailIcon,
-            ),
-            ChromiaBadge(
-              value: '888',
-              maxValue: 99,
-              shape: ChromiaBadgeShape.square,
-              child: emailIcon,
-            ),
-            ChromiaBadge(
-              value: 'new',
-              shape: ChromiaBadgeShape.square,
-              child: emailIcon,
-            ),
-          ],
-        ),
-        spacing.gapVL,
-
-        // Badge positions
-        ChromiaText(
-          'Badge Positions',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        Wrap(
-          spacing: spacing.xxl,
-          runSpacing: spacing.m,
-          children: [
-            ChromiaBadge(value: '1', position: ChromiaPosition.topLeft(), child: starIcon),
-            ChromiaBadge(value: '2', position: ChromiaPosition.topRight(), child: starIcon),
-          ],
-        ),
-        Wrap(
-          spacing: spacing.xxl,
-          runSpacing: spacing.m,
-          children: [
-            ChromiaBadge(value: '3', position: ChromiaPosition.bottomLeft(), child: starIcon),
-            ChromiaBadge(value: '4', position: ChromiaPosition.bottomRight(), child: starIcon),
-          ],
-        ),
-        spacing.gapVL,
-
-        // Labels
-        ChromiaText(
-          'Labels',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        Wrap(
-          spacing: spacing.m,
-          runSpacing: spacing.m,
-          children: [
-            ChromiaLabelBadge(
-              text: 'New',
-              backgroundColor: colors.primary,
-              textColor: colors.onPrimary,
-            ),
-            const ChromiaLabelBadge(
-              text: 'Featured',
-              icon: Icons.star,
-            ),
-            ChromiaLabelBadge(
-              text: 'Pro',
-              backgroundColor: colors.primary,
-              textColor: colors.onPrimary,
-              shape: ChromiaBadgeShape.circle,
-            ),
-            ChromiaLabelBadge(
-              text: 'Beta',
-              backgroundColor: colors.warning,
-              textColor: colors.onPrimary,
-              shape: ChromiaBadgeShape.square,
-            ),
-            ChromiaLabelBadge(
-              text: 'Removable',
-              onRemove: () {},
-            ),
-          ],
-        ),
-        spacing.gapVL,
-
-        // Status badges
-        ChromiaText(
-          'Status Badges',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        Wrap(
-          spacing: spacing.l,
-          runSpacing: spacing.m,
-          children: const [
-            ChromiaStatusBadge(
-              status: ChromiaStatusType.success,
-              text: 'Active',
-            ),
-            ChromiaStatusBadge(
-              status: ChromiaStatusType.warning,
-              text: 'Pending',
-            ),
-            ChromiaStatusBadge(
-              status: ChromiaStatusType.error,
-              text: 'Error',
-            ),
-            ChromiaStatusBadge(
-              status: ChromiaStatusType.info,
-              text: 'Info',
-            ),
-            ChromiaStatusBadge(
-              status: ChromiaStatusType.neutral,
-              text: 'Inactive',
-            ),
-          ],
-        ),
-        spacing.gapVL,
-
-        // Status dots only
-        ChromiaText(
-          'Status Dots',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        Wrap(
-          spacing: spacing.l,
-          runSpacing: spacing.m,
-          children: [
-            ChromiaStatusBadge(
-              status: ChromiaStatusType.success,
-              child: ChromiaAvatar.icon(
-                icon: Symbols.person,
-              ),
-            ),
-            ChromiaStatusBadge(
-              status: ChromiaStatusType.warning,
-              child: ChromiaAvatar.icon(
-                icon: Symbols.person,
-              ),
-            ),
-            ChromiaStatusBadge(
-              status: ChromiaStatusType.error,
-              child: ChromiaAvatar.icon(
-                icon: Symbols.person,
-              ),
-            ),
-            ChromiaStatusBadge(
-              status: ChromiaStatusType.info,
-              child: ChromiaAvatar.icon(
-                icon: Symbols.person,
-              ),
-            ),
-            ChromiaStatusBadge(
-              status: ChromiaStatusType.neutral,
-              child: ChromiaAvatar.icon(
-                icon: Symbols.person,
               ),
             ),
           ],

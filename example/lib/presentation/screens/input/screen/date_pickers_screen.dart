@@ -2,126 +2,114 @@ import 'package:chromia_ui/chromia_ui.dart';
 import 'package:chromia_ui_example/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
-class DatePickersScreen extends StatefulWidget {
+class DatePickersScreen extends StatelessWidget {
   const DatePickersScreen({super.key});
 
   @override
-  State<DatePickersScreen> createState() => _DatePickersScreenState();
-}
-
-class _DatePickersScreenState extends State<DatePickersScreen> {
-  DateTime? _selectedDate;
-  TimeOfDay? _selectedTime;
-  DateTime? _selectedDateTime;
-
-  @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final spacing = theme.spacing;
     return ExampleScaffold(
-      title: 'Date Pickers',
+      title: 'Date & Time Pickers',
       children: [
-        // Date Picker section
-        _buildDatePickerSection(context),
-        spacing.gapVXXL,
-      ],
-    );
-  }
-
-  Widget _buildDatePickerSection(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final colors = context.chromiaColors;
-    final spacing = theme.spacing;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Date & Time Pickers',
-          style: theme.typography.headlineSmall.copyWith(
-            color: colors.onSurface,
-          ),
-        ),
-        spacing.gapVM,
-
-        Text(
-          'Date Picker',
-          style: theme.typography.titleSmall.copyWith(
-            color: colors.onSurfaceVariant,
-          ),
-        ),
-        spacing.gapVS,
-        ChromiaDatePicker(
-          label: 'Birth Date',
-          selectedDate: _selectedDate,
-          onDateSelected: (date) {
-            setState(() => _selectedDate = date);
-          },
-          helperText: 'Select your date of birth',
-        ),
-        spacing.gapVL,
-
-        Text(
-          'Time Picker',
-          style: theme.typography.titleSmall.copyWith(
-            color: colors.onSurfaceVariant,
-          ),
-        ),
-        spacing.gapVS,
-        ChromiaTimePicker(
-          label: 'Appointment Time',
-          selectedTime: _selectedTime,
-          onTimeSelected: (time) {
-            setState(() => _selectedTime = time);
-          },
-          helperText: 'Select your preferred time',
-        ),
-        spacing.gapVL,
-
-        Text(
-          'Date & Time Picker',
-          style: theme.typography.titleSmall.copyWith(
-            color: colors.onSurfaceVariant,
-          ),
-        ),
-        spacing.gapVS,
-        ChromiaDateTimePicker(
-          label: 'Event Date & Time',
-          selectedDateTime: _selectedDateTime,
-          onDateTimeSelected: (dateTime) {
-            setState(() => _selectedDateTime = dateTime);
-          },
-          helperText: 'Select when the event will occur',
-        ),
-        spacing.gapVL,
-
-        Text(
-          'Selected Values',
-          style: theme.typography.titleSmall.copyWith(
-            color: colors.onSurfaceVariant,
-          ),
-        ),
-        spacing.gapVS,
-        ChromiaCard(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Date: ${_selectedDate?.toString().split(' ')[0] ?? 'Not selected'}',
-                style: theme.typography.bodyMedium,
+        ComponentPage(
+          description:
+              'Chromia provides ChromiaDatePicker, ChromiaTimePicker, and '
+              'ChromiaDateTimePicker for date and time selection. Each opens '
+              'the native platform dialog and displays the selected value '
+              'in a themed text field.',
+          whenToUse:
+              'Use ChromiaDatePicker for birth dates, deadlines, or any calendar date. '
+              'Use ChromiaTimePicker for scheduling times. '
+              'Use ChromiaDateTimePicker when both date and time are needed together.',
+          children: [
+            // ── Date Picker ───────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Date Picker',
+              description:
+                  'Tapping the field opens the system date picker dialog. '
+                  'selectedDate shows the current value; onDateSelected is called on pick.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaDatePicker(
+  label: 'Birth Date',
+  selectedDate: selectedDate,
+  helperText: 'Select your date of birth',
+  onDateSelected: (date) => setState(() => selectedDate = date),
+)''',
+                preview: StatefulBuilder(
+                  builder: (context, setState) {
+                    DateTime? selectedDate;
+                    return ChromiaDatePicker(
+                      label: 'Birth Date',
+                      selectedDate: selectedDate,
+                      helperText: 'Select your date of birth',
+                      onDateSelected: (date) =>
+                          setState(() => selectedDate = date),
+                    );
+                  },
+                ),
               ),
-              spacing.gapVS,
-              Text(
-                'Time: ${_selectedTime?.format(context) ?? 'Not selected'}',
-                style: theme.typography.bodyMedium,
+            ),
+
+            // ── Time Picker ───────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Time Picker',
+              description:
+                  'Tapping the field opens the system time picker dialog.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaTimePicker(
+  label: 'Appointment Time',
+  selectedTime: selectedTime,
+  helperText: 'Select your preferred time',
+  onTimeSelected: (time) => setState(() => selectedTime = time),
+)''',
+                preview: StatefulBuilder(
+                  builder: (context, setState) {
+                    TimeOfDay? selectedTime;
+                    return ChromiaTimePicker(
+                      label: 'Appointment Time',
+                      selectedTime: selectedTime,
+                      helperText: 'Select your preferred time',
+                      onTimeSelected: (time) =>
+                          setState(() => selectedTime = time),
+                    );
+                  },
+                ),
               ),
-              spacing.gapVS,
-              Text(
-                'DateTime: ${_selectedDateTime?.toString() ?? 'Not selected'}',
-                style: theme.typography.bodyMedium,
+            ),
+
+            // ── Date & Time Picker ────────────────────────────────────────────
+            ComponentSection(
+              title: 'Date & Time Picker',
+              description:
+                  'ChromiaDateTimePicker chains a date picker followed by '
+                  'a time picker, returning a combined DateTime.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaDateTimePicker(
+  label: 'Event Date & Time',
+  selectedDateTime: selectedDateTime,
+  helperText: 'Select when the event will occur',
+  onDateTimeSelected: (dt) => setState(() => selectedDateTime = dt),
+)''',
+                preview: StatefulBuilder(
+                  builder: (context, setState) {
+                    DateTime? selectedDateTime;
+                    return ChromiaDateTimePicker(
+                      label: 'Event Date & Time',
+                      selectedDateTime: selectedDateTime,
+                      helperText: 'Select when the event will occur',
+                      onDateTimeSelected: (dt) =>
+                          setState(() => selectedDateTime = dt),
+                    );
+                  },
+                ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ],
     );

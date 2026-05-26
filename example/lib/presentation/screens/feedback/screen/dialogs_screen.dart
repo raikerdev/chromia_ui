@@ -8,198 +8,289 @@ class DialogsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final spacing = theme.spacing;
     return ExampleScaffold(
-      title: 'Dialogs',
+      title: 'Dialog',
       children: [
-        // Dialogs section
-        _buildDialogSection(context),
-        spacing.gapVXXL,
-      ],
-    );
-  }
-
-  Widget _buildDialogSection(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final colors = context.chromiaColors;
-    final spacing = theme.spacing;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Alert dialog
-        ChromiaText(
-          'Alert Dialog',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        ChromiaButton(
-          onPressed: () {
-            showChromiaAlert(
-              context: context,
-              title: 'Alert',
-              message: 'This is an alert message.',
-            );
-          },
-          child: const ChromiaText('Show Alert'),
-        ),
-        spacing.gapVL,
-
-        // Confirm dialog
-        ChromiaText(
-          'Confirm Dialog',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        Row(
+        ComponentPage(
+          description:
+              'Chromia provides helper functions for showing themed dialogs: '
+              'showChromiaAlert, showChromiaConfirmDialog, showChromiaDialog '
+              '(custom content), ChromiaLoadingDialog, and showChromiaBottomSheet.',
+          whenToUse:
+              'Use alert dialogs for important information that requires acknowledgement. '
+              'Use confirm dialogs for destructive or irreversible actions. '
+              'Use custom dialogs for forms or complex interactions. '
+              'Use loading dialogs for async operations.',
           children: [
-            ChromiaButton(
-              onPressed: () async {
-                final confirmed = await showChromiaConfirmDialog(
-                  context: context,
-                  title: 'Confirm Action',
-                  message: 'Are you sure you want to continue?',
-                );
-                if (context.mounted) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: ChromiaText(confirmed ? 'Confirmed' : 'Cancelled'),
-                    ),
-                  );
-                }
-              },
-              child: const ChromiaText('Show Confirm'),
+            // ── Alert Dialog ──────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Alert Dialog',
+              description:
+                  'showChromiaAlert shows a simple information dialog '
+                  'with a dismiss button.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaButton(
+  onPressed: () {
+    showChromiaAlert(
+      context: context,
+      title: 'Alert',
+      message: 'This is an alert message.',
+    );
+  },
+  child: Text('Show Alert'),
+)''',
+                preview: Builder(
+                  builder: (context) => ChromiaButton(
+                    onPressed: () {
+                      showChromiaAlert(
+                        context: context,
+                        title: 'Alert',
+                        message: 'This is an alert message.',
+                      );
+                    },
+                    child: const Text('Show Alert'),
+                  ),
+                ),
+              ),
             ),
-            spacing.gapHM,
-            ChromiaButton(
-              variant: ChromiaButtonVariant.outlined,
-              onPressed: () async {
-                final confirmed = await showChromiaConfirmDialog(
-                  context: context,
-                  title: 'Delete Item',
-                  message: 'This action cannot be undone.',
-                  confirmLabel: 'Delete',
-                  isDestructive: true,
-                );
-                if (context.mounted) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: ChromiaText(confirmed ? 'Deleted' : 'Cancelled'),
-                    ),
-                  );
-                }
-              },
-              child: const ChromiaText('Show Destructive'),
+
+            // ── Confirm Dialog ────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Confirm Dialog',
+              description:
+                  'showChromiaConfirmDialog returns a bool — true if confirmed, '
+                  'false if cancelled. Use isDestructive: true for dangerous actions.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+// Standard confirm
+final confirmed = await showChromiaConfirmDialog(
+  context: context,
+  title: 'Confirm Action',
+  message: 'Are you sure you want to continue?',
+);
+
+// Destructive confirm
+final deleted = await showChromiaConfirmDialog(
+  context: context,
+  title: 'Delete Item',
+  message: 'This action cannot be undone.',
+  confirmLabel: 'Delete',
+  isDestructive: true,
+);''',
+                preview: Builder(
+                  builder: (context) => Wrap(
+                    spacing: 12,
+                    runSpacing: 8,
+                    children: [
+                      ChromiaButton(
+                        onPressed: () async {
+                          final confirmed = await showChromiaConfirmDialog(
+                            context: context,
+                            title: 'Confirm Action',
+                            message: 'Are you sure you want to continue?',
+                          );
+                          if (context.mounted) {
+                            context.showInfoSnackBar(
+                              message:
+                                  confirmed ? 'Confirmed!' : 'Cancelled.',
+                            );
+                          }
+                        },
+                        child: const Text('Show Confirm'),
+                      ),
+                      ChromiaButton(
+                        variant: ChromiaButtonVariant.outlined,
+                        onPressed: () async {
+                          final deleted = await showChromiaConfirmDialog(
+                            context: context,
+                            title: 'Delete Item',
+                            message: 'This action cannot be undone.',
+                            confirmLabel: 'Delete',
+                            isDestructive: true,
+                          );
+                          if (context.mounted) {
+                            context.showInfoSnackBar(
+                              message:
+                                  deleted ? 'Deleted!' : 'Cancelled.',
+                            );
+                          }
+                        },
+                        child: const Text('Show Destructive'),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+            // ── Custom Dialog ─────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Custom Dialog',
+              description:
+                  'showChromiaDialog accepts a contentWidget and a list of '
+                  'ChromiaDialogAction buttons.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+showChromiaDialog(
+  context: context,
+  title: 'Edit Profile',
+  contentWidget: Column(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      ChromiaTextField(label: 'Name', hintText: 'Enter your name'),
+      ChromiaTextField(label: 'Email', hintText: 'Enter your email'),
+    ],
+  ),
+  actions: [
+    ChromiaDialogAction(label: 'Cancel', onPressed: () => context.pop()),
+    ChromiaDialogAction(label: 'Submit', isPrimary: true, onPressed: () => context.pop()),
+  ],
+)''',
+                preview: Builder(
+                  builder: (context) {
+                    final spacing = context.chromiaTheme.spacing;
+                    return ChromiaButton(
+                      onPressed: () {
+                        showChromiaDialog(
+                          context: context,
+                          title: 'Edit Profile',
+                          contentWidget: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const ChromiaTextField(
+                                label: 'Name',
+                                hintText: 'Enter your name',
+                              ),
+                              spacing.gapVM,
+                              const ChromiaTextField(
+                                label: 'Email',
+                                hintText: 'Enter your email',
+                              ),
+                            ],
+                          ),
+                          actions: [
+                            ChromiaDialogAction(
+                              label: 'Cancel',
+                              onPressed: () => context.pop(),
+                            ),
+                            ChromiaDialogAction(
+                              label: 'Submit',
+                              isPrimary: true,
+                              onPressed: () => context.pop(),
+                            ),
+                          ],
+                        );
+                      },
+                      child: const Text('Show Custom'),
+                    );
+                  },
+                ),
+              ),
+            ),
+
+            // ── Loading Dialog ────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Loading Dialog',
+              description:
+                  'ChromiaLoadingDialog.show() blocks the UI with a spinner '
+                  'during async operations. Call .hide() when done.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaLoadingDialog.show(
+  context: context,
+  message: 'Processing...',
+);
+await Future.delayed(const Duration(seconds: 2));
+if (context.mounted) ChromiaLoadingDialog.hide(context);''',
+                preview: Builder(
+                  builder: (context) => ChromiaButton(
+                    onPressed: () {
+                      ChromiaLoadingDialog.show(
+                        context: context,
+                        message: 'Processing...',
+                      );
+                      Future.delayed(const Duration(seconds: 2)).then((_) {
+                        if (context.mounted) {
+                          ChromiaLoadingDialog.hide(context);
+                        }
+                      });
+                    },
+                    child: const Text('Show Loading'),
+                  ),
+                ),
+              ),
+            ),
+
+            // ── Bottom Sheet ──────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Bottom Sheet',
+              description:
+                  'showChromiaBottomSheet slides up a modal sheet from the bottom '
+                  'of the screen.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+showChromiaBottomSheet(
+  context: context,
+  child: Padding(
+    padding: spacing.paddingXXL,
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        ChromiaText('Options', style: theme.typography.headlineSmall),
+        ...
+        ChromiaButton(onPressed: () => context.pop(), child: Text('Close')),
+      ],
+    ),
+  ),
+)''',
+                preview: Builder(
+                  builder: (context) {
+                    final theme = context.chromiaTheme;
+                    final spacing = theme.spacing;
+                    return ChromiaButton(
+                      onPressed: () {
+                        showChromiaBottomSheet(
+                          context: context,
+                          child: Container(
+                            padding: spacing.paddingXXL,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment:
+                                  CrossAxisAlignment.stretch,
+                              children: [
+                                ChromiaText(
+                                  'Bottom Sheet',
+                                  style: theme.typography.headlineSmall,
+                                ),
+                                spacing.gapVM,
+                                ChromiaText(
+                                  'Slide up from the bottom for quick actions or supplemental content.',
+                                  style: theme.typography.bodyMedium,
+                                ),
+                                spacing.gapVL,
+                                ChromiaButton(
+                                  onPressed: () => context.pop(),
+                                  child: const Text('Close'),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                      child: const Text('Show Bottom Sheet'),
+                    );
+                  },
+                ),
+              ),
             ),
           ],
-        ),
-        spacing.gapVL,
-
-        // Custom dialog
-        ChromiaText(
-          'Custom Dialog',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        ChromiaButton(
-          onPressed: () {
-            showChromiaDialog(
-              context: context,
-              title: 'Custom Dialog',
-              contentWidget: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const ChromiaTextField(
-                    label: 'Name',
-                    hintText: 'Enter your name',
-                  ),
-                  spacing.gapVM,
-                  const ChromiaTextField(
-                    label: 'Email',
-                    hintText: 'Enter your email',
-                  ),
-                ],
-              ),
-              actions: [
-                ChromiaDialogAction(
-                  label: 'Cancel',
-                  onPressed: () => context.pop(),
-                ),
-                ChromiaDialogAction(
-                  label: 'Submit',
-                  isPrimary: true,
-                  onPressed: () => context.pop(),
-                ),
-              ],
-            );
-          },
-          child: const ChromiaText('Show Custom'),
-        ),
-        spacing.gapVL,
-
-        // Loading dialog
-        ChromiaText(
-          'Loading Dialog',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        ChromiaButton(
-          onPressed: () async {
-            ChromiaLoadingDialog.show(
-              context: context,
-              message: 'Processing...',
-            );
-            await Future.delayed(const Duration(seconds: 2));
-            if (context.mounted) {
-              ChromiaLoadingDialog.hide(context);
-            }
-          },
-          child: const ChromiaText('Show Loading'),
-        ),
-        spacing.gapVL,
-
-        // Bottom sheet
-        ChromiaText(
-          'Bottom Sheet',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        ChromiaButton(
-          onPressed: () {
-            showChromiaBottomSheet(
-              context: context,
-              child: Container(
-                padding: spacing.paddingXXL,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    ChromiaText(
-                      'Bottom Sheet',
-                      style: theme.typography.headlineSmall,
-                    ),
-                    spacing.gapVM,
-                    ChromiaText(
-                      'This is a bottom sheet dialog.',
-                      style: theme.typography.bodyMedium,
-                    ),
-                    spacing.gapVL,
-                    ChromiaButton(
-                      onPressed: () => context.pop(),
-                      child: const ChromiaText('Close'),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-          child: const ChromiaText('Show Bottom Sheet'),
         ),
       ],
     );

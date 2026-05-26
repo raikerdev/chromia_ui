@@ -31,7 +31,7 @@ class ChromiaCodePreview extends StatefulWidget {
     this.description,
     this.language = CodePreviewLanguage.dart,
     this.showCopyButton = true,
-    this.codeHeight,
+    this.height,
     this.previewPadding,
     this.previewAlignment = Alignment.center,
     this.layout = CodePreviewLayout.horizontal,
@@ -56,8 +56,8 @@ class ChromiaCodePreview extends StatefulWidget {
   /// Whether to show the copy button
   final bool showCopyButton;
 
-  /// Fixed height for code section (optional)
-  final double? codeHeight;
+  /// Fixed height (optional)
+  final double? height;
 
   /// Padding around the preview
   final EdgeInsetsGeometry? previewPadding;
@@ -123,14 +123,14 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
           ],
           spacing.gapVM,
         ],
-        _buildContent(theme),
+        _buildContent(context),
       ],
     );
   }
 
-  Widget _buildContent(ChromiaThemeData theme) {
+  Widget _buildContent(BuildContext context) {
     if (widget.layout == CodePreviewLayout.vertical) {
-      _buildVerticalContent(theme);
+      _buildVerticalContent(context);
     }
 
     // Horizontal layout
@@ -142,9 +142,9 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              _buildPreviewSection(theme),
-              theme.spacing.gapVM,
-              _buildCodeSection(theme),
+              _buildPreviewSection(context),
+              context.chromiaSpacing.gapVM,
+              _buildCodeSection(context),
             ],
           );
         }
@@ -156,12 +156,12 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
             children: [
               Expanded(
                 flex: 1,
-                child: _buildCodeSection(theme),
+                child: _buildCodeSection(context),
               ),
-              theme.spacing.gapHM,
+              context.chromiaSpacing.gapHM,
               Expanded(
                 flex: 1,
-                child: _buildPreviewSection(theme),
+                child: _buildPreviewSection(context),
               ),
             ],
           ),
@@ -170,22 +170,22 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
     );
   }
 
-  Widget _buildVerticalContent(ChromiaThemeData theme) {
+  Widget _buildVerticalContent(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        _buildPreviewSection(theme),
-        theme.spacing.gapVM,
-        _buildCodeSection(theme),
+        _buildPreviewSection(context),
+        context.chromiaSpacing.gapVM,
+        _buildCodeSection(context),
       ],
     );
   }
 
-  Widget _buildCodeSection(ChromiaThemeData theme) {
+  Widget _buildCodeSection(BuildContext context) {
     final colors = context.chromiaColors;
-    final spacing = theme.spacing;
-    final isDark = theme.brightness == Brightness.dark;
+    final spacing = context.chromiaSpacing;
+    final isDark = context.chromiaTheme.brightness == Brightness.dark;
 
     // Background color for code section
     final codeBackgroundColor = isDark
@@ -220,11 +220,11 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
     );
 
     return Container(
-      height: widget.codeHeight,
+      height: widget.height,
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
         color: codeBackgroundColor,
-        borderRadius: theme.radius.radiusM,
+        borderRadius: context.chromiaRadius.radiusM,
         border: Border.all(color: colors.outline),
       ),
       child: Column(
@@ -239,8 +239,8 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
             decoration: BoxDecoration(
               color: isDark ? const Color(0xFF21252B) : const Color(0xFFEEEEEE),
               borderRadius: BorderRadius.only(
-                topLeft: theme.radius.radiusM.topLeft,
-                topRight: theme.radius.radiusM.topRight,
+                topLeft: context.chromiaRadius.radiusM.topLeft,
+                topRight: context.chromiaRadius.radiusM.topRight,
               ),
               border: Border(
                 bottom: BorderSide(
@@ -263,7 +263,7 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
                 if (widget.showCopyButton)
                   InkWell(
                     onTap: _copyToClipboard,
-                    borderRadius: theme.radius.radiusS,
+                    borderRadius: context.chromiaRadius.radiusS,
                     child: Padding(
                       padding: spacing.paddingXS,
                       child: Row(
@@ -296,7 +296,7 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
             ),
           ),
           // Code content with syntax highlighting
-          widget.codeHeight != null
+          widget.height != null
               ? Expanded(child: _buildCodeContent(syntaxTheme))
               : _buildCodeContent(syntaxTheme),
         ],
@@ -314,15 +314,15 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
     );
   }
 
-  Widget _buildPreviewSection(ChromiaThemeData theme) {
+  Widget _buildPreviewSection(BuildContext context) {
     final colors = context.chromiaColors;
-    final spacing = theme.spacing;
+    final spacing = context.chromiaSpacing;
 
     return Container(
       padding: widget.previewPadding ?? spacing.paddingXL,
       decoration: BoxDecoration(
         color: colors.surface,
-        borderRadius: theme.radius.radiusM,
+        borderRadius: context.chromiaRadius.radiusM,
         border: Border.all(color: colors.outline),
       ),
       child: Align(

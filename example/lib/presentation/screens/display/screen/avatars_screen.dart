@@ -7,248 +7,293 @@ class AvatarsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final spacing = theme.spacing;
     return ExampleScaffold(
-      title: 'Avatars',
+      title: 'Avatar',
       children: [
-        // Avatar section
-        _buildAvatarSection(context),
-        spacing.gapVXXL,
-      ],
-    );
-  }
-
-  Widget _buildAvatarSection(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final colors = context.chromiaColors;
-    final spacing = theme.spacing;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Basic avatars with images
-        ChromiaText(
-          'Image Avatars',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        Wrap(
-          spacing: spacing.l,
-          runSpacing: spacing.m,
+        ComponentPage(
+          description:
+              'ChromiaAvatar displays a user representation using an image, '
+              'initials, or an icon. It supports four sizes, three shapes, '
+              'and can be grouped with ChromiaAvatarGroup.',
+          whenToUse:
+              'Use avatars in headers, lists, and comments to represent users. '
+              'Use initials when no image is available. '
+              'Use ChromiaAvatarGroup when showing a limited set of participants '
+              'with a "+N more" overflow indicator.',
           children: [
-            ChromiaAvatar(
-              backgroundColor: colors.primary,
-              size: ChromiaAvatarSize.small,
-              child: Icon(Icons.person, color: colors.onPrimary),
+            // ── Initials ──────────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Initials',
+              description:
+                  'Use ChromiaAvatar.initials() when no profile image is available.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaAvatar.initials(
+  initials: 'AB',
+  backgroundColor: colors.primary,
+  size: ChromiaAvatarSize.large,
+)''',
+                preview: Builder(
+                  builder: (context) {
+                    final colors = context.chromiaColors;
+                    return Wrap(
+                      spacing: 16,
+                      runSpacing: 12,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: [
+                        ChromiaAvatar.initials(
+                          initials: 'AB',
+                          backgroundColor: colors.primary,
+                          size: ChromiaAvatarSize.extraSmall,
+                        ),
+                        ChromiaAvatar.initials(
+                          initials: 'CD',
+                          backgroundColor: colors.secondary,
+                          size: ChromiaAvatarSize.small,
+                        ),
+                        ChromiaAvatar.initials(
+                          initials: 'EF',
+                          backgroundColor: colors.success,
+                          size: ChromiaAvatarSize.medium,
+                        ),
+                        ChromiaAvatar.initials(
+                          initials: 'GH',
+                          backgroundColor: colors.error,
+                          size: ChromiaAvatarSize.large,
+                        ),
+                        ChromiaAvatar.initials(
+                          initials: 'IJ',
+                          backgroundColor: colors.info,
+                          size: ChromiaAvatarSize.extraLarge,
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
             ),
-            ChromiaAvatar(
-              backgroundColor: colors.secondary,
-              size: ChromiaAvatarSize.medium,
-              child: Icon(Icons.person, color: colors.onPrimary),
-            ),
-            ChromiaAvatar(
-              backgroundColor: colors.success,
-              size: ChromiaAvatarSize.large,
-              child: Icon(Icons.person, color: colors.onPrimary),
-            ),
-            ChromiaAvatar(
-              backgroundColor: colors.warning,
-              size: ChromiaAvatarSize.extraLarge,
-              child: Icon(Icons.person, color: colors.onPrimary),
-            ),
-          ],
-        ),
-        spacing.gapVM,
-        Wrap(
-          spacing: spacing.l,
-          runSpacing: spacing.m,
-          children: [
-            ChromiaAvatar.image(
-              imageProvider: const NetworkImage('https://picsum.photos/200'),
-              backgroundColor: colors.primary,
-              size: ChromiaAvatarSize.small,
-            ),
-            ChromiaAvatar.image(
-              imageProvider: const NetworkImage('https://picsum.photos/200'),
-              backgroundColor: colors.secondary,
-              size: ChromiaAvatarSize.medium,
-            ),
-            ChromiaAvatar.image(
-              imageProvider: const NetworkImage('https://picsum.photos/200'),
-              backgroundColor: colors.success,
-              size: ChromiaAvatarSize.large,
-            ),
-            ChromiaAvatar.image(
-              imageProvider: const NetworkImage('https://picsum.photos/200'),
-              backgroundColor: colors.warning,
-              size: ChromiaAvatarSize.extraLarge,
-            ),
-          ],
-        ),
-        spacing.gapVL,
 
-        // Initials avatars
-        ChromiaText(
-          'Initials Avatars',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        Wrap(
-          spacing: spacing.l,
-          runSpacing: spacing.m,
-          children: [
-            ChromiaAvatar.initials(
-              initials: 'AB',
-              backgroundColor: colors.primary,
-              size: ChromiaAvatarSize.small,
+            // ── Icon ──────────────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Icon',
+              description:
+                  'Use ChromiaAvatar.icon() for generic or system-level user representations.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaAvatar.icon(
+  icon: Icons.person,
+  backgroundColor: colors.primary,
+  size: ChromiaAvatarSize.large,
+)''',
+                preview: Builder(
+                  builder: (context) {
+                    final colors = context.chromiaColors;
+                    return Wrap(
+                      spacing: 16,
+                      runSpacing: 12,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: [
+                        ChromiaAvatar.icon(
+                          icon: Icons.person,
+                          backgroundColor: colors.primary,
+                          size: ChromiaAvatarSize.small,
+                        ),
+                        ChromiaAvatar.icon(
+                          icon: Icons.business,
+                          backgroundColor: colors.secondary,
+                          size: ChromiaAvatarSize.medium,
+                        ),
+                        ChromiaAvatar.icon(
+                          icon: Icons.favorite,
+                          backgroundColor: colors.error,
+                          size: ChromiaAvatarSize.large,
+                        ),
+                        ChromiaAvatar.icon(
+                          icon: Icons.star,
+                          backgroundColor: colors.warning,
+                          size: ChromiaAvatarSize.extraLarge,
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
             ),
-            ChromiaAvatar.initials(
-              initials: 'CD',
-              backgroundColor: colors.secondary,
-              size: ChromiaAvatarSize.medium,
+
+            // ── Image ─────────────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Image',
+              description:
+                  'Use ChromiaAvatar.image() with any ImageProvider. '
+                  'The backgroundColor is shown while the image loads.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaAvatar.image(
+  imageProvider: NetworkImage('https://picsum.photos/200'),
+  size: ChromiaAvatarSize.large,
+)''',
+                preview: Builder(
+                  builder: (context) {
+                    final colors = context.chromiaColors;
+                    return Wrap(
+                      spacing: 16,
+                      runSpacing: 12,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: [
+                        ChromiaAvatar.image(
+                          imageProvider:
+                              const NetworkImage('https://picsum.photos/200'),
+                          backgroundColor: colors.primary,
+                          size: ChromiaAvatarSize.small,
+                        ),
+                        ChromiaAvatar.image(
+                          imageProvider:
+                              const NetworkImage('https://picsum.photos/201'),
+                          backgroundColor: colors.secondary,
+                          size: ChromiaAvatarSize.medium,
+                        ),
+                        ChromiaAvatar.image(
+                          imageProvider:
+                              const NetworkImage('https://picsum.photos/202'),
+                          backgroundColor: colors.success,
+                          size: ChromiaAvatarSize.large,
+                        ),
+                        ChromiaAvatar.image(
+                          imageProvider:
+                              const NetworkImage('https://picsum.photos/203'),
+                          backgroundColor: colors.warning,
+                          size: ChromiaAvatarSize.extraLarge,
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
             ),
-            ChromiaAvatar.initials(
-              initials: 'EF',
-              backgroundColor: colors.error,
-              size: ChromiaAvatarSize.large,
+
+            // ── Shapes ────────────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Shapes',
+              description:
+                  'Three shapes — circle (default), rounded, and square — '
+                  'to match different design contexts.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaAvatar.initials(
+  initials: 'C',
+  shape: ChromiaAvatarShape.circle,
+  size: ChromiaAvatarSize.large,
+)
+
+ChromiaAvatar.initials(
+  initials: 'R',
+  shape: ChromiaAvatarShape.rounded,
+  size: ChromiaAvatarSize.large,
+)
+
+ChromiaAvatar.initials(
+  initials: 'S',
+  shape: ChromiaAvatarShape.square,
+  size: ChromiaAvatarSize.large,
+)''',
+                preview: Builder(
+                  builder: (context) {
+                    final colors = context.chromiaColors;
+                    return Wrap(
+                      spacing: 16,
+                      runSpacing: 12,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: [
+                        ChromiaAvatar.initials(
+                          initials: 'C',
+                          backgroundColor: colors.primary,
+                          shape: ChromiaAvatarShape.circle,
+                          size: ChromiaAvatarSize.large,
+                        ),
+                        ChromiaAvatar.initials(
+                          initials: 'R',
+                          backgroundColor: colors.secondary,
+                          shape: ChromiaAvatarShape.rounded,
+                          size: ChromiaAvatarSize.large,
+                        ),
+                        ChromiaAvatar.initials(
+                          initials: 'S',
+                          backgroundColor: colors.success,
+                          shape: ChromiaAvatarShape.square,
+                          size: ChromiaAvatarSize.large,
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
             ),
-            ChromiaAvatar.initials(
-              initials: 'GH',
-              backgroundColor: colors.info,
-              size: ChromiaAvatarSize.extraLarge,
+
+            // ── Avatar Group ──────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Avatar Group',
+              description:
+                  'ChromiaAvatarGroup stacks avatars with overlap and shows '
+                  'a "+N" overflow indicator when the count exceeds max.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaAvatarGroup(
+  max: 4,
+  showMore: true,
+  size: ChromiaAvatarSize.large,
+  avatars: [
+    ChromiaAvatar.initials(initials: 'AB', backgroundColor: colors.primary),
+    ChromiaAvatar.initials(initials: 'CD', backgroundColor: colors.secondary),
+    ChromiaAvatar.initials(initials: 'EF', backgroundColor: colors.success),
+    ChromiaAvatar.initials(initials: 'GH', backgroundColor: colors.error),
+    ChromiaAvatar.initials(initials: 'IJ', backgroundColor: colors.warning),
+  ],
+)''',
+                preview: Builder(
+                  builder: (context) {
+                    final colors = context.chromiaColors;
+                    return ChromiaAvatarGroup(
+                      max: 4,
+                      showMore: true,
+                      size: ChromiaAvatarSize.large,
+                      spacing: 15,
+                      avatars: [
+                        ChromiaAvatar.initials(
+                          initials: 'AB',
+                          backgroundColor: colors.primary,
+                        ),
+                        ChromiaAvatar.image(
+                          imageProvider:
+                              const NetworkImage('https://picsum.photos/200'),
+                          backgroundColor: colors.primary,
+                          size: ChromiaAvatarSize.small,
+                        ),
+                        ChromiaAvatar.initials(
+                          initials: 'EF',
+                          backgroundColor: colors.success,
+                        ),
+                        ChromiaAvatar.image(
+                          imageProvider:
+                              const NetworkImage('https://picsum.photos/201'),
+                          backgroundColor: colors.primary,
+                          size: ChromiaAvatarSize.small,
+                        ),
+                        ChromiaAvatar.initials(
+                          initials: 'IJ',
+                          backgroundColor: colors.error,
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
             ),
           ],
-        ),
-        spacing.gapVL,
-
-        // Icon avatars
-        ChromiaText(
-          'Icon Avatars',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        Wrap(
-          spacing: spacing.l,
-          runSpacing: spacing.m,
-          children: [
-            ChromiaAvatar.icon(
-              icon: Icons.person,
-              backgroundColor: colors.primary,
-              size: ChromiaAvatarSize.small,
-            ),
-            ChromiaAvatar.icon(
-              icon: Icons.business,
-              backgroundColor: colors.secondary,
-              size: ChromiaAvatarSize.medium,
-            ),
-            ChromiaAvatar.icon(
-              icon: Icons.favorite,
-              backgroundColor: colors.error,
-              size: ChromiaAvatarSize.large,
-            ),
-            ChromiaAvatar.icon(
-              icon: Icons.star,
-              backgroundColor: colors.warning,
-              size: ChromiaAvatarSize.extraLarge,
-            ),
-          ],
-        ),
-        spacing.gapVL,
-
-        // Avatar shapes
-        ChromiaText(
-          'Avatar Shapes',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        Wrap(
-          spacing: spacing.l,
-          runSpacing: spacing.m,
-          children: [
-            ChromiaAvatar.initials(
-              initials: 'C',
-              backgroundColor: colors.primary,
-              shape: ChromiaAvatarShape.circle,
-              size: ChromiaAvatarSize.large,
-            ),
-            ChromiaAvatar.initials(
-              initials: 'R',
-              backgroundColor: colors.secondary,
-              shape: ChromiaAvatarShape.rounded,
-              size: ChromiaAvatarSize.large,
-            ),
-            ChromiaAvatar.initials(
-              initials: 'S',
-              backgroundColor: colors.success,
-              shape: ChromiaAvatarShape.square,
-              size: ChromiaAvatarSize.large,
-            ),
-          ],
-        ),
-        spacing.gapVL,
-
-        // Avatar group
-        ChromiaText(
-          'Avatar Group',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        ChromiaAvatarGroup(
-          avatars: [
-            ChromiaAvatar.initials(
-              initials: 'AB',
-              backgroundColor: colors.primary,
-            ),
-            ChromiaAvatar.image(
-              imageProvider: const NetworkImage('https://picsum.photos/200'),
-              backgroundColor: colors.primary,
-              size: ChromiaAvatarSize.small,
-            ),
-            ChromiaAvatar.initials(
-              initials: 'EF',
-              backgroundColor: colors.success,
-            ),
-            ChromiaAvatar.image(
-              imageProvider: const NetworkImage('https://picsum.photos/200'),
-              backgroundColor: colors.primary,
-              size: ChromiaAvatarSize.small,
-            ),
-            ChromiaAvatar.initials(
-              initials: 'IJ',
-              backgroundColor: colors.error,
-            ),
-          ],
-          max: 4,
-          spacing: 15,
-          showMore: true,
-          size: ChromiaAvatarSize.large,
-        ),
-        spacing.gapVL,
-
-        // Interactive avatar
-        ChromiaText(
-          'Interactive Avatar',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        ChromiaAvatar.initials(
-          initials: 'TA',
-          backgroundColor: colors.primary,
-          size: ChromiaAvatarSize.large,
-          onTap: () {
-            showChromiaAlert(
-              context: context,
-              title: 'Avatar Tapped',
-              message: 'You tapped on the avatar!',
-            );
-          },
         ),
       ],
     );

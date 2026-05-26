@@ -7,323 +7,348 @@ class CardsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final spacing = theme.spacing;
     return ExampleScaffold(
-      title: 'Cards',
+      title: 'Card',
       children: [
-        // Cards section
-        _buildCardsSection(context),
-        spacing.gapVXXL,
-      ],
-    );
-  }
-
-  Widget _buildCardsSection(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final colors = context.chromiaColors;
-    final spacing = theme.spacing;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Basic card
-        ChromiaText(
-          'Basic Card',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        const ChromiaCard(
-          child: ChromiaText(
-            'This is a basic card with some content inside. '
-            'Cards are great for grouping related information.',
-          ),
-        ),
-        spacing.gapVL,
-
-        // Card with header
-        ChromiaText(
-          'Card with Header',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        const ChromiaCard(
-          header: ChromiaText('Card Title'),
-          child: ChromiaText(
-            'This card has a header section that can contain a title or any widget.',
-          ),
-        ),
-        spacing.gapVL,
-
-        // Card with header and footer
-        ChromiaText(
-          'Card with Header and Footer',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        ChromiaCard(
-          header: const ChromiaText('Project Card'),
-          footer: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              ChromiaButton(
-                variant: ChromiaButtonVariant.text,
-                size: ChromiaButtonSize.small,
-                onPressed: () {},
-                child: const ChromiaText('Cancel'),
-              ),
-              spacing.gapHM,
-              ChromiaButton(
-                size: ChromiaButtonSize.small,
-                onPressed: () {},
-                child: const ChromiaText('Save'),
-              ),
-            ],
-          ),
-          child: const ChromiaText(
-            'This card demonstrates how to add action buttons in the footer section.',
-          ),
-        ),
-        spacing.gapVL,
-
-        // Interactive card
-        ChromiaText(
-          'Interactive Card',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        ChromiaCard(
-          elevation: 2,
-          onTap: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: ChromiaText('Card tapped!')),
-            );
-          },
-          child: Row(
-            children: [
-              Icon(Icons.touch_app, color: colors.primary, size: 40),
-              spacing.gapHM,
-              const Expanded(
-                child: ChromiaText(
-                  'Tap this card to see the interaction. '
-                  'It has hover and press states.',
-                ),
-              ),
-            ],
-          ),
-        ),
-        spacing.gapVL,
-
-        // Card with image
-        ChromiaText(
-          'Card with Image',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        ChromiaCard(
-          image: Container(
-            height: 150,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [colors.primary, colors.secondary],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-            ),
-            child: const Center(
-              child: Icon(
-                Icons.image,
-                size: 64,
-                color: Colors.white,
-              ),
-            ),
-          ),
-          imagePosition: CardImagePosition.top,
-          header: const ChromiaText('Photo Card'),
-          child: const ChromiaText(
-            'This card includes an image at the top. Perfect for gallery views or product cards.',
-          ),
-        ),
-        spacing.gapVL,
-
-        // Different elevations
-        ChromiaText(
-          'Different Elevations',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        Row(
+        ComponentPage(
+          description:
+              'ChromiaCard is a themed container that groups related content '
+              'with optional header, footer, image, and elevation. '
+              'ChromiaListTileCard combines a card with a list tile layout.',
+          whenToUse:
+              'Use cards to group related information into a single contained unit. '
+              'Use the header for a title widget and footer for actions. '
+              'Provide onTap to make the card interactive. '
+              'Use ChromiaListTileCard for feed items or list entries that need elevation.',
           children: [
-            Expanded(
-              child: ChromiaCard(
-                elevation: 0,
-                borderColor: colors.outline,
-                borderWidth: 1,
-                child: Column(
-                  children: [
-                    ChromiaText(
-                      'Elevation 0',
-                      type: ChromiaTypographyType.labelMedium,
-                      color: colors.onSurface,
-                    ),
-                    spacing.gapVXS,
-                    ChromiaText(
-                      'Flat',
-                      type: ChromiaTypographyType.bodySmall,
-                      color: colors.onSurfaceVariant,
-                    ),
-                  ],
+            // ── Basic ─────────────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Basic',
+              description:
+                  'A simple card wrapping any content.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaCard(
+  child: ChromiaText(
+    'Cards group related information into a '
+    'contained, visually distinct unit.',
+  ),
+)''',
+                preview: const ChromiaCard(
+                  child: ChromiaText(
+                    'Cards group related information into a '
+                    'contained, visually distinct unit.',
+                  ),
                 ),
               ),
             ),
-            spacing.gapHM,
-            Expanded(
-              child: ChromiaCard(
-                elevation: 2,
-                child: Column(
-                  children: [
-                    ChromiaText(
-                      'Elevation 2',
-                      type: ChromiaTypographyType.labelMedium,
-                      color: colors.onSurface,
-                    ),
-                    spacing.gapVXS,
-                    ChromiaText(
-                      'Default',
-                      type: ChromiaTypographyType.bodySmall,
-                      color: colors.onSurfaceVariant,
-                    ),
-                  ],
+
+            // ── Header & Footer ───────────────────────────────────────────────
+            ComponentSection(
+              title: 'Header & Footer',
+              description:
+                  'Add a header for a title and a footer for action buttons.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaCard(
+  header: ChromiaText('Project Card'),
+  footer: Row(
+    mainAxisAlignment: MainAxisAlignment.end,
+    children: [
+      ChromiaButton(variant: ChromiaButtonVariant.text, child: Text('Cancel'), onPressed: () {}),
+      ChromiaButton(child: Text('Save'), onPressed: () {}),
+    ],
+  ),
+  child: ChromiaText('Add action buttons in the footer.'),
+)''',
+                preview: Builder(
+                  builder: (context) {
+                    final spacing = context.chromiaTheme.spacing;
+                    return ChromiaCard(
+                      header: const ChromiaText('Project Card'),
+                      footer: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          ChromiaButton(
+                            variant: ChromiaButtonVariant.text,
+                            size: ChromiaButtonSize.small,
+                            onPressed: () {},
+                            child: const Text('Cancel'),
+                          ),
+                          spacing.gapHM,
+                          ChromiaButton(
+                            size: ChromiaButtonSize.small,
+                            onPressed: () {},
+                            child: const Text('Save'),
+                          ),
+                        ],
+                      ),
+                      child: const ChromiaText(
+                        'Add action buttons in the footer section.',
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
-            spacing.gapHM,
-            Expanded(
-              child: ChromiaCard(
-                elevation: 4,
-                child: Column(
-                  children: [
-                    ChromiaText(
-                      'Elevation 4',
-                      type: ChromiaTypographyType.labelMedium,
-                      color: colors.onSurface,
-                    ),
-                    spacing.gapVXS,
-                    ChromiaText(
-                      'Raised',
-                      type: ChromiaTypographyType.bodySmall,
-                      color: colors.onSurfaceVariant,
-                    ),
-                  ],
+
+            // ── Interactive ───────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Interactive',
+              description:
+                  'Provide onTap to make a card tappable with hover and press states.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaCard(
+  elevation: 2,
+  onTap: () {},
+  child: Row(
+    children: [
+      Icon(Icons.touch_app, color: colors.primary, size: 40),
+      Expanded(child: ChromiaText('Tap this card')),
+    ],
+  ),
+)''',
+                preview: Builder(
+                  builder: (context) {
+                    final colors = context.chromiaColors;
+                    return ChromiaCard(
+                      elevation: 2,
+                      onTap: () => context.showInfoSnackBar(
+                        message: 'Card tapped!',
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.touch_app,
+                            color: colors.primary,
+                            size: 40,
+                          ),
+                          const SizedBox(width: 12),
+                          const Expanded(
+                            child: ChromiaText(
+                              'Tap this card to see the interaction.',
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+
+            // ── With Image ────────────────────────────────────────────────────
+            ComponentSection(
+              title: 'With Image',
+              description:
+                  'Add an image at the top, bottom, start, or end using '
+                  'the image and imagePosition parameters.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaCard(
+  image: Container(
+    height: 150,
+    decoration: BoxDecoration(
+      gradient: LinearGradient(colors: [colors.primary, colors.secondary]),
+    ),
+  ),
+  imagePosition: CardImagePosition.top,
+  header: ChromiaText('Photo Card'),
+  child: ChromiaText('Include an image at the top of the card.'),
+)''',
+                preview: Builder(
+                  builder: (context) {
+                    final colors = context.chromiaColors;
+                    return ChromiaCard(
+                      image: Container(
+                        height: 150,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [colors.primary, colors.secondary],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                        ),
+                        child: const Center(
+                          child: Icon(
+                            Icons.image,
+                            size: 64,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      imagePosition: CardImagePosition.top,
+                      header: const ChromiaText('Photo Card'),
+                      child: const ChromiaText(
+                        'Perfect for gallery views or product cards.',
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+
+            // ── Elevations ────────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Elevations',
+              description:
+                  'Control depth with the elevation parameter. '
+                  'Use borderColor + borderWidth at elevation 0 for a flat outlined style.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaCard(elevation: 0, borderColor: colors.outline, borderWidth: 1, child: ...)
+ChromiaCard(elevation: 2, child: ...)
+ChromiaCard(elevation: 4, child: ...)''',
+                preview: Builder(
+                  builder: (context) {
+                    final colors = context.chromiaColors;
+                    final spacing = context.chromiaTheme.spacing;
+                    return Row(
+                      children: [
+                        Expanded(
+                          child: ChromiaCard(
+                            elevation: 0,
+                            borderColor: colors.outline,
+                            borderWidth: 1,
+                            child: Column(
+                              children: [
+                                ChromiaText(
+                                  'Elevation 0',
+                                  type: ChromiaTypographyType.labelMedium,
+                                  color: colors.onSurface,
+                                ),
+                                spacing.gapVXS,
+                                ChromiaText(
+                                  'Flat',
+                                  type: ChromiaTypographyType.bodySmall,
+                                  color: colors.onSurfaceVariant,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        spacing.gapHM,
+                        Expanded(
+                          child: ChromiaCard(
+                            elevation: 2,
+                            child: Column(
+                              children: [
+                                ChromiaText(
+                                  'Elevation 2',
+                                  type: ChromiaTypographyType.labelMedium,
+                                  color: colors.onSurface,
+                                ),
+                                spacing.gapVXS,
+                                ChromiaText(
+                                  'Default',
+                                  type: ChromiaTypographyType.bodySmall,
+                                  color: colors.onSurfaceVariant,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        spacing.gapHM,
+                        Expanded(
+                          child: ChromiaCard(
+                            elevation: 4,
+                            child: Column(
+                              children: [
+                                ChromiaText(
+                                  'Elevation 4',
+                                  type: ChromiaTypographyType.labelMedium,
+                                  color: colors.onSurface,
+                                ),
+                                spacing.gapVXS,
+                                ChromiaText(
+                                  'Raised',
+                                  type: ChromiaTypographyType.bodySmall,
+                                  color: colors.onSurfaceVariant,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+            ),
+
+            // ── List Tile Card ────────────────────────────────────────────────
+            ComponentSection(
+              title: 'List Tile Card',
+              description:
+                  'ChromiaListTileCard combines a card container with a list tile layout '
+                  'for feed items and notification entries.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaListTileCard(
+  leading: CircleAvatar(child: Icon(Icons.person, color: Colors.white)),
+  title: ChromiaText('John Doe'),
+  subtitle: ChromiaText('Software Engineer'),
+  trailing: Icon(Icons.chevron_right),
+  onTap: () {},
+)''',
+                preview: Builder(
+                  builder: (context) {
+                    final colors = context.chromiaColors;
+                    final spacing = context.chromiaTheme.spacing;
+                    return Column(
+                      children: [
+                        ChromiaListTileCard(
+                          leading: CircleAvatar(
+                            backgroundColor: colors.primary,
+                            child: const Icon(
+                              Icons.person,
+                              color: Colors.white,
+                            ),
+                          ),
+                          title: const ChromiaText('John Doe'),
+                          subtitle: const ChromiaText('Software Engineer'),
+                          trailing: Icon(
+                            Icons.chevron_right,
+                            color: colors.onSurfaceVariant,
+                          ),
+                          onTap: () {},
+                        ),
+                        spacing.gapVM,
+                        ChromiaListTileCard(
+                          leading: CircleAvatar(
+                            backgroundColor: colors.success,
+                            child: const Icon(
+                              Icons.check,
+                              color: Colors.white,
+                            ),
+                          ),
+                          title: const ChromiaText('Task Completed'),
+                          subtitle: const ChromiaText(
+                            'Successfully deployed to production',
+                          ),
+                          trailing: ChromiaText(
+                            '2 hours ago',
+                            type: ChromiaTypographyType.bodySmall,
+                            color: colors.onSurfaceVariant,
+                          ),
+                          onTap: () {},
+                        ),
+                      ],
+                    );
+                  },
                 ),
               ),
             ),
           ],
         ),
-        spacing.gapVL,
-
-        // List cards
-        ChromiaText(
-          'List Cards',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        ChromiaListTileCard(
-          leading: CircleAvatar(
-            backgroundColor: colors.primary,
-            child: const Icon(Icons.person, color: Colors.white),
-          ),
-          title: const ChromiaText('John Doe'),
-          subtitle: const ChromiaText('Software Engineer'),
-          trailing: Icon(Icons.chevron_right, color: colors.onSurfaceVariant),
-          onTap: () {},
-        ),
-        spacing.gapVM,
-        ChromiaListTileCard(
-          leading: CircleAvatar(
-            backgroundColor: colors.success,
-            child: const Icon(Icons.check, color: Colors.white),
-          ),
-          title: const ChromiaText('Task Completed'),
-          subtitle: const ChromiaText('Successfully deployed to production'),
-          trailing: ChromiaText(
-            '2 hours ago',
-            type: ChromiaTypographyType.bodySmall,
-            color: colors.onSurfaceVariant,
-          ),
-          onTap: () {},
-        ),
-        spacing.gapVM,
-        ChromiaListTileCard(
-          leading: CircleAvatar(
-            backgroundColor: colors.warning,
-            child: const Icon(Icons.warning, color: Colors.white),
-          ),
-          title: const ChromiaText('Warning Alert'),
-          subtitle: const ChromiaText('Server resources running low'),
-          trailing: Icon(Icons.arrow_forward, color: colors.primary),
-          onTap: () {},
-          elevation: 2,
-        ),
-        spacing.gapVL,
-
-        // Grid of cards
-        ChromiaText(
-          'Card Grid Layout',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        LayoutBuilder(
-          builder: (context, constraints) {
-            final crossAxisCount = context.isMobile ? 2 : 3;
-            return GridView.count(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              crossAxisCount: crossAxisCount,
-              mainAxisSpacing: spacing.m,
-              crossAxisSpacing: spacing.m,
-              childAspectRatio: 100 / 60,
-              children: [
-                _buildGridItem(context, Icons.home, 'Home'),
-                _buildGridItem(context, Icons.settings, 'Settings'),
-                _buildGridItem(context, Icons.person, 'Profile'),
-                _buildGridItem(context, Icons.notifications, 'Alerts'),
-                _buildGridItem(context, Icons.analytics, 'Analytics'),
-                _buildGridItem(context, Icons.help, 'Help'),
-              ],
-            );
-          },
-        ),
       ],
-    );
-  }
-
-  Widget _buildGridItem(BuildContext context, IconData icon, String title) {
-    final theme = context.chromiaTheme;
-    final colors = context.chromiaColors;
-    final spacing = theme.spacing;
-    return ChromiaCard(
-      onTap: () {},
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icon, size: 40, color: colors.primary),
-          spacing.gapVS,
-          ChromiaText(
-            title,
-            type: ChromiaTypographyType.labelMedium,
-          ),
-        ],
-      ),
     );
   }
 }

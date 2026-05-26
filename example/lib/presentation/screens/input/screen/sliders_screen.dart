@@ -2,207 +2,258 @@ import 'package:chromia_ui/chromia_ui.dart';
 import 'package:chromia_ui_example/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
-class SlidersScreen extends StatefulWidget {
+class SlidersScreen extends StatelessWidget {
   const SlidersScreen({super.key});
 
   @override
-  State<SlidersScreen> createState() => _SlidersScreenState();
-}
-
-class _SlidersScreenState extends State<SlidersScreen> {
-  double _volume = 40;
-  double _brightness = 0;
-  double _temperature = 16;
-  RangeValues _priceRange = const RangeValues(20, 80);
-
-  @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final spacing = theme.spacing;
     return ExampleScaffold(
-      title: 'Sliders',
+      title: 'Slider',
       children: [
-        // Slider section
-        _buildSliderSection(context),
-        spacing.gapVXXL,
-      ],
-    );
-  }
+        ComponentPage(
+          description:
+              'ChromiaSlider lets users select a numeric value from a continuous '
+              'or discrete range. ChromiaRangeSlider supports selecting a range '
+              'with two thumbs. Both support custom labels, value display, and '
+              'icon thumbs.',
+          whenToUse:
+              'Use sliders for settings with a continuous range like volume or brightness. '
+              'Add divisions for discrete steps (e.g., temperature in whole degrees). '
+              'Use a range slider when users need to define minimum and maximum bounds.',
+          children: [
+            // ── Basic ─────────────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Basic',
+              description: 'A simple slider with min, max, and a value label. '
+                  'Pass onChanged: null to disable.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaSlider(
+  value: volume,
+  min: 0,
+  max: 100,
+  label: '\$volume%',
+  onChanged: (value) => setState(() => volume = value),
+)
 
-  Widget _buildSliderSection(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final colors = context.chromiaColors;
-    final spacing = theme.spacing;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Basic slider
-        ChromiaText(
-          'Basic Slider',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        ChromiaSlider(
-          value: 60,
-          min: 0,
-          max: 100,
-          label: '$_volume%',
-          onChanged: null,
-        ),
-        spacing.gapVS,
-        ChromiaSlider(
-          value: _volume,
-          min: 0,
-          max: 100,
-          label: '$_volume%',
-          onChanged: (value) => setState(() => _volume = value),
-        ),
-        spacing.gapVL,
-
-        // Customizable slider
-        ChromiaText(
-          'Customizable Slider',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        ChromiaSlider(
-          value: _volume,
-          min: 0,
-          max: 100,
-          activeColor: Colors.red,
-          inactiveColor: Colors.green,
-          thumbColor: Colors.amber,
-          thumbRadius: 5,
-          onChanged: (value) => setState(() => _volume = value),
-        ),
-        spacing.gapVS,
-        ChromiaSlider(
-          value: _volume,
-          min: 0,
-          max: 100,
-          thumbIcon: Icons.star,
-          thumbRadius: 16,
-          onChanged: (value) => setState(() => _volume = value),
-        ),
-        spacing.gapVS,
-        ChromiaSlider(
-          value: _volume,
-          min: 0,
-          max: 100,
-          trackHeight: 16,
-          onChanged: (value) => setState(() => _volume = value),
-        ),
-        spacing.gapVL,
-
-        // With value display
-        ChromiaText(
-          'With Labels & Value Display',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        ChromiaSlider(
-          value: _brightness,
-          min: 0,
-          max: 100,
-          minLabel: 'Min',
-          maxLabel: 'Max',
-          valueBuilder: (value) => '${value.toInt()}%',
-          onChanged: (value) => setState(() => _brightness = value),
-        ),
-        spacing.gapVL,
-
-        // With divisions
-        ChromiaText(
-          'With Divisions',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        ChromiaSlider(
-          value: _temperature,
-          min: 16,
-          max: 30,
-          divisions: 14,
-          valueBuilder: (value) => '${value.toInt()}°C',
-          onChanged: (value) => setState(() => _temperature = value),
-        ),
-        spacing.gapVL,
-
-        // Range slider
-        ChromiaText(
-          'Range Slider',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        ChromiaRangeSlider(
-          values: _priceRange,
-          min: 0,
-          max: 100,
-          divisions: 20,
-          thumbRadius: 16,
-          showValues: true,
-          startThumbIcon: Icons.favorite,
-          endThumbIcon: Icons.star,
-          valueBuilder: (value) => '\$${value.toInt()}',
-          onChanged: (values) => setState(() => _priceRange = values),
-        ),
-        spacing.gapVL,
-
-        // Slider tiles
-        ChromiaText(
-          'Slider Tiles',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: colors.outline),
-            borderRadius: theme.radius.radiusM,
-          ),
-          child: Column(
-            children: [
-              ChromiaListTileSlider(
-                value: _volume,
-                min: 0,
-                max: 100,
-                divisions: 10,
-                enabled: false,
-                title: 'Volume',
-                subtitle: 'Adjust system volume',
-                valueBuilder: (value) => '${value.toInt()}%',
-                onChanged: (value) => setState(() => _volume = value),
+// Disabled
+ChromiaSlider(
+  value: 60,
+  min: 0,
+  max: 100,
+  onChanged: null,
+)''',
+                preview: StatefulBuilder(
+                  builder: (context, setState) {
+                    double volume = 40;
+                    return Column(
+                      children: [
+                        ChromiaSlider(
+                          value: volume,
+                          min: 0,
+                          max: 100,
+                          label: '${volume.toInt()}%',
+                          onChanged: (value) =>
+                              setState(() => volume = value),
+                        ),
+                        const SizedBox(height: 8),
+                        const ChromiaSlider(
+                          value: 60,
+                          min: 0,
+                          max: 100,
+                          onChanged: null,
+                        ),
+                      ],
+                    );
+                  },
+                ),
               ),
-              Divider(height: 1, color: colors.outline),
-              ChromiaListTileSlider(
-                value: _brightness,
-                min: 0,
-                max: 100,
-                divisions: 10,
-                title: 'Brightness',
-                thumbIcon: Icons.brightness_7,
-                subtitle: 'Adjust screen brightness',
-                valueBuilder: (value) => '${value.toInt()}%',
-                onChanged: (value) => setState(() => _brightness = value),
+            ),
+
+            // ── Value Display & Labels ────────────────────────────────────────
+            ComponentSection(
+              title: 'Value Display & Labels',
+              description:
+                  'Use valueBuilder to format the displayed value, '
+                  'and minLabel/maxLabel for range endpoint annotations.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaSlider(
+  value: brightness,
+  min: 0,
+  max: 100,
+  minLabel: 'Min',
+  maxLabel: 'Max',
+  valueBuilder: (value) => '\${value.toInt()}%',
+  onChanged: (value) => setState(() => brightness = value),
+)''',
+                preview: StatefulBuilder(
+                  builder: (context, setState) {
+                    double brightness = 50;
+                    return ChromiaSlider(
+                      value: brightness,
+                      min: 0,
+                      max: 100,
+                      minLabel: 'Min',
+                      maxLabel: 'Max',
+                      valueBuilder: (value) => '${value.toInt()}%',
+                      onChanged: (value) =>
+                          setState(() => brightness = value),
+                    );
+                  },
+                ),
               ),
-              Divider(height: 1, color: colors.outline),
-              ChromiaListTileRangeSlider(
-                values: _priceRange,
-                min: 0,
-                max: 100,
-                divisions: 20,
-                title: 'Price range',
-                subtitle: 'Adjust price range',
-                valueBuilder: (value) => '\$${value.toInt()}',
-                onChanged: (values) => setState(() => _priceRange = values),
+            ),
+
+            // ── Divisions ─────────────────────────────────────────────────────
+            ComponentSection(
+              title: 'With Divisions',
+              description:
+                  'Set divisions to restrict the slider to discrete steps '
+                  'and show tick marks.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaSlider(
+  value: temperature,
+  min: 16,
+  max: 30,
+  divisions: 14,
+  valueBuilder: (value) => '\${value.toInt()}°C',
+  onChanged: (value) => setState(() => temperature = value),
+)''',
+                preview: StatefulBuilder(
+                  builder: (context, setState) {
+                    double temperature = 22;
+                    return ChromiaSlider(
+                      value: temperature,
+                      min: 16,
+                      max: 30,
+                      divisions: 14,
+                      valueBuilder: (value) => '${value.toInt()}°C',
+                      onChanged: (value) =>
+                          setState(() => temperature = value),
+                    );
+                  },
+                ),
               ),
-            ],
-          ),
+            ),
+
+            // ── Range Slider ──────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Range Slider',
+              description:
+                  'ChromiaRangeSlider provides two thumbs to select '
+                  'a minimum and maximum value.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaRangeSlider(
+  values: priceRange,
+  min: 0,
+  max: 100,
+  divisions: 20,
+  showValues: true,
+  valueBuilder: (value) => '\$\${value.toInt()}',
+  onChanged: (values) => setState(() => priceRange = values),
+)''',
+                preview: StatefulBuilder(
+                  builder: (context, setState) {
+                    RangeValues priceRange = const RangeValues(20, 80);
+                    return ChromiaRangeSlider(
+                      values: priceRange,
+                      min: 0,
+                      max: 100,
+                      divisions: 20,
+                      showValues: true,
+                      valueBuilder: (value) => '\$${value.toInt()}',
+                      onChanged: (values) =>
+                          setState(() => priceRange = values),
+                    );
+                  },
+                ),
+              ),
+            ),
+
+            // ── Slider Tiles ──────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Slider Tiles',
+              description:
+                  'ChromiaListTileSlider embeds a slider inside a list tile '
+                  'for settings screens.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaListTileSlider(
+  value: volume,
+  min: 0,
+  max: 100,
+  title: 'Volume',
+  subtitle: 'Adjust system volume',
+  valueBuilder: (value) => '\${value.toInt()}%',
+  onChanged: (value) => setState(() => volume = value),
+)''',
+                preview: StatefulBuilder(
+                  builder: (context, setState) {
+                    double volume = 60;
+                    double brightness = 40;
+                    RangeValues priceRange = const RangeValues(20, 80);
+                    final colors = context.chromiaColors;
+                    final theme = context.chromiaTheme;
+                    return Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: colors.outline),
+                        borderRadius: theme.radius.radiusM,
+                      ),
+                      child: Column(
+                        children: [
+                          ChromiaListTileSlider(
+                            value: volume,
+                            min: 0,
+                            max: 100,
+                            divisions: 10,
+                            title: 'Volume',
+                            subtitle: 'Adjust system volume',
+                            valueBuilder: (value) => '${value.toInt()}%',
+                            onChanged: (value) =>
+                                setState(() => volume = value),
+                          ),
+                          Divider(height: 1, color: colors.outline),
+                          ChromiaListTileSlider(
+                            value: brightness,
+                            min: 0,
+                            max: 100,
+                            divisions: 10,
+                            title: 'Brightness',
+                            thumbIcon: Icons.brightness_7,
+                            subtitle: 'Adjust screen brightness',
+                            valueBuilder: (value) => '${value.toInt()}%',
+                            onChanged: (value) =>
+                                setState(() => brightness = value),
+                          ),
+                          Divider(height: 1, color: colors.outline),
+                          ChromiaListTileRangeSlider(
+                            values: priceRange,
+                            min: 0,
+                            max: 100,
+                            divisions: 20,
+                            title: 'Price range',
+                            subtitle: 'Filter by price',
+                            valueBuilder: (value) =>
+                                '\$${value.toInt()}',
+                            onChanged: (values) =>
+                                setState(() => priceRange = values),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+          ],
         ),
       ],
     );

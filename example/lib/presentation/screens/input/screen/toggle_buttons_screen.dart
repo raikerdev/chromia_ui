@@ -2,194 +2,263 @@ import 'package:chromia_ui/chromia_ui.dart';
 import 'package:chromia_ui_example/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
-class ToggleButtonsScreen extends StatefulWidget {
+class ToggleButtonsScreen extends StatelessWidget {
   const ToggleButtonsScreen({super.key});
 
   @override
-  State<ToggleButtonsScreen> createState() => _ToggleButtonsScreenState();
-}
-
-class _ToggleButtonsScreenState extends State<ToggleButtonsScreen> {
-  bool _basicValue = false;
-  bool _customizableValue = false;
-  bool _withLabelValue = false;
-  bool _sizeValue = false;
-  bool _listTileValue = false;
-
-  @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final spacing = theme.spacing;
     return ExampleScaffold(
-      title: 'Toggle Buttons',
+      title: 'Toggle Button',
       children: [
-        // Toggle button section
-        _buildToggleButtonSection(context),
-        spacing.gapVXXL,
-      ],
-    );
-  }
-
-  Widget _buildToggleButtonSection(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final colors = context.chromiaColors;
-    final spacing = theme.spacing;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Basic switches
-        ChromiaText(
-          'Basic',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        Row(
+        ComponentPage(
+          description:
+              'ChromiaToggleButton is a themed switch/toggle that represents a '
+              'binary on/off state. It supports three sizes, optional labels, '
+              'custom colors, and list-tile embedding.',
+          whenToUse:
+              'Use toggle buttons for binary settings like enabling/disabling features. '
+              'Prefer toggles over checkboxes when the action takes effect immediately '
+              '(e.g., enabling dark mode). Use ChromiaListTileToggleButton for settings screens.',
           children: [
-            const ChromiaToggleButton(
-              value: true,
-              onChanged: null, // Disabled
-            ),
-            spacing.gapHM,
-            ChromiaToggleButton(
-              value: _basicValue,
-              onChanged: (value) => setState(() => _basicValue = value),
-            ),
-          ],
-        ),
-        spacing.gapVL,
+            // ── Basic ─────────────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Basic',
+              description:
+                  'On, off, and disabled states. Pass onChanged: null to disable.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaToggleButton(
+  value: isOn,
+  onChanged: (value) => setState(() => isOn = value),
+)
 
-        // Customizable switches
-        ChromiaText(
-          'Customizable',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        Row(
-          children: [
-            const ChromiaToggleButton(
-              value: true,
-              inactiveColor: Colors.red,
-              activeColor: Colors.teal,
-              thumbColor: Colors.cyan,
-              onChanged: null, // Disabled
-            ),
-            spacing.gapHM,
-            ChromiaToggleButton(
-              value: _customizableValue,
-              inactiveColor: Colors.red,
-              activeColor: Colors.teal,
-              thumbColor: Colors.cyan,
-              onChanged: (value) => setState(() => _customizableValue = value),
-            ),
-          ],
-        ),
-        spacing.gapVL,
-
-        // With labels
-        ChromiaText(
-          'With Labels',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        const ChromiaToggleButton(
-          value: true,
-          onChanged: null,
-          label: 'Enable notifications',
-        ),
-        spacing.gapVS,
-        ChromiaToggleButton(
-          value: _withLabelValue,
-          onChanged: (value) => setState(() => _withLabelValue = value),
-          label: 'Dark mode',
-        ),
-        spacing.gapVL,
-
-        // Switch sizes
-        ChromiaText(
-          'Sizes',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVM,
-        Row(
-          children: [
-            ChromiaToggleButton(
-              value: _sizeValue,
-              onChanged: (value) => setState(() => _sizeValue = value),
-              size: ChromiaToggleButtonSize.small,
-            ),
-            spacing.gapHM,
-            ChromiaToggleButton(
-              value: _sizeValue,
-              onChanged: (value) => setState(() => _sizeValue = value),
-              size: ChromiaToggleButtonSize.medium,
-            ),
-            spacing.gapHM,
-            ChromiaToggleButton(
-              value: _sizeValue,
-              onChanged: (value) => setState(() => _sizeValue = value),
-              size: ChromiaToggleButtonSize.large,
-            ),
-          ],
-        ),
-        spacing.gapVS,
-        ChromiaToggleButton(
-          value: _sizeValue,
-          onChanged: (value) => setState(() => _sizeValue = value),
-          size: ChromiaToggleButtonSize.small,
-          label: 'With label',
-        ),
-        spacing.gapHM,
-        ChromiaToggleButton(
-          value: _sizeValue,
-          onChanged: (value) => setState(() => _sizeValue = value),
-          size: ChromiaToggleButtonSize.medium,
-          label: 'With label',
-        ),
-        spacing.gapHM,
-        ChromiaToggleButton(
-          value: _sizeValue,
-          onChanged: (value) => setState(() => _sizeValue = value),
-          size: ChromiaToggleButtonSize.large,
-          label: 'With label',
-        ),
-        spacing.gapVL,
-
-        // Switch tiles
-        ChromiaText(
-          'Switch Tiles',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: colors.outline),
-            borderRadius: theme.radius.radiusM,
-          ),
-          child: Column(
-            children: [
-              ChromiaListTileToggleButton(
-                value: true,
-                onChanged: null,
-                title: const Text('Push Notifications'),
-                subtitle: const Text('Receive notifications on your device'),
-                secondary: Icon(Icons.notifications, color: colors.primary),
+// Disabled
+ChromiaToggleButton(
+  value: true,
+  onChanged: null,
+)''',
+                preview: StatefulBuilder(
+                  builder: (context, setState) {
+                    bool isOn = false;
+                    return Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ChromiaToggleButton(
+                          value: isOn,
+                          onChanged: (value) => setState(() => isOn = value),
+                        ),
+                        const SizedBox(width: 16),
+                        const ChromiaToggleButton(value: true, onChanged: null),
+                        const SizedBox(width: 16),
+                        const ChromiaToggleButton(
+                          value: false,
+                          onChanged: null,
+                        ),
+                      ],
+                    );
+                  },
+                ),
               ),
-              Divider(height: 1, color: colors.outline),
-              ChromiaListTileToggleButton(
-                value: _listTileValue,
-                onChanged: (value) => setState(() => _listTileValue = value),
-                title: const Text('Auto-save'),
-                subtitle: const Text('Automatically save your work'),
-                secondary: Icon(Icons.save, color: colors.primary),
+            ),
+
+            // ── With Label ────────────────────────────────────────────────────
+            ComponentSection(
+              title: 'With Label',
+              description:
+                  'Add a label string to show descriptive text alongside the toggle.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaToggleButton(
+  value: darkMode,
+  label: 'Dark mode',
+  onChanged: (value) => setState(() => darkMode = value),
+)''',
+                preview: StatefulBuilder(
+                  builder: (context, setState) {
+                    bool darkMode = false;
+                    bool notifications = true;
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ChromiaToggleButton(
+                          value: darkMode,
+                          label: 'Dark mode',
+                          onChanged: (value) =>
+                              setState(() => darkMode = value),
+                        ),
+                        const SizedBox(height: 8),
+                        const ChromiaToggleButton(
+                          value: true,
+                          label: 'Enable notifications',
+                          onChanged: null,
+                        ),
+                        const SizedBox(height: 8),
+                        ChromiaToggleButton(
+                          value: notifications,
+                          label: 'Auto-update',
+                          onChanged: (value) =>
+                              setState(() => notifications = value),
+                        ),
+                      ],
+                    );
+                  },
+                ),
               ),
-            ],
-          ),
+            ),
+
+            // ── Sizes ─────────────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Sizes',
+              description:
+                  'Three sizes — small, medium (default), and large — for different layout densities.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaToggleButton(
+  value: isOn,
+  size: ChromiaToggleButtonSize.small,
+  onChanged: (value) => setState(() => isOn = value),
+)
+
+ChromiaToggleButton(
+  value: isOn,
+  size: ChromiaToggleButtonSize.medium,
+  onChanged: (value) => setState(() => isOn = value),
+)
+
+ChromiaToggleButton(
+  value: isOn,
+  size: ChromiaToggleButtonSize.large,
+  onChanged: (value) => setState(() => isOn = value),
+)''',
+                preview: StatefulBuilder(
+                  builder: (context, setState) {
+                    bool isOn = true;
+                    return Row(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ChromiaToggleButton(
+                          value: isOn,
+                          size: ChromiaToggleButtonSize.small,
+                          onChanged: (value) => setState(() => isOn = value),
+                        ),
+                        const SizedBox(width: 16),
+                        ChromiaToggleButton(
+                          value: isOn,
+                          size: ChromiaToggleButtonSize.medium,
+                          onChanged: (value) => setState(() => isOn = value),
+                        ),
+                        const SizedBox(width: 16),
+                        ChromiaToggleButton(
+                          value: isOn,
+                          size: ChromiaToggleButtonSize.large,
+                          onChanged: (value) => setState(() => isOn = value),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+            ),
+
+            // ── Custom Colors ─────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Custom Colors',
+              description:
+                  'Override activeColor, inactiveColor, and thumbColor to match '
+                  'a specific brand or semantic context.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaToggleButton(
+  value: isOn,
+  activeColor: Colors.teal,
+  inactiveColor: Colors.red,
+  thumbColor: Colors.cyan,
+  onChanged: (value) => setState(() => isOn = value),
+)''',
+                preview: StatefulBuilder(
+                  builder: (context, setState) {
+                    bool isOn = true;
+                    return ChromiaToggleButton(
+                      value: isOn,
+                      activeColor: Colors.teal,
+                      inactiveColor: Colors.red,
+                      thumbColor: Colors.cyan,
+                      onChanged: (value) => setState(() => isOn = value),
+                    );
+                  },
+                ),
+              ),
+            ),
+
+            // ── Toggle Tiles ──────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Toggle Tiles',
+              description:
+                  'ChromiaListTileToggleButton embeds a toggle inside a list tile '
+                  'for settings screens.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaListTileToggleButton(
+  value: pushEnabled,
+  onChanged: (value) => setState(() => pushEnabled = value),
+  title: Text('Push Notifications'),
+  subtitle: Text('Receive notifications on your device'),
+  secondary: Icon(Icons.notifications),
+)''',
+                preview: StatefulBuilder(
+                  builder: (context, setState) {
+                    bool push = true;
+                    bool email = false;
+                    final colors = context.chromiaColors;
+                    final theme = context.chromiaTheme;
+                    return Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: colors.outline),
+                        borderRadius: theme.radius.radiusM,
+                      ),
+                      child: Column(
+                        children: [
+                          ChromiaListTileToggleButton(
+                            value: push,
+                            onChanged: (value) =>
+                                setState(() => push = value),
+                            title: const Text('Push Notifications'),
+                            subtitle: const Text(
+                              'Receive notifications on your device',
+                            ),
+                            secondary: Icon(
+                              Icons.notifications,
+                              color: colors.primary,
+                            ),
+                          ),
+                          Divider(height: 1, color: colors.outline),
+                          ChromiaListTileToggleButton(
+                            value: email,
+                            onChanged: (value) =>
+                                setState(() => email = value),
+                            title: const Text('Email Updates'),
+                            subtitle: const Text(
+                              'Receive weekly digest emails',
+                            ),
+                            secondary: Icon(
+                              Icons.email,
+                              color: colors.primary,
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+          ],
         ),
       ],
     );

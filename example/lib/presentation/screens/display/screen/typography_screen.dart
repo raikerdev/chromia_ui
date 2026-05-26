@@ -7,48 +7,140 @@ class TypographyScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final spacing = theme.spacing;
-
     return ExampleScaffold(
       title: 'Typography',
       children: [
-        // Typography section
-        _buildTypographySection(context),
-        spacing.gapVXXL,
+        ComponentPage(
+          description:
+              'ChromiaTypography defines 17 text styles organized in a scale from '
+              'Display (largest, decorative) to Overline (smallest, all-caps labels). '
+              'Styles are accessed through ChromiaTypographyType enum and automatically '
+              'inherit the active brand font family.',
+          whenToUse:
+              'Always use ChromiaText or ChromiaTypographyType.getTextStyle(context) '
+              'instead of hardcoded TextStyle — this ensures brand font families '
+              'and theme overrides are respected across all apps.',
+          children: [
+            ComponentSection(
+              title: 'Type Scale',
+              description:
+                  'The complete scale from displayLarge (57px) down to overline (10px). '
+                  'Each style shows its name, size, and a sample sentence.',
+              child: _TypeScaleDemo(),
+            ),
+            ComponentSection(
+              title: 'Usage',
+              description:
+                  'Use ChromiaText for themed text, or call getTextStyle(context) '
+                  'to get a raw TextStyle for custom widgets.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+// Using ChromiaText widget
+ChromiaText(
+  'Hello, world!',
+  type: ChromiaTypographyType.headlineMedium,
+)
+
+// Using getTextStyle for custom widgets
+Text(
+  'Custom widget',
+  style: ChromiaTypographyType.bodyLarge.getTextStyle(context),
+)
+
+// Applying a color override
+ChromiaText(
+  'Muted text',
+  type: ChromiaTypographyType.bodyMedium,
+  color: context.chromiaColors.onSurfaceVariant,
+)''',
+                preview: Builder(
+                  builder: (context) {
+                    final colors = context.chromiaColors;
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ChromiaText(
+                          'Hello, world!',
+                          type: ChromiaTypographyType.headlineMedium,
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Custom widget',
+                          style: ChromiaTypographyType.bodyLarge
+                              .getTextStyle(context),
+                        ),
+                        const SizedBox(height: 8),
+                        ChromiaText(
+                          'Muted text',
+                          type: ChromiaTypographyType.bodyMedium,
+                          color: colors.onSurfaceVariant,
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
       ],
     );
   }
+}
 
-  Widget _buildTypographySection(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: ChromiaTypographyType.values.map((type) => _buildTypographyExample(context, type.name, type)).toList(),
-    );
-  }
-
-  Widget _buildTypographyExample(BuildContext context, String label, ChromiaTypographyType type) {
+class _TypeScaleDemo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
     final colors = context.chromiaColors;
     final spacing = context.chromiaSpacing;
-    final fontSize = type.getTextStyle(context).fontSize;
-    return Padding(
-      padding: spacing.verticalS,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ChromiaText(
-            '$label (font-size: $fontSize)',
-            type: ChromiaTypographyType.labelMedium,
-            color: colors.primary,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+    final radius = context.chromiaRadius;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: ChromiaTypographyType.values.map((type) {
+        final style = type.getTextStyle(context);
+        final fontSize = style.fontSize?.toStringAsFixed(0) ?? '—';
+        return Container(
+          margin: EdgeInsets.only(bottom: spacing.s),
+          padding: spacing.paddingL,
+          decoration: BoxDecoration(
+            color: colors.surfaceContainer,
+            borderRadius: radius.radiusM,
+            border: Border.all(color: colors.outlineVariant),
           ),
-          ChromiaText(
-            'The quick brown fox jumps over the lazy dog',
-            type: type,
-            color: colors.onSurface,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: 160,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ChromiaText(
+                      type.name,
+                      type: ChromiaTypographyType.labelMedium,
+                      color: colors.primary,
+                    ),
+                    ChromiaText(
+                      '${fontSize}sp',
+                      type: ChromiaTypographyType.labelSmall,
+                      color: colors.onSurfaceVariant,
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: ChromiaText(
+                  'The quick brown fox',
+                  type: type,
+                  color: colors.onSurface,
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      }).toList(),
     );
   }
 }

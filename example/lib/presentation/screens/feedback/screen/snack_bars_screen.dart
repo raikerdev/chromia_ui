@@ -7,115 +7,126 @@ class SnackBarsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final spacing = theme.spacing;
     return ExampleScaffold(
-      title: 'SnackBars',
+      title: 'Snack Bar',
       children: [
-        // SnackBars section
-        _buildSnackBarSection(context),
-        spacing.gapVXXL,
-      ],
-    );
-  }
-
-  Widget _buildSnackBarSection(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final colors = context.chromiaColors;
-    final spacing = theme.spacing;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'SnackBars',
-          style: theme.typography.headlineSmall.copyWith(
-            color: colors.onSurface,
-          ),
-        ),
-        spacing.gapVM,
-
-        Text(
-          'Basic SnackBars',
-          style: theme.typography.titleSmall.copyWith(
-            color: colors.onSurfaceVariant,
-          ),
-        ),
-        spacing.gapVS,
-        Wrap(
-          spacing: spacing.m,
-          runSpacing: spacing.m,
+        ComponentPage(
+          description:
+              'Chromia provides showChromiaSnackBar for basic snack bars, '
+              'and BuildContext extension methods — showSuccessSnackBar, '
+              'showErrorSnackBar, showWarningSnackBar, and showInfoSnackBar — '
+              'for semantic variants.',
+          whenToUse:
+              'Use snack bars for brief, non-blocking feedback about completed actions. '
+              'Use the success variant after a save or upload. '
+              'Use the error variant when an operation fails. '
+              'Add an action label for recoverable actions like UNDO.',
           children: [
-            ChromiaButton(
-              onPressed: () {
-                showChromiaSnackBar(
-                  context: context,
-                  message: 'This is a basic snack_bar',
-                );
-              },
-              child: const Text('Show Basic'),
-            ),
-            ChromiaButton(
-              variant: ChromiaButtonVariant.outlined,
-              onPressed: () {
-                showChromiaSnackBar(
-                  context: context,
-                  message: 'Action completed',
-                  actionLabel: 'UNDO',
-                  onActionPressed: () {
-                    context.showInfoSnackBar(message: 'Action undone');
-                  },
-                );
-              },
-              child: const Text('With Action'),
-            ),
-          ],
-        ),
-        spacing.gapVL,
+            // ── Basic ─────────────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Basic',
+              description:
+                  'showChromiaSnackBar displays a neutral message. '
+                  'Add actionLabel and onActionPressed for an undo-style action.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+// Basic message
+showChromiaSnackBar(
+  context: context,
+  message: 'This is a basic snack bar',
+)
 
-        Text(
-          'Styled SnackBars',
-          style: theme.typography.titleSmall.copyWith(
-            color: colors.onSurfaceVariant,
-          ),
-        ),
-        spacing.gapVS,
-        Wrap(
-          spacing: spacing.m,
-          runSpacing: spacing.m,
-          children: [
-            ChromiaButton(
-              onPressed: () {
-                context.showSuccessSnackBar(
-                  message: 'Changes saved successfully!',
-                );
-              },
-              child: const Text('Success'),
+// With action
+showChromiaSnackBar(
+  context: context,
+  message: 'Action completed',
+  actionLabel: 'UNDO',
+  onActionPressed: () { /* handle undo */ },
+)''',
+                preview: Builder(
+                  builder: (context) => Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: [
+                      ChromiaButton(
+                        onPressed: () {
+                          showChromiaSnackBar(
+                            context: context,
+                            message: 'This is a basic snack bar',
+                          );
+                        },
+                        child: const Text('Show Basic'),
+                      ),
+                      ChromiaButton(
+                        variant: ChromiaButtonVariant.outlined,
+                        onPressed: () {
+                          showChromiaSnackBar(
+                            context: context,
+                            message: 'Action completed',
+                            actionLabel: 'UNDO',
+                            onActionPressed: () {
+                              context.showInfoSnackBar(
+                                message: 'Action undone',
+                              );
+                            },
+                          );
+                        },
+                        child: const Text('With Action'),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
-            ChromiaButton(
-              onPressed: () {
-                context.showErrorSnackBar(
-                  message: 'An error occurred',
-                  actionLabel: 'RETRY',
-                );
-              },
-              child: const Text('Error'),
-            ),
-            ChromiaButton(
-              onPressed: () {
-                context.showWarningSnackBar(
-                  message: 'Please review your text_field',
-                );
-              },
-              child: const Text('Warning'),
-            ),
-            ChromiaButton(
-              onPressed: () {
-                context.showInfoSnackBar(
-                  message: 'New updates available',
-                );
-              },
-              child: const Text('Info'),
+
+            // ── Semantic Variants ─────────────────────────────────────────────
+            ComponentSection(
+              title: 'Semantic Variants',
+              description:
+                  'Use context extension methods for pre-styled success, '
+                  'error, warning, and info snack bars.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+context.showSuccessSnackBar(message: 'Changes saved successfully!')
+context.showErrorSnackBar(message: 'An error occurred', actionLabel: 'RETRY')
+context.showWarningSnackBar(message: 'Please review your input')
+context.showInfoSnackBar(message: 'New updates available')''',
+                preview: Builder(
+                  builder: (context) => Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: [
+                      ChromiaButton(
+                        onPressed: () => context.showSuccessSnackBar(
+                          message: 'Changes saved successfully!',
+                        ),
+                        child: const Text('Success'),
+                      ),
+                      ChromiaButton(
+                        onPressed: () => context.showErrorSnackBar(
+                          message: 'An error occurred',
+                          actionLabel: 'RETRY',
+                        ),
+                        child: const Text('Error'),
+                      ),
+                      ChromiaButton(
+                        onPressed: () => context.showWarningSnackBar(
+                          message: 'Please review your input',
+                        ),
+                        child: const Text('Warning'),
+                      ),
+                      ChromiaButton(
+                        onPressed: () => context.showInfoSnackBar(
+                          message: 'New updates available',
+                        ),
+                        child: const Text('Info'),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ],
         ),

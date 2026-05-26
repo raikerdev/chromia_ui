@@ -10,188 +10,263 @@ class TextFieldsScreen extends StatefulWidget {
 }
 
 class _TextFieldsScreenState extends State<TextFieldsScreen> {
-  ChromiaTextFieldVariant selectedVariant = ChromiaTextFieldVariant.filled;
-  bool isPasswordObscured = true;
-
-  void _setVariant(ChromiaTextFieldVariant variant) {
-    setState(() {
-      selectedVariant = variant;
-    });
-  }
-
-  void _togglePasswordVisibility() {
-    setState(() {
-      isPasswordObscured = !isPasswordObscured;
-    });
-  }
+  bool _isPasswordObscured = true;
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final spacing = theme.spacing;
     return ExampleScaffold(
-      title: 'Text Fields',
+      title: 'Text Field',
       children: [
-        // Variant section
-        _buildVariantSection(context),
-        spacing.gapVXXL,
+        ComponentPage(
+          description:
+              'ChromiaTextField is a themed text input that supports filled and outlined '
+              'variants, prefix/suffix icons and text, helper text, character limits, '
+              'multiline mode, and built-in validation.',
+          whenToUse:
+              'Use the filled variant inside forms and surfaces. '
+              'Use outlined when the input needs a clear boundary against a colored background. '
+              'Always provide a label so screen readers can identify the field.',
+          children: [
+            // ── Variants ─────────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Variants',
+              description:
+                  'Filled uses a background fill; Outlined uses a border. '
+                  'Both adapt to light and dark modes automatically.',
+              child: ChromiaCodePreviewGroup(
+                items: [
+                  CodePreviewItem(
+                    label: 'Filled',
+                    description: 'Recommended for most forms.',
+                    code: '''
+ChromiaTextField(
+  variant: ChromiaTextFieldVariant.filled,
+  label: 'Email',
+  hintText: 'Enter your email',
+)''',
+                    preview: ChromiaTextField(
+                      variant: ChromiaTextFieldVariant.filled,
+                      label: 'Email',
+                      hintText: 'Enter your email',
+                    ),
+                  ),
+                  CodePreviewItem(
+                    label: 'Outlined',
+                    description:
+                        'Use when the field needs a visible border boundary.',
+                    code: '''
+ChromiaTextField(
+  variant: ChromiaTextFieldVariant.outlined,
+  label: 'Email',
+  hintText: 'Enter your email',
+)''',
+                    preview: ChromiaTextField(
+                      variant: ChromiaTextFieldVariant.outlined,
+                      label: 'Email',
+                      hintText: 'Enter your email',
+                    ),
+                  ),
+                ],
+              ),
+            ),
 
-        // Text fields section
-        _buildTextFieldsSection(context),
-        spacing.gapVXXL,
-      ],
-    );
-  }
+            // ── Prefix & Suffix ───────────────────────────────────────────────
+            ComponentSection(
+              title: 'Prefix & Suffix',
+              description:
+                  'Add icons, text, or interactive widgets to either side of the input.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+// Prefix icon + suffix text
+ChromiaTextField(
+  label: 'Email',
+  hintText: 'user',
+  prefixIcon: Icon(Icons.email),
+  suffixText: '@example.com',
+)
 
-  Widget _buildVariantSection(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final colors = context.chromiaColors;
-    final spacing = theme.spacing;
+// Prefix text + suffix icon
+ChromiaTextField(
+  label: 'Phone',
+  hintText: '234 567 8900',
+  prefixText: '+1 ',
+  suffixIcon: Icon(Icons.phone),
+  keyboardType: TextInputType.phone,
+)''',
+                preview: Column(
+                  children: [
+                    ChromiaTextField(
+                      label: 'Email',
+                      hintText: 'user',
+                      prefixIcon: const Icon(Icons.email),
+                      suffixText: '@example.com',
+                    ),
+                    const SizedBox(height: 12),
+                    ChromiaTextField(
+                      label: 'Phone',
+                      hintText: '234 567 8900',
+                      prefixText: '+1 ',
+                      suffixIcon: const Icon(Icons.phone),
+                      keyboardType: TextInputType.phone,
+                    ),
+                  ],
+                ),
+              ),
+            ),
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        ChromiaText(
-          'Select a variant to see the theme change dynamically:',
-          type: ChromiaTypographyType.bodyMedium,
-          color: colors.onSurfaceVariant,
-        ),
-        spacing.gapVM,
-        Wrap(
-          spacing: spacing.m,
-          runSpacing: spacing.m,
-          children: ChromiaTextFieldVariant.values.map((variant) {
-            final isSelected = variant.name == selectedVariant.name;
-            return ChromiaButton(
-              variant: isSelected ? ChromiaButtonVariant.filled : ChromiaButtonVariant.outlined,
-              size: ChromiaButtonSize.small,
-              onPressed: () => _setVariant(variant),
-              child: Text(variant.name),
-            );
-          }).toList(),
-        ),
-      ],
-    );
-  }
+            // ── Helper & Character Limit ──────────────────────────────────────
+            ComponentSection(
+              title: 'Helper Text & Character Limit',
+              description:
+                  'helperText provides context below the field. '
+                  'maxLength shows a character counter.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaTextField(
+  label: 'Document',
+  helperText: 'We never share your personal information.',
+  prefixIcon: Icon(Icons.assignment_ind),
+)
 
-  Widget _buildTextFieldsSection(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final colors = context.chromiaColors;
-    final spacing = theme.spacing;
+ChromiaTextField(
+  label: 'Username',
+  maxLength: 20,
+  prefixIcon: Icon(Icons.account_circle),
+)''',
+                preview: Column(
+                  children: [
+                    ChromiaTextField(
+                      label: 'Document',
+                      helperText: 'We never share your personal information.',
+                      prefixIcon: const Icon(Icons.assignment_ind),
+                    ),
+                    const SizedBox(height: 12),
+                    ChromiaTextField(
+                      label: 'Username',
+                      maxLength: 20,
+                      prefixIcon: const Icon(Icons.account_circle),
+                    ),
+                  ],
+                ),
+              ),
+            ),
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Single line'
-        ChromiaText(
-          'Single line',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
+            // ── Password ──────────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Password',
+              description:
+                  'Use obscureText: true and a toggle icon in suffixIcon '
+                  'to create a password field with show/hide functionality.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaTextField(
+  label: 'Password',
+  obscureText: isObscured,
+  prefixIcon: Icon(Icons.lock),
+  suffixIcon: IconButton(
+    icon: Icon(isObscured ? Icons.visibility : Icons.visibility_off),
+    onPressed: () => setState(() => isObscured = !isObscured),
+  ),
+)''',
+                preview: StatefulBuilder(
+                  builder: (context, setState) {
+                    return ChromiaTextField(
+                      label: 'Password',
+                      hintText: 'Enter your password',
+                      obscureText: _isPasswordObscured,
+                      prefixIcon: const Icon(Icons.lock),
+                      suffixIcon: InkWell(
+                        onTap: () => setState(
+                          () => _isPasswordObscured = !_isPasswordObscured,
+                        ),
+                        child: Icon(
+                          _isPasswordObscured
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
 
-        ChromiaTextField(
-          label: 'Email',
-          hintText: 'Enter your email',
-          variant: selectedVariant,
-          keyboardType: TextInputType.emailAddress,
-          prefixIcon: const Icon(Icons.email),
-          suffixText: '@your-mail.com',
-        ),
-        spacing.gapVM,
+            // ── Validation ────────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Validation',
+              description:
+                  'Pass a list of ChromiaTextFieldValidator to validators. '
+                  'Built-in validators include required, email, min/max length, and regex.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+// Email validator
+ChromiaTextField(
+  label: 'Email',
+  validators: [EmailValidator('Enter a valid email address')],
+)
 
-        ChromiaTextField(
-          variant: selectedVariant,
-          label: 'Phone',
-          hintText: '234 567 8900',
-          keyboardType: TextInputType.phone,
-          prefixText: '+1 ',
-          suffixIcon: const Icon(Icons.phone),
-        ),
-        spacing.gapVL,
+// Custom "already taken" check
+ChromiaTextField(
+  label: 'Username',
+  initialValue: 'john_doe',
+  validators: [
+    DifferentValidator('Username is already taken',
+        compareValue: 'john_doe'),
+  ],
+)''',
+                preview: Column(
+                  children: [
+                    ChromiaTextField(
+                      label: 'Email',
+                      hintText: 'Enter your email',
+                      keyboardType: TextInputType.emailAddress,
+                      prefixIcon: const Icon(Icons.email),
+                      validators: [EmailValidator('Enter a valid email address')],
+                    ),
+                    const SizedBox(height: 12),
+                    ChromiaTextField(
+                      label: 'Username',
+                      initialValue: 'john_doe',
+                      prefixIcon: const Icon(Icons.account_circle),
+                      validators: [
+                        DifferentValidator(
+                          'Username is already taken',
+                          compareValue: 'john_doe',
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
 
-        ChromiaTextField(
-          label: 'Password',
-          hintText: 'Enter your password',
-          obscureText: isPasswordObscured,
-          variant: selectedVariant,
-          prefixIcon: const Icon(Icons.lock),
-          suffixIcon: InkWell(
-            onTap: _togglePasswordVisibility,
-            child: Icon(isPasswordObscured ? Icons.visibility : Icons.visibility_off),
-          ),
-        ),
-        spacing.gapVL,
-
-        // With Helper text
-        ChromiaText(
-          'With Helper',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-
-        ChromiaTextField(
-          label: 'Document',
-          hintText: 'Enter your document number',
-          helperText: 'We don\'t share your information',
-          keyboardType: TextInputType.number,
-          variant: selectedVariant,
-          prefixIcon: const Icon(Icons.assignment_ind),
-        ),
-        spacing.gapVM,
-
-        ChromiaTextField(
-          label: 'Username',
-          hintText: 'Enter your username',
-          variant: selectedVariant,
-          maxLength: 10,
-          prefixIcon: const Icon(Icons.account_circle),
-        ),
-        spacing.gapVM,
-
-        // With validation text
-        ChromiaText(
-          'With Validation',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-
-        ChromiaTextField(
-          label: 'Username',
-          hintText: 'Enter username',
-          initialValue: 'john_doe',
-          variant: selectedVariant,
-          prefixIcon: const Icon(Icons.account_circle),
-          validators: [DifferentValidator('Username is already taken', compareValue: 'john_doe')],
-        ),
-        spacing.gapVL,
-
-        ChromiaTextField(
-          label: 'Email',
-          hintText: 'Enter your email',
-          variant: selectedVariant,
-          keyboardType: TextInputType.emailAddress,
-          prefixIcon: const Icon(Icons.account_circle),
-          validators: [EmailValidator('Invalid email')],
-        ),
-        spacing.gapVL,
-
-        // Multiline
-        ChromiaText(
-          'Multiline',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-
-        ChromiaTextField(
-          label: 'Description',
-          hintText: 'Enter a description',
-          variant: selectedVariant,
-          maxLines: 4,
-          minLines: 3,
+            // ── Multiline ─────────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Multiline',
+              description:
+                  'Set maxLines > 1 (and optionally minLines) for text area inputs.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaTextField(
+  label: 'Description',
+  hintText: 'Enter a description...',
+  maxLines: 4,
+  minLines: 3,
+)''',
+                preview: ChromiaTextField(
+                  label: 'Description',
+                  hintText: 'Enter a description...',
+                  maxLines: 4,
+                  minLines: 3,
+                ),
+              ),
+            ),
+          ],
         ),
       ],
     );

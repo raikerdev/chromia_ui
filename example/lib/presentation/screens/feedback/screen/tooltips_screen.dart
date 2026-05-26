@@ -7,246 +7,270 @@ class TooltipsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final spacing = theme.spacing;
     return ExampleScaffold(
-      title: 'Tooltips',
+      title: 'Tooltip',
       children: [
-        // Tooltip section
-        _buildTooltipSection(context),
-        spacing.gapVXXL,
-      ],
-    );
-  }
-
-  Widget _buildTooltipSection(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final colors = context.chromiaColors;
-    final spacing = theme.spacing;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Basic tooltips
-        ChromiaText(
-          'Basic Tooltips',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        ChromiaText(
-          'Hover or long-press on the icons to see tooltips',
-          style: theme.typography.bodySmall.copyWith(
-            color: colors.onSurfaceVariant,
-          ),
-        ),
-        spacing.gapVS,
-        Wrap(
-          spacing: spacing.l,
-          runSpacing: spacing.m,
+        ComponentPage(
+          description:
+              'ChromiaTooltip wraps any widget and shows a message on hover '
+              'or long-press. ChromiaTooltip.rich adds a title for richer content. '
+              'ChromiaHelpIcon is a pre-built help icon with an inline tooltip. '
+              'ChromiaLongPressTooltip is optimized for touch targets.',
+          whenToUse:
+              'Use tooltips to explain icon-only buttons and less obvious UI elements. '
+              'Use ChromiaHelpIcon next to form labels that need extra clarification. '
+              'On mobile, tooltips trigger on long-press; on desktop, on hover.',
           children: [
-            ChromiaTooltip(
-              message: 'This is a home icon',
-              child: Icon(Icons.home, size: 32, color: colors.primary),
-            ),
-            ChromiaTooltip(
-              message: 'This is a favorite icon',
-              child: Icon(Icons.favorite, size: 32, color: colors.error),
-            ),
-            ChromiaTooltip(
-              message: 'This is a star icon',
-              child: Icon(Icons.star, size: 32, color: colors.warning),
-            ),
-            ChromiaTooltip(
-              message: 'This is a settings icon',
-              child: Icon(Icons.settings, size: 32, color: colors.onSurface),
-            ),
-          ],
-        ),
-        spacing.gapVL,
-
-        // Rich tooltips
-        ChromiaText(
-          'Rich Tooltips',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        Wrap(
-          spacing: spacing.l,
-          runSpacing: spacing.m,
-          children: [
-            ChromiaTooltip.rich(
-              title: 'Help',
-              message: 'This is a detailed tooltip with additional information.',
-              child: Icon(Icons.help_outline, size: 32, color: colors.info),
-            ),
-            ChromiaTooltip.rich(
-              title: 'Information',
-              message: 'Rich tooltips can contain longer descriptions and explanations.',
-              child: Icon(Icons.info_outline, size: 32, color: colors.primary),
-            ),
-          ],
-        ),
-        spacing.gapVL,
-
-        // Help icons
-        ChromiaText(
-          'Help Icons',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        Row(
-          children: [
-            ChromiaText(
-              'Username',
-              style: theme.typography.bodyMedium,
-            ),
-            spacing.gapHXS,
-            const ChromiaHelpIcon(
-              message: 'Enter your unique username',
-            ),
-            const Spacer(),
-            ChromiaText(
-              'Email',
-              style: theme.typography.bodyMedium,
-            ),
-            spacing.gapHXS,
-            const ChromiaHelpIcon(
-              message: 'Your email address for notifications',
-            ),
-          ],
-        ),
-        spacing.gapVL,
-
-        // Tooltips on buttons
-        ChromiaText(
-          'Tooltips on Buttons',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        Wrap(
-          spacing: spacing.m,
-          runSpacing: spacing.m,
-          children: [
-            ChromiaTooltip(
-              message: 'Save your changes',
-              child: ChromiaButton(
-                onPressed: () {},
-                icon: const Icon(Icons.save),
-                child: const ChromiaText('Save'),
-              ),
-            ),
-            ChromiaTooltip(
-              message: 'Discard all changes',
-              child: ChromiaButton(
-                variant: ChromiaButtonVariant.outlined,
-                onPressed: () {},
-                icon: const Icon(Icons.cancel),
-                child: const ChromiaText('Cancel'),
-              ),
-            ),
-          ],
-        ),
-        spacing.gapVL,
-
-        // Long press tooltip
-        ChromiaText(
-          'Long Press Tooltip',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        ChromiaText(
-          'Long press on the card below to see the tooltip',
-          style: theme.typography.bodySmall.copyWith(
-            color: colors.onSurfaceVariant,
-          ),
-        ),
-        spacing.gapVS,
-        ChromiaLongPressTooltip(
-          message: 'You activated the long press tooltip!',
-          duration: const Duration(seconds: 3),
-          child: ChromiaCard(
-            child: Row(
-              children: [
-                Icon(Icons.touch_app, color: colors.primary),
-                spacing.gapHM,
-                const Expanded(
-                  child: ChromiaText('Long press here'),
+            // ── Basic ─────────────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Basic',
+              description:
+                  'Wrap any widget with ChromiaTooltip. '
+                  'Hover over or long-press the icons to see the tooltips.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaTooltip(
+  message: 'This is a home icon',
+  child: Icon(Icons.home, size: 32),
+)''',
+                preview: Builder(
+                  builder: (context) {
+                    final colors = context.chromiaColors;
+                    return Wrap(
+                      spacing: 24,
+                      runSpacing: 12,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: [
+                        ChromiaTooltip(
+                          message: 'This is a home icon',
+                          child: Icon(
+                            Icons.home,
+                            size: 32,
+                            color: colors.primary,
+                          ),
+                        ),
+                        ChromiaTooltip(
+                          message: 'Add to favorites',
+                          child: Icon(
+                            Icons.favorite,
+                            size: 32,
+                            color: colors.error,
+                          ),
+                        ),
+                        ChromiaTooltip(
+                          message: 'Mark as starred',
+                          child: Icon(
+                            Icons.star,
+                            size: 32,
+                            color: colors.warning,
+                          ),
+                        ),
+                        ChromiaTooltip(
+                          message: 'Open settings',
+                          child: Icon(
+                            Icons.settings,
+                            size: 32,
+                            color: colors.onSurface,
+                          ),
+                        ),
+                      ],
+                    );
+                  },
                 ),
-              ],
+              ),
             ),
-          ),
-        ),
-        spacing.gapVL,
 
-        // Tooltips in a form example
-        ChromiaText(
-          'Tooltips in Form',
-          type: ChromiaTypographyType.headlineSmall,
-          color: colors.onSurface,
-        ),
-        spacing.gapVS,
-        ChromiaCard(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: ChromiaText(
-                      'Account Settings',
-                      style: theme.typography.titleMedium,
-                    ),
-                  ),
-                  const ChromiaHelpIcon(
-                    message: 'Configure your account preferences',
-                  ),
-                ],
+            // ── Rich Tooltips ─────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Rich Tooltips',
+              description:
+                  'ChromiaTooltip.rich adds a bold title above the message '
+                  'for more informative tooltips.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaTooltip.rich(
+  title: 'Help',
+  message: 'Detailed explanation of this feature.',
+  child: Icon(Icons.help_outline, size: 32),
+)''',
+                preview: Builder(
+                  builder: (context) {
+                    final colors = context.chromiaColors;
+                    return Wrap(
+                      spacing: 24,
+                      runSpacing: 12,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: [
+                        ChromiaTooltip.rich(
+                          title: 'Help',
+                          message:
+                              'This is a detailed tooltip with additional information.',
+                          child: Icon(
+                            Icons.help_outline,
+                            size: 32,
+                            color: colors.info,
+                          ),
+                        ),
+                        ChromiaTooltip.rich(
+                          title: 'Information',
+                          message:
+                              'Rich tooltips can contain longer descriptions.',
+                          child: Icon(
+                            Icons.info_outline,
+                            size: 32,
+                            color: colors.primary,
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                ),
               ),
-              spacing.gapVM,
-              Row(
-                children: [
-                  Expanded(
-                    child: ChromiaText(
-                      'Email Notifications',
-                      style: theme.typography.bodyMedium,
-                    ),
-                  ),
-                  const ChromiaHelpIcon(
-                    message: 'Receive updates via email',
-                  ),
-                  spacing.gapHM,
-                  ChromiaToggleButton(
-                    value: true,
-                    onChanged: (value) {},
-                  ),
-                ],
+            ),
+
+            // ── Help Icon ─────────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Help Icon',
+              description:
+                  'ChromiaHelpIcon is a small inline tooltip icon — '
+                  'place it next to form labels for quick hints.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+Row(
+  children: [
+    Text('Username'),
+    SizedBox(width: 4),
+    ChromiaHelpIcon(message: 'Enter your unique username'),
+  ],
+)''',
+                preview: Builder(
+                  builder: (context) {
+                    final theme = context.chromiaTheme;
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            ChromiaText(
+                              'Username',
+                              style: theme.typography.bodyMedium,
+                            ),
+                            const SizedBox(width: 4),
+                            const ChromiaHelpIcon(
+                              message: 'Enter your unique username',
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 12),
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            ChromiaText(
+                              'Email',
+                              style: theme.typography.bodyMedium,
+                            ),
+                            const SizedBox(width: 4),
+                            const ChromiaHelpIcon(
+                              message:
+                                  'Your email address for account notifications',
+                            ),
+                          ],
+                        ),
+                      ],
+                    );
+                  },
+                ),
               ),
-              spacing.gapVM,
-              Row(
-                children: [
-                  Expanded(
-                    child: ChromiaText(
-                      'Push Notifications',
-                      style: theme.typography.bodyMedium,
-                    ),
+            ),
+
+            // ── Tooltips on Buttons ───────────────────────────────────────────
+            ComponentSection(
+              title: 'Tooltips on Buttons',
+              description:
+                  'Wrap any widget including buttons. Useful for icon-only action bars.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaTooltip(
+  message: 'Save your changes',
+  child: ChromiaButton(
+    icon: Icon(Icons.save),
+    onPressed: () {},
+    child: Text('Save'),
+  ),
+)''',
+                preview: Builder(
+                  builder: (context) => Wrap(
+                    spacing: 12,
+                    runSpacing: 8,
+                    children: [
+                      ChromiaTooltip(
+                        message: 'Save your changes',
+                        child: ChromiaButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.save),
+                          child: const Text('Save'),
+                        ),
+                      ),
+                      ChromiaTooltip(
+                        message: 'Discard all changes',
+                        child: ChromiaButton(
+                          variant: ChromiaButtonVariant.outlined,
+                          onPressed: () {},
+                          icon: const Icon(Icons.cancel),
+                          child: const Text('Cancel'),
+                        ),
+                      ),
+                    ],
                   ),
-                  const ChromiaHelpIcon(
-                    message: 'Receive push notifications on your device',
-                  ),
-                  spacing.gapHM,
-                  ChromiaToggleButton(
-                    value: false,
-                    onChanged: (value) {},
-                  ),
-                ],
+                ),
               ),
-            ],
-          ),
+            ),
+
+            // ── Long Press ────────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Long Press Tooltip',
+              description:
+                  'ChromiaLongPressTooltip is optimized for touch — '
+                  'it shows on long-press and auto-dismisses after duration.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaLongPressTooltip(
+  message: 'You activated the long press tooltip!',
+  duration: Duration(seconds: 3),
+  child: ChromiaCard(child: Text('Long press here')),
+)''',
+                preview: Builder(
+                  builder: (context) {
+                    final colors = context.chromiaColors;
+                    return ChromiaLongPressTooltip(
+                      message: 'You activated the long press tooltip!',
+                      duration: const Duration(seconds: 3),
+                      child: ChromiaCard(
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.touch_app,
+                              color: colors.primary,
+                            ),
+                            const SizedBox(width: 12),
+                            const Expanded(
+                              child: ChromiaText('Long press here'),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+          ],
         ),
       ],
     );

@@ -7,136 +7,162 @@ class DividersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final spacing = theme.spacing;
     return ExampleScaffold(
-      title: 'Dividers',
+      title: 'Divider',
       children: [
-        // Divider section
-        _buildDividerSection(context),
-        spacing.gapVXXL,
-      ],
-    );
-  }
+        ComponentPage(
+          description:
+              'ChromiaDivider separates content with a horizontal or vertical line. '
+              'It supports text and icon variants for labeled section breaks, '
+              'and ChromiaSectionDivider for titled list sections with optional actions.',
+          whenToUse:
+              'Use dividers to visually separate groups of related content. '
+              'Use ChromiaDivider.withText for auth screens with an "OR" separator. '
+              'Use ChromiaSectionDivider as a list section header with an optional action.',
+          children: [
+            // ── Basic ─────────────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Basic',
+              description:
+                  'A simple horizontal divider. '
+                  'Customize with thickness, indent, and color.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+// Default
+ChromiaDivider()
 
-  Widget _buildDividerSection(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final colors = context.chromiaColors;
-    final spacing = theme.spacing;
+// Custom thickness
+ChromiaDivider(thickness: 2)
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Dividers',
-          style: theme.typography.headlineSmall.copyWith(
-            color: colors.onSurface,
-          ),
-        ),
-        spacing.gapVM,
+// With indent
+ChromiaDivider(indent: 16, endIndent: 16, thickness: 2)''',
+                preview: const Column(
+                  children: [
+                    ChromiaDivider(),
+                    SizedBox(height: 12),
+                    ChromiaDivider(thickness: 2),
+                    SizedBox(height: 12),
+                    ChromiaDivider(
+                      indent: 16,
+                      endIndent: 16,
+                      thickness: 2,
+                    ),
+                  ],
+                ),
+              ),
+            ),
 
-        // Basic divider
-        Text(
-          'Basic Divider',
-          style: theme.typography.titleSmall.copyWith(
-            color: colors.onSurfaceVariant,
-          ),
-        ),
-        spacing.gapVS,
-        const ChromiaDivider(),
-        spacing.gapVL,
+            // ── With Text ─────────────────────────────────────────────────────
+            ComponentSection(
+              title: 'With Text',
+              description:
+                  'ChromiaDivider.withText() centers a label between two lines. '
+                  'Commonly used as an "OR" separator on auth screens.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaDivider.withText(text: 'OR')
+ChromiaDivider.withText(text: 'CONTINUE WITH')''',
+                preview: Column(
+                  children: [
+                    ChromiaDivider.withText(text: 'OR'),
+                    const SizedBox(height: 12),
+                    ChromiaDivider.withText(text: 'CONTINUE WITH'),
+                  ],
+                ),
+              ),
+            ),
 
-        // Divider with custom thickness
-        Text(
-          'Custom Thickness',
-          style: theme.typography.titleSmall.copyWith(
-            color: colors.onSurfaceVariant,
-          ),
-        ),
-        spacing.gapVS,
-        const ChromiaDivider(thickness: 2),
-        spacing.gapVL,
+            // ── With Icon ─────────────────────────────────────────────────────
+            ComponentSection(
+              title: 'With Icon',
+              description:
+                  'ChromiaDivider.withIcon() centers an icon between two lines.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaDivider.withIcon(icon: Icons.star)
+ChromiaDivider.withIcon(icon: Icons.favorite)''',
+                preview: Column(
+                  children: [
+                    ChromiaDivider.withIcon(icon: Icons.star),
+                    const SizedBox(height: 12),
+                    ChromiaDivider.withIcon(icon: Icons.favorite),
+                  ],
+                ),
+              ),
+            ),
 
-        // Divider with indent
-        Text(
-          'With Indent',
-          style: theme.typography.titleSmall.copyWith(
-            color: colors.onSurfaceVariant,
-          ),
-        ),
-        spacing.gapVS,
-        const ChromiaDivider(
-          indent: 16,
-          endIndent: 16,
-          thickness: 2,
-        ),
-        spacing.gapVL,
+            // ── Vertical ──────────────────────────────────────────────────────
+            ComponentSection(
+              title: 'Vertical',
+              description:
+                  'Use ChromiaDivider.vertical() inside a Row to separate '
+                  'inline items such as toolbar actions or tab labels.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+SizedBox(
+  height: 50,
+  child: Row(
+    children: [
+      Text('Item 1'),
+      ChromiaDivider.vertical(height: 40),
+      Text('Item 2'),
+      ChromiaDivider.vertical(height: 40),
+      Text('Item 3'),
+    ],
+  ),
+)''',
+                preview: const SizedBox(
+                  height: 50,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Item 1'),
+                      ChromiaDivider.vertical(height: 40),
+                      Text('Item 2'),
+                      ChromiaDivider.vertical(height: 40),
+                      Text('Item 3'),
+                    ],
+                  ),
+                ),
+              ),
+            ),
 
-        // Divider with text
-        Text(
-          'Divider with Text',
-          style: theme.typography.titleSmall.copyWith(
-            color: colors.onSurfaceVariant,
-          ),
-        ),
-        spacing.gapVS,
-        ChromiaDivider.withText(text: 'OR'),
-        spacing.gapVM,
-        ChromiaDivider.withText(text: 'CONTINUE WITH'),
-        spacing.gapVL,
-
-        // Divider with icon
-        Text(
-          'Divider with Icon',
-          style: theme.typography.titleSmall.copyWith(
-            color: colors.onSurfaceVariant,
-          ),
-        ),
-        spacing.gapVS,
-        ChromiaDivider.withIcon(icon: Icons.star),
-        spacing.gapVM,
-        ChromiaDivider.withIcon(icon: Icons.favorite),
-        spacing.gapVL,
-
-        // Vertical dividers
-        Text(
-          'Vertical Dividers',
-          style: theme.typography.titleSmall.copyWith(
-            color: colors.onSurfaceVariant,
-          ),
-        ),
-        spacing.gapVS,
-        const SizedBox(
-          height: 50,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('Item 1'),
-              ChromiaDivider.vertical(height: 40),
-              Text('Item 2'),
-              ChromiaDivider.vertical(height: 40),
-              Text('Item 3'),
-            ],
-          ),
-        ),
-        spacing.gapVL,
-
-        // Section divider
-        Text(
-          'Section Divider',
-          style: theme.typography.titleSmall.copyWith(
-            color: colors.onSurfaceVariant,
-          ),
-        ),
-        spacing.gapVS,
-        ChromiaSectionDivider(
-          title: 'Settings',
-          trailing: ChromiaButton(
-            size: ChromiaButtonSize.small,
-            variant: ChromiaButtonVariant.text,
-            onPressed: () {},
-            child: const Text('View All'),
-          ),
+            // ── Section Divider ───────────────────────────────────────────────
+            ComponentSection(
+              title: 'Section Divider',
+              description:
+                  'ChromiaSectionDivider renders a titled label with an optional '
+                  'trailing action — ideal for grouped list section headers.',
+              child: ChromiaCodePreview(
+                layout: CodePreviewLayout.vertical,
+                code: '''
+ChromiaSectionDivider(
+  title: 'Settings',
+  trailing: ChromiaButton(
+    variant: ChromiaButtonVariant.text,
+    size: ChromiaButtonSize.small,
+    onPressed: () {},
+    child: Text('View All'),
+  ),
+)''',
+                preview: Builder(
+                  builder: (context) => ChromiaSectionDivider(
+                    title: 'Settings',
+                    trailing: ChromiaButton(
+                      size: ChromiaButtonSize.small,
+                      variant: ChromiaButtonVariant.text,
+                      onPressed: () {},
+                      child: const Text('View All'),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ],
     );
