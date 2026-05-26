@@ -28,7 +28,6 @@ class TooltipsScreen extends StatelessWidget {
                   'Wrap any widget with ChromiaTooltip. '
                   'Hover over or long-press the icons to see the tooltips.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaTooltip(
   message: 'This is a home icon',
@@ -88,7 +87,6 @@ ChromiaTooltip(
                   'ChromiaTooltip.rich adds a bold title above the message '
                   'for more informative tooltips.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaTooltip.rich(
   title: 'Help',
@@ -137,7 +135,6 @@ ChromiaTooltip.rich(
                   'ChromiaHelpIcon is a small inline tooltip icon — '
                   'place it next to form labels for quick hints.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 Row(
   children: [
@@ -193,7 +190,6 @@ Row(
               description:
                   'Wrap any widget including buttons. Useful for icon-only action bars.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaTooltip(
   message: 'Save your changes',
@@ -238,7 +234,6 @@ ChromiaTooltip(
                   'ChromiaLongPressTooltip is optimized for touch — '
                   'it shows on long-press and auto-dismisses after duration.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaLongPressTooltip(
   message: 'You activated the long press tooltip!',

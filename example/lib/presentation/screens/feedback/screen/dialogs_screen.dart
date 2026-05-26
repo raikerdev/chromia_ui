@@ -29,7 +29,6 @@ class DialogsScreen extends StatelessWidget {
                   'showChromiaAlert shows a simple information dialog '
                   'with a dismiss button.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaButton(
   onPressed: () {
@@ -63,7 +62,6 @@ ChromiaButton(
                   'showChromiaConfirmDialog returns a bool — true if confirmed, '
                   'false if cancelled. Use isDestructive: true for dangerous actions.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 // Standard confirm
 final confirmed = await showChromiaConfirmDialog(
@@ -133,7 +131,6 @@ final deleted = await showChromiaConfirmDialog(
                   'showChromiaDialog accepts a contentWidget and a list of '
                   'ChromiaDialogAction buttons.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 showChromiaDialog(
   context: context,
@@ -199,7 +196,6 @@ showChromiaDialog(
                   'ChromiaLoadingDialog.show() blocks the UI with a spinner '
                   'during async operations. Call .hide() when done.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaLoadingDialog.show(
   context: context,
@@ -233,7 +229,6 @@ if (context.mounted) ChromiaLoadingDialog.hide(context);''',
                   'showChromiaBottomSheet slides up a modal sheet from the bottom '
                   'of the screen.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 showChromiaBottomSheet(
   context: context,

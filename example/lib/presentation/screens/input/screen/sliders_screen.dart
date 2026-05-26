@@ -27,7 +27,6 @@ class SlidersScreen extends StatelessWidget {
               description: 'A simple slider with min, max, and a value label. '
                   'Pass onChanged: null to disable.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaSlider(
   value: volume,
@@ -78,7 +77,6 @@ ChromiaSlider(
                   'Use valueBuilder to format the displayed value, '
                   'and minLabel/maxLabel for range endpoint annotations.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaSlider(
   value: brightness,
@@ -114,7 +112,6 @@ ChromiaSlider(
                   'Set divisions to restrict the slider to discrete steps '
                   'and show tick marks.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaSlider(
   value: temperature,
@@ -148,7 +145,6 @@ ChromiaSlider(
                   'ChromiaRangeSlider provides two thumbs to select '
                   'a minimum and maximum value.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaRangeSlider(
   values: priceRange,
@@ -184,7 +180,6 @@ ChromiaRangeSlider(
                   'ChromiaListTileSlider embeds a slider inside a list tile '
                   'for settings screens.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaListTileSlider(
   value: volume,

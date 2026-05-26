@@ -26,7 +26,6 @@ class DropdownsScreen extends StatelessWidget {
               description:
                   'A simple dropdown with a label and hint text.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaDropdown<String>(
   value: selected,
@@ -58,7 +57,6 @@ ChromiaDropdown<String>(
                   'Add helperText for contextual guidance and prefixIcon '
                   'to visually reinforce the field purpose.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaDropdown<String>(
   value: selected,
@@ -93,7 +91,6 @@ ChromiaDropdown<String>(
               description:
                   'Set enabled: false or onChanged: null to prevent interaction.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaDropdown<String>(
   value: 'Option 1',
@@ -119,7 +116,6 @@ ChromiaDropdown<String>(
                   'ChromiaRichDropdown shows an icon and description for each '
                   'option — ideal for priority pickers, plan selectors, etc.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaRichDropdown<String>(
   value: priority,

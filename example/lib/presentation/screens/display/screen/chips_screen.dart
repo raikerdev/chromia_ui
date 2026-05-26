@@ -29,7 +29,6 @@ class ChipsScreen extends StatelessWidget {
                   'Simple label-only chips. Wrap with ChromiaChipGroup '
                   'to handle Wrap layout automatically.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaChipGroup(
   children: [
@@ -57,7 +56,6 @@ ChromiaChipGroup(
               description:
                   'Add a leading icon to provide visual context.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaChip(label: 'Home',     icon: Icons.home)
 ChromiaChip(label: 'Favorite', icon: Icons.favorite)
@@ -80,7 +78,6 @@ ChromiaChip(label: 'Star',     icon: Icons.star)''',
                   'Pass a ChromiaAvatar as the avatar parameter to show '
                   'a user picture or initials inside the chip.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaChip(
   label: 'Alice',
@@ -133,7 +130,6 @@ ChromiaChip(
                   'Provide onDeleted to show a remove button. '
                   'Ideal for dynamic tag lists.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaChip(
   label: tag,
@@ -188,7 +184,6 @@ ChromiaChip(
                   'Use ChromiaChip.filter() for multi-select filtering. '
                   'Multiple filters can be active at the same time.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaChip.filter(
   label: 'Active',
@@ -239,7 +234,6 @@ ChromiaChip.filter(
                   'Use ChromiaChip.choice() for single-select options. '
                   'Only one choice chip can be selected at a time.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaChip.choice(
   label: 'Option 1',

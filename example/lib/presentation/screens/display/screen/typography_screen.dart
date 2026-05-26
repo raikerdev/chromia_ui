@@ -34,7 +34,6 @@ class TypographyScreen extends StatelessWidget {
                   'Use ChromiaText for themed text, or call getTextStyle(context) '
                   'to get a raw TextStyle for custom widgets.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 // Using ChromiaText widget
 ChromiaText(

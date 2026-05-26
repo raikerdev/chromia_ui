@@ -27,7 +27,6 @@ class DividersScreen extends StatelessWidget {
                   'A simple horizontal divider. '
                   'Customize with thickness, indent, and color.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 // Default
 ChromiaDivider()
@@ -60,7 +59,6 @@ ChromiaDivider(indent: 16, endIndent: 16, thickness: 2)''',
                   'ChromiaDivider.withText() centers a label between two lines. '
                   'Commonly used as an "OR" separator on auth screens.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaDivider.withText(text: 'OR')
 ChromiaDivider.withText(text: 'CONTINUE WITH')''',
@@ -80,7 +78,6 @@ ChromiaDivider.withText(text: 'CONTINUE WITH')''',
               description:
                   'ChromiaDivider.withIcon() centers an icon between two lines.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaDivider.withIcon(icon: Icons.star)
 ChromiaDivider.withIcon(icon: Icons.favorite)''',
@@ -101,7 +98,6 @@ ChromiaDivider.withIcon(icon: Icons.favorite)''',
                   'Use ChromiaDivider.vertical() inside a Row to separate '
                   'inline items such as toolbar actions or tab labels.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 SizedBox(
   height: 50,
@@ -138,7 +134,6 @@ SizedBox(
                   'ChromiaSectionDivider renders a titled label with an optional '
                   'trailing action — ideal for grouped list section headers.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaSectionDivider(
   title: 'Settings',

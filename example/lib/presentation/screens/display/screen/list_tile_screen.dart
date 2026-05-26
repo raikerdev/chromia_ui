@@ -27,7 +27,6 @@ class ListTileScreen extends StatelessWidget {
                   'A title, optional leading icon, optional trailing widget, '
                   'and an onTap handler.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaListTile(
   leading: Icon(Icons.inbox, color: colors.primary),
@@ -88,7 +87,6 @@ ChromiaListTile(
               description:
                   'Add a subtitle for secondary information below the title.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaListTile(
   leading: CircleAvatar(child: Text('JD')),
@@ -148,7 +146,6 @@ ChromiaListTile(
               description:
                   'Standard (default), outlined (with border), and card (elevated) variants.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaListTile(
   variant: ChromiaListTileVariant.standard,
@@ -220,7 +217,6 @@ ChromiaListTile(
               description:
                   'Use selected: true and a check trailing to indicate the active item.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaListTile(
   leading: Icon(Icons.home, color: isSelected ? colors.primary : colors.onSurfaceVariant),
@@ -279,7 +275,6 @@ ChromiaListTile(
                   'Combine ChromiaListTile with ChromiaToggleButton in the trailing '
                   'for settings screens.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaListTile(
   leading: Icon(Icons.notifications),
@@ -342,7 +337,6 @@ ChromiaListTile(
                   'Set enabled: false to prevent interaction and apply a '
                   'muted visual style.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaListTile(
   leading: Icon(Icons.block),

@@ -28,7 +28,6 @@ class MenusScreen extends StatelessWidget {
                   'ChromiaPopupMenu renders a three-dot icon that opens a dropdown '
                   'list of ChromiaMenuItem actions.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaPopupMenu<String>(
   items: const [
@@ -82,7 +81,6 @@ ChromiaPopupMenu<String>(
                   'ChromiaMenuButton shows a labeled button with a dropdown arrow. '
                   'Use for sort/filter controls.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaMenuButton<String>(
   label: 'Sort by',
@@ -130,7 +128,6 @@ ChromiaMenuButton<String>(
                   'ChromiaContextMenu adds a long-press (mobile) or '
                   'right-click (desktop/web) context menu to any widget.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaContextMenu<String>(
   items: const [

@@ -26,7 +26,6 @@ class ToggleButtonsScreen extends StatelessWidget {
               description:
                   'On, off, and disabled states. Pass onChanged: null to disable.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaToggleButton(
   value: isOn,
@@ -68,7 +67,6 @@ ChromiaToggleButton(
               description:
                   'Add a label string to show descriptive text alongside the toggle.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaToggleButton(
   value: darkMode,
@@ -114,7 +112,6 @@ ChromiaToggleButton(
               description:
                   'Three sizes — small, medium (default), and large — for different layout densities.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaToggleButton(
   value: isOn,
@@ -171,7 +168,6 @@ ChromiaToggleButton(
                   'Override activeColor, inactiveColor, and thumbColor to match '
                   'a specific brand or semantic context.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaToggleButton(
   value: isOn,
@@ -202,7 +198,6 @@ ChromiaToggleButton(
                   'ChromiaListTileToggleButton embeds a toggle inside a list tile '
                   'for settings screens.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaListTileToggleButton(
   value: pushEnabled,

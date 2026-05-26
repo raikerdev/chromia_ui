@@ -27,7 +27,6 @@ class CheckboxesScreen extends StatelessWidget {
                   'Checked, unchecked, and disabled states. '
                   'Pass onChanged: null to disable.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 // Unchecked
 ChromiaCheckbox(
@@ -82,7 +81,6 @@ ChromiaCheckbox(
                   'Set tristate: true to allow a null (indeterminate) state — '
                   'useful for "select all" controls.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaCheckbox(
   value: null,   // indeterminate
@@ -121,7 +119,6 @@ ChromiaCheckbox(
               description:
                   'Provide a label string to show a tappable text label beside the checkbox.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaCheckbox(
   value: accepted,
@@ -161,7 +158,6 @@ ChromiaCheckbox(
                   'Customize the check icon, tristate icon, size, '
                   'checkColor, and activeColor.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaCheckbox(
   value: checked,
@@ -211,7 +207,6 @@ ChromiaCheckbox(
                   'ChromiaListTileCheckbox embeds a checkbox inside a list tile '
                   'for settings-style screens.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaListTileCheckbox(
   value: enabled,

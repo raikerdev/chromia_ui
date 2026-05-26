@@ -29,7 +29,6 @@ class SnackBarsScreen extends StatelessWidget {
                   'showChromiaSnackBar displays a neutral message. '
                   'Add actionLabel and onActionPressed for an undo-style action.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 // Basic message
 showChromiaSnackBar(
@@ -87,7 +86,6 @@ showChromiaSnackBar(
                   'Use context extension methods for pre-styled success, '
                   'error, warning, and info snack bars.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 context.showSuccessSnackBar(message: 'Changes saved successfully!')
 context.showErrorSnackBar(message: 'An error occurred', actionLabel: 'RETRY')

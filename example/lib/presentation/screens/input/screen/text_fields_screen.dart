@@ -76,7 +76,6 @@ ChromiaTextField(
               description:
                   'Add icons, text, or interactive widgets to either side of the input.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 // Prefix icon + suffix text
 ChromiaTextField(
@@ -122,7 +121,6 @@ ChromiaTextField(
                   'helperText provides context below the field. '
                   'maxLength shows a character counter.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaTextField(
   label: 'Document',
@@ -160,7 +158,6 @@ ChromiaTextField(
                   'Use obscureText: true and a toggle icon in suffixIcon '
                   'to create a password field with show/hide functionality.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaTextField(
   label: 'Password',
@@ -201,7 +198,6 @@ ChromiaTextField(
                   'Pass a list of ChromiaTextFieldValidator to validators. '
                   'Built-in validators include required, email, min/max length, and regex.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 // Email validator
 ChromiaTextField(
@@ -250,7 +246,6 @@ ChromiaTextField(
               description:
                   'Set maxLines > 1 (and optionally minLines) for text area inputs.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaTextField(
   label: 'Description',

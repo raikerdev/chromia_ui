@@ -28,7 +28,6 @@ class ProgressScreen extends StatelessWidget {
                   'Pass a value in [0.0, 1.0] for determinate progress. '
                   'Omit value for indeterminate.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 // Determinate
 ChromiaLinearProgress(value: 0.3)
@@ -63,7 +62,6 @@ ChromiaLinearProgress()''',
                   'Circular indicators support determinate values, '
                   'labels, and a custom child widget at the center.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 // Determinate values
 ChromiaCircularProgress(value: 0.25)
@@ -130,7 +128,6 @@ ChromiaCircularProgress(
                   'Override color, backgroundColor, height (linear), '
                   'strokeWidth, and size (circular).',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaLinearProgress(
   value: 0.6,
@@ -192,7 +189,6 @@ ChromiaCircularProgress(
                   'ChromiaSteppedProgress visualizes a workflow with '
                   'discrete numbered steps.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaSteppedProgress(currentStep: 0, totalSteps: 4)
 ChromiaSteppedProgress(currentStep: 1, totalSteps: 4)

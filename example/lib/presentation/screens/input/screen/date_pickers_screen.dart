@@ -28,7 +28,6 @@ class DatePickersScreen extends StatelessWidget {
                   'Tapping the field opens the system date picker dialog. '
                   'selectedDate shows the current value; onDateSelected is called on pick.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaDatePicker(
   label: 'Birth Date',
@@ -57,7 +56,6 @@ ChromiaDatePicker(
               description:
                   'Tapping the field opens the system time picker dialog.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaTimePicker(
   label: 'Appointment Time',
@@ -87,7 +85,6 @@ ChromiaTimePicker(
                   'ChromiaDateTimePicker chains a date picker followed by '
                   'a time picker, returning a combined DateTime.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaDateTimePicker(
   label: 'Event Date & Time',

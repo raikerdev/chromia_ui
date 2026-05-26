@@ -28,7 +28,6 @@ class ChromiaCodePreview extends StatefulWidget {
     required this.preview,
     this.title,
     this.description,
-    this.language = CodePreviewLanguage.dart,
     this.showCopyButton = true,
     this.height,
     this.previewPadding,
@@ -48,9 +47,6 @@ class ChromiaCodePreview extends StatefulWidget {
 
   /// Optional description
   final String? description;
-
-  /// Programming language for syntax highlighting
-  final CodePreviewLanguage language;
 
   /// Whether to show the copy button
   final bool showCopyButton;
@@ -82,20 +78,6 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
       setState(() => _copied = false);
     }
   }
-
-  Syntax get _syntax => switch (widget.language) {
-    CodePreviewLanguage.dart => Syntax.DART,
-    CodePreviewLanguage.c => Syntax.C,
-    CodePreviewLanguage.cpp => Syntax.CPP,
-    CodePreviewLanguage.javascript => Syntax.JAVASCRIPT,
-    CodePreviewLanguage.kotlin => Syntax.KOTLIN,
-    CodePreviewLanguage.java => Syntax.JAVA,
-    CodePreviewLanguage.swift => Syntax.SWIFT,
-    CodePreviewLanguage.yaml => Syntax.YAML,
-    CodePreviewLanguage.rust => Syntax.RUST,
-    CodePreviewLanguage.lua => Syntax.LUA,
-    CodePreviewLanguage.python => Syntax.PYTHON,
-  };
 
   @override
   Widget build(BuildContext context) {
@@ -243,7 +225,7 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
             child: Row(
               children: [
                 ChromiaText(
-                  widget.language.name,
+                  'Dart',
                   type: ChromiaTypographyType.bodyMedium,
                   color: isDark
                       ? const Color(0xFF5C6370)
@@ -298,7 +280,6 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
     return SingleChildScrollView(
       child: ChromiaSyntaxView(
         code: widget.code.trim(),
-        syntax: _syntax,
         syntaxTheme: syntaxTheme,
       ),
     );
@@ -334,21 +315,6 @@ enum CodePreviewLayout {
 
   /// Preview on top, code below.
   vertical,
-}
-
-/// Supported syntax highlighting languages.
-enum CodePreviewLanguage {
-  dart,
-  c,
-  cpp,
-  javascript,
-  kotlin,
-  java,
-  swift,
-  yaml,
-  rust,
-  lua,
-  python,
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

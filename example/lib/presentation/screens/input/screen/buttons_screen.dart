@@ -118,7 +118,6 @@ ChromiaButton(
               description:
                   'Three sizes — small, medium (default), and large — to fit different layout densities.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 // Small
 ChromiaButton(
@@ -171,7 +170,6 @@ ChromiaButton(
                   'Buttons adapt visually to enabled, disabled, and loading states. '
                   'Set onPressed to null to disable; set isLoading: true for async actions.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 // Enabled
 ChromiaButton(
@@ -218,7 +216,6 @@ ChromiaButton(
               description:
                   'Add an icon to the leading or trailing position using icon and iconPosition.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 // Leading icon (default)
 ChromiaButton(
@@ -259,7 +256,6 @@ ChromiaButton(
               description:
                   'Set isFullWidth: true to stretch the button to fill its parent.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaButton(
   isFullWidth: true,

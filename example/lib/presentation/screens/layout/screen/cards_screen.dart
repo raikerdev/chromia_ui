@@ -27,7 +27,6 @@ class CardsScreen extends StatelessWidget {
               description:
                   'A simple card wrapping any content.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaCard(
   child: ChromiaText(
@@ -50,7 +49,6 @@ ChromiaCard(
               description:
                   'Add a header for a title and a footer for action buttons.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaCard(
   header: ChromiaText('Project Card'),
@@ -100,7 +98,6 @@ ChromiaCard(
               description:
                   'Provide onTap to make a card tappable with hover and press states.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaCard(
   elevation: 2,
@@ -148,7 +145,6 @@ ChromiaCard(
                   'Add an image at the top, bottom, start, or end using '
                   'the image and imagePosition parameters.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaCard(
   image: Container(
@@ -200,7 +196,6 @@ ChromiaCard(
                   'Control depth with the elevation parameter. '
                   'Use borderColor + borderWidth at elevation 0 for a flat outlined style.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaCard(elevation: 0, borderColor: colors.outline, borderWidth: 1, child: ...)
 ChromiaCard(elevation: 2, child: ...)
@@ -289,7 +284,6 @@ ChromiaCard(elevation: 4, child: ...)''',
                   'ChromiaListTileCard combines a card container with a list tile layout '
                   'for feed items and notification entries.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaListTileCard(
   leading: CircleAvatar(child: Icon(Icons.person, color: Colors.white)),

@@ -28,7 +28,6 @@ class BadgesScreen extends StatelessWidget {
                   'Wrap any widget with ChromiaBadge. '
                   'Pass an empty string for a dot indicator, or a number/text for a count.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 // Dot (no value)
 ChromiaBadge(
@@ -84,7 +83,6 @@ ChromiaBadge(
                   'Use showBadge: false to hide the badge without removing '
                   'the widget from the tree.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaBadge(
   value: '8',
@@ -128,7 +126,6 @@ ChromiaBadge(
               title: 'Sizes',
               description: 'Small, medium, and large badge sizes.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaBadge(value: '99', size: ChromiaBadgeSize.small, child: icon)
 ChromiaBadge(value: '99', size: ChromiaBadgeSize.medium, child: icon)
@@ -176,7 +173,6 @@ ChromiaBadge(value: '99', size: ChromiaBadgeSize.large, child: icon)''',
                   'ChromiaLabelBadge renders tag-style chips with optional '
                   'icons and a removable button.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaLabelBadge(
   text: 'New',
@@ -233,7 +229,6 @@ ChromiaLabelBadge(
                   'ChromiaStatusBadge communicates the state of a record. '
                   'Omit text to render a status dot on an avatar.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 // With text labels
 ChromiaStatusBadge(status: ChromiaStatusType.success, text: 'Active')

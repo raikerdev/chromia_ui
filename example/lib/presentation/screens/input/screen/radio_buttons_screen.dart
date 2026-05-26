@@ -27,7 +27,6 @@ class RadioButtonsScreen extends StatelessWidget {
                   'Unselected, selected, and disabled states. '
                   'The groupValue determines which button is active.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaRadioButton<String>(
   value: 'option1',
@@ -89,7 +88,6 @@ ChromiaRadioButton<String>(
               description:
                   'Add a label string to show descriptive text beside each radio button.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaRadioButton<String>(
   value: 'option1',
@@ -137,7 +135,6 @@ ChromiaRadioButton<String>(
                   'ChromiaRadioButtonGroup manages a list of items and their '
                   'shared selection state. Default layout is vertical.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaRadioButtonGroup<String>(
   value: selected,
@@ -180,7 +177,6 @@ ChromiaRadioButtonGroup<String>(
               description:
                   'Set direction: Axis.horizontal for a side-by-side layout.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaRadioButtonGroup<String>(
   value: selected,
@@ -218,7 +214,6 @@ ChromiaRadioButtonGroup<String>(
                   'ChromiaListTileRadioButton embeds a radio button inside a '
                   'list tile — ideal for plan/option selection screens.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaListTileRadioButton<String>(
   value: 'pro',

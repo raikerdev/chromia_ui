@@ -27,7 +27,6 @@ class AvatarsScreen extends StatelessWidget {
               description:
                   'Use ChromiaAvatar.initials() when no profile image is available.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaAvatar.initials(
   initials: 'AB',
@@ -80,7 +79,6 @@ ChromiaAvatar.initials(
               description:
                   'Use ChromiaAvatar.icon() for generic or system-level user representations.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaAvatar.icon(
   icon: Icons.person,
@@ -129,7 +127,6 @@ ChromiaAvatar.icon(
                   'Use ChromiaAvatar.image() with any ImageProvider. '
                   'The backgroundColor is shown while the image loads.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaAvatar.image(
   imageProvider: NetworkImage('https://picsum.photos/200'),
@@ -181,7 +178,6 @@ ChromiaAvatar.image(
                   'Three shapes — circle (default), rounded, and square — '
                   'to match different design contexts.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaAvatar.initials(
   initials: 'C',
@@ -240,7 +236,6 @@ ChromiaAvatar.initials(
                   'ChromiaAvatarGroup stacks avatars with overlap and shows '
                   'a "+N" overflow indicator when the count exceeds max.',
               child: ChromiaCodePreview(
-                layout: CodePreviewLayout.vertical,
                 code: '''
 ChromiaAvatarGroup(
   max: 4,

@@ -7,7 +7,6 @@ import 'package:flutter_syntax_view/flutter_syntax_view.dart';
 class ChromiaSyntaxView extends StatefulWidget {
   const ChromiaSyntaxView({
     required this.code,
-    required this.syntax,
     this.syntaxTheme,
     this.fontSize = 14.0,
     super.key,
@@ -15,9 +14,6 @@ class ChromiaSyntaxView extends StatefulWidget {
 
   /// Code text
   final String code;
-
-  /// Syntax/Language (Dart, C, C++...)
-  final Syntax syntax;
 
   /// Theme of syntax view
   final SyntaxTheme? syntaxTheme;
@@ -118,7 +114,7 @@ class ChromiaSyntaxViewState extends State<ChromiaSyntaxView> {
         text: TextSpan(
           style: TextStyle(fontFamily: fontFamily, fontSize: widget.fontSize),
           children: <TextSpan>[
-            getSyntax(widget.syntax, widget.syntaxTheme).format(widget.code),
+            getSyntax(Syntax.DART, widget.syntaxTheme).format(widget.code),
           ],
         ),
       ),
