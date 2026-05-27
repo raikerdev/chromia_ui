@@ -1,14 +1,14 @@
-import 'dart:math' as math;
-
 import 'package:chromia_ui/chromia_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_syntax_view/flutter_syntax_view.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ChromiaSyntaxView extends StatefulWidget {
   const ChromiaSyntaxView({
     required this.code,
     this.syntaxTheme,
     this.fontSize = 14.0,
+    this.fontScaleFactor = 1.0,
     super.key,
   });
 
@@ -21,79 +21,43 @@ class ChromiaSyntaxView extends StatefulWidget {
   /// Font Size (default: 14.0)
   final double fontSize;
 
+  final double fontScaleFactor;
+
   @override
   State<StatefulWidget> createState() => ChromiaSyntaxViewState();
 }
 
 class ChromiaSyntaxViewState extends State<ChromiaSyntaxView> {
-  static const double maxFontScaleFactor = 1.3;
-  static const double minFontScaleFactor = 1;
-  double _fontScaleFactor = 1.0;
-  late ScrollController _verticalScrollController;
-
-  @override
-  void initState() {
-    super.initState();
-    _verticalScrollController = ScrollController();
-  }
-
-  @override
-  void dispose() {
-    _verticalScrollController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final isDark = theme.brightness == Brightness.dark;
-    final fontFamily = theme.typography.bodyMedium.fontFamily;
-
-    return Stack(
-      alignment: AlignmentDirectional.bottomEnd,
-      children: <Widget>[
-        Container(
-          width: double.infinity,
-          color: widget.syntaxTheme!.backgroundColor,
-          child: _buildCodeWithLinesCount(isDark, fontFamily),
-        ),
-        Positioned(
-          bottom: 5,
-          right: 10,
-          child: _zoomControls(),
-        ),
-      ],
+    return Container(
+      width: double.infinity,
+      color: widget.syntaxTheme!.backgroundColor,
+      child: _buildCodeWithLinesCount(context),
     );
   }
 
-  Widget _buildCodeWithLinesCount(bool isDark, String? fontFamily) {
+  Widget _buildCodeWithLinesCount(BuildContext context) {
     final int numLines = '\n'.allMatches(widget.code).length + 1;
+    final colors = context.chromiaColors;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.max,
-      spacing: 10,
+      spacing: 5,
       children: [
         Container(
-          width: 35,
-          decoration: BoxDecoration(
-            color:
-                isDark ? const Color(0xFF21252B) : const Color(0xFFEEEEEE),
-            border: Border(
-              right: BorderSide(color: widget.syntaxTheme!.linesCountColor!),
-            ),
-          ),
-          padding: const EdgeInsets.fromLTRB(0, 10, 0, 30),
+          width: 40,
+          padding: const EdgeInsets.only(top: 10),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               for (int i = 1; i <= numLines; i++)
                 ChromiaRichText(
-                  textScaler: TextScaler.linear(_fontScaleFactor),
+                  textScaler: TextScaler.linear(widget.fontScaleFactor),
                   text: TextSpan(
-                    style: TextStyle(
-                      fontFamily: fontFamily,
+                    style: GoogleFonts.googleSansCode(
                       fontSize: widget.fontSize,
-                      color: widget.syntaxTheme!.linesCountColor,
+                      color: colors.onSurfaceContainer,
                     ),
                     text: '$i',
                   ),
@@ -101,49 +65,23 @@ class ChromiaSyntaxViewState extends State<ChromiaSyntaxView> {
             ],
           ),
         ),
-        _buildCode(fontFamily),
+        _buildCode(),
       ],
     );
   }
 
-  Widget _buildCode(String? fontFamily) {
+  Widget _buildCode() {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 10, 0, 30),
       child: RichText(
-        textScaler: TextScaler.linear(_fontScaleFactor),
+        textScaler: TextScaler.linear(widget.fontScaleFactor),
         text: TextSpan(
-          style: TextStyle(fontFamily: fontFamily, fontSize: widget.fontSize),
+          style: GoogleFonts.googleSansCode(fontSize: widget.fontSize),
           children: <TextSpan>[
             getSyntax(Syntax.DART, widget.syntaxTheme).format(widget.code),
           ],
         ),
       ),
-    );
-  }
-
-  Widget _zoomControls() {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        IconButton(
-          icon: Icon(Icons.zoom_out, color: widget.syntaxTheme!.zoomIconColor),
-          onPressed: () => setState(() {
-            _fontScaleFactor = math.max(
-              minFontScaleFactor,
-              _fontScaleFactor - 0.1,
-            );
-          }),
-        ),
-        IconButton(
-          icon: Icon(Icons.zoom_in, color: widget.syntaxTheme!.zoomIconColor),
-          onPressed: () => setState(() {
-            _fontScaleFactor = math.min(
-              maxFontScaleFactor,
-              _fontScaleFactor + 0.1,
-            );
-          }),
-        ),
-      ],
     );
   }
 }

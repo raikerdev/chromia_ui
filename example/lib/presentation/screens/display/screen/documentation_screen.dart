@@ -241,7 +241,6 @@ ChromiaBadge(
         ChromiaCodePreview(
           title: 'Vertical Layout',
           description: 'Preview on top, code below',
-          layout: CodePreviewLayout.vertical,
           code: '''
 ChromiaProgress(
   value: 0.65,

@@ -84,8 +84,7 @@ ChromiaListTile(
             // ── With Subtitle ─────────────────────────────────────────────────
             ComponentSection(
               title: 'With Subtitle',
-              description:
-                  'Add a subtitle for secondary information below the title.',
+              description: 'Add a subtitle for secondary information below the title.',
               child: ChromiaCodePreview(
                 code: '''
 ChromiaListTile(
@@ -171,6 +170,7 @@ ChromiaListTile(
                   builder: (context) {
                     final colors = context.chromiaColors;
                     return Column(
+                      mainAxisSize: .min,
                       children: [
                         ChromiaListTile(
                           variant: ChromiaListTileVariant.standard,
@@ -214,8 +214,7 @@ ChromiaListTile(
             // ── Selectable ────────────────────────────────────────────────────
             ComponentSection(
               title: 'Selectable List',
-              description:
-                  'Use selected: true and a check trailing to indicate the active item.',
+              description: 'Use selected: true and a check trailing to indicate the active item.',
               child: ChromiaCodePreview(
                 code: '''
 ChromiaListTile(
@@ -245,9 +244,7 @@ ChromiaListTile(
                           child: ChromiaListTile(
                             leading: Icon(
                               item.$1,
-                              color: isSelected
-                                  ? colors.primary
-                                  : colors.onSurfaceVariant,
+                              color: isSelected ? colors.primary : colors.onSurfaceVariant,
                             ),
                             title: Text(item.$2),
                             selected: isSelected,
@@ -257,8 +254,7 @@ ChromiaListTile(
                                     color: colors.primary,
                                   )
                                 : null,
-                            onTap: () =>
-                                setState(() => selectedIndex = i),
+                            onTap: () => setState(() => selectedIndex = i),
                           ),
                         );
                       }).toList(),
@@ -303,8 +299,7 @@ ChromiaListTile(
                           ),
                           trailing: ChromiaToggleButton(
                             value: push,
-                            onChanged: (v) =>
-                                setState(() => push = v),
+                            onChanged: (v) => setState(() => push = v),
                           ),
                         ),
                         const SizedBox(height: 4),
@@ -319,8 +314,7 @@ ChromiaListTile(
                           ),
                           trailing: ChromiaToggleButton(
                             value: email,
-                            onChanged: (v) =>
-                                setState(() => email = v),
+                            onChanged: (v) => setState(() => email = v),
                           ),
                         ),
                       ],

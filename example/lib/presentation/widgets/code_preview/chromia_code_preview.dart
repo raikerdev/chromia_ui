@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:chromia_ui/chromia_ui.dart';
 import 'package:chromia_ui_example/presentation/widgets/code_preview/chromia_syntax_view.dart';
 import 'package:flutter/material.dart';
@@ -29,10 +31,8 @@ class ChromiaCodePreview extends StatefulWidget {
     this.title,
     this.description,
     this.showCopyButton = true,
-    this.height,
-    this.previewPadding,
-    this.previewAlignment = Alignment.center,
-    this.layout = CodePreviewLayout.horizontal,
+    this.height = 300,
+    this.layout = Axis.horizontal,
     super.key,
   });
 
@@ -52,23 +52,21 @@ class ChromiaCodePreview extends StatefulWidget {
   final bool showCopyButton;
 
   /// Fixed height (optional)
-  final double? height;
-
-  /// Padding around the preview section
-  final EdgeInsetsGeometry? previewPadding;
-
-  /// Alignment of the preview widget inside its container
-  final Alignment previewAlignment;
+  final double height;
 
   /// Layout orientation
-  final CodePreviewLayout layout;
+  final Axis layout;
 
   @override
   State<ChromiaCodePreview> createState() => _ChromiaCodePreviewState();
 }
 
 class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
+  static const double maxFontScaleFactor = 1.3;
+  static const double minFontScaleFactor = 1;
+
   bool _copied = false;
+  double _fontScaleFactor = 1.0;
 
   Future<void> _copyToClipboard() async {
     await Clipboard.setData(ClipboardData(text: widget.code));
@@ -110,7 +108,7 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
   }
 
   Widget _buildContent(BuildContext context) {
-    if (widget.layout == CodePreviewLayout.vertical) {
+    if (widget.layout == Axis.vertical) {
       return _buildVerticalContent(context);
     }
 
@@ -150,50 +148,14 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
   Widget _buildCodeSection(BuildContext context) {
     final colors = context.chromiaColors;
     final spacing = context.chromiaSpacing;
-    final isDark = context.chromiaTheme.brightness == Brightness.dark;
 
-    final codeBackgroundColor = isDark
-        ? const Color(0xFF282C34)
-        : const Color(0xFFFAFAFA);
-
-    final syntaxTheme = SyntaxTheme(
-      baseStyle: TextStyle(color: colors.onSurfaceVariant),
-      numberStyle: TextStyle(
-        color:
-            isDark ? const Color(0xFF2AACB8) : const Color(0xFF1750EB),
-      ),
-      commentStyle: TextStyle(
-        color:
-            isDark ? const Color(0xFF7A7E85) : const Color(0xFF8C8C8C),
-      ),
-      keywordStyle: TextStyle(
-        color:
-            isDark ? const Color(0xFFCF8E6D) : const Color(0xFFEd864A),
-      ),
-      stringStyle: TextStyle(
-        color:
-            isDark ? const Color(0xFF6AAB73) : const Color(0xFF067D17),
-      ),
-      classStyle: TextStyle(
-        color:
-            isDark ? const Color(0xFF57AAF7) : const Color(0xFF0033B3),
-      ),
-      constantStyle: TextStyle(
-        color:
-            isDark ? const Color(0xFFC77DBB) : const Color(0xFF871094),
-      ),
-      linesCountColor:
-          isDark ? const Color(0xFF5C6370) : const Color(0xFF9E9E9E),
-      backgroundColor: codeBackgroundColor,
-      zoomIconColor:
-          isDark ? const Color(0xFF5C6370) : const Color(0xFF9E9E9E),
-    );
+    final syntaxTheme = _buildSyntaxTheme(context);
 
     return Container(
       height: widget.height,
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
-        color: codeBackgroundColor,
+        color: colors.surface,
         borderRadius: context.chromiaRadius.radiusM,
         border: Border.all(color: colors.outline),
       ),
@@ -207,70 +169,43 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
               vertical: spacing.s,
             ),
             decoration: BoxDecoration(
-              color: isDark
-                  ? const Color(0xFF21252B)
-                  : const Color(0xFFEEEEEE),
+              color: colors.surfaceContainer,
               borderRadius: BorderRadius.only(
                 topLeft: context.chromiaRadius.radiusM.topLeft,
                 topRight: context.chromiaRadius.radiusM.topRight,
               ),
-              border: Border(
-                bottom: BorderSide(
-                  color: isDark
-                      ? const Color(0xFF181A1F)
-                      : const Color(0xFFDDDDDD),
-                ),
-              ),
+              border: Border(bottom: BorderSide(color: colors.outline)),
             ),
             child: Row(
               children: [
                 ChromiaText(
                   'Dart',
                   type: ChromiaTypographyType.bodyMedium,
-                  color: isDark
-                      ? const Color(0xFF5C6370)
-                      : const Color(0xFF9E9E9E),
+                  color: colors.onSurfaceContainer,
                 ),
                 const Spacer(),
+                _zoomControls(context),
+                spacing.gapHM,
                 if (widget.showCopyButton)
-                  InkWell(
-                    onTap: _copyToClipboard,
-                    borderRadius: context.chromiaRadius.radiusS,
-                    child: Padding(
-                      padding: spacing.paddingXS,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(
-                            _copied ? Icons.check : Icons.copy,
-                            size: 16,
-                            color: _copied
-                                ? colors.success
-                                : (isDark
-                                      ? const Color(0xFF5C6370)
-                                      : const Color(0xFF9E9E9E)),
-                          ),
-                          spacing.gapHXS,
-                          ChromiaText(
-                            _copied ? 'Copied!' : 'Copy',
-                            type: ChromiaTypographyType.labelSmall,
-                            color: _copied
-                                ? colors.success
-                                : (isDark
-                                      ? const Color(0xFF5C6370)
-                                      : const Color(0xFF9E9E9E)),
-                          ),
-                        ],
-                      ),
+                  ChromiaButton(
+                    variant: ChromiaButtonVariant.text,
+                    icon: Icon(
+                      _copied ? Icons.check : Icons.copy,
+                      size: 16,
+                      color: _copied ? colors.success : colors.onSurfaceContainer,
+                    ),
+                    onPressed: _copyToClipboard,
+                    child: ChromiaText(
+                      _copied ? 'Copied!' : 'Copy',
+                      type: ChromiaTypographyType.labelSmall,
+                      color: _copied ? colors.success : colors.onSurfaceContainer,
                     ),
                   ),
               ],
             ),
           ),
           // Syntax-highlighted code
-          widget.height != null
-              ? Expanded(child: _buildCodeContent(syntaxTheme))
-              : _buildCodeContent(syntaxTheme),
+          Expanded(child: _buildCodeContent(syntaxTheme)),
         ],
       ),
     );
@@ -278,9 +213,11 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
 
   Widget _buildCodeContent(SyntaxTheme syntaxTheme) {
     return SingleChildScrollView(
+      padding: const .only(bottom: 10),
       child: ChromiaSyntaxView(
         code: widget.code.trim(),
         syntaxTheme: syntaxTheme,
+        fontScaleFactor: _fontScaleFactor,
       ),
     );
   }
@@ -290,31 +227,73 @@ class _ChromiaCodePreviewState extends State<ChromiaCodePreview> {
     final spacing = context.chromiaSpacing;
 
     return Container(
-      padding: widget.previewPadding ?? spacing.paddingXL,
+      padding: spacing.paddingXL,
+      alignment: .center,
       decoration: BoxDecoration(
         color: colors.surface,
         borderRadius: context.chromiaRadius.radiusM,
         border: Border.all(color: colors.outline),
       ),
-      child: Align(
-        alignment: widget.previewAlignment,
-        child: widget.preview,
-      ),
+      child: widget.preview,
     );
   }
-}
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Enums
-// ─────────────────────────────────────────────────────────────────────────────
+  Widget _zoomControls(BuildContext context) {
+    final colors = context.chromiaColors;
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        IconButton(
+          icon: Icon(Icons.zoom_out, color: colors.onSurfaceContainer),
+          onPressed: () => setState(() {
+            _fontScaleFactor = math.max(
+              minFontScaleFactor,
+              _fontScaleFactor - 0.1,
+            );
+          }),
+        ),
+        IconButton(
+          icon: Icon(Icons.zoom_in, color: colors.onSurfaceContainer),
+          onPressed: () => setState(() {
+            _fontScaleFactor = math.min(
+              maxFontScaleFactor,
+              _fontScaleFactor + 0.1,
+            );
+          }),
+        ),
+      ],
+    );
+  }
 
-/// Layout orientation for [ChromiaCodePreview].
-enum CodePreviewLayout {
-  /// Code on left, preview on right (switches to vertical on narrow screens).
-  horizontal,
+  SyntaxTheme _buildSyntaxTheme(BuildContext context) {
+    final colors = context.chromiaColors;
+    final isDark = context.chromiaTheme.brightness == Brightness.dark;
 
-  /// Preview on top, code below.
-  vertical,
+    return SyntaxTheme(
+      baseStyle: TextStyle(color: colors.onSurfaceVariant),
+      numberStyle: TextStyle(
+        color: isDark ? const Color(0xFF2AACB8) : const Color(0xFF1750EB),
+      ),
+      commentStyle: TextStyle(
+        color: isDark ? const Color(0xFF7A7E85) : const Color(0xFF8C8C8C),
+      ),
+      keywordStyle: TextStyle(
+        color: isDark ? const Color(0xFFCF8E6D) : const Color(0xFFEd864A),
+      ),
+      stringStyle: TextStyle(
+        color: isDark ? const Color(0xFF6AAB73) : const Color(0xFF067D17),
+      ),
+      classStyle: TextStyle(
+        color: isDark ? const Color(0xFF57AAF7) : const Color(0xFF0033B3),
+      ),
+      constantStyle: TextStyle(
+        color: isDark ? const Color(0xFFC77DBB) : const Color(0xFF871094),
+      ),
+      linesCountColor: isDark ? const Color(0xFF5C6370) : const Color(0xFF9E9E9E),
+      backgroundColor: colors.surface,
+      zoomIconColor: isDark ? const Color(0xFF5C6370) : const Color(0xFF9E9E9E),
+    );
+  }
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -337,8 +316,7 @@ class ChromiaCodePreviewGroup extends StatefulWidget {
   final String? description;
 
   @override
-  State<ChromiaCodePreviewGroup> createState() =>
-      _ChromiaCodePreviewGroupState();
+  State<ChromiaCodePreviewGroup> createState() => _ChromiaCodePreviewGroupState();
 }
 
 class _ChromiaCodePreviewGroupState extends State<ChromiaCodePreviewGroup> {
@@ -394,9 +372,7 @@ class _ChromiaCodePreviewGroupState extends State<ChromiaCodePreviewGroup> {
                       decoration: BoxDecoration(
                         border: Border(
                           bottom: BorderSide(
-                            color: isSelected
-                                ? colors.primary
-                                : Colors.transparent,
+                            color: isSelected ? colors.primary : Colors.transparent,
                             width: 2,
                           ),
                         ),
@@ -405,12 +381,8 @@ class _ChromiaCodePreviewGroupState extends State<ChromiaCodePreviewGroup> {
                         item.label,
                         type: ChromiaTypographyType.labelMedium,
                         style: TextStyle(
-                          color: isSelected
-                              ? colors.primary
-                              : colors.onSurfaceVariant,
-                          fontWeight: isSelected
-                              ? FontWeight.w600
-                              : FontWeight.normal,
+                          color: isSelected ? colors.primary : colors.onSurfaceVariant,
+                          fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
                         ),
                       ),
                     ),
