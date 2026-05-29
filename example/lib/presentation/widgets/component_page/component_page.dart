@@ -1,4 +1,6 @@
 import 'package:chromia_ui/chromia_ui.dart';
+import 'package:chromia_ui_example/presentation/widgets/code_preview/chromia_code_preview.dart' show ChromiaCodePreview, ChromiaCodePreviewGroup;
+import 'package:chromia_ui_example/presentation/widgets/widgets.dart' show ChromiaCodePreview, ChromiaCodePreviewGroup;
 import 'package:flutter/material.dart';
 
 /// Page-level layout for a component documentation screen.

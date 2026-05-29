@@ -23,7 +23,7 @@ class ChipsScreen extends StatelessWidget {
               'Use deletable chips for dynamic tag input.',
           children: [
             // ── Basic ─────────────────────────────────────────────────────────
-            ComponentSection(
+            const ComponentSection(
               title: 'Basic',
               description:
                   'Simple label-only chips. Wrap with ChromiaChipGroup '
@@ -38,7 +38,7 @@ ChromiaChipGroup(
     ChromiaChip(label: 'Design'),
   ],
 )''',
-                preview: const ChromiaChipGroup(
+                preview: ChromiaChipGroup(
                   children: [
                     ChromiaChip(label: 'Flutter'),
                     ChromiaChip(label: 'Dart'),
@@ -51,7 +51,7 @@ ChromiaChipGroup(
             ),
 
             // ── With Icons ────────────────────────────────────────────────────
-            ComponentSection(
+            const ComponentSection(
               title: 'With Icons',
               description:
                   'Add a leading icon to provide visual context.',
@@ -60,7 +60,7 @@ ChromiaChipGroup(
 ChromiaChip(label: 'Home',     icon: Icons.home)
 ChromiaChip(label: 'Favorite', icon: Icons.favorite)
 ChromiaChip(label: 'Star',     icon: Icons.star)''',
-                preview: const ChromiaChipGroup(
+                preview: ChromiaChipGroup(
                   children: [
                     ChromiaChip(label: 'Home', icon: Icons.home),
                     ChromiaChip(label: 'Favorite', icon: Icons.favorite),

@@ -86,7 +86,7 @@ ChromiaDropdown<String>(
             ),
 
             // ── Disabled ──────────────────────────────────────────────────────
-            ComponentSection(
+            const ComponentSection(
               title: 'Disabled',
               description:
                   'Set enabled: false or onChanged: null to prevent interaction.',
@@ -99,7 +99,7 @@ ChromiaDropdown<String>(
   enabled: false,
   onChanged: null,
 )''',
-                preview: const ChromiaDropdown<String>(
+                preview: ChromiaDropdown<String>(
                   value: 'Option 1',
                   label: 'Disabled Dropdown',
                   items: ['Option 1', 'Option 2', 'Option 3'],

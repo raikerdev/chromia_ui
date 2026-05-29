@@ -1,5 +1,4 @@
 import 'package:chromia_ui/chromia_ui.dart';
-import 'package:chromia_ui/src/components/input/slider/chromia_slider_icon_shape.dart';
 import 'package:flutter/material.dart';
 
 /// A customizable slider component for selecting a value from a range.

@@ -59,7 +59,7 @@ ChromiaText(
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ChromiaText(
+                        const ChromiaText(
                           'Hello, world!',
                           type: ChromiaTypographyType.headlineMedium,
                         ),

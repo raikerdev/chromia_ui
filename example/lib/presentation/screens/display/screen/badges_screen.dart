@@ -223,7 +223,7 @@ ChromiaLabelBadge(
             ),
 
             // ── Status Badges ─────────────────────────────────────────────────
-            ComponentSection(
+            const ComponentSection(
               title: 'Status Badges',
               description:
                   'ChromiaStatusBadge communicates the state of a record. '
@@ -245,7 +245,7 @@ ChromiaStatusBadge(
                 preview: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Wrap(
+                    Wrap(
                       spacing: 8,
                       runSpacing: 8,
                       children: [
@@ -271,11 +271,11 @@ ChromiaStatusBadge(
                         ),
                       ],
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     Wrap(
                       spacing: 16,
                       runSpacing: 8,
-                      children: const [
+                      children: [
                         ChromiaStatusBadge(
                           status: ChromiaStatusType.success,
                           child: ChromiaAvatar(child: Icon(Symbols.person)),

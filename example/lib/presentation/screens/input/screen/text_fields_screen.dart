@@ -28,7 +28,7 @@ class _TextFieldsScreenState extends State<TextFieldsScreen> {
               'Always provide a label so screen readers can identify the field.',
           children: [
             // ── Variants ─────────────────────────────────────────────────────
-            ComponentSection(
+            const ComponentSection(
               title: 'Variants',
               description:
                   'Filled uses a background fill; Outlined uses a border. '
@@ -71,7 +71,7 @@ ChromiaTextField(
             ),
 
             // ── Prefix & Suffix ───────────────────────────────────────────────
-            ComponentSection(
+            const ComponentSection(
               title: 'Prefix & Suffix',
               description:
                   'Add icons, text, or interactive widgets to either side of the input.',
@@ -98,15 +98,15 @@ ChromiaTextField(
                     ChromiaTextField(
                       label: 'Email',
                       hintText: 'user',
-                      prefixIcon: const Icon(Icons.email),
+                      prefixIcon: Icon(Icons.email),
                       suffixText: '@example.com',
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12),
                     ChromiaTextField(
                       label: 'Phone',
                       hintText: '234 567 8900',
                       prefixText: '+1 ',
-                      suffixIcon: const Icon(Icons.phone),
+                      suffixIcon: Icon(Icons.phone),
                       keyboardType: TextInputType.phone,
                     ),
                   ],
@@ -115,7 +115,7 @@ ChromiaTextField(
             ),
 
             // ── Helper & Character Limit ──────────────────────────────────────
-            ComponentSection(
+            const ComponentSection(
               title: 'Helper Text & Character Limit',
               description:
                   'helperText provides context below the field. '
@@ -138,13 +138,13 @@ ChromiaTextField(
                     ChromiaTextField(
                       label: 'Document',
                       helperText: 'We never share your personal information.',
-                      prefixIcon: const Icon(Icons.assignment_ind),
+                      prefixIcon: Icon(Icons.assignment_ind),
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12),
                     ChromiaTextField(
                       label: 'Username',
                       maxLength: 20,
-                      prefixIcon: const Icon(Icons.account_circle),
+                      prefixIcon: Icon(Icons.account_circle),
                     ),
                   ],
                 ),
@@ -241,7 +241,7 @@ ChromiaTextField(
             ),
 
             // ── Multiline ─────────────────────────────────────────────────────
-            ComponentSection(
+            const ComponentSection(
               title: 'Multiline',
               description:
                   'Set maxLines > 1 (and optionally minLines) for text area inputs.',

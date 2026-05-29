@@ -21,7 +21,7 @@ class DividersScreen extends StatelessWidget {
               'Use ChromiaSectionDivider as a list section header with an optional action.',
           children: [
             // ── Basic ─────────────────────────────────────────────────────────
-            ComponentSection(
+            const ComponentSection(
               title: 'Basic',
               description:
                   'A simple horizontal divider. '
@@ -36,7 +36,7 @@ ChromiaDivider(thickness: 2)
 
 // With indent
 ChromiaDivider(indent: 16, endIndent: 16, thickness: 2)''',
-                preview: const Column(
+                preview: Column(
                   children: [
                     ChromiaDivider(),
                     SizedBox(height: 12),
@@ -92,7 +92,7 @@ ChromiaDivider.withIcon(icon: Icons.favorite)''',
             ),
 
             // ── Vertical ──────────────────────────────────────────────────────
-            ComponentSection(
+            const ComponentSection(
               title: 'Vertical',
               description:
                   'Use ChromiaDivider.vertical() inside a Row to separate '
@@ -111,7 +111,7 @@ SizedBox(
     ],
   ),
 )''',
-                preview: const SizedBox(
+                preview: SizedBox(
                   height: 50,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,

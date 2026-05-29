@@ -22,7 +22,7 @@ class ProgressScreen extends StatelessWidget {
               'Use stepped progress for wizards and onboarding flows.',
           children: [
             // ── Linear Progress ───────────────────────────────────────────────
-            ComponentSection(
+            const ComponentSection(
               title: 'Linear Progress',
               description:
                   'Pass a value in [0.0, 1.0] for determinate progress. '
@@ -39,7 +39,7 @@ ChromiaLinearProgress(value: 0.65, showLabel: true)
 
 // Indeterminate
 ChromiaLinearProgress()''',
-                preview: const Column(
+                preview: Column(
                   children: [
                     ChromiaLinearProgress(value: 0.3),
                     SizedBox(height: 12),
@@ -56,7 +56,7 @@ ChromiaLinearProgress()''',
             ),
 
             // ── Circular Progress ─────────────────────────────────────────────
-            ComponentSection(
+            const ComponentSection(
               title: 'Circular Progress',
               description:
                   'Circular indicators support determinate values, '
@@ -85,15 +85,15 @@ ChromiaCircularProgress(
                       spacing: 24,
                       runSpacing: 12,
                       crossAxisAlignment: WrapCrossAlignment.center,
-                      children: const [
+                      children: [
                         ChromiaCircularProgress(value: 0.25),
                         ChromiaCircularProgress(value: 0.5),
                         ChromiaCircularProgress(value: 0.75),
                         ChromiaCircularProgress(),
                       ],
                     ),
-                    const SizedBox(height: 16),
-                    const Wrap(
+                    SizedBox(height: 16),
+                    Wrap(
                       spacing: 24,
                       runSpacing: 12,
                       crossAxisAlignment: WrapCrossAlignment.center,
@@ -122,7 +122,7 @@ ChromiaCircularProgress(
             ),
 
             // ── Customization ─────────────────────────────────────────────────
-            ComponentSection(
+            const ComponentSection(
               title: 'Customization',
               description:
                   'Override color, backgroundColor, height (linear), '
@@ -145,24 +145,24 @@ ChromiaCircularProgress(
 )''',
                 preview: Column(
                   children: [
-                    const ChromiaLinearProgress(
+                    ChromiaLinearProgress(
                       value: 0.6,
                       color: Colors.purple,
                       backgroundColor: Color(0x28AB47BC),
                       height: 12,
                     ),
-                    const SizedBox(height: 12),
-                    const ChromiaLinearProgress(
+                    SizedBox(height: 12),
+                    ChromiaLinearProgress(
                       color: Colors.teal,
                       backgroundColor: Color(0x2800897B),
                       height: 12,
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     Wrap(
                       spacing: 24,
                       runSpacing: 12,
                       crossAxisAlignment: WrapCrossAlignment.center,
-                      children: const [
+                      children: [
                         ChromiaCircularProgress(
                           value: 0.7,
                           color: Colors.purple,

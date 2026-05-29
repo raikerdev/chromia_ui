@@ -22,7 +22,7 @@ class CardsScreen extends StatelessWidget {
               'Use ChromiaListTileCard for feed items or list entries that need elevation.',
           children: [
             // ── Basic ─────────────────────────────────────────────────────────
-            ComponentSection(
+            const ComponentSection(
               title: 'Basic',
               description:
                   'A simple card wrapping any content.',
@@ -34,7 +34,7 @@ ChromiaCard(
     'contained, visually distinct unit.',
   ),
 )''',
-                preview: const ChromiaCard(
+                preview: ChromiaCard(
                   child: ChromiaText(
                     'Cards group related information into a '
                     'contained, visually distinct unit.',

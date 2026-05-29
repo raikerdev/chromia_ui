@@ -10,14 +10,9 @@ const String kChromiaVersion = '0.1.0';
 /// Library name
 const String kChromiaName = 'Chromia UI';
 
-/// Default animation duration in milliseconds
-const int kDefaultAnimationDuration = 200;
-
-/// Fast animation duration in milliseconds
-const int kFastAnimationDuration = 100;
-
-/// Slow animation duration in milliseconds
-const int kSlowAnimationDuration = 300;
+// Animation durations are defined as Duration constants in AnimationTokens.
+// Use AnimationTokens.normal (200ms), AnimationTokens.faster (100ms),
+// AnimationTokens.slow (300ms), etc.
 
 /// Default border width
 const double kDefaultBorderWidth = 1;
