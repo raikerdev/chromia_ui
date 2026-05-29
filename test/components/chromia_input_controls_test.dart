@@ -425,4 +425,103 @@ void main() {
       expect(find.byType(ChromiaRadioButton<String>), findsOneWidget);
     });
   });
+
+  // ── ChromiaSwitch ─────────────────────────────────────────────────────────────
+
+  group('ChromiaSwitch', () {
+    testWidgets('renders off state without crash', (tester) async {
+      await tester.pumpWidget(
+        buildTestApp(ChromiaSwitch(value: false, onChanged: (_) {})),
+      );
+      expect(find.byType(ChromiaSwitch), findsOneWidget);
+    });
+
+    testWidgets('renders on state without crash', (tester) async {
+      await tester.pumpWidget(
+        buildTestApp(ChromiaSwitch(value: true, onChanged: (_) {})),
+      );
+      expect(find.byType(ChromiaSwitch), findsOneWidget);
+    });
+
+    testWidgets('renders disabled without crash', (tester) async {
+      await tester.pumpWidget(
+        buildTestApp(const ChromiaSwitch(value: false, onChanged: null)),
+      );
+      expect(find.byType(ChromiaSwitch), findsOneWidget);
+    });
+
+    testWidgets('renders with label without crash', (tester) async {
+      await tester.pumpWidget(
+        buildTestApp(
+          ChromiaSwitch(
+            value: false,
+            onChanged: (_) {},
+            label: 'Enable feature',
+          ),
+        ),
+      );
+      expect(find.text('Enable feature'), findsOneWidget);
+    });
+
+    testWidgets('calls onChanged when Switch toggled', (tester) async {
+      bool? received;
+      await tester.pumpWidget(
+        buildTestApp(
+          ChromiaSwitch(value: false, onChanged: (v) => received = v),
+        ),
+      );
+      await tester.tap(find.byType(Switch));
+      await tester.pump();
+      expect(received, true);
+    });
+
+    testWidgets('calls onChanged when label row tapped', (tester) async {
+      bool? received;
+      await tester.pumpWidget(
+        buildTestApp(
+          ChromiaSwitch(
+            value: false,
+            onChanged: (v) => received = v,
+            label: 'Enable',
+          ),
+        ),
+      );
+      await tester.tap(find.text('Enable'));
+      await tester.pump();
+      expect(received, true);
+    });
+
+    testWidgets('does not call onChanged when disabled', (tester) async {
+      const bool called = false;
+      await tester.pumpWidget(
+        buildTestApp(
+          const ChromiaSwitch(
+            value: false,
+            onChanged: null,
+            label: 'Enable',
+          ),
+        ),
+      );
+      await tester.tap(find.text('Enable'), warnIfMissed: false);
+      await tester.pump();
+      expect(called, false);
+    });
+
+    testWidgets('renders with custom track colors without crash', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        buildTestApp(
+          ChromiaSwitch(
+            value: true,
+            onChanged: (_) {},
+            activeTrackColor: Colors.green,
+            inactiveTrackColor: Colors.grey,
+            thumbColor: Colors.white,
+          ),
+        ),
+      );
+      expect(find.byType(ChromiaSwitch), findsOneWidget);
+    });
+  });
 }

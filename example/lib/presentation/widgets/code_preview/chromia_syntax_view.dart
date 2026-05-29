@@ -33,7 +33,10 @@ class ChromiaSyntaxViewState extends State<ChromiaSyntaxView> {
     return Container(
       width: double.infinity,
       color: widget.syntaxTheme!.backgroundColor,
-      child: _buildCodeWithLinesCount(context),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: _buildCodeWithLinesCount(context),
+      ),
     );
   }
 
@@ -42,7 +45,7 @@ class ChromiaSyntaxViewState extends State<ChromiaSyntaxView> {
     final colors = context.chromiaColors;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.max,
+      mainAxisSize: MainAxisSize.min,
       spacing: 5,
       children: [
         Container(

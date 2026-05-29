@@ -150,11 +150,11 @@ void main() {
       await tester.pumpWidget(
         buildTestApp(
           ChromiaPopupMenu<String>(
-            items: [
+            items: const [
               ChromiaMenuItem<String>(
                 value: 'copy',
                 label: 'Copy',
-                trailing: const Text('⌘C'),
+                trailing: Text('⌘C'),
               ),
             ],
             onSelected: (_) {},

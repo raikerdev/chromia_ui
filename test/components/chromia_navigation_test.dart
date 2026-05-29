@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:chromia_ui/chromia_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -77,7 +79,7 @@ void main() {
       );
 
       // Push a detail route so canPop becomes true → back button appears.
-      navKey.currentState!.push(
+      unawaited(navKey.currentState!.push(
         MaterialPageRoute<void>(
           builder: (ctx) => ChromiaTheme(
             data: ChromiaThemeData.light(),
@@ -90,7 +92,7 @@ void main() {
             ),
           ),
         ),
-      );
+      ));
       await tester.pumpAndSettle();
 
       await tester.tap(find.byIcon(Icons.arrow_back));

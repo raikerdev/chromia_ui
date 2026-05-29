@@ -52,6 +52,7 @@ export 'src/components/display/list_tile/chromia_list_tile_radio_button.dart';
 export 'src/components/display/list_tile/chromia_list_tile_range_slider.dart';
 export 'src/components/display/list_tile/chromia_list_tile_shell.dart';
 export 'src/components/display/list_tile/chromia_list_tile_slider.dart';
+export 'src/components/display/list_tile/chromia_list_tile_switch.dart';
 export 'src/components/display/list_tile/chromia_list_tile_toggle_button.dart';
 export 'src/components/display/text/chromia_rich_text.dart';
 export 'src/components/display/text/chromia_text.dart';
@@ -59,6 +60,7 @@ export 'src/components/display/text/chromia_text.dart';
 // ============================================================================
 // COMPONENTS - FEEDBACK
 // ============================================================================
+export 'src/components/feedback/bottom_sheet/chromia_bottom_sheet.dart';
 export 'src/components/feedback/dialog/chromia_dialog.dart';
 export 'src/components/feedback/progress/chromia_circular_progress.dart';
 export 'src/components/feedback/progress/chromia_linear_progress.dart';
@@ -80,6 +82,7 @@ export 'src/components/input/slider/chromia_range_slider.dart';
 export 'src/components/input/slider/chromia_range_slider_icon_shape.dart';
 export 'src/components/input/slider/chromia_slider.dart';
 export 'src/components/input/slider/chromia_slider_icon_shape.dart';
+export 'src/components/input/switch/chromia_switch.dart';
 export 'src/components/input/text_field/chromia_text_field.dart';
 export 'src/components/input/text_field/chromia_text_field_style.dart';
 export 'src/components/input/text_field/util/chromia_text_field_validator.dart';

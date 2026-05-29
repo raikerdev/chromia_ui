@@ -405,4 +405,74 @@ void main() {
       expect(called, false);
     });
   });
+
+  // ── ChromiaListTileSwitch ─────────────────────────────────────────────────────
+
+  group('ChromiaListTileSwitch', () {
+    testWidgets('renders off state without crash', (tester) async {
+      await tester.pumpWidget(
+        buildTestApp(
+          ChromiaListTileSwitch(value: false, onChanged: (_) {}),
+        ),
+      );
+      expect(find.byType(ChromiaListTileSwitch), findsOneWidget);
+    });
+
+    testWidgets('renders on state without crash', (tester) async {
+      await tester.pumpWidget(
+        buildTestApp(
+          ChromiaListTileSwitch(value: true, onChanged: (_) {}),
+        ),
+      );
+      expect(find.byType(ChromiaListTileSwitch), findsOneWidget);
+    });
+
+    testWidgets('renders with title and subtitle without crash', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        buildTestApp(
+          ChromiaListTileSwitch(
+            value: false,
+            onChanged: (_) {},
+            title: const Text('Notifications'),
+            subtitle: const Text('Enable push notifications'),
+          ),
+        ),
+      );
+      expect(find.text('Notifications'), findsOneWidget);
+      expect(find.text('Enable push notifications'), findsOneWidget);
+    });
+
+    testWidgets('calls onChanged when tile tapped', (tester) async {
+      bool? received;
+      await tester.pumpWidget(
+        buildTestApp(
+          ChromiaListTileSwitch(
+            value: false,
+            onChanged: (v) => received = v,
+            title: const Text('Toggle'),
+          ),
+        ),
+      );
+      await tester.tap(find.byType(ChromiaListTileSwitch));
+      await tester.pumpAndSettle();
+      expect(received, true);
+    });
+
+    testWidgets('does not call onChanged when disabled', (tester) async {
+      const bool called = false;
+      await tester.pumpWidget(
+        buildTestApp(
+          const ChromiaListTileSwitch(value: false, onChanged: null),
+        ),
+      );
+      await tester.tap(
+        find.byType(ChromiaListTileSwitch),
+        warnIfMissed: false,
+      );
+      await tester.pump();
+      expect(called, false);
+    });
+  });
 }

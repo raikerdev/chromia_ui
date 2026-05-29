@@ -282,30 +282,6 @@ Future<bool> showChromiaConfirmDialog({
   return result ?? false;
 }
 
-/// Shows a bottom sheet dialog.
-Future<T?> showChromiaBottomSheet<T>({
-  required BuildContext context,
-  required Widget child,
-  bool isDismissible = true,
-  bool enableDrag = true,
-  Color? backgroundColor,
-}) {
-  final theme = ChromiaTheme.of(context);
-
-  return showModalBottomSheet<T>(
-    context: context,
-    isDismissible: isDismissible,
-    enableDrag: enableDrag,
-    backgroundColor: backgroundColor ?? theme.colors.surface,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(
-        top: Radius.circular(theme.radius.xl),
-      ),
-    ),
-    builder: (context) => child,
-  );
-}
-
 /// A loading dialog that shows a progress indicator.
 class ChromiaLoadingDialog extends StatelessWidget {
   const ChromiaLoadingDialog({
