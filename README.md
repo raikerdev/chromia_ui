@@ -284,7 +284,7 @@ ChromiaBadge(label: '12')
 
 ChromiaLabelBadge(label: 'New')
 
-ChromiaStatusBadge(status: ChromiaStatus.success)
+ChromiaStatusBadge(status: ChromiaStatusType.success)
 ```
 
 ### Avatars
@@ -405,14 +405,13 @@ if (context.isDesktopOrLarger) { ... }
 | Card | `ChromiaCard`, `ChromiaListTileCard` |
 | Checkbox | `ChromiaCheckbox`, `ChromiaListTileCheckbox` |
 | Chip | `ChromiaChip` (filter, input, suggestion variants) |
-| Code | `ChromiaCodePreview`, `ChromiaSyntaxView` |
 | Date/Time | `ChromiaDatePicker` |
 | Dialog | `ChromiaDialog` |
 | Divider | `ChromiaDivider` |
 | Drawer | `ChromiaDrawer`, `ChromiaMiniDrawer` |
 | Dropdown | `ChromiaDropdown` |
 | Input | `ChromiaTextField` |
-| Menu | `ChromiaMenu` |
+| Menu | `ChromiaPopupMenu`, `ChromiaMenuButton`, `ChromiaContextMenu` |
 | Navigation | `ChromiaBottomNavigation` |
 | Progress | `ChromiaLinearProgress`, `ChromiaCircularProgress`, `ChromiaSteppedProgress` |
 | Radio Button | `ChromiaRadioButton`, `ChromiaRadioButtonGroup`, `ChromiaListTileRadioButton` |
@@ -448,7 +447,7 @@ lib/
 ├── chromia_ui.dart         # Main library export
 └── src/
     ├── components/         # All UI components
-    │   ├── display/        # Text, Avatar, Badge, Chip, ListTile, Code
+    │   ├── display/        # Text, Avatar, Badge, Chip, ListTile
     │   ├── feedback/       # Dialog, Progress, Snackbar, Tooltip
     │   ├── input/          # Button, TextField, Checkbox, Radio, Slider, etc.
     │   ├── layout/         # Card, Divider

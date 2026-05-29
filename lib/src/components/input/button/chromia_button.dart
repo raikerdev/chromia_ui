@@ -118,53 +118,60 @@ class _ChromiaButtonState extends State<ChromiaButton> {
     );
     final Color? borderColor = _getBorderColor(finalStyle, isEnabled, theme);
 
-    return MouseRegion(
-      onEnter: isEnabled ? (_) => setState(() => _isHovered = true) : null,
-      onExit: isEnabled ? (_) => setState(() => _isHovered = false) : null,
-      cursor: isEnabled ? SystemMouseCursors.click : SystemMouseCursors.basic,
-      child: GestureDetector(
-        onTapDown: isEnabled ? (_) => setState(() => _isPressed = true) : null,
-        onTapUp: isEnabled ? (_) => setState(() => _isPressed = false) : null,
-        onTapCancel: isEnabled
-            ? () => setState(() => _isPressed = false)
-            : null,
-        onTap: isEnabled ? widget.onPressed : null,
-        onLongPress: isEnabled ? widget.onLongPress : null,
-        child: AnimatedContainer(
-          duration: AnimationTokens.fast,
-          curve: AnimationTokens.easeOut,
-          constraints: BoxConstraints(
-            minWidth: finalStyle.minimumSize?.width ?? 0,
-            minHeight: finalStyle.minimumSize?.height ?? 0,
-            maxWidth: widget.isFullWidth
-                ? double.infinity
-                : (finalStyle.maximumSize?.width ?? double.infinity),
-            maxHeight: finalStyle.maximumSize?.height ?? double.infinity,
-          ),
-          decoration: BoxDecoration(
-            color: backgroundColor,
-            borderRadius: finalStyle.borderRadius,
-            border: borderColor != null && finalStyle.borderWidth != null
-                ? Border.all(
-                    color: borderColor,
-                    width: finalStyle.borderWidth!,
-                  )
-                : null,
-            boxShadow: finalStyle.elevation != null && finalStyle.elevation! > 0
-                ? [
-                    BoxShadow(
-                      color: theme.colors.shadow.withAlpha(25),
-                      blurRadius: finalStyle.elevation! * 2,
-                      offset: Offset(0, finalStyle.elevation!),
-                    ),
-                  ]
-                : null,
-          ),
-          padding: finalStyle.padding,
-          child: _buildButtonContent(
-            theme,
-            foregroundColor,
-            finalStyle.textStyle,
+    return Semantics(
+      button: true,
+      enabled: isEnabled,
+      child: MouseRegion(
+        onEnter: isEnabled ? (_) => setState(() => _isHovered = true) : null,
+        onExit: isEnabled ? (_) => setState(() => _isHovered = false) : null,
+        cursor: isEnabled ? SystemMouseCursors.click : SystemMouseCursors.basic,
+        child: GestureDetector(
+          onTapDown: isEnabled
+              ? (_) => setState(() => _isPressed = true)
+              : null,
+          onTapUp: isEnabled ? (_) => setState(() => _isPressed = false) : null,
+          onTapCancel: isEnabled
+              ? () => setState(() => _isPressed = false)
+              : null,
+          onTap: isEnabled ? widget.onPressed : null,
+          onLongPress: isEnabled ? widget.onLongPress : null,
+          child: AnimatedContainer(
+            duration: AnimationTokens.fast,
+            curve: AnimationTokens.easeOut,
+            constraints: BoxConstraints(
+              minWidth: finalStyle.minimumSize?.width ?? 0,
+              minHeight: finalStyle.minimumSize?.height ?? 0,
+              maxWidth: widget.isFullWidth
+                  ? double.infinity
+                  : (finalStyle.maximumSize?.width ?? double.infinity),
+              maxHeight: finalStyle.maximumSize?.height ?? double.infinity,
+            ),
+            decoration: BoxDecoration(
+              color: backgroundColor,
+              borderRadius: finalStyle.borderRadius,
+              border: borderColor != null && finalStyle.borderWidth != null
+                  ? Border.all(
+                      color: borderColor,
+                      width: finalStyle.borderWidth!,
+                    )
+                  : null,
+              boxShadow:
+                  finalStyle.elevation != null && finalStyle.elevation! > 0
+                  ? [
+                      BoxShadow(
+                        color: theme.colors.shadow.withAlpha(25),
+                        blurRadius: finalStyle.elevation! * 2,
+                        offset: Offset(0, finalStyle.elevation!),
+                      ),
+                    ]
+                  : null,
+            ),
+            padding: finalStyle.padding,
+            child: _buildButtonContent(
+              theme,
+              foregroundColor,
+              finalStyle.textStyle,
+            ),
           ),
         ),
       ),

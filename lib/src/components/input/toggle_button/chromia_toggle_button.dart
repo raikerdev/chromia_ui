@@ -121,14 +121,23 @@ class _ChromiaToggleButtonState extends State<ChromiaToggleButton>
     );
 
     if (widget.label == null) {
-      return control;
+      return Semantics(
+        toggled: widget.value,
+        enabled: isEnabled,
+        child: control,
+      );
     }
 
-    return ChromiaInlineLabel(
-      label: widget.label!,
-      control: control,
-      isEnabled: isEnabled,
-      onTap: isEnabled ? _handleTap : null,
+    return Semantics(
+      toggled: widget.value,
+      enabled: isEnabled,
+      label: widget.label,
+      child: ChromiaInlineLabel(
+        label: widget.label!,
+        control: control,
+        isEnabled: isEnabled,
+        onTap: isEnabled ? _handleTap : null,
+      ),
     );
   }
 

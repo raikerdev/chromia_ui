@@ -104,14 +104,23 @@ class ChromiaCheckbox extends StatelessWidget {
     );
 
     if (label == null) {
-      return control;
+      return Semantics(
+        checked: value,
+        enabled: isEnabled,
+        child: control,
+      );
     }
 
-    return ChromiaInlineLabel(
-      label: label!,
-      control: control,
-      isEnabled: isEnabled,
-      onTap: _buildOnTap(isEnabled),
+    return Semantics(
+      checked: value,
+      enabled: isEnabled,
+      label: label,
+      child: ChromiaInlineLabel(
+        label: label!,
+        control: control,
+        isEnabled: isEnabled,
+        onTap: _buildOnTap(isEnabled),
+      ),
     );
   }
 

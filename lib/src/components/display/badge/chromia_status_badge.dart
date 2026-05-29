@@ -1,4 +1,5 @@
 import 'package:chromia_ui/chromia_ui.dart';
+import 'package:chromia_ui/src/components/utils/position_widget/chromia_position_widget.dart';
 import 'package:flutter/material.dart';
 
 /// A status badge for showing status indicators.

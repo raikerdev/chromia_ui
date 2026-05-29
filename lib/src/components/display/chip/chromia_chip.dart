@@ -1,4 +1,5 @@
 import 'package:chromia_ui/chromia_ui.dart';
+import 'package:chromia_ui/src/components/utils/interactive_widget/chromia_interactive_widget.dart';
 import 'package:flutter/material.dart';
 
 /// A customizable chip component for displaying compact information.
