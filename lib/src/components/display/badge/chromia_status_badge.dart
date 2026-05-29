@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 
 /// A status badge for showing status indicators.
 class ChromiaStatusBadge extends StatelessWidget {
+  /// Creates a [ChromiaStatusBadge].
+  ///
+  /// When [child] is provided the badge is overlaid on it at [position].
+  /// When [child] is `null` only the status indicator itself is rendered.
   const ChromiaStatusBadge({
     required this.status,
     this.child,

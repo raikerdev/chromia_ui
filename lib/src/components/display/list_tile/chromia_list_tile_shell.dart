@@ -24,6 +24,7 @@ import 'package:flutter/material.dart';
 /// )
 /// ```
 class ChromiaListTileShell extends StatelessWidget {
+  /// Creates a [ChromiaListTileShell].
   const ChromiaListTileShell({
     required this.control,
     this.onTap,

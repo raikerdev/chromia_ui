@@ -16,6 +16,7 @@ import 'package:flutter/material.dart';
 /// )
 /// ```
 class ChromiaListTileToggleButton extends StatelessWidget {
+  /// Creates a [ChromiaListTileToggleButton].
   const ChromiaListTileToggleButton({
     required this.value,
     required this.onChanged,

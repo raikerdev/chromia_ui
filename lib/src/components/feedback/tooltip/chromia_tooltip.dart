@@ -17,6 +17,7 @@ import 'package:flutter/material.dart';
 /// )
 /// ```
 class ChromiaTooltip extends StatelessWidget {
+  /// Creates a [ChromiaTooltip].
   const ChromiaTooltip({
     required this.message,
     required this.child,
@@ -176,6 +177,7 @@ class _ChromiaRichTooltip extends ChromiaTooltip {
 
 /// A custom tooltip that shows on long press
 class ChromiaLongPressTooltip extends StatefulWidget {
+  /// Creates a [ChromiaLongPressTooltip].
   const ChromiaLongPressTooltip({
     required this.message,
     required this.child,
@@ -298,6 +300,7 @@ class _TooltipOverlay extends StatelessWidget {
 
 /// A help icon with a tooltip
 class ChromiaHelpIcon extends StatelessWidget {
+  /// Creates a [ChromiaHelpIcon].
   const ChromiaHelpIcon({
     required this.message,
     this.icon = Icons.help_outline,

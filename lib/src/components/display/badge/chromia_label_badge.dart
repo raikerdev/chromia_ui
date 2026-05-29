@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 /// A standalone badge that can be used inline.
 class ChromiaLabelBadge extends StatelessWidget {
+  /// Creates a [ChromiaLabelBadge].
   const ChromiaLabelBadge({
     required this.text,
     this.backgroundColor,

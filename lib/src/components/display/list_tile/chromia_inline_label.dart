@@ -24,6 +24,7 @@ import 'package:flutter/material.dart';
 /// )
 /// ```
 class ChromiaInlineLabel extends StatelessWidget {
+  /// Creates a [ChromiaInlineLabel].
   const ChromiaInlineLabel({
     required this.label,
     required this.control,

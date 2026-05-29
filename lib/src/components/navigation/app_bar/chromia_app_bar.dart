@@ -16,6 +16,7 @@ import 'package:flutter/material.dart';
 /// )
 /// ```
 class ChromiaAppBar extends StatelessWidget implements PreferredSizeWidget {
+  /// Creates a [ChromiaAppBar].
   const ChromiaAppBar({
     this.title,
     this.titleWidget,
@@ -127,6 +128,7 @@ class ChromiaAppBar extends StatelessWidget implements PreferredSizeWidget {
 /// A search app bar with integrated search field.
 class ChromiaSearchAppBar extends StatefulWidget
     implements PreferredSizeWidget {
+  /// Creates a [ChromiaSearchAppBar].
   const ChromiaSearchAppBar({
     required this.onSearch,
     this.hintText = 'Search...',
@@ -249,6 +251,7 @@ class _ChromiaSearchAppBarState extends State<ChromiaSearchAppBar> {
 
 /// An app bar with tabs.
 class ChromiaTabBar extends StatelessWidget implements PreferredSizeWidget {
+  /// Creates a [ChromiaTabBar].
   const ChromiaTabBar({
     required this.tabs,
     this.controller,
@@ -301,6 +304,7 @@ class ChromiaTabBar extends StatelessWidget implements PreferredSizeWidget {
 
 /// A collapsible app bar that expands and collapses on scroll.
 class ChromiaSliverAppBar extends StatelessWidget {
+  /// Creates a [ChromiaSliverAppBar].
   const ChromiaSliverAppBar({
     this.title,
     this.titleWidget,

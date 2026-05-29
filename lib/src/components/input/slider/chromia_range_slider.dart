@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 /// A range slider for selecting a range of values.
 class ChromiaRangeSlider extends StatelessWidget {
+  /// Creates a [ChromiaRangeSlider].
   const ChromiaRangeSlider({
     required this.values,
     required this.onChanged,

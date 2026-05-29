@@ -44,6 +44,7 @@ Widget _pickerTheme(BuildContext context, Widget? child) {
 /// )
 /// ```
 class ChromiaDatePicker extends StatelessWidget {
+  /// Creates a [ChromiaDatePicker].
   const ChromiaDatePicker({
     required this.onDateSelected,
     this.selectedDate,
@@ -204,6 +205,7 @@ class ChromiaDatePicker extends StatelessWidget {
 
 /// A customizable time picker field.
 class ChromiaTimePicker extends StatelessWidget {
+  /// Creates a [ChromiaTimePicker].
   const ChromiaTimePicker({
     required this.onTimeSelected,
     this.selectedTime,
@@ -353,6 +355,7 @@ class ChromiaTimePicker extends StatelessWidget {
 
 /// A combined date and time picker
 class ChromiaDateTimePicker extends StatelessWidget {
+  /// Creates a [ChromiaDateTimePicker].
   const ChromiaDateTimePicker({
     required this.onDateTimeSelected,
     this.selectedDateTime,

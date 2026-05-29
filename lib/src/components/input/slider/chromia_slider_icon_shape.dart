@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 
+/// A custom slider thumb shape that renders a Material icon instead of the
+/// default filled circle.
+///
+/// Pass this to [SliderThemeData.thumbShape] when you want an icon-based thumb.
 class ChromiaSliderIconShape extends SliderComponentShape {
+  /// The icon to render as the slider thumb.
   final IconData icon;
+
+  /// The radius of the thumb hit-box and paint area.
   final double thumbRadius;
 
   /// Color used for the icon shadow. Pass `theme.colors.shadow` from the
   /// parent build method so dark mode is handled correctly.
   final Color shadowColor;
 
+  /// Creates a [ChromiaSliderIconShape].
   const ChromiaSliderIconShape({
     required this.icon,
     required this.thumbRadius,

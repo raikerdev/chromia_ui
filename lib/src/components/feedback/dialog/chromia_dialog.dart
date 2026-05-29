@@ -52,6 +52,10 @@ Future<T?> showChromiaDialog<T>({
 
 /// A customizable dialog component.
 class ChromiaDialog extends StatelessWidget {
+  /// Creates a [ChromiaDialog].
+  ///
+  /// Provide either [title] or [titleWidget] for the heading, and either
+  /// [content] or [contentWidget] for the body.
   const ChromiaDialog({
     this.title,
     this.titleWidget,
@@ -156,6 +160,7 @@ class ChromiaDialog extends StatelessWidget {
 
 /// An action button for dialogs.
 class ChromiaDialogAction {
+  /// Creates a [ChromiaDialogAction].
   const ChromiaDialogAction({
     required this.label,
     required this.onPressed,
@@ -284,6 +289,9 @@ Future<bool> showChromiaConfirmDialog({
 
 /// A loading dialog that shows a progress indicator.
 class ChromiaLoadingDialog extends StatelessWidget {
+  /// Creates a [ChromiaLoadingDialog].
+  ///
+  /// Prefer [ChromiaLoadingDialog.show] to display it inside a route.
   const ChromiaLoadingDialog({
     this.message,
     super.key,

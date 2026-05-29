@@ -28,6 +28,11 @@ import 'package:flutter/material.dart';
 /// )
 /// ```
 class ChromiaButton extends StatefulWidget {
+  /// Creates a [ChromiaButton].
+  ///
+  /// Pass `null` to [onPressed] to render the button in a disabled state.
+  /// Use [variant] to select the visual style; defaults to
+  /// [ChromiaButtonVariant.filled].
   const ChromiaButton({
     required this.onPressed,
     required this.child,

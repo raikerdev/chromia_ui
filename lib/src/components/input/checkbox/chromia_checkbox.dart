@@ -23,6 +23,9 @@ import 'package:flutter/material.dart';
 /// )
 /// ```
 class ChromiaCheckbox extends StatelessWidget {
+  /// Creates a [ChromiaCheckbox].
+  ///
+  /// Pass `null` to [onChanged] to disable interaction.
   const ChromiaCheckbox({
     required this.value,
     required this.onChanged,

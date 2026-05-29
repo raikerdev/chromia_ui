@@ -12,6 +12,9 @@ import 'package:flutter/material.dart';
 /// )
 /// ```
 class ChromiaBadge extends StatelessWidget {
+  /// Creates a [ChromiaBadge].
+  ///
+  /// Omit [value] (or pass an empty string) to render a dot indicator.
   const ChromiaBadge({
     required this.child,
     this.value,

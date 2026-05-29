@@ -25,6 +25,9 @@ import 'package:flutter/material.dart';
 /// )
 /// ```
 class ChromiaRadioButton<T> extends StatelessWidget {
+  /// Creates a [ChromiaRadioButton].
+  ///
+  /// Pass `null` to [onChanged] to disable interaction.
   const ChromiaRadioButton({
     required this.value,
     required this.groupValue,

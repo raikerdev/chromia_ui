@@ -65,6 +65,9 @@ Future<T?> showChromiaBottomSheet<T>({
 /// );
 /// ```
 class ChromiaBottomSheet extends StatelessWidget {
+  /// Creates a [ChromiaBottomSheet].
+  ///
+  /// Provide either [title] or [titleWidget], not both.
   const ChromiaBottomSheet({
     this.title,
     this.titleWidget,

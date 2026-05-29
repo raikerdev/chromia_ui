@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 /// )
 /// ```
 class ChromiaDropdown<T> extends StatelessWidget {
+  /// Creates a [ChromiaDropdown].
   const ChromiaDropdown({
     required this.value,
     required this.items,
@@ -160,6 +161,7 @@ class ChromiaDropdown<T> extends StatelessWidget {
 
 /// A dropdown item with icon and description
 class ChromiaDropdownItem<T> {
+  /// Creates a [ChromiaDropdownItem].
   const ChromiaDropdownItem({
     required this.value,
     required this.label,
@@ -182,6 +184,7 @@ class ChromiaDropdownItem<T> {
 
 /// A dropdown with rich items (icon + description)
 class ChromiaRichDropdown<T> extends StatelessWidget {
+  /// Creates a [ChromiaRichDropdown].
   const ChromiaRichDropdown({
     required this.value,
     required this.items,

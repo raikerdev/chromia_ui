@@ -24,6 +24,9 @@ import 'package:flutter/material.dart';
 /// )
 /// ```
 class ChromiaToggleButton extends StatefulWidget {
+  /// Creates a [ChromiaToggleButton].
+  ///
+  /// Pass `null` to [onChanged] to disable interaction.
   const ChromiaToggleButton({
     required this.value,
     required this.onChanged,

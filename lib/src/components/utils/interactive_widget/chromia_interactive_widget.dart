@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 /// All colours are resolved from the current [ChromiaTheme] so both light and
 /// dark modes behave correctly.
 class ChromiaInteractiveWidget extends StatelessWidget {
+  /// Creates a [ChromiaInteractiveWidget].
   const ChromiaInteractiveWidget({
     this.child,
     this.onPressed,

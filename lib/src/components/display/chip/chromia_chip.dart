@@ -18,6 +18,9 @@ import 'package:flutter/material.dart';
 /// )
 /// ```
 class ChromiaChip extends StatelessWidget {
+  /// Creates a [ChromiaChip] (assist style by default).
+  ///
+  /// Use [ChromiaChip.filter] or [ChromiaChip.choice] for selection variants.
   const ChromiaChip({
     required this.label,
     this.avatar,
@@ -345,6 +348,7 @@ class _Chip extends StatelessWidget {
 
 /// A group of chips that can be selected
 class ChromiaChipGroup extends StatelessWidget {
+  /// Creates a [ChromiaChipGroup].
   const ChromiaChipGroup({
     required this.children,
     this.spacing,

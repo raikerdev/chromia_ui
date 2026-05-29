@@ -27,6 +27,9 @@ import 'package:flutter/material.dart';
 /// )
 /// ```
 class ChromiaSwitch extends StatelessWidget {
+  /// Creates a [ChromiaSwitch].
+  ///
+  /// Pass `null` to [onChanged] to disable interaction.
   const ChromiaSwitch({
     required this.value,
     required this.onChanged,

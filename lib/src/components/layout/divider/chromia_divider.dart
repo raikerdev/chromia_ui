@@ -12,6 +12,9 @@ import 'package:flutter/material.dart';
 /// ChromiaDivider.withText(text: 'OR')
 /// ```
 class ChromiaDivider extends StatelessWidget {
+  /// Creates a horizontal [ChromiaDivider].
+  ///
+  /// Use [ChromiaDivider.vertical] for a vertical line.
   const ChromiaDivider({
     this.height,
     this.thickness,
@@ -21,6 +24,7 @@ class ChromiaDivider extends StatelessWidget {
     super.key,
   }) : isVertical = false;
 
+  /// Creates a vertical [ChromiaDivider].
   const ChromiaDivider.vertical({
     this.height,
     this.thickness,
@@ -213,6 +217,7 @@ class _ChromiaDividerWithIcon extends ChromiaDivider {
 
 /// A section divider with optional title
 class ChromiaSectionDivider extends StatelessWidget {
+  /// Creates a [ChromiaSectionDivider].
   const ChromiaSectionDivider({
     this.title,
     this.trailing,

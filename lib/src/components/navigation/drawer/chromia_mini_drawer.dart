@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 /// A mini drawer that shows only icons.
 class ChromiaMiniDrawer extends StatelessWidget {
+  /// Creates a [ChromiaMiniDrawer].
   const ChromiaMiniDrawer({
     this.header,
     this.items = const [],
@@ -69,7 +70,12 @@ class ChromiaMiniDrawer extends StatelessWidget {
   }
 }
 
+/// A single icon-only item for [ChromiaMiniDrawer].
+///
+/// Shows the icon and an optional badge. When [label] is set it appears as a
+/// tooltip on hover/long-press.
 class ChromiaMiniDrawerItem extends StatelessWidget {
+  /// Creates a [ChromiaMiniDrawerItem].
   const ChromiaMiniDrawerItem({
     required this.icon,
     this.label,

@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 
+/// Positions a [badge] widget over an optional [child] using a [Stack].
+///
+/// When [child] is `null` the badge is rendered on its own. Otherwise the
+/// badge is placed at [badgePosition] relative to the child using
+/// [Positioned].
 class ChromiaPositionWidget extends StatelessWidget {
+  /// Creates a [ChromiaPositionWidget].
   const ChromiaPositionWidget({
     required this.badge,
     required this.badgePosition,
@@ -8,8 +14,13 @@ class ChromiaPositionWidget extends StatelessWidget {
     super.key,
   });
 
+  /// The overlay widget (badge, indicator, etc.) to position.
   final Widget badge;
+
+  /// Where to place [badge] relative to [child].
   final ChromiaPosition badgePosition;
+
+  /// The widget the badge is anchored to. When `null`, only [badge] is shown.
   final Widget? child;
 
   @override
@@ -38,6 +49,7 @@ class ChromiaPositionWidget extends StatelessWidget {
 class ChromiaPosition {
   static const double _customOffset = -4;
 
+  /// Creates a [ChromiaPosition] with explicit inset values.
   const ChromiaPosition({
     this.top,
     this.right,

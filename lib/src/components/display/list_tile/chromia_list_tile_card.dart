@@ -19,6 +19,7 @@ import 'package:flutter/material.dart';
 /// )
 /// ```
 class ChromiaListTileCard extends StatelessWidget {
+  /// Creates a [ChromiaListTileCard].
   const ChromiaListTileCard({
     required this.title,
     this.subtitle,

@@ -12,6 +12,9 @@ import 'package:flutter/material.dart';
 /// )
 /// ```
 class ChromiaLinearProgress extends StatelessWidget {
+  /// Creates a [ChromiaLinearProgress].
+  ///
+  /// Omit [value] to show an indeterminate (animated) indicator.
   const ChromiaLinearProgress({
     this.value,
     this.backgroundColor,

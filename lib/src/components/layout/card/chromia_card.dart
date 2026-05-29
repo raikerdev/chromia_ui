@@ -32,6 +32,10 @@ import 'package:flutter/material.dart';
 /// )
 /// ```
 class ChromiaCard extends StatefulWidget {
+  /// Creates a [ChromiaCard].
+  ///
+  /// Provide [onTap] to make the card interactive; the cursor changes to
+  /// a pointer and a hover/press animation is applied.
   const ChromiaCard({
     required this.child,
     this.header,

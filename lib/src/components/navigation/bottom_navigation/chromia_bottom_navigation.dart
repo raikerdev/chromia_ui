@@ -21,6 +21,7 @@ import 'package:flutter/material.dart';
 /// )
 /// ```
 class ChromiaBottomNavigationBar extends StatelessWidget {
+  /// Creates a [ChromiaBottomNavigationBar].
   const ChromiaBottomNavigationBar({
     required this.items,
     required this.currentIndex,
@@ -101,6 +102,7 @@ class ChromiaBottomNavigationBar extends StatelessWidget {
 
 /// A single item in the bottom navigation bar
 class ChromiaBottomNavigationItem {
+  /// Creates a [ChromiaBottomNavigationItem].
   const ChromiaBottomNavigationItem({
     required this.icon,
     required this.label,
@@ -202,6 +204,7 @@ class _BottomNavigationItemWidget extends StatelessWidget {
 
 /// A floating bottom navigation bar with rounded corners
 class ChromiaFloatingBottomNavigationBar extends StatelessWidget {
+  /// Creates a [ChromiaFloatingBottomNavigationBar].
   const ChromiaFloatingBottomNavigationBar({
     required this.items,
     required this.currentIndex,

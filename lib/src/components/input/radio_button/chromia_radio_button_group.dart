@@ -21,6 +21,7 @@ import 'package:flutter/material.dart';
 /// )
 /// ```
 class ChromiaRadioButtonGroup<T> extends StatelessWidget {
+  /// Creates a [ChromiaRadioButtonGroup].
   const ChromiaRadioButtonGroup({
     required this.value,
     required this.onChanged,
@@ -99,6 +100,7 @@ class ChromiaRadioButtonGroup<T> extends StatelessWidget {
 
 /// Represents a single item in a radio group.
 class ChromiaRadioButtonItem<T> {
+  /// Creates a [ChromiaRadioButtonItem].
   const ChromiaRadioButtonItem({
     required this.value,
     required this.label,

@@ -17,6 +17,7 @@ import 'package:flutter/material.dart';
 /// )
 /// ```
 class ChromiaListTileRadioButton<T> extends StatelessWidget {
+  /// Creates a [ChromiaListTileRadioButton].
   const ChromiaListTileRadioButton({
     required this.value,
     required this.groupValue,

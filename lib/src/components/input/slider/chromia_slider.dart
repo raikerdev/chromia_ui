@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 /// )
 /// ```
 class ChromiaSlider extends StatelessWidget {
+  /// Creates a [ChromiaSlider].
   const ChromiaSlider({
     required this.value,
     required this.onChanged,

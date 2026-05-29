@@ -22,6 +22,7 @@ import 'package:flutter/material.dart';
 /// )
 /// ```
 class ChromiaDrawer extends StatelessWidget {
+  /// Creates a [ChromiaDrawer].
   const ChromiaDrawer({
     this.header,
     this.items = const [],
@@ -74,6 +75,7 @@ class ChromiaDrawer extends StatelessWidget {
 
 /// A single item in the drawer.
 class ChromiaDrawerItem extends StatelessWidget {
+  /// Creates a [ChromiaDrawerItem].
   const ChromiaDrawerItem({
     required this.label,
     this.icon,
@@ -190,6 +192,7 @@ class ChromiaDrawerItem extends StatelessWidget {
 
 /// A section header in the drawer.
 class ChromiaDrawerSection extends StatelessWidget {
+  /// Creates a [ChromiaDrawerSection].
   const ChromiaDrawerSection({
     required this.title,
     this.padding,
@@ -232,6 +235,7 @@ class ChromiaDrawerSection extends StatelessWidget {
 
 /// A divider for the drawer.
 class ChromiaDrawerDivider extends StatelessWidget {
+  /// Creates a [ChromiaDrawerDivider].
   const ChromiaDrawerDivider({
     this.margin,
     super.key,
@@ -261,6 +265,7 @@ class ChromiaDrawerDivider extends StatelessWidget {
 
 /// A custom drawer header with user info.
 class ChromiaDrawerHeader extends StatelessWidget {
+  /// Creates a [ChromiaDrawerHeader].
   const ChromiaDrawerHeader({
     this.title,
     this.subtitle,

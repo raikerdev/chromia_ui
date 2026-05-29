@@ -15,6 +15,7 @@ import 'package:flutter/material.dart';
 /// )
 /// ```
 class ChromiaPopupMenu<T> extends StatelessWidget {
+  /// Creates a [ChromiaPopupMenu].
   const ChromiaPopupMenu({
     required this.items,
     required this.onSelected,
@@ -81,6 +82,7 @@ class ChromiaPopupMenu<T> extends StatelessWidget {
 
 /// A single menu item
 class ChromiaMenuItem<T> {
+  /// Creates a [ChromiaMenuItem].
   const ChromiaMenuItem({
     required this.value,
     required this.label,
@@ -167,6 +169,7 @@ class _MenuItemContent<T> extends StatelessWidget {
 
 /// A context menu that shows on long press or right click
 class ChromiaContextMenu<T> extends StatelessWidget {
+  /// Creates a [ChromiaContextMenu].
   const ChromiaContextMenu({
     required this.items,
     required this.onSelected,
@@ -240,6 +243,7 @@ class ChromiaContextMenu<T> extends StatelessWidget {
 
 /// A dropdown menu button
 class ChromiaMenuButton<T> extends StatelessWidget {
+  /// Creates a [ChromiaMenuButton].
   const ChromiaMenuButton({
     required this.items,
     required this.onSelected,

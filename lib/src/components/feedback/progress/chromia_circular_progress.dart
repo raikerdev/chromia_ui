@@ -13,6 +13,9 @@ import 'package:flutter/material.dart';
 /// )
 /// ```
 class ChromiaCircularProgress extends StatelessWidget {
+  /// Creates a [ChromiaCircularProgress].
+  ///
+  /// Omit [value] to show an indeterminate (spinning) indicator.
   const ChromiaCircularProgress({
     this.value,
     this.size = 40.0,

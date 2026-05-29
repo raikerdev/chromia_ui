@@ -1,14 +1,25 @@
 import 'package:flutter/material.dart';
 
+/// A custom range-slider thumb shape that renders Material icons instead of
+/// the default filled circles.
+///
+/// Use separate [startIcon] and [endIcon] to distinguish the two thumbs.
+/// Pass this to [SliderThemeData.rangeThumbShape].
 class ChromiaRangeSliderIconShape extends RangeSliderThumbShape {
+  /// The icon to render for the start (lower-value) thumb.
   final IconData startIcon;
+
+  /// The icon to render for the end (higher-value) thumb.
   final IconData endIcon;
+
+  /// The radius of each thumb hit-box and paint area.
   final double thumbRadius;
 
   /// Color used for the icon shadow. Pass `theme.colors.shadow` from the
   /// parent build method so dark mode is handled correctly.
   final Color shadowColor;
 
+  /// Creates a [ChromiaRangeSliderIconShape].
   const ChromiaRangeSliderIconShape({
     required this.startIcon,
     required this.endIcon,

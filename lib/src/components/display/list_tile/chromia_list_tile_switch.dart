@@ -16,6 +16,7 @@ import 'package:flutter/material.dart';
 /// )
 /// ```
 class ChromiaListTileSwitch extends StatelessWidget {
+  /// Creates a [ChromiaListTileSwitch].
   const ChromiaListTileSwitch({
     required this.value,
     required this.onChanged,

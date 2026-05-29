@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 ///
 /// Useful for showing progress through multiple steps.
 class ChromiaSteppedProgress extends StatelessWidget {
+  /// Creates a [ChromiaSteppedProgress].
   const ChromiaSteppedProgress({
     required this.currentStep,
     required this.totalSteps,

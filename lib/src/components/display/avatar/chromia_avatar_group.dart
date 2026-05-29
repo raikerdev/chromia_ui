@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 /// A group of overlapping avatars.
 class ChromiaAvatarGroup extends StatelessWidget {
+  /// Creates a [ChromiaAvatarGroup].
   const ChromiaAvatarGroup({
     required this.avatars,
     this.max = 3,

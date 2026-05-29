@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 /// A slider with a label and current value display.
 class ChromiaListTileRangeSlider extends StatelessWidget {
+  /// Creates a [ChromiaListTileRangeSlider].
   const ChromiaListTileRangeSlider({
     required this.values,
     required this.onChanged,

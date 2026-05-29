@@ -16,6 +16,7 @@ import 'package:flutter/services.dart';
 /// )
 /// ```
 class ChromiaTextField extends StatefulWidget {
+  /// Creates a [ChromiaTextField].
   const ChromiaTextField({
     this.controller,
     this.focusNode,

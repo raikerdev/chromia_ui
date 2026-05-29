@@ -16,6 +16,7 @@ import 'package:flutter/material.dart';
 /// )
 /// ```
 class ChromiaListTileCheckbox extends StatelessWidget {
+  /// Creates a [ChromiaListTileCheckbox].
   const ChromiaListTileCheckbox({
     required this.value,
     required this.onChanged,

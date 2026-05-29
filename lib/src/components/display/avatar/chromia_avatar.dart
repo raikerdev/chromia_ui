@@ -17,6 +17,7 @@ import 'package:flutter/material.dart';
 /// )
 /// ```
 class ChromiaAvatar extends StatelessWidget {
+  /// Creates a [ChromiaAvatar].
   const ChromiaAvatar({
     this.child,
     this.imageProvider,
@@ -116,6 +117,7 @@ class ChromiaAvatar extends StatelessWidget {
     );
   }
 
+  /// Creates a [ChromiaAvatar.image] — creates an avatar from an [ImageProvider].
   factory ChromiaAvatar.image({
     required ImageProvider imageProvider,
     Color? backgroundColor,
