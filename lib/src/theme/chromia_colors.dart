@@ -160,11 +160,23 @@ class ChromiaColors with Diagnosticable {
 
   Color get infoDisabled => _adjustBrightness(info, isDark ? -0.3 : 0.3);
 
-  Color get surfaceHover => _adjustBrightness(surface, isDark ? 0.1 : -0.1);
+  // Surface state overlays: blend onSurface at low alpha over the base
+  // surface instead of adjusting lightness. This produces clearly visible
+  // hover/press feedback regardless of the base surface color.
+  Color get surfaceHover => Color.alphaBlend(
+    onSurface.withAlpha(isDark ? 20 : 15),
+    surface,
+  );
 
-  Color get surfacePressed => _adjustBrightness(surface, isDark ? 0.2 : -0.2);
+  Color get surfacePressed => Color.alphaBlend(
+    onSurface.withAlpha(isDark ? 38 : 28),
+    surface,
+  );
 
-  Color get surfaceDisabled => _adjustBrightness(surface, isDark ? -0.3 : 0.3);
+  Color get surfaceDisabled => Color.alphaBlend(
+    onSurface.withAlpha(isDark ? 10 : 8),
+    surface,
+  );
 
   // ── Factories ─────────────────────────────────────────────────────────────
 

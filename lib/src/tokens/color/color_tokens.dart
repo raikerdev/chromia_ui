@@ -22,7 +22,7 @@ class ColorTokens {
   static const Color neutral1000 = Color(0xFF000000);
 
   // Error colors (Red)
-  static const Color errorLight = Color(0xFFB71C1C);
+  static const Color errorLight = Color(0xFFC62828);
   static const Color onErrorLight = Color(0xFFFFFFFF);
   static const Color errorContainerLight = Color(0xFFFFCDD2);
   static const Color onErrorContainerLight = Color(0xFF7F0000);
@@ -33,7 +33,7 @@ class ColorTokens {
   static const Color onErrorContainerDark = Color(0xFFFFCDD2);
 
   // Success colors (Green)
-  static const Color successLight = Color(0xFF1B5E20);
+  static const Color successLight = Color(0xFF2E7D32);
   static const Color onSuccessLight = Color(0xFFFFFFFF);
   static const Color successContainerLight = Color(0xFFC8E6C9);
   static const Color onSuccessContainerLight = Color(0xFF003300);
@@ -54,29 +54,29 @@ class ColorTokens {
   static const Color warningContainerDark = Color(0xFF4A3500);
   static const Color onWarningContainerDark = Color(0xFFFFF8E1);
 
-  // Info colors (Cyan)
-  static const Color infoLight = Color(0xFF006064);
+  // Info colors (Blue — clearly distinct from the teal primary)
+  static const Color infoLight = Color(0xFF1565C0);
   static const Color onInfoLight = Color(0xFFFFFFFF);
-  static const Color infoContainerLight = Color(0xFFB2EBF2);
-  static const Color onInfoContainerLight = Color(0xFF002F32);
+  static const Color infoContainerLight = Color(0xFFBBDEFB);
+  static const Color onInfoContainerLight = Color(0xFF0D2350);
 
-  static const Color infoDark = Color(0xFF4DD0E1);
-  static const Color onInfoDark = Color(0xFF002F32);
-  static const Color infoContainerDark = Color(0xFF003D42);
-  static const Color onInfoContainerDark = Color(0xFFB2EBF2);
+  static const Color infoDark = Color(0xFF64B5F6);
+  static const Color onInfoDark = Color(0xFF0D2350);
+  static const Color infoContainerDark = Color(0xFF0D2350);
+  static const Color onInfoContainerDark = Color(0xFFBBDEFB);
 
-  // Surface colors
-  static const Color surfaceLight = Color(0xFFFEF7FF);
-  static const Color onSurfaceLight = Color(0xFF1D1B20);
-  static const Color onSurfaceVariantLight = Color(0xFF49454F);
-  static const Color surfaceContainerLight = Color(0xFFF3EDF7);
-  static const Color onSurfaceContainerLight = Color(0xFF1D1B20);
+  // Surface colors — teal-tinted neutrals (no purple tint)
+  static const Color surfaceLight = Color(0xFFF5FAF9);
+  static const Color onSurfaceLight = Color(0xFF1A2220);
+  static const Color onSurfaceVariantLight = Color(0xFF4D5C59);
+  static const Color surfaceContainerLight = Color(0xFFECF3F1);
+  static const Color onSurfaceContainerLight = Color(0xFF1A2220);
 
-  static const Color surfaceDark = Color(0xFF141218);
-  static const Color onSurfaceDark = Color(0xFFE6E0E9);
-  static const Color onSurfaceVariantDark = Color(0xFFCAC4D0);
-  static const Color surfaceContainerDark = Color(0xFF211F26);
-  static const Color onSurfaceContainerDark = Color(0xFFE6E0E9);
+  static const Color surfaceDark = Color(0xFF101918);
+  static const Color onSurfaceDark = Color(0xFFDCE8E5);
+  static const Color onSurfaceVariantDark = Color(0xFFB5CBC7);
+  static const Color surfaceContainerDark = Color(0xFF1B2523);
+  static const Color onSurfaceContainerDark = Color(0xFFDCE8E5);
 
   // Other light
   static const Color shadowLight = Color(0xFF2A2A2A);

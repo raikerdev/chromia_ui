@@ -157,6 +157,29 @@ class ChromiaButtonStyle {
     );
   }
 
+  /// Creates a danger/destructive button style — uses the error color palette.
+  ///
+  /// Use this for irreversible destructive actions such as deleting accounts,
+  /// removing data, or confirming destructive operations.
+  factory ChromiaButtonStyle.danger(ChromiaThemeData theme) {
+    return ChromiaButtonStyle(
+      backgroundColor: theme.colors.error,
+      foregroundColor: theme.colors.onError,
+      disabledBackgroundColor: theme.colors.errorDisabled,
+      disabledForegroundColor: theme.colors.textDisabled,
+      hoverBackgroundColor: theme.colors.errorHover,
+      pressedBackgroundColor: theme.colors.errorPressed,
+      borderRadius: theme.radius.radiusL,
+      padding: EdgeInsets.symmetric(
+        horizontal: theme.spacing.l,
+        vertical: theme.spacing.m,
+      ),
+      elevation: 0,
+      textStyle: theme.typography.labelLarge,
+      minimumSize: const Size(64, 40),
+    );
+  }
+
   /// Creates an elevated button style
   factory ChromiaButtonStyle.elevated(ChromiaThemeData theme) {
     return ChromiaButtonStyle(
@@ -262,6 +285,11 @@ enum ChromiaButtonVariant {
 
   /// Elevated button with shadow
   elevated,
+
+  /// Danger/destructive button — uses the error color palette.
+  ///
+  /// Reserve for irreversible destructive actions (delete, remove, etc.).
+  danger,
 }
 
 /// Enum for button sizes

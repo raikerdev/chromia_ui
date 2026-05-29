@@ -86,30 +86,30 @@ class ChromiaTypography with Diagnosticable {
         letterSpacing: TypographyTokens.letterSpacingNormal,
       ),
 
-      // Headline styles
+      // Headline styles — semibold for strong visual hierarchy
       headlineLarge: TextStyle(
         fontSize: TypographyTokens.fontSize32,
-        fontWeight: TypographyTokens.regular,
+        fontWeight: TypographyTokens.semiBold,
         height: TypographyTokens.lineHeightTight,
         letterSpacing: TypographyTokens.letterSpacingNormal,
       ),
       headlineMedium: TextStyle(
         fontSize: TypographyTokens.fontSize28,
-        fontWeight: TypographyTokens.regular,
-        height: TypographyTokens.lineHeightNormal,
+        fontWeight: TypographyTokens.semiBold,
+        height: TypographyTokens.lineHeightTight,
         letterSpacing: TypographyTokens.letterSpacingNormal,
       ),
       headlineSmall: TextStyle(
         fontSize: TypographyTokens.fontSize24,
-        fontWeight: TypographyTokens.regular,
+        fontWeight: TypographyTokens.semiBold,
         height: TypographyTokens.lineHeightNormal,
         letterSpacing: TypographyTokens.letterSpacingNormal,
       ),
 
-      // Title styles
+      // Title styles — medium weight, clearly subordinate to headlines
       titleLarge: TextStyle(
         fontSize: TypographyTokens.fontSize22,
-        fontWeight: TypographyTokens.regular,
+        fontWeight: TypographyTokens.medium,
         height: TypographyTokens.lineHeightNormal,
         letterSpacing: TypographyTokens.letterSpacingNormal,
       ),

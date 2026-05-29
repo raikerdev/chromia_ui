@@ -192,6 +192,38 @@ void main() {
       expect(count, 1);
     });
 
+    // ── Danger variant ────────────────────────────────────────────────────────
+
+    testWidgets('danger variant renders and responds to tap', (tester) async {
+      int count = 0;
+      await tester.pumpWidget(
+        buildTestApp(
+          ChromiaButton(
+            variant: ChromiaButtonVariant.danger,
+            onPressed: () => count++,
+            child: const Text('Delete'),
+          ),
+        ),
+      );
+      expect(find.text('Delete'), findsOneWidget);
+      await tester.tap(find.byType(ChromiaButton));
+      await tester.pump();
+      expect(count, 1);
+    });
+
+    testWidgets('danger variant renders disabled state', (tester) async {
+      await tester.pumpWidget(
+        buildTestApp(
+          const ChromiaButton(
+            variant: ChromiaButtonVariant.danger,
+            onPressed: null,
+            child: Text('Delete'),
+          ),
+        ),
+      );
+      expect(find.text('Delete'), findsOneWidget);
+    });
+
     // ── Custom style ──────────────────────────────────────────────────────────
 
     testWidgets('applies custom style without crash', (tester) async {

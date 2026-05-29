@@ -6,7 +6,7 @@ class ChromiaBrandColorTokens {
   // Primary role — Dark Teal
   static const Color primaryLight = Color(0xFF006B5E);
   static const Color onPrimaryLight = Color(0xFFFFFFFF);
-  static const Color primaryContainerLight = Color(0xFF74F8E1);
+  static const Color primaryContainerLight = Color(0xFFC5E8E3);
   static const Color onPrimaryContainerLight = Color(0xFF00201B);
 
   static const Color primaryDark = Color(0xFF54DBC5);

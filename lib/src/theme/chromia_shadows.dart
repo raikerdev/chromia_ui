@@ -24,104 +24,78 @@ class ChromiaShadows with Diagnosticable {
   final List<BoxShadow> xl;
   final List<BoxShadow> xxl;
 
-  /// Default shadow configuration for light mode
+  /// Default shadow configuration for light mode.
+  ///
+  /// Uses two-layer shadows: a directional shadow for depth and an ambient
+  /// shadow for realistic light diffusion.
   factory ChromiaShadows.light() {
-    const Color shadowColor = Color(0x1A000000);
+    // Directional shadow — gives depth and sense of lift
+    const Color direct = Color(0x14000000); // ~8% black
+    // Ambient shadow — simulates scattered light, no directional offset
+    const Color ambient = Color(0x0A000000); // ~4% black
 
     return const ChromiaShadows(
       none: [],
       xs: [
-        BoxShadow(
-          color: shadowColor,
-          blurRadius: 2,
-          offset: Offset(0, 1),
-        ),
+        BoxShadow(color: direct, blurRadius: 2, offset: Offset(0, 1)),
+        BoxShadow(color: ambient, blurRadius: 4),
       ],
       s: [
-        BoxShadow(
-          color: shadowColor,
-          blurRadius: 4,
-          offset: Offset(0, 2),
-        ),
+        BoxShadow(color: direct, blurRadius: 4, offset: Offset(0, 2)),
+        BoxShadow(color: ambient, blurRadius: 8),
       ],
       m: [
-        BoxShadow(
-          color: shadowColor,
-          blurRadius: 8,
-          offset: Offset(0, 4),
-        ),
+        BoxShadow(color: direct, blurRadius: 8, offset: Offset(0, 4)),
+        BoxShadow(color: ambient, blurRadius: 16),
       ],
       l: [
-        BoxShadow(
-          color: shadowColor,
-          blurRadius: 16,
-          offset: Offset(0, 8),
-        ),
+        BoxShadow(color: Color(0x18000000), blurRadius: 16, offset: Offset(0, 8)),
+        BoxShadow(color: Color(0x0C000000), blurRadius: 24),
       ],
       xl: [
-        BoxShadow(
-          color: shadowColor,
-          blurRadius: 24,
-          offset: Offset(0, 12),
-        ),
+        BoxShadow(color: Color(0x18000000), blurRadius: 24, offset: Offset(0, 12)),
+        BoxShadow(color: Color(0x0C000000), blurRadius: 40),
       ],
       xxl: [
-        BoxShadow(
-          color: shadowColor,
-          blurRadius: 32,
-          offset: Offset(0, 16),
-        ),
+        BoxShadow(color: Color(0x1E000000), blurRadius: 32, offset: Offset(0, 16)),
+        BoxShadow(color: Color(0x10000000), blurRadius: 48),
       ],
     );
   }
 
-  /// Default shadow configuration for dark mode
+  /// Default shadow configuration for dark mode.
+  ///
+  /// Stronger alpha values because dark surfaces need more contrast to
+  /// distinguish elevation levels.
   factory ChromiaShadows.dark() {
-    const Color shadowColor = Color(0x33000000);
+    const Color direct = Color(0x29000000); // ~16% black
+    const Color ambient = Color(0x1A000000); // ~10% black
 
     return const ChromiaShadows(
       none: [],
       xs: [
-        BoxShadow(
-          color: shadowColor,
-          blurRadius: 2,
-          offset: Offset(0, 1),
-        ),
+        BoxShadow(color: direct, blurRadius: 2, offset: Offset(0, 1)),
+        BoxShadow(color: ambient, blurRadius: 4),
       ],
       s: [
-        BoxShadow(
-          color: shadowColor,
-          blurRadius: 4,
-          offset: Offset(0, 2),
-        ),
+        BoxShadow(color: direct, blurRadius: 4, offset: Offset(0, 2)),
+        BoxShadow(color: ambient, blurRadius: 8),
       ],
       m: [
-        BoxShadow(
-          color: shadowColor,
-          blurRadius: 8,
-          offset: Offset(0, 4),
-        ),
+        BoxShadow(color: direct, blurRadius: 8, offset: Offset(0, 4)),
+        BoxShadow(color: ambient, blurRadius: 16),
       ],
       l: [
-        BoxShadow(
-          color: shadowColor,
-          blurRadius: 16,
-          offset: Offset(0, 8),
-        ),
+        BoxShadow(color: Color(0x33000000), blurRadius: 16, offset: Offset(0, 8)),
+        BoxShadow(color: Color(0x1F000000), blurRadius: 24),
       ],
       xl: [
-        BoxShadow(
-          color: shadowColor,
-          blurRadius: 24,
-          offset: Offset(0, 12),
-        ),
+        BoxShadow(color: Color(0x33000000), blurRadius: 24, offset: Offset(0, 12)),
+        BoxShadow(color: Color(0x1F000000), blurRadius: 40),
       ],
       xxl: [
-        BoxShadow(
-          color: shadowColor,
-          blurRadius: 32,
-          offset: Offset(0, 16),
-        ),
+        BoxShadow(color: Color(0x3D000000), blurRadius: 32, offset: Offset(0, 16)),
+        BoxShadow(color: Color(0x29000000), blurRadius: 48),
       ],
     );
   }

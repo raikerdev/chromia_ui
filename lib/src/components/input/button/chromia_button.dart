@@ -287,6 +287,7 @@ class _ChromiaButtonState extends State<ChromiaButton> {
       ChromiaButtonVariant.text => ChromiaButtonStyle.text(theme),
       ChromiaButtonVariant.tonal => ChromiaButtonStyle.tonal(theme),
       ChromiaButtonVariant.elevated => ChromiaButtonStyle.elevated(theme),
+      ChromiaButtonVariant.danger => ChromiaButtonStyle.danger(theme),
     };
   }
 
