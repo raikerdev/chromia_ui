@@ -105,7 +105,12 @@ class ChromiaTextFieldStyle {
   /// The color of the suffix icon
   final Color? suffixIconColor;
 
-  /// Creates a filled text field style
+  /// Creates a filled text field style.
+  ///
+  /// Organic Rounded identity: 12 px radius, no visible border at rest —
+  /// the border only appears on focus (primary) or error states.
+  /// A consistent 1.5 px border width is always reserved to prevent
+  /// layout shifts during the animated focus transition.
   factory ChromiaTextFieldStyle.filled(ChromiaThemeData theme) {
     return ChromiaTextFieldStyle(
       fillColor: theme.colors.surfaceContainer,
@@ -117,13 +122,15 @@ class ChromiaTextFieldStyle {
       labelColor: theme.colors.onSurfaceVariant,
       errorColor: theme.colors.error,
       disabledTextColor: theme.colors.textDisabled,
-      borderColor: theme.colors.outline,
+      // Transparent at rest — border only appears on focus/error.
+      borderColor: Colors.transparent,
       focusedBorderColor: theme.colors.primary,
       errorBorderColor: theme.colors.error,
-      disabledBorderColor: theme.colors.outline,
-      borderWidth: 1.0,
-      focusedBorderWidth: 2.0,
-      borderRadius: theme.radius.radiusM,
+      disabledBorderColor: Colors.transparent,
+      // Constant 1.5 px so the container size never shifts during animation.
+      borderWidth: 1.5,
+      focusedBorderWidth: 1.5,
+      borderRadius: theme.radius.radiusL,
       contentPadding: EdgeInsets.symmetric(
         horizontal: theme.spacing.l,
         vertical: theme.spacing.m,

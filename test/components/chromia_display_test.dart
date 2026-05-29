@@ -140,6 +140,18 @@ void main() {
       );
       expect(find.byIcon(Icons.tag), findsOneWidget);
     });
+
+    // ── Organic Rounded identity ─────────────────────────────────────────────
+
+    testWidgets('chip renders with pill shape without crash', (tester) async {
+      // Verifies the chip renders correctly with its radiusFull border.
+      await tester.pumpWidget(
+        buildTestApp(
+          const ChromiaChip(label: 'Pill chip'),
+        ),
+      );
+      expect(find.text('Pill chip'), findsOneWidget);
+    });
   });
 
   // ── ChromiaBadge ────────────────────────────────────────────────────────────

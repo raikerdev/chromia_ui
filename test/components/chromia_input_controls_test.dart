@@ -178,6 +178,20 @@ void main() {
       await tester.pump();
       expect(received, null);
     });
+
+    // ── Organic Rounded identity ─────────────────────────────────────────────
+
+    testWidgets('renders checkbox with squircle (8 px) radius without crash', (
+      tester,
+    ) async {
+      // Verifies checkbox renders correctly with its radiusM (8 px) border.
+      await tester.pumpWidget(
+        buildTestApp(
+          ChromiaCheckbox(value: false, onChanged: (_) {}),
+        ),
+      );
+      expect(find.byType(AnimatedContainer), findsOneWidget);
+    });
   });
 
   // ── ChromiaToggleButton ───────────────────────────────────────────────────────

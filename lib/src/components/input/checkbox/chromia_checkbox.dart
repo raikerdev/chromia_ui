@@ -159,7 +159,8 @@ class ChromiaCheckbox extends StatelessWidget {
                   : (isEnabled ? colors.outline : colors.surfaceContainer),
               width: 2,
             ),
-            borderRadius: radius.circular(4),
+            // Organic Rounded identity: 8 px squircle-like corners.
+            borderRadius: radius.radiusM,
           ),
           child: value == true
               ? Icon(checkIcon, size: size * 0.7, color: checkColor)

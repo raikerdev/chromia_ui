@@ -129,7 +129,8 @@ class _ChromiaCardState extends State<ChromiaCard> {
     final shadows = theme.shadows;
 
     final bool isInteractive = widget.onTap != null;
-    final BorderRadius effectiveRadius = widget.borderRadius ?? radius.radiusL;
+    // Organic Rounded identity: 24 px default radius for a soft, floating feel.
+    final BorderRadius effectiveRadius = widget.borderRadius ?? radius.radiusXXL;
     final Color effectiveBackgroundColor =
         widget.backgroundColor ?? colors.surface;
 

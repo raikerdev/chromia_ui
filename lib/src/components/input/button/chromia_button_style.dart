@@ -73,7 +73,9 @@ class ChromiaButtonStyle {
   /// The maximum size of the button
   final Size? maximumSize;
 
-  /// Creates a filled button style (primary variant)
+  /// Creates a filled button style (primary variant).
+  ///
+  /// Uses a pill shape (`radiusFull`) as part of the Chromia Organic Rounded identity.
   factory ChromiaButtonStyle.filled(ChromiaThemeData theme) {
     return ChromiaButtonStyle(
       backgroundColor: theme.colors.primary,
@@ -82,7 +84,7 @@ class ChromiaButtonStyle {
       disabledForegroundColor: theme.colors.textDisabled,
       hoverBackgroundColor: theme.colors.primaryHover,
       pressedBackgroundColor: theme.colors.primaryPressed,
-      borderRadius: theme.radius.radiusL,
+      borderRadius: theme.radius.radiusFull,
       padding: EdgeInsets.symmetric(
         horizontal: theme.spacing.l,
         vertical: theme.spacing.m,
@@ -93,7 +95,9 @@ class ChromiaButtonStyle {
     );
   }
 
-  /// Creates an outlined button style
+  /// Creates an outlined button style.
+  ///
+  /// Uses a pill shape (`radiusFull`) as part of the Chromia Organic Rounded identity.
   factory ChromiaButtonStyle.outlined(ChromiaThemeData theme) {
     return ChromiaButtonStyle(
       backgroundColor: theme.colors.transparent,
@@ -106,7 +110,7 @@ class ChromiaButtonStyle {
       disabledBorderColor: theme.colors.outline,
       hoverBorderColor: theme.colors.primaryHover,
       borderWidth: 1.5,
-      borderRadius: theme.radius.radiusL,
+      borderRadius: theme.radius.radiusFull,
       padding: EdgeInsets.symmetric(
         horizontal: theme.spacing.l,
         vertical: theme.spacing.m,
@@ -117,7 +121,9 @@ class ChromiaButtonStyle {
     );
   }
 
-  /// Creates a text button style (ghost variant)
+  /// Creates a text button style (ghost variant).
+  ///
+  /// Uses a pill shape (`radiusFull`) as part of the Chromia Organic Rounded identity.
   factory ChromiaButtonStyle.text(ChromiaThemeData theme) {
     return ChromiaButtonStyle(
       backgroundColor: theme.colors.transparent,
@@ -126,7 +132,7 @@ class ChromiaButtonStyle {
       disabledForegroundColor: theme.colors.textDisabled,
       hoverBackgroundColor: theme.colors.surfaceHover,
       pressedBackgroundColor: theme.colors.surfacePressed,
-      borderRadius: theme.radius.radiusL,
+      borderRadius: theme.radius.radiusFull,
       padding: EdgeInsets.symmetric(
         horizontal: theme.spacing.l,
         vertical: theme.spacing.m,
@@ -137,7 +143,9 @@ class ChromiaButtonStyle {
     );
   }
 
-  /// Creates a tonal button style (filled with lower emphasis, uses primaryContainer)
+  /// Creates a tonal button style (filled with lower emphasis, uses primaryContainer).
+  ///
+  /// Uses a pill shape (`radiusFull`) as part of the Chromia Organic Rounded identity.
   factory ChromiaButtonStyle.tonal(ChromiaThemeData theme) {
     return ChromiaButtonStyle(
       backgroundColor: theme.colors.primaryContainer,
@@ -146,7 +154,7 @@ class ChromiaButtonStyle {
       disabledForegroundColor: theme.colors.textDisabled,
       hoverBackgroundColor: theme.colors.primaryHover,
       pressedBackgroundColor: theme.colors.primaryPressed,
-      borderRadius: theme.radius.radiusL,
+      borderRadius: theme.radius.radiusFull,
       padding: EdgeInsets.symmetric(
         horizontal: theme.spacing.l,
         vertical: theme.spacing.m,
@@ -161,6 +169,7 @@ class ChromiaButtonStyle {
   ///
   /// Use this for irreversible destructive actions such as deleting accounts,
   /// removing data, or confirming destructive operations.
+  /// Uses a pill shape (`radiusFull`) as part of the Chromia Organic Rounded identity.
   factory ChromiaButtonStyle.danger(ChromiaThemeData theme) {
     return ChromiaButtonStyle(
       backgroundColor: theme.colors.error,
@@ -169,7 +178,7 @@ class ChromiaButtonStyle {
       disabledForegroundColor: theme.colors.textDisabled,
       hoverBackgroundColor: theme.colors.errorHover,
       pressedBackgroundColor: theme.colors.errorPressed,
-      borderRadius: theme.radius.radiusL,
+      borderRadius: theme.radius.radiusFull,
       padding: EdgeInsets.symmetric(
         horizontal: theme.spacing.l,
         vertical: theme.spacing.m,
@@ -180,7 +189,9 @@ class ChromiaButtonStyle {
     );
   }
 
-  /// Creates an elevated button style
+  /// Creates an elevated button style.
+  ///
+  /// Uses a pill shape (`radiusFull`) as part of the Chromia Organic Rounded identity.
   factory ChromiaButtonStyle.elevated(ChromiaThemeData theme) {
     return ChromiaButtonStyle(
       backgroundColor: theme.colors.surface,
@@ -189,7 +200,7 @@ class ChromiaButtonStyle {
       disabledForegroundColor: theme.colors.textDisabled,
       hoverBackgroundColor: theme.colors.surfaceHover,
       pressedBackgroundColor: theme.colors.surfacePressed,
-      borderRadius: theme.radius.radiusL,
+      borderRadius: theme.radius.radiusFull,
       padding: EdgeInsets.symmetric(
         horizontal: theme.spacing.l,
         vertical: theme.spacing.m,

@@ -226,5 +226,20 @@ void main() {
 
       controller.dispose();
     });
+
+    // ── Organic Rounded identity ───────────────────────────────────────────────
+
+    test('filled style uses 12 px radius and transparent rest border', () {
+      final theme = ChromiaThemeData.light();
+      final style = ChromiaTextFieldStyle.filled(theme);
+
+      // 12 px = radiusL
+      expect(style.borderRadius, theme.radius.radiusL);
+      // Border is invisible at rest; only appears on focus/error.
+      expect(style.borderColor, Colors.transparent);
+      // Width is constant (1.5) to prevent layout shift during animation.
+      expect(style.borderWidth, 1.5);
+      expect(style.focusedBorderWidth, 1.5);
+    });
   });
 }

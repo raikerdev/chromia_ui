@@ -31,9 +31,10 @@ Future<T?> showChromiaBottomSheet<T>({
     enableDrag: enableDrag,
     isScrollControlled: isScrollControlled,
     backgroundColor: backgroundColor ?? theme.colors.surface,
+    // Organic Rounded identity: 24 px top corners.
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(
-        top: Radius.circular(theme.radius.xl),
+        top: Radius.circular(theme.radius.xxl),
       ),
     ),
     builder: (context) => child,
@@ -118,12 +119,14 @@ class ChromiaBottomSheet extends StatelessWidget {
       children: [
         if (showDragHandle) ...[
           Center(
+            // Organic Rounded identity: slightly wider, thicker drag handle
+            // for a more tactile, premium feel.
             child: Container(
-              width: 32,
-              height: 4,
+              width: 40,
+              height: 5,
               decoration: BoxDecoration(
                 color: colors.onSurfaceVariant.withAlpha(77),
-                borderRadius: BorderRadius.circular(2),
+                borderRadius: BorderRadius.circular(3),
               ),
             ),
           ),

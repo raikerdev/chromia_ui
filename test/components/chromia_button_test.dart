@@ -241,5 +241,19 @@ void main() {
       );
       expect(find.text('Custom'), findsOneWidget);
     });
+
+    // ── Organic Rounded identity ───────────────────────────────────────────────
+
+    test('all variant factories use pill border radius', () {
+      final theme = ChromiaThemeData.light();
+      final expected = theme.radius.radiusFull;
+
+      expect(ChromiaButtonStyle.filled(theme).borderRadius, expected);
+      expect(ChromiaButtonStyle.outlined(theme).borderRadius, expected);
+      expect(ChromiaButtonStyle.text(theme).borderRadius, expected);
+      expect(ChromiaButtonStyle.tonal(theme).borderRadius, expected);
+      expect(ChromiaButtonStyle.danger(theme).borderRadius, expected);
+      expect(ChromiaButtonStyle.elevated(theme).borderRadius, expected);
+    });
   });
 }

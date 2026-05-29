@@ -98,8 +98,9 @@ class ChromiaDialog extends StatelessWidget {
     return Dialog(
       backgroundColor: colors.surface,
       surfaceTintColor: Colors.transparent,
+      // Organic Rounded identity: 24 px radius for a softer, modern feel.
       shape: RoundedRectangleBorder(
-        borderRadius: radius.radiusXL,
+        borderRadius: radius.radiusXXL,
       ),
       child: Container(
         width: width ?? 400,
@@ -211,7 +212,8 @@ class _ActionButton extends StatelessWidget {
       label: action.label,
       child: InkWell(
         onTap: action.onPressed,
-        borderRadius: theme.radius.radiusM,
+        // Organic Rounded identity: pill-shaped action buttons inside dialogs.
+        borderRadius: theme.radius.radiusFull,
         child: Container(
           padding: EdgeInsets.symmetric(
             horizontal: spacing.l,
@@ -219,7 +221,7 @@ class _ActionButton extends StatelessWidget {
           ),
           decoration: BoxDecoration(
             color: backgroundColor,
-            borderRadius: theme.radius.radiusM,
+            borderRadius: theme.radius.radiusFull,
           ),
           child: ExcludeSemantics(
             child: Text(
@@ -325,8 +327,9 @@ class ChromiaLoadingDialog extends StatelessWidget {
 
     return Dialog(
       backgroundColor: colors.surface,
+      // Organic Rounded identity: 24 px radius consistent with ChromiaDialog.
       shape: RoundedRectangleBorder(
-        borderRadius: theme.radius.radiusL,
+        borderRadius: theme.radius.radiusXXL,
       ),
       child: Padding(
         padding: spacing.paddingXXL,

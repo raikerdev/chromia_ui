@@ -299,7 +299,8 @@ class _Chip extends StatelessWidget {
       child: Container(
       decoration: BoxDecoration(
         color: backgroundColor,
-        borderRadius: radius.radiusL,
+        // Organic Rounded identity: pill shape for chips.
+        borderRadius: radius.radiusFull,
         border: border,
       ),
       clipBehavior: Clip.antiAlias,
