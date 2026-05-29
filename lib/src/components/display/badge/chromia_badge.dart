@@ -123,7 +123,7 @@ class _Badge extends StatelessWidget {
       ChromiaBadgeShape.circle => null,
     };
 
-    return Container(
+    final Widget badge = Container(
       constraints: BoxConstraints(
         minWidth: isDot ? size.value / 1.5 : size.value,
         minHeight: isDot ? size.value / 1.5 : size.value,
@@ -158,6 +158,16 @@ class _Badge extends StatelessWidget {
                 ),
               ),
             ),
+    );
+
+    if (isDot) {
+      return ExcludeSemantics(child: badge);
+    }
+
+    return Semantics(
+      label: value,
+      container: true,
+      child: badge,
     );
   }
 }

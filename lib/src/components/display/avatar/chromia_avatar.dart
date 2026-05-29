@@ -26,6 +26,7 @@ class ChromiaAvatar extends StatelessWidget {
     this.shape = ChromiaAvatarShape.circle,
     this.border,
     this.onTap,
+    this.semanticsLabel,
     super.key,
   });
 
@@ -53,6 +54,10 @@ class ChromiaAvatar extends StatelessWidget {
   /// Callback when tapped
   final VoidCallback? onTap;
 
+  /// Accessibility label for screen readers.
+  /// Defaults to 'Avatar' when not provided.
+  final String? semanticsLabel;
+
   /// Creates an avatar with initials
   factory ChromiaAvatar.initials({
     required String initials,
@@ -62,6 +67,7 @@ class ChromiaAvatar extends StatelessWidget {
     ChromiaAvatarShape shape = ChromiaAvatarShape.circle,
     BoxBorder? border,
     VoidCallback? onTap,
+    String? semanticsLabel,
   }) {
     assert(initials.length <= 3, 'Initials must be 3 characters or less');
     return ChromiaAvatar(
@@ -71,6 +77,7 @@ class ChromiaAvatar extends StatelessWidget {
       shape: shape,
       border: border,
       onTap: onTap,
+      semanticsLabel: semanticsLabel ?? initials,
       child: ChromiaText(
         initials.toUpperCase(),
         type: ChromiaTypographyType.bodyMedium,
@@ -92,6 +99,7 @@ class ChromiaAvatar extends StatelessWidget {
     ChromiaAvatarShape shape = ChromiaAvatarShape.circle,
     BoxBorder? border,
     VoidCallback? onTap,
+    String? semanticsLabel,
   }) {
     return ChromiaAvatar(
       backgroundColor: backgroundColor,
@@ -100,6 +108,7 @@ class ChromiaAvatar extends StatelessWidget {
       shape: shape,
       border: border,
       onTap: onTap,
+      semanticsLabel: semanticsLabel ?? 'Avatar',
       child: Icon(
         icon,
         size: size.iconSize,
@@ -114,6 +123,7 @@ class ChromiaAvatar extends StatelessWidget {
     ChromiaAvatarShape shape = ChromiaAvatarShape.circle,
     BoxBorder? border,
     VoidCallback? onTap,
+    String? semanticsLabel,
   }) {
     return ChromiaAvatar(
       backgroundColor: backgroundColor,
@@ -121,6 +131,7 @@ class ChromiaAvatar extends StatelessWidget {
       shape: shape,
       border: border,
       onTap: onTap,
+      semanticsLabel: semanticsLabel ?? 'Avatar',
       imageProvider: imageProvider,
     );
   }
@@ -173,7 +184,11 @@ class ChromiaAvatar extends StatelessWidget {
       ),
     );
 
-    return avatar;
+    return Semantics(
+      label: semanticsLabel ?? 'Avatar',
+      button: onTap != null,
+      child: avatar,
+    );
   }
 }
 

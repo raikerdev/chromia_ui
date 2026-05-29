@@ -118,7 +118,12 @@ class ChromiaDrawerItem extends StatelessWidget {
         ? colors.primary
         : colors.onSurfaceVariant;
 
-    return InkWell(
+    return Semantics(
+      selected: selected,
+      button: true,
+      label: label,
+      excludeSemantics: true,
+      child: InkWell(
       onTap: onTap,
       child: Container(
         padding: EdgeInsets.symmetric(
@@ -177,6 +182,7 @@ class ChromiaDrawerItem extends StatelessWidget {
             ],
           ],
         ),
+      ),
       ),
     );
   }
@@ -289,7 +295,10 @@ class ChromiaDrawerHeader extends StatelessWidget {
     final colors = context.chromiaColors;
     final spacing = theme.spacing;
 
-    return GestureDetector(
+    return Semantics(
+      button: onTap != null,
+      label: title ?? 'Drawer header',
+      child: GestureDetector(
       onTap: onTap,
       child: Container(
         height: 180,
@@ -338,6 +347,7 @@ class ChromiaDrawerHeader extends StatelessWidget {
             ],
           ],
         ),
+      ),
       ),
     );
   }

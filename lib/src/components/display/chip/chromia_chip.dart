@@ -134,13 +134,19 @@ class ChromiaChip extends StatelessWidget {
       avatar: avatar,
       icon: icon,
       deleteWidget: onDeleted != null
-          ? ChromiaInteractiveWidget(
-              onPressed: onDeleted,
-              useCircleBorder: true,
-              child: Icon(
-                Icons.close,
-                size: 16,
-                color: effectiveDeleteIconColor,
+          ? Semantics(
+              label: 'Remove $label',
+              button: true,
+              child: ChromiaInteractiveWidget(
+                onPressed: onDeleted,
+                useCircleBorder: true,
+                child: ExcludeSemantics(
+                  child: Icon(
+                    Icons.close,
+                    size: 16,
+                    color: effectiveDeleteIconColor,
+                  ),
+                ),
               ),
             )
           : null,
@@ -196,6 +202,7 @@ class _ChromiaFilterChip extends ChromiaChip {
       onPressed: () => onSelected(!selected),
       avatar: avatar,
       icon: effectiveIcon,
+      semanticsChecked: selected,
     );
   }
 }
@@ -241,6 +248,8 @@ class _ChromiaChoiceChip extends ChromiaChip {
       fontWeight: selected
           ? TypographyTokens.semiBold
           : TypographyTokens.regular,
+      semanticsChecked: selected,
+      semanticsInMutuallyExclusiveGroup: true,
     );
   }
 }
@@ -257,6 +266,8 @@ class _Chip extends StatelessWidget {
     this.deleteWidget,
     this.padding,
     this.fontWeight = TypographyTokens.regular,
+    this.semanticsChecked,
+    this.semanticsInMutuallyExclusiveGroup = false,
   });
 
   final String label;
@@ -269,13 +280,20 @@ class _Chip extends StatelessWidget {
   final Widget? deleteWidget;
   final EdgeInsetsGeometry? padding;
   final FontWeight fontWeight;
+  final bool? semanticsChecked;
+  final bool semanticsInMutuallyExclusiveGroup;
 
   @override
   Widget build(BuildContext context) {
     final spacing = context.chromiaSpacing;
     final radius = context.chromiaRadius;
 
-    return Container(
+    return Semantics(
+      button: onPressed != null,
+      label: label,
+      checked: semanticsChecked,
+      inMutuallyExclusiveGroup: semanticsInMutuallyExclusiveGroup,
+      child: Container(
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: radius.radiusL,
@@ -321,7 +339,7 @@ class _Chip extends StatelessWidget {
           ),
         ),
       ),
-    );
+    ));
   }
 }
 

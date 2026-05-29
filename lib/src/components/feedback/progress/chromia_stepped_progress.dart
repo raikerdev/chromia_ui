@@ -47,7 +47,13 @@ class ChromiaSteppedProgress extends StatelessWidget {
     final BorderRadius effectiveBorderRadius =
         borderRadius ?? BorderRadius.circular(height / 2);
 
-    return Row(
+    final int displayStep = currentStep + 1;
+    final int pct = (displayStep / totalSteps * 100).round();
+
+    return Semantics(
+      label: 'Step $displayStep of $totalSteps',
+      value: '$pct%',
+      child: Row(
       children: List.generate(totalSteps, (index) {
         final bool isActive = index <= currentStep;
         return Expanded(
@@ -67,6 +73,6 @@ class ChromiaSteppedProgress extends StatelessWidget {
           ),
         );
       }),
-    );
+    ));
   }
 }

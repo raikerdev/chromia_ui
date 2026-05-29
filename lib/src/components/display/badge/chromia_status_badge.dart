@@ -10,6 +10,7 @@ class ChromiaStatusBadge extends StatelessWidget {
     this.text,
     this.showDot = true,
     this.position,
+    this.semanticsLabel,
     super.key,
   });
 
@@ -28,6 +29,10 @@ class ChromiaStatusBadge extends StatelessWidget {
   /// Position of the badge relative to the child
   final ChromiaPosition? position;
 
+  /// Accessibility label for screen readers.
+  /// Defaults to 'Status: {status name}'.
+  final String? semanticsLabel;
+
   @override
   Widget build(BuildContext context) {
     final String effectiveText = child == null ? text ?? '' : '';
@@ -40,6 +45,7 @@ class ChromiaStatusBadge extends StatelessWidget {
         status: status,
         text: effectiveText,
         showDot: showDot,
+        semanticsLabel: semanticsLabel,
       ),
       badgePosition: effectivePosition,
       child: child,
@@ -52,11 +58,13 @@ class _StatusBadge extends StatelessWidget {
     required this.status,
     this.text,
     this.showDot = true,
+    this.semanticsLabel,
   });
 
   final ChromiaStatusType status;
   final String? text;
   final bool showDot;
+  final String? semanticsLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -77,12 +85,15 @@ class _StatusBadge extends StatelessWidget {
     }
 
     if (text == null) {
-      return Container(
-        width: 8,
-        height: 8,
-        decoration: BoxDecoration(
-          color: statusColor,
-          shape: BoxShape.circle,
+      return Semantics(
+        label: semanticsLabel ?? 'Status: ${status.name}',
+        child: Container(
+          width: 8,
+          height: 8,
+          decoration: BoxDecoration(
+            color: statusColor,
+            shape: BoxShape.circle,
+          ),
         ),
       );
     }

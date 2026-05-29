@@ -44,7 +44,9 @@ class ChromiaAvatarGroup extends StatelessWidget {
       width: 2,
     );
 
-    return SizedBox(
+    return Semantics(
+      label: 'Group of ${avatars.length} avatar${avatars.length == 1 ? '' : 's'}',
+      child: SizedBox(
       width:
           totalWidth +
           extraWidth +
@@ -86,6 +88,7 @@ class ChromiaAvatarGroup extends StatelessWidget {
             ),
         ],
       ),
+    ),
     );
   }
 }

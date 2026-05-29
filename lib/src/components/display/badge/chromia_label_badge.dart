@@ -75,13 +75,19 @@ class ChromiaLabelBadge extends StatelessWidget {
           ),
           if (onRemove != null) ...[
             spacing.gapHXS,
-            ChromiaInteractiveWidget(
-              onPressed: onRemove,
-              useCircleBorder: true,
-              child: Icon(
-                Icons.close,
-                size: TypographyTokens.fontSize14,
-                color: effectiveTextColor,
+            Semantics(
+              label: 'Remove $text',
+              button: true,
+              child: ChromiaInteractiveWidget(
+                onPressed: onRemove,
+                useCircleBorder: true,
+                child: ExcludeSemantics(
+                  child: Icon(
+                    Icons.close,
+                    size: TypographyTokens.fontSize14,
+                    color: effectiveTextColor,
+                  ),
+                ),
               ),
             ),
           ],

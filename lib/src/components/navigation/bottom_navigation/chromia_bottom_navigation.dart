@@ -163,7 +163,12 @@ class _BottomNavigationItemWidget extends StatelessWidget {
     }
 
     return Expanded(
-      child: InkWell(
+      child: Semantics(
+        selected: isSelected,
+        button: true,
+        label: item.label,
+        excludeSemantics: true,
+        child: InkWell(
         onTap: onTap,
         child: Padding(
           padding: spacing.paddingXS,
@@ -189,6 +194,7 @@ class _BottomNavigationItemWidget extends StatelessWidget {
             ],
           ),
         ),
+      ),
       ),
     );
   }

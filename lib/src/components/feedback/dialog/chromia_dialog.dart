@@ -201,22 +201,28 @@ class _ActionButton extends StatelessWidget {
       textColor = colors.onSurface;
     }
 
-    return InkWell(
-      onTap: action.onPressed,
-      borderRadius: theme.radius.radiusM,
-      child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: spacing.l,
-          vertical: spacing.m,
-        ),
-        decoration: BoxDecoration(
-          color: backgroundColor,
-          borderRadius: theme.radius.radiusM,
-        ),
-        child: Text(
-          action.label,
-          style: theme.typography.labelMedium.copyWith(
-            color: textColor,
+    return Semantics(
+      button: true,
+      label: action.label,
+      child: InkWell(
+        onTap: action.onPressed,
+        borderRadius: theme.radius.radiusM,
+        child: Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: spacing.l,
+            vertical: spacing.m,
+          ),
+          decoration: BoxDecoration(
+            color: backgroundColor,
+            borderRadius: theme.radius.radiusM,
+          ),
+          child: ExcludeSemantics(
+            child: Text(
+              action.label,
+              style: theme.typography.labelMedium.copyWith(
+                color: textColor,
+              ),
+            ),
           ),
         ),
       ),

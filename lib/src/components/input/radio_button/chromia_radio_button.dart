@@ -80,14 +80,25 @@ class ChromiaRadioButton<T> extends StatelessWidget {
     );
 
     if (label == null) {
-      return control;
+      return Semantics(
+        inMutuallyExclusiveGroup: true,
+        checked: _isSelected,
+        enabled: isEnabled,
+        child: control,
+      );
     }
 
-    return ChromiaInlineLabel(
-      label: label!,
-      control: control,
-      isEnabled: isEnabled,
-      onTap: onTap,
+    return Semantics(
+      inMutuallyExclusiveGroup: true,
+      checked: _isSelected,
+      enabled: isEnabled,
+      label: label,
+      child: ChromiaInlineLabel(
+        label: label!,
+        control: control,
+        isEnabled: isEnabled,
+        onTap: onTap,
+      ),
     );
   }
 
