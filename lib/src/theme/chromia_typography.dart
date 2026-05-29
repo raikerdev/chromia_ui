@@ -2,6 +2,7 @@ import 'package:chromia_ui/src/theme/chromia_theme.dart';
 import 'package:chromia_ui/src/tokens/typography_tokens.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 /// Semantic typography system for Chromia UI.
 ///
@@ -63,63 +64,81 @@ class ChromiaTypography with Diagnosticable {
   final TextStyle caption;
   final TextStyle overline;
 
-  /// Default typography configuration
+  /// Default typography configuration using Plus Jakarta Sans.
+  ///
+  /// Display and headline styles use a -0.02em letter-spacing to achieve
+  /// the compact, modern feel characteristic of the Chromia Chromatic Teal
+  /// visual identity. Body and label styles stay at 0 for readability.
   factory ChromiaTypography.defaultTypography() {
-    return const ChromiaTypography(
-      // Display styles
-      displayLarge: TextStyle(
+    // Helper: returns a Plus Jakarta Sans TextStyle with shared properties.
+    TextStyle pjs({
+      required double fontSize,
+      required FontWeight fontWeight,
+      required double height,
+      required double letterSpacing,
+    }) =>
+        GoogleFonts.plusJakartaSans(
+          fontSize: fontSize,
+          fontWeight: fontWeight,
+          height: height,
+          letterSpacing: letterSpacing,
+        );
+
+    return ChromiaTypography(
+      // Display styles — -0.02em letter-spacing for editorial compactness
+      displayLarge: pjs(
         fontSize: TypographyTokens.fontSize57,
         fontWeight: TypographyTokens.regular,
         height: TypographyTokens.lineHeightTight,
-        letterSpacing: TypographyTokens.letterSpacingTight,
+        letterSpacing: TypographyTokens.fontSize57 * -0.02, // -1.14
       ),
-      displayMedium: TextStyle(
+      displayMedium: pjs(
         fontSize: TypographyTokens.fontSize45,
         fontWeight: TypographyTokens.regular,
         height: TypographyTokens.lineHeightTight,
-        letterSpacing: TypographyTokens.letterSpacingNormal,
+        letterSpacing: TypographyTokens.fontSize45 * -0.02, // -0.90
       ),
-      displaySmall: TextStyle(
+      displaySmall: pjs(
         fontSize: TypographyTokens.fontSize36,
         fontWeight: TypographyTokens.regular,
         height: TypographyTokens.lineHeightTight,
-        letterSpacing: TypographyTokens.letterSpacingNormal,
+        letterSpacing: TypographyTokens.fontSize36 * -0.02, // -0.72
       ),
 
-      // Headline styles — semibold for strong visual hierarchy
-      headlineLarge: TextStyle(
+      // Headline styles — semibold + -0.02em for strong visual hierarchy
+      headlineLarge: pjs(
         fontSize: TypographyTokens.fontSize32,
         fontWeight: TypographyTokens.semiBold,
         height: TypographyTokens.lineHeightTight,
-        letterSpacing: TypographyTokens.letterSpacingNormal,
+        letterSpacing: TypographyTokens.fontSize32 * -0.02, // -0.64
       ),
-      headlineMedium: TextStyle(
+      headlineMedium: pjs(
         fontSize: TypographyTokens.fontSize28,
         fontWeight: TypographyTokens.semiBold,
         height: TypographyTokens.lineHeightTight,
-        letterSpacing: TypographyTokens.letterSpacingNormal,
+        letterSpacing: TypographyTokens.fontSize28 * -0.02, // -0.56
       ),
-      headlineSmall: TextStyle(
+      headlineSmall: pjs(
         fontSize: TypographyTokens.fontSize24,
         fontWeight: TypographyTokens.semiBold,
         height: TypographyTokens.lineHeightNormal,
-        letterSpacing: TypographyTokens.letterSpacingNormal,
+        letterSpacing: TypographyTokens.fontSize24 * -0.02, // -0.48
       ),
 
-      // Title styles — medium weight, clearly subordinate to headlines
-      titleLarge: TextStyle(
+      // Title styles — medium weight, neutral letter-spacing
+      titleLarge: pjs(
         fontSize: TypographyTokens.fontSize22,
         fontWeight: TypographyTokens.medium,
         height: TypographyTokens.lineHeightNormal,
         letterSpacing: TypographyTokens.letterSpacingNormal,
       ),
-      titleMedium: TextStyle(
+      titleMedium: pjs(
         fontSize: TypographyTokens.fontSize16,
         fontWeight: TypographyTokens.medium,
         height: TypographyTokens.lineHeightNormal,
         letterSpacing: TypographyTokens.letterSpacingNormal,
       ),
-      titleSmall: TextStyle(
+      titleSmall: pjs(
         fontSize: TypographyTokens.fontSize14,
         fontWeight: TypographyTokens.medium,
         height: TypographyTokens.lineHeightNormal,
@@ -127,39 +146,39 @@ class ChromiaTypography with Diagnosticable {
       ),
 
       // Body styles
-      bodyLarge: TextStyle(
+      bodyLarge: pjs(
         fontSize: TypographyTokens.fontSize16,
         fontWeight: TypographyTokens.regular,
         height: TypographyTokens.lineHeightNormal,
         letterSpacing: TypographyTokens.letterSpacingNormal,
       ),
-      bodyMedium: TextStyle(
+      bodyMedium: pjs(
         fontSize: TypographyTokens.fontSize14,
         fontWeight: TypographyTokens.regular,
         height: TypographyTokens.lineHeightNormal,
         letterSpacing: TypographyTokens.letterSpacingNormal,
       ),
-      bodySmall: TextStyle(
+      bodySmall: pjs(
         fontSize: TypographyTokens.fontSize12,
         fontWeight: TypographyTokens.regular,
         height: TypographyTokens.lineHeightNormal,
         letterSpacing: TypographyTokens.letterSpacingNormal,
       ),
 
-      // Label styles
-      labelLarge: TextStyle(
+      // Label styles — slightly wide tracking enhances legibility at small sizes
+      labelLarge: pjs(
         fontSize: TypographyTokens.fontSize14,
         fontWeight: TypographyTokens.medium,
         height: TypographyTokens.lineHeightNormal,
         letterSpacing: TypographyTokens.letterSpacingWide,
       ),
-      labelMedium: TextStyle(
+      labelMedium: pjs(
         fontSize: TypographyTokens.fontSize12,
         fontWeight: TypographyTokens.medium,
         height: TypographyTokens.lineHeightNormal,
         letterSpacing: TypographyTokens.letterSpacingWide,
       ),
-      labelSmall: TextStyle(
+      labelSmall: pjs(
         fontSize: TypographyTokens.fontSize11,
         fontWeight: TypographyTokens.medium,
         height: TypographyTokens.lineHeightNormal,
@@ -167,13 +186,13 @@ class ChromiaTypography with Diagnosticable {
       ),
 
       // Caption styles
-      caption: TextStyle(
+      caption: pjs(
         fontSize: TypographyTokens.fontSize12,
         fontWeight: TypographyTokens.regular,
         height: TypographyTokens.lineHeightNormal,
         letterSpacing: TypographyTokens.letterSpacingNormal,
       ),
-      overline: TextStyle(
+      overline: pjs(
         fontSize: TypographyTokens.fontSize10,
         fontWeight: TypographyTokens.medium,
         height: TypographyTokens.lineHeightNormal,

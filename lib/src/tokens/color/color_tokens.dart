@@ -65,18 +65,21 @@ class ColorTokens {
   static const Color infoContainerDark = Color(0xFF0D2350);
   static const Color onInfoContainerDark = Color(0xFFBBDEFB);
 
-  // Surface colors — teal-tinted neutrals (no purple tint)
-  static const Color surfaceLight = Color(0xFFF5FAF9);
-  static const Color onSurfaceLight = Color(0xFF1A2220);
-  static const Color onSurfaceVariantLight = Color(0xFF4D5C59);
-  static const Color surfaceContainerLight = Color(0xFFECF3F1);
-  static const Color onSurfaceContainerLight = Color(0xFF1A2220);
+  // Surface base colors — neutral, no color tint hardcoded.
+  // ChromiaColors.light() / dark() / fromBrandColorConfig() apply a subtle
+  // primary-derived tint (~4-5 % opacity) at runtime so every brand palette
+  // gets harmonious surfaces automatically.
+  static const Color surfaceLight = Color(0xFFF8F8F8);
+  static const Color onSurfaceLight = Color(0xFF1C1C1E);
+  static const Color onSurfaceVariantLight = Color(0xFF5C5C5C);
+  static const Color surfaceContainerLight = Color(0xFFF0F0F0);
+  static const Color onSurfaceContainerLight = Color(0xFF1C1C1E);
 
-  static const Color surfaceDark = Color(0xFF101918);
-  static const Color onSurfaceDark = Color(0xFFDCE8E5);
-  static const Color onSurfaceVariantDark = Color(0xFFB5CBC7);
-  static const Color surfaceContainerDark = Color(0xFF1B2523);
-  static const Color onSurfaceContainerDark = Color(0xFFDCE8E5);
+  static const Color surfaceDark = Color(0xFF121212);
+  static const Color onSurfaceDark = Color(0xFFE0E0E0);
+  static const Color onSurfaceVariantDark = Color(0xFFB0B0B0);
+  static const Color surfaceContainerDark = Color(0xFF1E1E1E);
+  static const Color onSurfaceContainerDark = Color(0xFFE0E0E0);
 
   // Other light
   static const Color shadowLight = Color(0xFF2A2A2A);

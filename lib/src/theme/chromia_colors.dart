@@ -180,12 +180,17 @@ class ChromiaColors with Diagnosticable {
 
   // ── Factories ─────────────────────────────────────────────────────────────
 
-  /// Default light color scheme
+  /// Default light color scheme.
+  ///
+  /// Surfaces are neutral (`#F8F8F8`) blended with the Chromia primary colour
+  /// at ~2 % opacity, producing a barely-perceptible teal whisper that ties
+  /// the background to the brand without overwhelming it.
   factory ChromiaColors.light() {
-    return const ChromiaColors(
+    const Color primary = ChromiaBrandColorTokens.primaryLight;
+    return ChromiaColors(
       brightness: Brightness.light,
       // Primary
-      primary: ChromiaBrandColorTokens.primaryLight,
+      primary: primary,
       onPrimary: ChromiaBrandColorTokens.onPrimaryLight,
       primaryContainer: ChromiaBrandColorTokens.primaryContainerLight,
       onPrimaryContainer: ChromiaBrandColorTokens.onPrimaryContainerLight,
@@ -214,11 +219,18 @@ class ChromiaColors with Diagnosticable {
       onInfo: ColorTokens.onInfoLight,
       infoContainer: ColorTokens.infoContainerLight,
       onInfoContainer: ColorTokens.onInfoContainerLight,
-      // Surface
-      surface: ColorTokens.surfaceLight,
+      // Surface — neutral base + subtle primary tint
+      surface: _tintedSurface(
+        primary,
+        ColorTokens.surfaceLight,
+      ),
       onSurface: ColorTokens.onSurfaceLight,
       onSurfaceVariant: ColorTokens.onSurfaceVariantLight,
-      surfaceContainer: ColorTokens.surfaceContainerLight,
+      surfaceContainer: _tintedSurface(
+        primary,
+        ColorTokens.surfaceContainerLight,
+        alpha: 7,
+      ),
       onSurfaceContainer: ColorTokens.onSurfaceContainerLight,
       // Outline
       outline: ColorTokens.neutral300,
@@ -231,12 +243,16 @@ class ChromiaColors with Diagnosticable {
     );
   }
 
-  /// Default dark color scheme
+  /// Default dark color scheme.
+  ///
+  /// Surfaces are neutral (`#121212`) blended with the Chromia primary colour
+  /// at ~2 % opacity for a barely-perceptible tint in dark contexts.
   factory ChromiaColors.dark() {
-    return const ChromiaColors(
+    const Color primary = ChromiaBrandColorTokens.primaryDark;
+    return ChromiaColors(
       brightness: Brightness.dark,
       // Primary
-      primary: ChromiaBrandColorTokens.primaryDark,
+      primary: primary,
       onPrimary: ChromiaBrandColorTokens.onPrimaryDark,
       primaryContainer: ChromiaBrandColorTokens.primaryContainerDark,
       onPrimaryContainer: ChromiaBrandColorTokens.onPrimaryContainerDark,
@@ -265,11 +281,18 @@ class ChromiaColors with Diagnosticable {
       onInfo: ColorTokens.onInfoDark,
       infoContainer: ColorTokens.infoContainerDark,
       onInfoContainer: ColorTokens.onInfoContainerDark,
-      // Surface
-      surface: ColorTokens.surfaceDark,
+      // Surface — neutral base + subtle primary tint
+      surface: _tintedSurface(
+        primary,
+        ColorTokens.surfaceDark,
+      ),
       onSurface: ColorTokens.onSurfaceDark,
       onSurfaceVariant: ColorTokens.onSurfaceVariantDark,
-      surfaceContainer: ColorTokens.surfaceContainerDark,
+      surfaceContainer: _tintedSurface(
+        primary,
+        ColorTokens.surfaceContainerDark,
+        alpha: 7,
+      ),
       onSurfaceContainer: ColorTokens.onSurfaceContainerDark,
       // Outline
       outline: ColorTokens.neutral700,
@@ -282,11 +305,25 @@ class ChromiaColors with Diagnosticable {
     );
   }
 
-  /// Create a color scheme from a [ChromiaBrandColorConfig]
+  /// Creates a color scheme from a [ChromiaBrandColorConfig].
+  ///
+  /// The surface tint is recomputed from the brand's own primary colour so
+  /// that every brand gets a harmonious, brand-specific background — not the
+  /// default Chromia teal tint.
   factory ChromiaColors.fromBrandColorConfig(
     ChromiaBrandColorConfig colorConfig, {
     bool isDark = false,
   }) {
+    // Resolve brand primary (falls back to Chromia default via the config getter).
+    final Color brandPrimary =
+        isDark ? colorConfig.primaryDark : colorConfig.primaryLight;
+
+    final Color neutralSurface =
+        isDark ? ColorTokens.surfaceDark : ColorTokens.surfaceLight;
+    final Color neutralContainer = isDark
+        ? ColorTokens.surfaceContainerDark
+        : ColorTokens.surfaceContainerLight;
+
     final ChromiaColors base = isDark
         ? ChromiaColors.dark().copyWith(
             primary: colorConfig.primaryDark,
@@ -308,7 +345,22 @@ class ChromiaColors with Diagnosticable {
             secondaryContainer: colorConfig.secondaryContainerLight,
             onSecondaryContainer: colorConfig.onSecondaryContainerLight,
           );
-    return base;
+
+    // Recompute surface tint with the brand's primary colour.
+    return base.copyWith(
+      surface: _tintedSurface(brandPrimary, neutralSurface),
+      surfaceContainer: _tintedSurface(brandPrimary, neutralContainer, alpha: 7),
+    );
+  }
+
+  /// Blends [primary] at [alpha]/255 opacity into [base] to produce a surface
+  /// that subtly harmonises with the brand colour without overpowering it.
+  ///
+  /// The default [alpha] of `5` corresponds to ≈ 2 % opacity — perceptible
+  /// as a whisper of colour but never dominant. Use `7` for container levels
+  /// (cards, inputs) to keep their visual separation from the main surface.
+  static Color _tintedSurface(Color primary, Color base, {int alpha = 5}) {
+    return Color.alphaBlend(primary.withAlpha(alpha), base);
   }
 
   /// Adjusts the brightness of a color
