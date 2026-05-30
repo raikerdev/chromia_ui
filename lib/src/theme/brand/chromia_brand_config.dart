@@ -77,7 +77,7 @@ class BrandConfigs {
 
   /// Default Chromia brand
   static const ChromiaBrandConfig chromia = ChromiaBrandConfig(
-    name: 'Default Chromia Brand',
+    name: 'Chromia Theme',
     colorConfig: ChromiaBrandColorConfig.defaultConfig(),
   );
 
