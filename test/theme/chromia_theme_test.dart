@@ -277,7 +277,7 @@ void main() {
     });
 
     test('predefined brands are available', () {
-      expect(BrandConfigs.chromia.name, 'Default Chromia Brand');
+      expect(BrandConfigs.chromia.name, 'Chromia Theme');
       expect(BrandConfigs.all, isNotEmpty);
       expect(BrandConfigs.all.length, greaterThan(1));
     });

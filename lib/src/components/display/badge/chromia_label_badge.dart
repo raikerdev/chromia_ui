@@ -1,5 +1,4 @@
 import 'package:chromia_ui/chromia_ui.dart';
-import 'package:chromia_ui/src/components/utils/interactive_widget/chromia_interactive_widget.dart';
 import 'package:flutter/material.dart';
 
 /// A standalone badge that can be used inline.
@@ -10,7 +9,6 @@ class ChromiaLabelBadge extends StatelessWidget {
     this.backgroundColor,
     this.textColor,
     this.icon,
-    this.onRemove,
     this.shape = ChromiaBadgeShape.rounded,
     super.key,
   });
@@ -26,9 +24,6 @@ class ChromiaLabelBadge extends StatelessWidget {
 
   /// Optional icon
   final IconData? icon;
-
-  /// Callback when remove button is pressed
-  final VoidCallback? onRemove;
 
   /// Shape of the badge
   final ChromiaBadgeShape shape;
@@ -74,24 +69,6 @@ class ChromiaLabelBadge extends StatelessWidget {
             type: ChromiaTypographyType.labelSmall,
             color: effectiveTextColor,
           ),
-          if (onRemove != null) ...[
-            spacing.gapHXS,
-            Semantics(
-              label: 'Remove $text',
-              button: true,
-              child: ChromiaInteractiveWidget(
-                onPressed: onRemove,
-                useCircleBorder: true,
-                child: ExcludeSemantics(
-                  child: Icon(
-                    Icons.close,
-                    size: TypographyTokens.fontSize14,
-                    color: effectiveTextColor,
-                  ),
-                ),
-              ),
-            ),
-          ],
         ],
       ),
     );

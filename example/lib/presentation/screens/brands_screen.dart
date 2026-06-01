@@ -5,14 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // ─── Screen ───────────────────────────────────────────────────────────────────
-
 class BrandsScreen extends StatelessWidget {
   const BrandsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final themeState = context.watch<ThemeCubit>().state;
-    final spacing = context.chromiaTheme.spacing;
+    final spacing = context.chromiaSpacing;
 
     return ExampleScaffold(
       title: 'Design Tokens',
@@ -32,24 +31,7 @@ class BrandsScreen extends StatelessWidget {
   }
 }
 
-// ─── Helpers ─────────────────────────────────────────────────────────────────
-
-String _hexOf(Color c) {
-  final r = (c.r * 255).round();
-  final g = (c.g * 255).round();
-  final b = (c.b * 255).round();
-  return '#'
-      '${r.toRadixString(16).padLeft(2, '0')}'
-      '${g.toRadixString(16).padLeft(2, '0')}'
-      '${b.toRadixString(16).padLeft(2, '0')}'
-      .toUpperCase();
-}
-
-Color _contrastFor(Color bg) =>
-    bg.computeLuminance() > 0.35 ? const Color(0xFF1C1C1E) : const Color(0xFFFFFFFF);
-
 // ─── Shared section header ────────────────────────────────────────────────────
-
 class _SectionHeader extends StatelessWidget {
   const _SectionHeader({required this.title, this.subtitle});
 
@@ -59,7 +41,7 @@ class _SectionHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = context.chromiaColors;
-    final spacing = context.chromiaTheme.spacing;
+    final spacing = context.chromiaSpacing;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,7 +65,6 @@ class _SectionHeader extends StatelessWidget {
 }
 
 // ─── 1. Brand Selector ────────────────────────────────────────────────────────
-
 class _BrandSelector extends StatelessWidget {
   const _BrandSelector({required this.selectedBrand});
 
@@ -91,7 +72,7 @@ class _BrandSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final spacing = context.chromiaTheme.spacing;
+    final spacing = context.chromiaSpacing;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -131,10 +112,10 @@ class _BrandCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
     final colors = context.chromiaColors;
-    final spacing = theme.spacing;
-    final radius = theme.radius;
+    final spacing = context.chromiaSpacing;
+    final radius = context.chromiaRadius;
+    final shadows = context.chromiaShadows;
     final primary = brand.colorConfig.primaryLight;
 
     return GestureDetector(
@@ -150,7 +131,7 @@ class _BrandCard extends StatelessWidget {
             color: isSelected ? colors.primary : colors.outline,
             width: isSelected ? 2.0 : 1.0,
           ),
-          boxShadow: isSelected ? theme.shadows.s : theme.shadows.xs,
+          boxShadow: isSelected ? shadows.s : shadows.xs,
         ),
         clipBehavior: Clip.antiAlias,
         child: Column(
@@ -165,13 +146,13 @@ class _BrandCard extends StatelessWidget {
                       child: Container(
                         padding: const EdgeInsets.all(4),
                         decoration: BoxDecoration(
-                          color: _contrastFor(primary).withAlpha(30),
+                          color: ColorUtils.getContrastColor(primary).withAlpha(30),
                           shape: BoxShape.circle,
                         ),
                         child: Icon(
                           Icons.check,
                           size: 16,
-                          color: _contrastFor(primary),
+                          color: ColorUtils.getContrastColor(primary),
                         ),
                       ),
                     )
@@ -183,24 +164,18 @@ class _BrandCard extends StatelessWidget {
                 horizontal: spacing.m,
                 vertical: spacing.s,
               ),
-              child: Row(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ChromiaText(
-                          brand.name,
-                          type: ChromiaTypographyType.labelMedium,
-                          color: isSelected ? colors.primary : colors.onSurface,
-                        ),
-                        ChromiaText(
-                          _hexOf(primary),
-                          type: ChromiaTypographyType.caption,
-                          color: colors.onSurfaceVariant,
-                        ),
-                      ],
-                    ),
+                  ChromiaText(
+                    brand.name,
+                    type: ChromiaTypographyType.labelMedium,
+                    color: isSelected ? colors.primary : colors.onSurface,
+                  ),
+                  ChromiaText(
+                    ColorUtils.toHex(primary),
+                    type: ChromiaTypographyType.caption,
+                    color: colors.onSurfaceVariant,
                   ),
                 ],
               ),
@@ -213,7 +188,6 @@ class _BrandCard extends StatelessWidget {
 }
 
 // ─── 2. Color Palette ─────────────────────────────────────────────────────────
-
 class _SwatchData {
   const _SwatchData(this.name, this.color);
   final String name;
@@ -226,7 +200,7 @@ class _ColorPaletteSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = context.chromiaColors;
-    final spacing = context.chromiaTheme.spacing;
+    final spacing = context.chromiaSpacing;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -257,16 +231,42 @@ class _ColorPaletteSection extends StatelessWidget {
         ),
         spacing.gapVM,
         _ColorGroup(
-          label: 'SEMANTIC',
+          label: 'SEMANTIC (ERROR)',
           swatches: [
             _SwatchData('error', colors.error),
+            _SwatchData('onError', colors.onError),
             _SwatchData('errorContainer', colors.errorContainer),
+            _SwatchData('onErrorContainer', colors.onErrorContainer),
+          ],
+        ),
+        spacing.gapVM,
+        _ColorGroup(
+          label: 'SEMANTIC (SUCCESS)',
+          swatches: [
             _SwatchData('success', colors.success),
+            _SwatchData('onSuccess', colors.onSuccess),
             _SwatchData('successContainer', colors.successContainer),
+            _SwatchData('onSuccessContainer', colors.onSuccessContainer),
+          ],
+        ),
+        spacing.gapVM,
+        _ColorGroup(
+          label: 'SEMANTIC (WARNING)',
+          swatches: [
             _SwatchData('warning', colors.warning),
+            _SwatchData('onWarning', colors.onWarning),
             _SwatchData('warningContainer', colors.warningContainer),
+            _SwatchData('onWarningContainer', colors.onWarningContainer),
+          ],
+        ),
+        spacing.gapVM,
+        _ColorGroup(
+          label: 'SEMANTIC (INFO)',
+          swatches: [
             _SwatchData('info', colors.info),
+            _SwatchData('onInfo', colors.onInfo),
             _SwatchData('infoContainer', colors.infoContainer),
+            _SwatchData('onInfoContainer', colors.onInfoContainer),
           ],
         ),
         spacing.gapVM,
@@ -274,8 +274,9 @@ class _ColorPaletteSection extends StatelessWidget {
           label: 'SURFACE',
           swatches: [
             _SwatchData('surface', colors.surface),
-            _SwatchData('surfaceContainer', colors.surfaceContainer),
             _SwatchData('onSurface', colors.onSurface),
+            _SwatchData('surfaceContainer', colors.surfaceContainer),
+            _SwatchData('onSurfaceContainer', colors.onSurfaceContainer),
             _SwatchData('onSurfaceVariant', colors.onSurfaceVariant),
             _SwatchData('outline', colors.outline),
             _SwatchData('outlineVariant', colors.outlineVariant),
@@ -294,25 +295,19 @@ class _ColorGroup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = context.chromiaColors;
     final spacing = context.chromiaTheme.spacing;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        ChromiaText(
           label,
-          style: TextStyle(
-            fontSize: 10,
-            fontWeight: FontWeight.w700,
-            color: colors.onSurfaceVariant,
-            letterSpacing: 1.4,
-          ),
+          type: ChromiaTypographyType.labelLarge,
         ),
         SizedBox(height: spacing.xs),
         Wrap(
-          spacing: spacing.xs,
-          runSpacing: spacing.xs,
+          spacing: spacing.s,
+          runSpacing: spacing.s,
           children: swatches.map((s) => _ColorSwatch(swatch: s)).toList(),
         ),
       ],
@@ -327,19 +322,18 @@ class _ColorSwatch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
     final colors = context.chromiaColors;
-    final radius = theme.radius;
-    final spacing = theme.spacing;
+    final radius = context.chromiaRadius;
+    final spacing = context.chromiaSpacing;
 
-    final fg = _contrastFor(swatch.color);
-    final hex = _hexOf(swatch.color);
+    final fg = ColorUtils.getContrastColor(swatch.color);
+    final hex =  ColorUtils.toHex(swatch.color);
     final lum = swatch.color.computeLuminance();
     // Subtle border for very light or very dark colors to define edges
     final showBorder = lum > 0.88 || lum < 0.03;
 
     return Container(
-      width: 120,
+      width: 125,
       decoration: BoxDecoration(
         color: colors.surfaceContainer,
         borderRadius: radius.radiusL,
@@ -365,18 +359,17 @@ class _ColorSwatch extends StatelessWidget {
                   : null,
             ),
             alignment: Alignment.bottomRight,
-            padding: EdgeInsets.all(spacing.xxs + 2),
+            padding: EdgeInsets.all(spacing.xs),
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 1),
               decoration: BoxDecoration(
                 color: fg.withAlpha(28),
                 borderRadius: BorderRadius.circular(3),
               ),
-              child: Text(
+              child: ChromiaText(
                 hex,
+                type: ChromiaTypographyType.bodyMedium,
                 style: TextStyle(
-                  fontSize: 10,
-                  fontWeight: FontWeight.w700,
                   color: fg,
                   letterSpacing: 0.3,
                 ),
@@ -389,11 +382,11 @@ class _ColorSwatch extends StatelessWidget {
               horizontal: spacing.xs,
               vertical: spacing.xs,
             ),
-            child: Text(
+            child: ChromiaText(
               swatch.name,
+              type: ChromiaTypographyType.caption,
               style: TextStyle(
-                fontSize: 9,
-                fontWeight: FontWeight.w500,
+                fontSize: 10,
                 color: colors.onSurfaceVariant,
                 height: 1.3,
               ),
@@ -406,14 +399,11 @@ class _ColorSwatch extends StatelessWidget {
 }
 
 // ─── 3. Typography ────────────────────────────────────────────────────────────
-
 class _TypeEntry {
-  const _TypeEntry(this.name, this.style, this.sample, this.specs, this.group);
+  const _TypeEntry(this.name, this.style, this.specs);
   final String name;
   final TextStyle style;
-  final String sample;
   final String specs;
-  final String group;
 }
 
 class _TypographySection extends StatelessWidget {
@@ -421,30 +411,8 @@ class _TypographySection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final typo = theme.typography;
-    final spacing = theme.spacing;
-    final colors = context.chromiaColors;
-
-    final entries = [
-      _TypeEntry('Display Large', typo.displayLarge, 'Aa', '57 · Regular · −0.02em', 'DISPLAY'),
-      _TypeEntry('Display Medium', typo.displayMedium, 'Aa', '45 · Regular · −0.02em', 'DISPLAY'),
-      _TypeEntry('Display Small', typo.displaySmall, 'Aa', '36 · Regular · −0.02em', 'DISPLAY'),
-      _TypeEntry('Headline Large', typo.headlineLarge, 'The quick brown fox', '32 · SemiBold · −0.02em', 'HEADLINE'),
-      _TypeEntry('Headline Medium', typo.headlineMedium, 'The quick brown fox', '28 · SemiBold · −0.02em', 'HEADLINE'),
-      _TypeEntry('Headline Small', typo.headlineSmall, 'The quick brown fox', '24 · SemiBold · −0.02em', 'HEADLINE'),
-      _TypeEntry('Title Large', typo.titleLarge, 'The quick brown fox jumps', '22 · Medium', 'TITLE'),
-      _TypeEntry('Title Medium', typo.titleMedium, 'The quick brown fox jumps over', '16 · Medium', 'TITLE'),
-      _TypeEntry('Title Small', typo.titleSmall, 'The quick brown fox jumps over the lazy dog', '14 · Medium', 'TITLE'),
-      _TypeEntry('Body Large', typo.bodyLarge, 'The quick brown fox jumps over the lazy dog.', '16 · Regular', 'BODY'),
-      _TypeEntry('Body Medium', typo.bodyMedium, 'The quick brown fox jumps over the lazy dog.', '14 · Regular', 'BODY'),
-      _TypeEntry('Body Small', typo.bodySmall, 'The quick brown fox jumps over the lazy dog.', '12 · Regular', 'BODY'),
-      _TypeEntry('Label Large', typo.labelLarge, 'BUTTON LABEL', '14 · Medium · +0.5', 'LABEL'),
-      _TypeEntry('Label Medium', typo.labelMedium, 'Chip · Tag', '12 · Medium · +0.5', 'LABEL'),
-      _TypeEntry('Label Small', typo.labelSmall, 'Small label', '11 · Medium · +0.5', 'LABEL'),
-      _TypeEntry('Caption', typo.caption, 'Footer note or caption text here', '12 · Regular', 'MISC'),
-      _TypeEntry('Overline', typo.overline, 'SECTION CATEGORY', '10 · Medium · +1.5', 'MISC'),
-    ];
+    final typo = context.chromiaTypography;
+    final spacing = context.chromiaSpacing;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -454,45 +422,87 @@ class _TypographySection extends StatelessWidget {
           subtitle: 'Plus Jakarta Sans · 17 styles · negative tracking on display & headlines',
         ),
         spacing.gapVL,
-        // Render entries, grouping with a divider label at each group change
-        ...() {
-          final widgets = <Widget>[];
-          String? lastGroup;
-          for (int i = 0; i < entries.length; i++) {
-            final e = entries[i];
-            if (e.group != lastGroup) {
-              if (i > 0) {
-                widgets.add(spacing.gapVS);
-              }
-              widgets.add(
-                Padding(
-                  padding: EdgeInsets.only(bottom: spacing.xs),
-                  child: Text(
-                    e.group,
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.w700,
-                      color: colors.onSurfaceVariant,
-                      letterSpacing: 1.4,
-                    ),
-                  ),
-                ),
-              );
-              lastGroup = e.group;
-            }
-            widgets.add(_TypeRow(entry: e));
-            if (i < entries.length - 1) {
-              widgets.add(
-                Divider(
-                  height: 1,
-                  thickness: 0.5,
-                  color: colors.outline.withAlpha(50),
-                ),
-              );
-            }
-          }
-          return widgets;
-        }(),
+        _TypeGroup(
+          label: 'DISPLAY',
+          entries: [
+            _TypeEntry('Display Large', typo.displayLarge, '57 · Regular · −0.02em'),
+            _TypeEntry('Display Medium', typo.displayMedium, '45 · Regular · −0.02em'),
+            _TypeEntry('Display Small', typo.displaySmall, '36 · Regular · −0.02em'),
+          ],
+        ),
+        spacing.gapVM,
+        _TypeGroup(
+          label: 'HEADLINE',
+          entries: [
+            _TypeEntry('Headline Large', typo.headlineLarge, '32 · SemiBold · −0.02em'),
+            _TypeEntry('Headline Medium', typo.headlineMedium, '28 · SemiBold · −0.02em'),
+            _TypeEntry('Headline Small', typo.headlineSmall, '24 · SemiBold · −0.02em'),
+          ],
+        ),
+        spacing.gapVM,
+        _TypeGroup(
+          label: 'TITLE',
+          entries: [
+            _TypeEntry('Title Large', typo.titleLarge, '22 · Medium'),
+            _TypeEntry('Title Medium', typo.titleMedium, '16 · Medium'),
+            _TypeEntry('Title Small', typo.titleSmall, '14 · Medium'),
+          ],
+        ),
+        spacing.gapVM,
+        _TypeGroup(
+          label: 'BODY',
+          entries: [
+            _TypeEntry('Body Large', typo.bodyLarge, '16 · Regular'),
+            _TypeEntry('Body Medium', typo.bodyMedium, '14 · Regular'),
+            _TypeEntry('Body Small', typo.bodySmall, '12 · Regular'),
+          ],
+        ),
+        spacing.gapVM,
+        _TypeGroup(
+          label: 'LABEL',
+          entries: [
+            _TypeEntry('Label Large', typo.labelLarge, '14 · Medium · +0.5'),
+            _TypeEntry('Label Medium', typo.labelMedium, '12 · Medium · +0.5'),
+            _TypeEntry('Label Small', typo.labelSmall, '11 · Medium · +0.5'),
+          ],
+        ),
+        spacing.gapVM,
+        _TypeGroup(
+          label: 'MISC',
+          entries: [
+            _TypeEntry('Caption', typo.caption, '12 · Regular'),
+            _TypeEntry('Overline', typo.overline, '10 · Medium · +1.5'),
+          ],
+        ),
+        spacing.gapVM,
+      ],
+    );
+  }
+}
+
+class _TypeGroup extends StatelessWidget {
+  const _TypeGroup({required this.label, required this.entries});
+
+  final String label;
+  final List<_TypeEntry> entries;
+
+  @override
+  Widget build(BuildContext context) {
+    final spacing = context.chromiaTheme.spacing;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ChromiaText(
+          label,
+          type: ChromiaTypographyType.labelLarge,
+        ),
+        SizedBox(height: spacing.xs),
+        Wrap(
+          spacing: spacing.s,
+          runSpacing: spacing.s,
+          children: entries.map((s) => _TypeRow(entry: s)).toList(),
+        ),
       ],
     );
   }
@@ -552,25 +562,24 @@ class _TypeRow extends StatelessWidget {
 }
 
 // ─── 4. Spacing ───────────────────────────────────────────────────────────────
-
 class _SpacingSection extends StatelessWidget {
   const _SpacingSection();
 
   @override
   Widget build(BuildContext context) {
-    final spacing = context.chromiaTheme.spacing;
+    final spacing = context.chromiaSpacing;
 
-    const steps = [
-      ('xxs', 2.0),
-      ('xs', 4.0),
-      ('s', 8.0),
-      ('m', 12.0),
-      ('l', 16.0),
-      ('xl', 20.0),
-      ('xxl', 24.0),
-      ('xxxl', 32.0),
-      ('huge', 40.0),
-      ('xhuge', 48.0),
+    final steps = [
+      ('xxs', spacing.xxs),
+      ('xs', spacing.xs),
+      ('s', spacing.s),
+      ('m', spacing.m),
+      ('l', spacing.l),
+      ('xl', spacing.xl),
+      ('xxl', spacing.xxl),
+      ('xxxl', spacing.xxxl),
+      ('huge', spacing.huge),
+      ('xhuge', spacing.xhuge),
     ];
 
     return Column(
@@ -606,13 +615,12 @@ class _SpacingBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
     final colors = context.chromiaColors;
-    final spacing = theme.spacing;
-    final radius = theme.radius;
+    final spacing = context.chromiaSpacing;
+    final radius = context.chromiaRadius;
 
-    // Scale bar: 48px (xhuge) maps to ~200px visual width
-    final barWidth = (value / 48.0) * 200.0;
+    // Scale bar: 48px (xhuge) maps to ~100px visual width
+    final barWidth = (value / 48.0) * 100.0;
 
     return Padding(
       padding: EdgeInsets.only(bottom: isLast ? 0 : spacing.xxs),
@@ -620,26 +628,11 @@ class _SpacingBar extends StatelessWidget {
         children: [
           SizedBox(
             width: 42,
-            child: Text(
+            child: ChromiaText(
               label,
-              style: TextStyle(
-                fontSize: 11,
-                fontWeight: FontWeight.w600,
-                color: colors.onSurface,
-                letterSpacing: 0.1,
-              ),
-            ),
-          ),
-          SizedBox(
-            width: 44,
-            child: Text(
-              '${value.toInt()} px',
+              type: ChromiaTypographyType.caption,
+              color: colors.onSurface,
               textAlign: TextAlign.right,
-              style: TextStyle(
-                fontSize: 10,
-                color: colors.onSurfaceVariant,
-                fontFeatures: const [FontFeature.tabularFigures()],
-              ),
             ),
           ),
           spacing.gapHM,
@@ -658,6 +651,15 @@ class _SpacingBar extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: null,
           ),
+          spacing.gapHS,
+          SizedBox(
+            width: 44,
+            child: ChromiaText(
+              '${value.toInt()} px',
+              type: ChromiaTypographyType.caption,
+              color: colors.onSurfaceVariant,
+            ),
+          ),
         ],
       ),
     );
@@ -665,15 +667,13 @@ class _SpacingBar extends StatelessWidget {
 }
 
 // ─── 5. Border Radius ─────────────────────────────────────────────────────────
-
 class _RadiusSection extends StatelessWidget {
   const _RadiusSection();
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final radius = theme.radius;
-    final spacing = theme.spacing;
+    final radius = context.chromiaRadius;
+    final spacing = context.chromiaSpacing;
 
     final steps = [
       ('none', radius.none),
@@ -739,20 +739,15 @@ class _RadiusTile extends StatelessWidget {
           ),
         ),
         SizedBox(height: spacing.xs),
-        Text(
+        ChromiaText(
           label,
-          style: TextStyle(
-            fontSize: 11,
-            fontWeight: FontWeight.w600,
-            color: colors.onSurface,
-          ),
+          type: ChromiaTypographyType.labelMedium,
+          color: colors.onSurface,
         ),
-        Text(
+        ChromiaText(
           isPill ? '∞ pill' : '${value.toInt()} px',
-          style: TextStyle(
-            fontSize: 9,
-            color: colors.onSurfaceVariant,
-          ),
+          type: ChromiaTypographyType.labelSmall,
+          color: colors.onSurfaceVariant,
         ),
       ],
     );

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_syntax_view/flutter_syntax_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+const double lineHeight = 1.3;
+
 class ChromiaSyntaxView extends StatefulWidget {
   const ChromiaSyntaxView({
     required this.code,
@@ -61,6 +63,7 @@ class ChromiaSyntaxViewState extends State<ChromiaSyntaxView> {
                     style: GoogleFonts.googleSansCode(
                       fontSize: widget.fontSize,
                       color: colors.onSurfaceContainer,
+                      height: lineHeight,
                     ),
                     text: '$i',
                   ),
@@ -76,14 +79,17 @@ class ChromiaSyntaxViewState extends State<ChromiaSyntaxView> {
   Widget _buildCode() {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 10, 0, 30),
-      child: RichText(
-        textScaler: TextScaler.linear(widget.fontScaleFactor),
-        text: TextSpan(
-          style: GoogleFonts.googleSansCode(fontSize: widget.fontSize),
+      child: SelectableText.rich(
+        TextSpan(
+          style: GoogleFonts.googleSansCode(
+            fontSize: widget.fontSize,
+            height: lineHeight,
+          ),
           children: <TextSpan>[
             getSyntax(Syntax.DART, widget.syntaxTheme).format(widget.code),
           ],
         ),
+        textScaler: TextScaler.linear(widget.fontScaleFactor),
       ),
     );
   }

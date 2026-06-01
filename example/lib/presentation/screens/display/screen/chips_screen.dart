@@ -1,4 +1,5 @@
 import 'package:chromia_ui/chromia_ui.dart';
+import 'package:chromia_ui_example/presentation/screens/display/display_constants.dart';
 import 'package:chromia_ui_example/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -7,6 +8,12 @@ class ChipsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final tags = ['Flutter', 'Dart', 'Mobile', 'UI'];
+    bool active = false;
+    bool pending = true;
+    bool completed = false;
+    String? selected;
+
     return ExampleScaffold(
       title: 'Chip',
       children: [
@@ -23,130 +30,98 @@ class ChipsScreen extends StatelessWidget {
               'Use deletable chips for dynamic tag input.',
           children: [
             // ── Basic ─────────────────────────────────────────────────────────
-            const ComponentSection(
-              title: 'Basic',
-              description:
-                  'Simple label-only chips. Wrap with ChromiaChipGroup '
-                  'to handle Wrap layout automatically.',
-              child: ChromiaCodePreview(
-                code: '''
-ChromiaChipGroup(
-  children: [
-    ChromiaChip(label: 'Flutter'),
-    ChromiaChip(label: 'Dart'),
-    ChromiaChip(label: 'Mobile'),
-    ChromiaChip(label: 'Design'),
-  ],
-)''',
-                preview: ChromiaChipGroup(
-                  children: [
-                    ChromiaChip(label: 'Flutter'),
-                    ChromiaChip(label: 'Dart'),
-                    ChromiaChip(label: 'Mobile'),
-                    ChromiaChip(label: 'Design'),
-                    ChromiaChip(label: 'UI'),
-                  ],
-                ),
-              ),
-            ),
-
-            // ── With Icons ────────────────────────────────────────────────────
-            const ComponentSection(
-              title: 'With Icons',
-              description:
-                  'Add a leading icon to provide visual context.',
-              child: ChromiaCodePreview(
-                code: '''
-ChromiaChip(label: 'Home',     icon: Icons.home)
-ChromiaChip(label: 'Favorite', icon: Icons.favorite)
-ChromiaChip(label: 'Star',     icon: Icons.star)''',
-                preview: ChromiaChipGroup(
-                  children: [
-                    ChromiaChip(label: 'Home', icon: Icons.home),
-                    ChromiaChip(label: 'Favorite', icon: Icons.favorite),
-                    ChromiaChip(label: 'Star', icon: Icons.star),
-                    ChromiaChip(label: 'Settings', icon: Icons.settings),
-                  ],
-                ),
-              ),
-            ),
-
-            // ── With Avatars ──────────────────────────────────────────────────
             ComponentSection(
-              title: 'With Avatars',
-              description:
-                  'Pass a ChromiaAvatar as the avatar parameter to show '
-                  'a user picture or initials inside the chip.',
-              child: ChromiaCodePreview(
-                code: '''
-ChromiaChip(
-  label: 'Alice',
-  avatar: ChromiaAvatar.initials(
-    initials: 'A',
-    backgroundColor: colors.primary,
-    size: ChromiaAvatarSize.extraSmall,
-  ),
-)''',
-                preview: Builder(
-                  builder: (context) {
-                    final colors = context.chromiaColors;
-                    return ChromiaChipGroup(
+              title: 'Variants',
+              child: ChromiaCodePreviewGroup(
+                items: [
+                  const CodePreviewItem(
+                    label: 'Basic',
+                    description: 'Simple label-only chips. Wrap with ChromiaChipGroup to handle Wrap layout automatically.',
+                    code: ChipConstants.simpleCode,
+                    preview: ChromiaChipGroup(
                       children: [
-                        ChromiaChip(
-                          label: 'Alice',
-                          avatar: ChromiaAvatar.initials(
-                            initials: 'A',
-                            backgroundColor: colors.primary,
-                            size: ChromiaAvatarSize.extraSmall,
-                          ),
-                        ),
-                        ChromiaChip(
-                          label: 'Bob',
-                          avatar: ChromiaAvatar.initials(
-                            initials: 'B',
-                            backgroundColor: colors.secondary,
-                            size: ChromiaAvatarSize.extraSmall,
-                          ),
-                        ),
-                        ChromiaChip(
-                          label: 'Charlie',
-                          avatar: ChromiaAvatar.initials(
-                            initials: 'C',
-                            backgroundColor: colors.success,
-                            size: ChromiaAvatarSize.extraSmall,
-                          ),
-                        ),
+                        ChromiaChip(label: 'Flutter'),
+                        ChromiaChip(label: 'Dart'),
+                        ChromiaChip(label: 'Mobile'),
+                        ChromiaChip(label: 'Design'),
+                        ChromiaChip(label: 'UI'),
                       ],
-                    );
-                  },
-                ),
+                    ),
+                  ),
+                  const CodePreviewItem(
+                    label: 'With Icons',
+                    description: 'Add a leading icon to provide visual context.',
+                    code: ChipConstants.withIconCode,
+                    preview: ChromiaChipGroup(
+                      children: [
+                        ChromiaChip(label: 'Home', icon: Icons.home),
+                        ChromiaChip(label: 'Favorite', icon: Icons.favorite),
+                        ChromiaChip(label: 'Star', icon: Icons.star),
+                        ChromiaChip(label: 'Settings', icon: Icons.settings),
+                      ],
+                    ),
+                  ),
+                  CodePreviewItem(
+                    label: 'With Avatars',
+                    description:
+                        'AdPass a ChromiaAvatar as the avatar parameter to show a user picture or initials inside the chip.',
+                    code: ChipConstants.withAvatarCode,
+                    preview: Builder(
+                      builder: (context) {
+                        final colors = context.chromiaColors;
+                        return ChromiaChipGroup(
+                          children: [
+                            ChromiaChip(
+                              label: 'Alice',
+                              avatar: ChromiaAvatar.initials(
+                                initials: 'A',
+                                backgroundColor: colors.primary,
+                                size: ChromiaAvatarSize.extraSmall,
+                              ),
+                            ),
+                            ChromiaChip(
+                              label: 'Bob',
+                              avatar: ChromiaAvatar.initials(
+                                initials: 'B',
+                                backgroundColor: colors.secondary,
+                                size: ChromiaAvatarSize.extraSmall,
+                              ),
+                            ),
+                            ChromiaChip(
+                              label: 'Charlie',
+                              avatar: ChromiaAvatar.initials(
+                                initials: 'C',
+                                backgroundColor: colors.success,
+                                size: ChromiaAvatarSize.extraSmall,
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
 
             // ── Deletable (Tags) ──────────────────────────────────────────────
             ComponentSection(
               title: 'Deletable Chips',
-              description:
-                  'Provide onDeleted to show a remove button. '
-                  'Ideal for dynamic tag lists.',
+              description: 'Provide onDeleted to show a remove button. Ideal for dynamic tag lists.',
               child: ChromiaCodePreview(
-                code: '''
-ChromiaChip(
-  label: tag,
-  onDeleted: () => setState(() => tags.remove(tag)),
-)''',
+                code: ChipConstants.deletableCode,
                 preview: StatefulBuilder(
-                  builder: (context, setState) {
-                    final tags = ['Flutter', 'Dart', 'Mobile', 'UI'];
+                  builder: (context, setBuilderState) {
                     return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         ChromiaChipGroup(
                           children: tags.map((tag) {
                             return ChromiaChip(
                               label: tag,
                               onDeleted: () {
-                                setState(() => tags.remove(tag));
+                                setBuilderState(() => tags.remove(tag));
                               },
                             );
                           }).toList(),
@@ -163,7 +138,7 @@ ChromiaChip(
                         ChromiaButton(
                           size: ChromiaButtonSize.small,
                           variant: ChromiaButtonVariant.outlined,
-                          onPressed: () => setState(() {
+                          onPressed: () => setBuilderState(() {
                             tags.addAll(
                               ['Flutter', 'Dart', 'Mobile', 'UI'],
                             );
@@ -181,21 +156,11 @@ ChromiaChip(
             ComponentSection(
               title: 'Filter Chips',
               description:
-                  'Use ChromiaChip.filter() for multi-select filtering. '
-                  'Multiple filters can be active at the same time.',
+                  'Use ChromiaChip.filter() for multi-select filtering. Multiple filters can be active at the same time.',
               child: ChromiaCodePreview(
-                code: '''
-ChromiaChip.filter(
-  label: 'Active',
-  selected: filterActive,
-  icon: Icons.check_circle,
-  onSelected: (selected) => setState(() => filterActive = selected),
-)''',
+                code: ChipConstants.filterCode,
                 preview: StatefulBuilder(
-                  builder: (context, setState) {
-                    bool active = false;
-                    bool pending = true;
-                    bool completed = false;
+                  builder: (context, setBuilderState) {
                     return ChromiaChipGroup(
                       children: [
                         ChromiaChip.filter(
@@ -203,22 +168,21 @@ ChromiaChip.filter(
                           selected: active,
                           icon: Icons.check_circle,
                           selectedIcon: Icons.check_circle,
-                          onSelected: (v) => setState(() => active = v),
+                          onSelected: (v) => setBuilderState(() => active = v),
                         ),
                         ChromiaChip.filter(
                           label: 'Pending',
                           selected: pending,
                           icon: Icons.pending,
                           selectedIcon: Icons.pending,
-                          onSelected: (v) => setState(() => pending = v),
+                          onSelected: (v) => setBuilderState(() => pending = v),
                         ),
                         ChromiaChip.filter(
                           label: 'Completed',
                           selected: completed,
                           icon: Icons.done_all,
                           selectedIcon: Icons.done_all,
-                          onSelected: (v) =>
-                              setState(() => completed = v),
+                          onSelected: (v) => setBuilderState(() => completed = v),
                         ),
                       ],
                     );
@@ -234,17 +198,12 @@ ChromiaChip.filter(
                   'Use ChromiaChip.choice() for single-select options. '
                   'Only one choice chip can be selected at a time.',
               child: ChromiaCodePreview(
-                code: '''
-ChromiaChip.choice(
-  label: 'Option 1',
-  selected: selectedChoice == 'Option 1',
-  onSelected: () => setState(() => selectedChoice = 'Option 1'),
-)''',
+                code: ChipConstants.choiceCode,
                 preview: StatefulBuilder(
-                  builder: (context, setState) {
-                    String? selected;
+                  builder: (context, setBuilderState) {
                     return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         ChromiaChipGroup(
                           children: ['Small', 'Medium', 'Large', 'XL'].map(
@@ -252,8 +211,7 @@ ChromiaChip.choice(
                               return ChromiaChip.choice(
                                 label: option,
                                 selected: selected == option,
-                                onSelected: () =>
-                                    setState(() => selected = option),
+                                onSelected: () => setBuilderState(() => selected = option),
                               );
                             },
                           ).toList(),

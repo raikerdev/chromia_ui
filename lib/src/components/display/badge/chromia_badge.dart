@@ -151,13 +151,18 @@ class _Badge extends StatelessWidget {
       child: isDot
           ? null
           : Center(
-              child: ChromiaText(
-                value!,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: textColor,
-                  fontSize: size.fontSize,
-                  fontWeight: FontWeight.bold,
+              child: Padding(
+                padding:  EdgeInsets.all(spacing.xxs),
+                child: ChromiaText(
+                  value!,
+                  textAlign: TextAlign.center,
+                  type: ChromiaTypographyType.caption,
+                  style: TextStyle(
+                    color: textColor,
+                    fontSize: size.fontSize,
+                    fontWeight: FontWeight.bold,
+                    height: 1
+                  ),
                 ),
               ),
             ),

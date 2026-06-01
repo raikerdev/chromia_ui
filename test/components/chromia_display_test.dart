@@ -225,18 +225,6 @@ void main() {
       );
       expect(find.byIcon(Icons.fiber_new), findsOneWidget);
     });
-
-    testWidgets('calls onRemove when remove tapped', (tester) async {
-      int count = 0;
-      await tester.pumpWidget(
-        buildTestApp(
-          ChromiaLabelBadge(text: 'Tag', onRemove: () => count++),
-        ),
-      );
-      await tester.tap(find.byIcon(Icons.close));
-      await tester.pump();
-      expect(count, 1);
-    });
   });
 
   // ── ChromiaStatusBadge ──────────────────────────────────────────────────────
