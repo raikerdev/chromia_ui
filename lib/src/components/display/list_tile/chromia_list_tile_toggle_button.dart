@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 /// A toggle button with a tile layout.
 ///
 /// Displays a [ChromiaToggleButton] at the trailing end with optional
-/// [title], [subtitle] and [secondary] widgets.
+/// [title], [subtitle] and [leading] widgets.
+///
+/// Supports the same [ChromiaListTileVariant] options as [ChromiaListTile]
+/// (standard, outlined, card) so it integrates seamlessly in any list layout.
 ///
 /// Example usage:
 /// ```dart
@@ -22,28 +25,29 @@ class ChromiaListTileToggleButton extends StatelessWidget {
     required this.onChanged,
     this.title,
     this.subtitle,
-    this.secondary,
+    this.leading,
     this.activeColor,
     this.inactiveColor,
     this.contentPadding,
     this.size = ChromiaToggleButtonSize.medium,
+    this.variant = ChromiaListTileVariant.standard,
     super.key,
   });
 
-  /// Whether the toggle is on or off
+  /// Whether the toggle is on or off.
   final bool value;
 
   /// Called when the user toggles. Pass `null` to disable.
   final ValueChanged<bool>? onChanged;
 
-  /// The primary content
+  /// The primary content.
   final Widget? title;
 
-  /// Additional content displayed below the title
+  /// Additional content displayed below the title.
   final Widget? subtitle;
 
-  /// A widget to display at the leading edge
-  final Widget? secondary;
+  /// A widget to display at the leading edge.
+  final Widget? leading;
 
   /// Color when on. Defaults to [ChromiaColors.primary].
   final Color? activeColor;
@@ -57,14 +61,20 @@ class ChromiaListTileToggleButton extends StatelessWidget {
   /// Size of the toggle. Defaults to [ChromiaToggleButtonSize.medium].
   final ChromiaToggleButtonSize size;
 
+  /// The visual variant of the tile.
+  ///
+  /// Mirrors [ChromiaListTile.variant] — standard (default), outlined, card.
+  final ChromiaListTileVariant variant;
+
   @override
   Widget build(BuildContext context) {
     return ChromiaListTileShell(
       onTap: onChanged != null ? () => onChanged!(!value) : null,
       title: title,
       subtitle: subtitle,
-      secondary: secondary,
+      leading: leading,
       contentPadding: contentPadding,
+      variant: variant,
       control: ChromiaToggleButton(
         value: value,
         onChanged: onChanged,

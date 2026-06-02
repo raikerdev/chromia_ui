@@ -44,15 +44,12 @@ export 'src/components/display/badge/chromia_badge.dart';
 export 'src/components/display/badge/chromia_label_badge.dart';
 export 'src/components/display/badge/chromia_status_badge.dart';
 export 'src/components/display/chip/chromia_chip.dart';
-export 'src/components/display/list_tile/chromia_inline_label.dart';
 export 'src/components/display/list_tile/chromia_list_tile.dart';
-export 'src/components/display/list_tile/chromia_list_tile_card.dart';
 export 'src/components/display/list_tile/chromia_list_tile_checkbox.dart';
 export 'src/components/display/list_tile/chromia_list_tile_radio_button.dart';
 export 'src/components/display/list_tile/chromia_list_tile_range_slider.dart';
 export 'src/components/display/list_tile/chromia_list_tile_shell.dart';
 export 'src/components/display/list_tile/chromia_list_tile_slider.dart';
-export 'src/components/display/list_tile/chromia_list_tile_switch.dart';
 export 'src/components/display/list_tile/chromia_list_tile_toggle_button.dart';
 export 'src/components/display/text/chromia_rich_text.dart';
 export 'src/components/display/text/chromia_text.dart';
@@ -82,7 +79,6 @@ export 'src/components/input/slider/chromia_range_slider.dart';
 export 'src/components/input/slider/chromia_range_slider_icon_shape.dart';
 export 'src/components/input/slider/chromia_slider.dart';
 export 'src/components/input/slider/chromia_slider_icon_shape.dart';
-export 'src/components/input/switch/chromia_switch.dart';
 export 'src/components/input/text_field/chromia_text_field.dart';
 export 'src/components/input/text_field/chromia_text_field_style.dart';
 export 'src/components/input/text_field/util/chromia_text_field_validator.dart';
@@ -106,6 +102,7 @@ export 'src/components/navigation/menu/chromia_menu.dart';
 // ============================================================================
 // COMPONENTS - UTILS
 // ============================================================================
+export 'src/components/utils/inline_label/chromia_inline_label.dart';
 export 'src/components/utils/position_widget/chromia_position_widget.dart';
 //
 // ============================================================================

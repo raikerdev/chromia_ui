@@ -277,18 +277,19 @@ ChromiaCard(elevation: 4, child: ...)''',
               ),
             ),
 
-            // ── List Tile Card ────────────────────────────────────────────────
+            // ── List Tile (card variant) ──────────────────────────────────────
             ComponentSection(
-              title: 'List Tile Card',
+              title: 'List Tile — Card',
               description:
-                  'ChromiaListTileCard combines a card container with a list tile layout '
-                  'for feed items and notification entries.',
+                  'Use ChromiaListTile with variant: card for feed items and '
+                  'notification entries that need elevation.',
               child: ChromiaCodePreview(
                 code: '''
-ChromiaListTileCard(
+ChromiaListTile(
+  variant: ChromiaListTileVariant.card,
   leading: CircleAvatar(child: Icon(Icons.person, color: Colors.white)),
-  title: ChromiaText('John Doe'),
-  subtitle: ChromiaText('Software Engineer'),
+  title: Text('John Doe'),
+  subtitle: Text('Software Engineer'),
   trailing: Icon(Icons.chevron_right),
   onTap: () {},
 )''',
@@ -298,7 +299,8 @@ ChromiaListTileCard(
                     final spacing = context.chromiaTheme.spacing;
                     return Column(
                       children: [
-                        ChromiaListTileCard(
+                        ChromiaListTile(
+                          variant: ChromiaListTileVariant.card,
                           leading: CircleAvatar(
                             backgroundColor: colors.primary,
                             child: const Icon(
@@ -306,8 +308,8 @@ ChromiaListTileCard(
                               color: Colors.white,
                             ),
                           ),
-                          title: const ChromiaText('John Doe'),
-                          subtitle: const ChromiaText('Software Engineer'),
+                          title: const Text('John Doe'),
+                          subtitle: const Text('Software Engineer'),
                           trailing: Icon(
                             Icons.chevron_right,
                             color: colors.onSurfaceVariant,
@@ -315,7 +317,8 @@ ChromiaListTileCard(
                           onTap: () {},
                         ),
                         spacing.gapVM,
-                        ChromiaListTileCard(
+                        ChromiaListTile(
+                          variant: ChromiaListTileVariant.card,
                           leading: CircleAvatar(
                             backgroundColor: colors.success,
                             child: const Icon(
@@ -323,8 +326,8 @@ ChromiaListTileCard(
                               color: Colors.white,
                             ),
                           ),
-                          title: const ChromiaText('Task Completed'),
-                          subtitle: const ChromiaText(
+                          title: const Text('Task Completed'),
+                          subtitle: const Text(
                             'Successfully deployed to production',
                           ),
                           trailing: ChromiaText(

@@ -1,18 +1,20 @@
 import 'package:chromia_ui/chromia_ui.dart';
 import 'package:flutter/material.dart';
 
-/// A customizable list tile component with Chromia styling.
+/// A customizable list tile built on the shared [ChromiaListTileShell] layout.
 ///
-/// [ChromiaListTile] is an enhanced version of Flutter's ListTile that
-/// integrates with the Chromia design system.
+/// [ChromiaListTile] is a general-purpose row component that integrates with
+/// the Chromia design system. It forms the foundation of the entire list-tile
+/// family — all control tiles (Checkbox, Radio, Toggle, Switch) and slider
+/// tiles use the same [ChromiaListTileShell] layout engine.
 ///
 /// ## Features
 ///
-/// - **Theme Integration**: Automatic Chromia theme styling
-/// - **Multiple Variants**: Standard, outlined, and card styles
-/// - **Rich Content**: Support for leading, trailing, title, subtitle
-/// - **Interactive**: Tap and long-press handlers
-/// - **Customizable**: Colors, padding, and spacing options
+/// - **Consistent layout**: same row engine as every control tile
+/// - **Three variants**: standard, outlined, and card
+/// - **Selected state**: highlighted background and primary border
+/// - **Enabled / disabled**: suppresses interaction + reduced opacity
+/// - **Rich content**: leading icon, title, subtitle, trailing widget
 ///
 /// ## Basic Usage
 ///
@@ -30,9 +32,7 @@ import 'package:flutter/material.dart';
 ///
 /// ```dart
 /// // Standard (default)
-/// ChromiaListTile(
-///   title: Text('Standard'),
-/// )
+/// ChromiaListTile(title: Text('Standard'))
 ///
 /// // Outlined
 /// ChromiaListTile(
@@ -48,8 +48,10 @@ import 'package:flutter/material.dart';
 /// ```
 ///
 /// See also:
-/// - [ChromiaCard] for card containers
-/// - [ListTile] for the underlying Flutter widget
+/// - [ChromiaListTileShell] — the shared layout engine
+/// - [ChromiaListTileCheckbox], [ChromiaListTileRadioButton],
+///   [ChromiaListTileToggleButton] — control tiles
+/// - [ChromiaListTileSlider], [ChromiaListTileRangeSlider] — slider tiles
 class ChromiaListTile extends StatelessWidget {
   /// Creates a Chromia-styled list tile.
   ///
@@ -68,9 +70,6 @@ class ChromiaListTile extends StatelessWidget {
     this.contentPadding,
     this.tileColor,
     this.selectedTileColor,
-    this.dense,
-    this.visualDensity,
-    this.shape,
     this.margin,
   });
 
@@ -96,111 +95,65 @@ class ChromiaListTile extends StatelessWidget {
   /// Called when the user long-presses on this list tile.
   final VoidCallback? onLongPress;
 
-  /// Whether this list tile is selected.
+  /// Whether this list tile is in a selected state.
   ///
-  /// If true, the tile will use [selectedTileColor] or the theme's
-  /// selected color.
+  /// When `true`, the tile uses [selectedTileColor] as its background and the
+  /// outlined border switches to [ChromiaColors.primary].
   final bool selected;
 
   /// Whether this list tile is interactive.
   ///
-  /// If false, the tile will be grayed out and [onTap] will not work.
+  /// When `false`, [onTap] and [onLongPress] are suppressed and the tile is
+  /// rendered at reduced opacity.
   final bool enabled;
 
   /// The visual variant of the list tile.
   final ChromiaListTileVariant variant;
 
   /// The tile's internal padding.
+  ///
+  /// Defaults to [ChromiaSpacing.paddingM].
   final EdgeInsetsGeometry? contentPadding;
 
   /// The tile's background color when not selected.
   final Color? tileColor;
 
-  /// The tile's background color when selected.
+  /// The tile's background color when [selected] is `true`.
+  ///
+  /// Defaults to [ChromiaColors.surface].
   final Color? selectedTileColor;
-
-  /// Whether this list tile is part of a vertically dense list.
-  final bool? dense;
-
-  /// Defines how compact the list tile's layout will be.
-  final VisualDensity? visualDensity;
-
-  /// The shape of the tile's [Material].
-  final ShapeBorder? shape;
 
   /// The margin around the list tile.
   final EdgeInsetsGeometry? margin;
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
-    final colors = context.chromiaColors;
-    final spacing = theme.spacing;
-
-    Widget tile = ListTile(
+    return ChromiaListTileShell(
       leading: leading,
       title: title,
       subtitle: subtitle,
-      trailing: trailing,
-      onTap: enabled ? onTap : null,
-      onLongPress: enabled ? onLongPress : null,
+      control: trailing,
+      onTap: onTap,
+      onLongPress: onLongPress,
       selected: selected,
       enabled: enabled,
-      contentPadding: contentPadding ?? spacing.paddingM,
+      contentPadding: contentPadding,
       tileColor: tileColor,
-      selectedTileColor: selectedTileColor ?? colors.surface,
-      dense: dense,
-      visualDensity: visualDensity,
-      shape:
-          shape ??
-          RoundedRectangleBorder(
-            borderRadius: theme.radius.radiusM,
-          ),
+      selectedTileColor: selectedTileColor,
+      variant: variant,
+      margin: margin,
     );
-
-    // Apply variant styling
-    if (variant == ChromiaListTileVariant.outlined) {
-      tile = Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: colors.outline),
-          borderRadius: theme.radius.radiusM,
-          color: selected ? selectedTileColor ?? colors.surface : tileColor,
-        ),
-        child: tile,
-      );
-    } else if (variant == ChromiaListTileVariant.card) {
-      tile = Container(
-        decoration: BoxDecoration(
-          color: selected
-              ? selectedTileColor ?? colors.surface
-              : tileColor ?? colors.surface,
-          borderRadius: theme.radius.radiusM,
-          boxShadow: theme.shadows.s,
-        ),
-        child: tile,
-      );
-    }
-
-    // Apply margin if provided
-    if (margin != null) {
-      tile = Padding(
-        padding: margin!,
-        child: tile,
-      );
-    }
-
-    return tile;
   }
 }
 
-/// Visual variants for [ChromiaListTile].
+/// Visual variants for [ChromiaListTile] and all control tiles.
 enum ChromiaListTileVariant {
-  /// Standard list tile with no border or elevation.
+  /// Standard tile with no border or elevation.
   standard,
 
-  /// List tile with a border outline.
+  /// Tile with a 1 px border outline.
   outlined,
 
-  /// List tile with elevation and shadow (card style).
+  /// Tile with elevation and shadow (card style).
   card,
 }

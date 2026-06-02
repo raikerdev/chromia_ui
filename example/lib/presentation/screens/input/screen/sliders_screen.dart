@@ -209,8 +209,8 @@ ChromiaListTileSlider(
                             min: 0,
                             max: 100,
                             divisions: 10,
-                            title: 'Volume',
-                            subtitle: 'Adjust system volume',
+                            title: const Text('Volume'),
+                            subtitle: const Text('Adjust system volume'),
                             valueBuilder: (value) => '${value.toInt()}%',
                             onChanged: (value) =>
                                 setState(() => volume = value),
@@ -221,9 +221,9 @@ ChromiaListTileSlider(
                             min: 0,
                             max: 100,
                             divisions: 10,
-                            title: 'Brightness',
+                            title: const Text('Brightness'),
                             thumbIcon: Icons.brightness_7,
-                            subtitle: 'Adjust screen brightness',
+                            subtitle: const Text('Adjust screen brightness'),
                             valueBuilder: (value) => '${value.toInt()}%',
                             onChanged: (value) =>
                                 setState(() => brightness = value),
@@ -234,8 +234,8 @@ ChromiaListTileSlider(
                             min: 0,
                             max: 100,
                             divisions: 20,
-                            title: 'Price range',
-                            subtitle: 'Filter by price',
+                            title: const Text('Price range'),
+                            subtitle: const Text('Filter by price'),
                             valueBuilder: (value) =>
                                 '\$${value.toInt()}',
                             onChanged: (values) =>

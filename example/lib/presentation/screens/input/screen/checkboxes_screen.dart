@@ -213,7 +213,7 @@ ChromiaListTileCheckbox(
   onChanged: (value) => setState(() => enabled = value ?? false),
   title: ChromiaText('Enable notifications'),
   subtitle: ChromiaText('Receive alerts about new messages'),
-  secondary: Icon(Icons.notifications),
+  leading: Icon(Icons.notifications),
 )''',
                 preview: StatefulBuilder(
                   builder: (context, setState) {
@@ -239,7 +239,7 @@ ChromiaListTileCheckbox(
                             subtitle: const ChromiaText(
                               'Receive alerts about new messages',
                             ),
-                            secondary: Icon(
+                            leading: Icon(
                               Icons.notifications,
                               color: colors.primary,
                             ),
@@ -254,7 +254,7 @@ ChromiaListTileCheckbox(
                             subtitle: const ChromiaText(
                               'Automatically save your progress',
                             ),
-                            secondary: Icon(
+                            leading: Icon(
                               Icons.save,
                               color: colors.primary,
                             ),

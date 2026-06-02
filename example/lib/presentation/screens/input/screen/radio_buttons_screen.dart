@@ -221,7 +221,7 @@ ChromiaListTileRadioButton<String>(
   onChanged: (value) => setState(() => selected = value!),
   title: ChromiaText('Pro Plan'),
   subtitle: ChromiaText('For professionals'),
-  secondary: Icon(Icons.work),
+  leading: Icon(Icons.work),
 )''',
                 preview: StatefulBuilder(
                   builder: (context, setState) {
@@ -242,7 +242,7 @@ ChromiaListTileRadioButton<String>(
                                 setState(() => selected = v!),
                             title: const ChromiaText('Basic Plan'),
                             subtitle: const ChromiaText('For individuals'),
-                            secondary: Icon(
+                            leading: Icon(
                               Icons.person,
                               color: colors.primary,
                             ),
@@ -257,7 +257,7 @@ ChromiaListTileRadioButton<String>(
                             subtitle: const ChromiaText(
                               'For professionals',
                             ),
-                            secondary: Icon(
+                            leading: Icon(
                               Icons.work,
                               color: colors.primary,
                             ),
@@ -272,7 +272,7 @@ ChromiaListTileRadioButton<String>(
                             subtitle: const ChromiaText(
                               'For organizations',
                             ),
-                            secondary: Icon(
+                            leading: Icon(
                               Icons.business,
                               color: colors.primary,
                             ),

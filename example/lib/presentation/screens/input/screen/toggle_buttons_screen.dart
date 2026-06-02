@@ -204,7 +204,7 @@ ChromiaListTileToggleButton(
   onChanged: (value) => setState(() => pushEnabled = value),
   title: Text('Push Notifications'),
   subtitle: Text('Receive notifications on your device'),
-  secondary: Icon(Icons.notifications),
+  leading: Icon(Icons.notifications),
 )''',
                 preview: StatefulBuilder(
                   builder: (context, setState) {
@@ -227,7 +227,7 @@ ChromiaListTileToggleButton(
                             subtitle: const Text(
                               'Receive notifications on your device',
                             ),
-                            secondary: Icon(
+                            leading: Icon(
                               Icons.notifications,
                               color: colors.primary,
                             ),
@@ -241,7 +241,7 @@ ChromiaListTileToggleButton(
                             subtitle: const Text(
                               'Receive weekly digest emails',
                             ),
-                            secondary: Icon(
+                            leading: Icon(
                               Icons.email,
                               color: colors.primary,
                             ),

@@ -406,73 +406,89 @@ void main() {
     });
   });
 
-  // ── ChromiaListTileSwitch ─────────────────────────────────────────────────────
+  // ── Shared: leading + variant ─────────────────────────────────────────────────
 
-  group('ChromiaListTileSwitch', () {
-    testWidgets('renders off state without crash', (tester) async {
-      await tester.pumpWidget(
-        buildTestApp(
-          ChromiaListTileSwitch(value: false, onChanged: (_) {}),
-        ),
-      );
-      expect(find.byType(ChromiaListTileSwitch), findsOneWidget);
-    });
-
-    testWidgets('renders on state without crash', (tester) async {
-      await tester.pumpWidget(
-        buildTestApp(
-          ChromiaListTileSwitch(value: true, onChanged: (_) {}),
-        ),
-      );
-      expect(find.byType(ChromiaListTileSwitch), findsOneWidget);
-    });
-
-    testWidgets('renders with title and subtitle without crash', (
+  group('Control tiles — leading and variant', () {
+    testWidgets('ChromiaListTileCheckbox renders with leading icon', (
       tester,
     ) async {
       await tester.pumpWidget(
         buildTestApp(
-          ChromiaListTileSwitch(
+          ChromiaListTileCheckbox(
             value: false,
             onChanged: (_) {},
+            leading: const Icon(Icons.notifications),
             title: const Text('Notifications'),
-            subtitle: const Text('Enable push notifications'),
           ),
         ),
       );
-      expect(find.text('Notifications'), findsOneWidget);
-      expect(find.text('Enable push notifications'), findsOneWidget);
+      expect(find.byIcon(Icons.notifications), findsOneWidget);
     });
 
-    testWidgets('calls onChanged when tile tapped', (tester) async {
-      bool? received;
+    testWidgets(
+      'ChromiaListTileCheckbox renders outlined variant without crash',
+      (tester) async {
+        await tester.pumpWidget(
+          buildTestApp(
+            ChromiaListTileCheckbox(
+              value: true,
+              onChanged: (_) {},
+              title: const Text('Outlined'),
+              variant: ChromiaListTileVariant.outlined,
+            ),
+          ),
+        );
+        expect(find.byType(ChromiaListTileCheckbox), findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      'ChromiaListTileToggleButton renders card variant without crash',
+      (tester) async {
+        await tester.pumpWidget(
+          buildTestApp(
+            ChromiaListTileToggleButton(
+              value: true,
+              onChanged: (_) {},
+              title: const Text('Card variant'),
+              variant: ChromiaListTileVariant.card,
+            ),
+          ),
+        );
+        expect(find.byType(ChromiaListTileToggleButton), findsOneWidget);
+      },
+    );
+
+    testWidgets('ChromiaListTileSlider renders outlined variant without crash',
+        (tester) async {
       await tester.pumpWidget(
         buildTestApp(
-          ChromiaListTileSwitch(
-            value: false,
-            onChanged: (v) => received = v,
-            title: const Text('Toggle'),
+          ChromiaListTileSlider(
+            value: 0.5,
+            onChanged: (_) {},
+            title: const Text('Volume'),
+            variant: ChromiaListTileVariant.outlined,
           ),
         ),
       );
-      await tester.tap(find.byType(ChromiaListTileSwitch));
-      await tester.pumpAndSettle();
-      expect(received, true);
+      expect(find.byType(ChromiaListTileSlider), findsOneWidget);
     });
 
-    testWidgets('does not call onChanged when disabled', (tester) async {
-      const bool called = false;
-      await tester.pumpWidget(
-        buildTestApp(
-          const ChromiaListTileSwitch(value: false, onChanged: null),
-        ),
-      );
-      await tester.tap(
-        find.byType(ChromiaListTileSwitch),
-        warnIfMissed: false,
-      );
-      await tester.pump();
-      expect(called, false);
-    });
+    testWidgets(
+      'ChromiaListTileRangeSlider renders card variant without crash',
+      (tester) async {
+        await tester.pumpWidget(
+          buildTestApp(
+            ChromiaListTileRangeSlider(
+              values: const RangeValues(0.2, 0.8),
+              onChanged: (_) {},
+              title: const Text('Range'),
+              variant: ChromiaListTileVariant.card,
+            ),
+          ),
+        );
+        expect(find.byType(ChromiaListTileRangeSlider), findsOneWidget);
+      },
+    );
   });
 }

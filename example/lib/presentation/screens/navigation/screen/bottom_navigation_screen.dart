@@ -231,7 +231,8 @@ class _SearchTabContent extends StatelessWidget {
           3,
           (index) => Padding(
             padding: spacing.verticalS,
-            child: ChromiaListTileCard(
+            child: ChromiaListTile(
+              variant: ChromiaListTileVariant.card,
               leading: CircleAvatar(
                 backgroundColor: colors.primary,
                 child: Text('${index + 1}'),

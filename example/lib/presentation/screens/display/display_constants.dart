@@ -441,14 +441,88 @@ Column(
         title: Text(item.title),
         selected: isSelected,
         trailing: isSelected
-            ? Icon(
-                Icons.check,
-                color: colors.primary,
-              )
+            ? Icon(Icons.check, color: colors.primary)
             : null,
         onTap: () => setState(() => selectedIndex = i),
       ),
     );
   }).toList(),
+)''';
+
+  static const checkboxTile = '''ChromiaListTileCheckbox(
+  value: notifications,
+  onChanged: (v) => setState(() => notifications = v ?? false),
+  leading: Icon(Icons.notifications, color: colors.primary),
+  title: Text('Push Notifications'),
+  subtitle: Text('Receive alerts in real time'),
+)''';
+
+  static const checkboxTileVariants = '''ChromiaListTileCheckbox(
+  value: v1,
+  onChanged: (v) => setState(() => v1 = v ?? false),
+  title: Text('Standard'),
+  subtitle: Text('Default look'),
+  variant: ChromiaListTileVariant.standard,
+)
+ChromiaListTileCheckbox(
+  value: v2,
+  onChanged: (v) => setState(() => v2 = v ?? false),
+  title: Text('Outlined'),
+  subtitle: Text('With border'),
+  variant: ChromiaListTileVariant.outlined,
+)
+ChromiaListTileCheckbox(
+  value: v3,
+  onChanged: (v) => setState(() => v3 = v ?? false),
+  title: Text('Card'),
+  subtitle: Text('With elevation'),
+  variant: ChromiaListTileVariant.card,
+)''';
+
+  static const radioTile = '''ChromiaListTileRadioButton<String>(
+  value: 'light',
+  groupValue: theme,
+  onChanged: (v) => setState(() => theme = v ?? theme),
+  leading: Icon(Icons.light_mode, color: colors.primary),
+  title: Text('Light'),
+  subtitle: Text('Light color scheme'),
+)''';
+
+  static const toggleTile = '''ChromiaListTileToggleButton(
+  value: notifications,
+  onChanged: (v) => setState(() => notifications = v),
+  leading: Icon(Icons.notifications, color: colors.primary),
+  title: Text('Push Notifications'),
+  subtitle: Text('Receive alerts in real time'),
+)''';
+
+  static const sliderTile = '''ChromiaListTileSlider(
+  value: volume,
+  onChanged: (v) => setState(() => volume = v),
+  title: Text('Volume'),
+  subtitle: Text('Adjust playback volume'),
+  min: 0,
+  max: 100,
+  divisions: 10,
+  valueBuilder: (v) => '\${v.toInt()}%',
+)''';
+
+  static const rangeSliderTile = '''ChromiaListTileRangeSlider(
+  values: priceRange,
+  onChanged: (v) => setState(() => priceRange = v),
+  title: Text('Price range'),
+  min: 0,
+  max: 1000,
+  divisions: 10,
+  valueBuilder: (v) => '\$\${v.toInt()}',
+)''';
+
+  static const cardTile = '''ChromiaListTile(
+  variant: ChromiaListTileVariant.card,
+  leading: Icon(Icons.person, color: colors.primary),
+  title: Text('John Appleseed'),
+  subtitle: Text('john@example.com'),
+  trailing: Icon(Icons.chevron_right),
+  onTap: () {},
 )''';
 }

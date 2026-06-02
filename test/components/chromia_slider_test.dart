@@ -189,8 +189,8 @@ void main() {
           ChromiaListTileSlider(
             value: 0.5,
             onChanged: (_) {},
-            title: 'Volume',
-            subtitle: 'Adjust the volume',
+            title: const Text('Volume'),
+            subtitle: const Text('Adjust the volume'),
           ),
         ),
       );
@@ -248,7 +248,7 @@ void main() {
           ChromiaListTileRangeSlider(
             values: const RangeValues(0.2, 0.8),
             onChanged: (_) {},
-            title: 'Price range',
+            title: const Text('Price range'),
           ),
         ),
       );
