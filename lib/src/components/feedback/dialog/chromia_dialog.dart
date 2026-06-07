@@ -90,10 +90,9 @@ class ChromiaDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
     final colors = context.chromiaColors;
-    final spacing = theme.spacing;
-    final radius = theme.radius;
+    final spacing = context.chromiaSpacing;
+    final radius = context.chromiaRadius;
 
     return Dialog(
       backgroundColor: colors.surface,
@@ -137,15 +136,15 @@ class ChromiaDialog extends StatelessWidget {
 
             // Actions
             if (actions != null && actions!.isNotEmpty)
-              _buildActions(context, theme),
+              _buildActions(context),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildActions(BuildContext context, ChromiaThemeData theme) {
-    final spacing = theme.spacing;
+  Widget _buildActions(BuildContext context) {
+    final spacing = context.chromiaSpacing;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
@@ -189,9 +188,9 @@ class _ActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
     final colors = context.chromiaColors;
-    final spacing = theme.spacing;
+    final spacing = context.chromiaSpacing;
+    final radius = context.chromiaRadius;
 
     Color? backgroundColor;
     Color? textColor;
@@ -213,7 +212,7 @@ class _ActionButton extends StatelessWidget {
       child: InkWell(
         onTap: action.onPressed,
         // Organic Rounded identity: pill-shaped action buttons inside dialogs.
-        borderRadius: theme.radius.radiusFull,
+        borderRadius: radius.radiusFull,
         child: Container(
           padding: EdgeInsets.symmetric(
             horizontal: spacing.l,
@@ -221,14 +220,13 @@ class _ActionButton extends StatelessWidget {
           ),
           decoration: BoxDecoration(
             color: backgroundColor,
-            borderRadius: theme.radius.radiusFull,
+            borderRadius: radius.radiusFull,
           ),
           child: ExcludeSemantics(
-            child: Text(
+            child: ChromiaText(
               action.label,
-              style: theme.typography.labelMedium.copyWith(
-                color: textColor,
-              ),
+              type: ChromiaTypographyType.labelMedium,
+              color: textColor,
             ),
           ),
         ),
@@ -321,15 +319,15 @@ class ChromiaLoadingDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.chromiaTheme;
     final colors = context.chromiaColors;
-    final spacing = theme.spacing;
+    final spacing = context.chromiaSpacing;
+    final radius = context.chromiaRadius;
 
     return Dialog(
       backgroundColor: colors.surface,
       // Organic Rounded identity: 24 px radius consistent with ChromiaDialog.
       shape: RoundedRectangleBorder(
-        borderRadius: theme.radius.radiusXXL,
+        borderRadius: radius.radiusXXL,
       ),
       child: Padding(
         padding: spacing.paddingXXL,
@@ -341,11 +339,10 @@ class ChromiaLoadingDialog extends StatelessWidget {
             ),
             if (message != null) ...[
               spacing.gapVL,
-              Text(
+              ChromiaText(
                 message!,
-                style: theme.typography.bodyMedium.copyWith(
-                  color: colors.onSurfaceVariant,
-                ),
+                type: ChromiaTypographyType.bodyMedium,
+                color: colors.onSurfaceVariant,
                 textAlign: TextAlign.center,
               ),
             ],

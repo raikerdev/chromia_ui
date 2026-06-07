@@ -139,7 +139,8 @@ class ChipsScreen extends StatelessWidget {
                           size: ChromiaButtonSize.small,
                           variant: ChromiaButtonVariant.outlined,
                           onPressed: () => setBuilderState(() {
-                            tags.addAll(
+                            tags..clear()
+                            ..addAll(
                               ['Flutter', 'Dart', 'Mobile', 'UI'],
                             );
                           }),

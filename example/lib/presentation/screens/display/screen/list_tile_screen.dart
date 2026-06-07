@@ -11,6 +11,14 @@ class ListTileScreen extends StatelessWidget {
     final colors = context.chromiaColors;
     final layersIcon = Icon(Icons.layers, color: colors.primary);
     final chevronRight = Icon(Icons.chevron_right, color: colors.onSurfaceVariant);
+    RangeValues priceRange = const RangeValues(200, 700);
+
+    int selectedIndex = 0;
+    bool notifications = true;
+    String theme = 'light';
+    bool sound = false;
+    double volume = 60;
+    double brightness = 80;
 
     return ExampleScaffold(
       title: 'List Tile',
@@ -85,7 +93,7 @@ class ListTileScreen extends StatelessWidget {
                 preview: StatefulBuilder(
                   builder: (context, setState) {
                     final colors = context.chromiaColors;
-                    int selectedIndex = 0;
+
                     final items = [
                       (icon: Icons.home, title: 'Home'),
                       (icon: Icons.explore, title: 'Explore'),
@@ -125,17 +133,9 @@ class ListTileScreen extends StatelessWidget {
             // ── ChromiaListTile — Disabled ────────────────────────────────────
             ComponentSection(
               title: 'Disabled State',
-              description:
-                  'Set enabled: false to prevent interaction and apply a '
-                  'muted visual style.',
+              description: 'Set enabled: false to prevent interaction and apply a muted visual style.',
               child: ChromiaCodePreview(
-                code: '''
-ChromiaListTile(
-  leading: Icon(Icons.block),
-  title: Text('Disabled Item'),
-  subtitle: Text('This item is disabled'),
-  enabled: false,
-)''',
+                code: ListTileConstants.disabledTile,
                 preview: Builder(
                   builder: (context) {
                     final colors = context.chromiaColors;
@@ -150,104 +150,29 @@ ChromiaListTile(
               ),
             ),
 
-            // ── Card Tile ─────────────────────────────────────────────────────
-            ComponentSection(
-              title: 'Card Tile',
-              description:
-                  'Use variant: card for standalone, elevated list rows — '
-                  'suitable for feed items and search results.',
-              child: ChromiaCodePreview(
-                code: ListTileConstants.cardTile,
-                preview: Builder(
-                  builder: (context) {
-                    final colors = context.chromiaColors;
-                    return ChromiaListTile(
-                      variant: ChromiaListTileVariant.card,
-                      leading: Icon(Icons.person, color: colors.primary),
-                      title: const Text('John Appleseed'),
-                      subtitle: const Text('john@example.com'),
-                      trailing: Icon(
-                        Icons.chevron_right,
-                        color: colors.onSurfaceVariant,
-                      ),
-                      onTap: () {},
-                    );
-                  },
-                ),
-              ),
-            ),
-
             // ── ChromiaListTileCheckbox ───────────────────────────────────────
             ComponentSection(
               title: 'Checkbox Tile',
               description:
-                  'ChromiaListTileCheckbox embeds a checkbox at the trailing '
-                  'end. The whole row is tappable.',
-              child: ChromiaCodePreviewGroup(
-                items: [
-                  CodePreviewItem(
-                    label: 'Basic',
-                    code: ListTileConstants.checkboxTile,
-                    preview: StatefulBuilder(
-                      builder: (context, setState) {
-                        final colors = context.chromiaColors;
-                        bool notifications = true;
-                        return ChromiaListTileCheckbox(
-                          value: notifications,
-                          onChanged: (v) =>
-                              setState(() => notifications = v ?? false),
-                          leading: Icon(
-                            Icons.notifications,
-                            color: colors.primary,
-                          ),
-                          title: const Text('Push Notifications'),
-                          subtitle: const Text('Receive alerts in real time'),
-                        );
-                      },
-                    ),
-                  ),
-                  CodePreviewItem(
-                    label: 'Variants',
-                    code: ListTileConstants.checkboxTileVariants,
-                    preview: StatefulBuilder(
-                      builder: (context, setState) {
-                        bool v1 = true;
-                        bool v2 = false;
-                        bool v3 = true;
-                        return Column(
-                          children: [
-                            ChromiaListTileCheckbox(
-                              value: v1,
-                              onChanged: (v) =>
-                                  setState(() => v1 = v ?? false),
-                              title: const Text('Standard'),
-                              subtitle: const Text('Default look'),
-                              variant: ChromiaListTileVariant.standard,
-                            ),
-                            const SizedBox(height: 8),
-                            ChromiaListTileCheckbox(
-                              value: v2,
-                              onChanged: (v) =>
-                                  setState(() => v2 = v ?? false),
-                              title: const Text('Outlined'),
-                              subtitle: const Text('With border'),
-                              variant: ChromiaListTileVariant.outlined,
-                            ),
-                            const SizedBox(height: 8),
-                            ChromiaListTileCheckbox(
-                              value: v3,
-                              onChanged: (v) =>
-                                  setState(() => v3 = v ?? false),
-                              title: const Text('Card'),
-                              subtitle: const Text('With elevation'),
-                              variant: ChromiaListTileVariant.card,
-                            ),
-                          ],
-                        );
-                      },
-                    ),
-                  ),
-                ],
+                  'ChromiaListTileCheckbox embeds a checkbox at the trailing end. The whole row is tappable.',
+              child: ChromiaCodePreview(
+                code: ListTileConstants.checkboxTile,
+                preview: StatefulBuilder(
+                  builder: (context, setState) {
+                    final colors = context.chromiaColors;
+                    return ChromiaListTileCheckbox(
+                      value: notifications,
+                      onChanged: (v) =>
+                          setState(() => notifications = v ?? false),
+                      leading: Icon(
+                        Icons.notifications,
+                        color: colors.primary,
+                      ),
+                      title: const Text('Push Notifications'),
+                      subtitle: const Text('Receive alerts in real time'),
+                    );
+                  },
+                )
               ),
             ),
 
@@ -262,7 +187,6 @@ ChromiaListTile(
                 preview: StatefulBuilder(
                   builder: (context, setState) {
                     final colors = context.chromiaColors;
-                    String theme = 'light';
                     return Column(
                       children: [
                         ChromiaListTileRadioButton<String>(
@@ -319,8 +243,6 @@ ChromiaListTile(
                 preview: StatefulBuilder(
                   builder: (context, setState) {
                     final colors = context.chromiaColors;
-                    bool notifications = true;
-                    bool sound = false;
                     return Column(
                       children: [
                         ChromiaListTileToggleButton(
@@ -363,8 +285,6 @@ ChromiaListTile(
                 code: ListTileConstants.sliderTile,
                 preview: StatefulBuilder(
                   builder: (context, setState) {
-                    double volume = 60;
-                    double brightness = 80;
                     return Column(
                       children: [
                         ChromiaListTileSlider(
@@ -407,7 +327,6 @@ ChromiaListTile(
                 code: ListTileConstants.rangeSliderTile,
                 preview: StatefulBuilder(
                   builder: (context, setState) {
-                    RangeValues priceRange = const RangeValues(200, 700);
                     return ChromiaListTileRangeSlider(
                       values: priceRange,
                       onChanged: (v) =>
